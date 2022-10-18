@@ -89,7 +89,12 @@ public abstract class BaseTest extends ConfigurableTest {
                 System.out.println("Parsing URI getApiTargetPath : " + e.getMessage());
             }
         } else if (uriArquillianTestServer != null) {
-            return uriArquillianTestServer.getPath();
+            try {
+                URI testURI = new URI(uriArquillianTestServer.getPath() + endpointPath);
+                return testURI.getPath();
+            } catch (Exception e) {
+                System.out.println("Parsing URI getApiTargetPath : " + e.getMessage());
+            }
         }
         return null;
     }

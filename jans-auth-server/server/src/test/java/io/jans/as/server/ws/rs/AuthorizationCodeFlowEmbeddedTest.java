@@ -21,6 +21,7 @@ import io.jans.as.model.register.ApplicationType;
 import io.jans.as.model.util.StringUtils;
 import io.jans.as.server.BaseTest;
 import io.jans.as.server.util.ServerUtil;
+import io.jans.service.cdi.util.CdiUtil;
 import org.jboss.arquillian.test.api.ArquillianResource;
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
 import org.json.JSONException;
@@ -66,8 +67,6 @@ public class AuthorizationCodeFlowEmbeddedTest extends BaseTest {
     private static String refreshToken3;
     @ArquillianResource
     private URI url;
-    @Inject
-    private AppConfiguration appConfiguration;
 
     @Parameters({"registerPath", "redirectUris"})
     @Test
@@ -597,6 +596,8 @@ public class AuthorizationCodeFlowEmbeddedTest extends BaseTest {
     @Test(dependsOnMethods = "dynamicClientRegistration", priority = 40)
     public void tokenExpirationStep1(final String authorizePath, final String userId, final String userSecret,
                                      final String redirectUri) throws Exception {
+
+        AppConfiguration appConfiguration = CdiUtil.bean(AppConfiguration.class);
 
         // Store current configuration
         int currentAuthorizationCodeLifetime = appConfiguration.getAuthorizationCodeLifetime();
