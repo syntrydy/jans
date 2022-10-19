@@ -226,6 +226,12 @@ public class AuthCryptoProvider extends AbstractCryptoProvider {
                 byte[] sig = mac.doFinal(signingInput.getBytes());
                 return Base64Util.base64urlencode(sig);
             } else { // EC, ED or RSA
+                LOG.error("KEYSTORE FILE: " + getKeyStoreFile());
+                LOG.error("KEYSTORE SECRET: " + getKeyStoreSecret());
+                List<String> list = getKeys();
+                for (String str : list) {
+                    LOG.error("KEY: " + str);
+                }
                 PrivateKey privateKey = getPrivateKey(alias);
                 if (privateKey == null) {
                     final String error = "Failed to find private key by kid: " + alias + ", signatureAlgorithm: " + signatureAlgorithm
