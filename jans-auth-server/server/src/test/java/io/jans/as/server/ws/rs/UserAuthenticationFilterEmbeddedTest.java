@@ -7,6 +7,7 @@
 package io.jans.as.server.ws.rs;
 
 import io.jans.as.client.RegisterRequest;
+import io.jans.as.model.crypto.signature.SignatureAlgorithm;
 import io.jans.as.model.util.QueryStringDecoder;
 import io.jans.as.server.util.TestUtil;
 import io.jans.as.model.authorize.AuthorizeResponseParam;
@@ -377,7 +378,6 @@ public class UserAuthenticationFilterEmbeddedTest extends BaseTest {
         io.jans.as.client.RegisterRequest registerRequest = new RegisterRequest(ApplicationType.WEB, "jans test app",
                 StringUtils.spaceSeparatedToList(redirectUris));
         registerRequest.setJwksUri(jwksUri);
-        registerRequest.setScope(Arrays.asList("email", "read_stream", "manage_pages"));
         registerRequest.setTokenEndpointAuthMethod(AuthenticationMethod.CLIENT_SECRET_JWT);
         registerRequest.addCustomAttribute("jansTrustedClnt", "true");
 
@@ -430,6 +430,7 @@ public class UserAuthenticationFilterEmbeddedTest extends BaseTest {
         tokenRequest.setAuthUsername(clientId4);
         tokenRequest.setAuthPassword(clientSecret4);
         tokenRequest.setAuthenticationMethod(AuthenticationMethod.CLIENT_SECRET_JWT);
+        tokenRequest.setAlgorithm(SignatureAlgorithm.RS256);
         tokenRequest.setCryptoProvider(cryptoProvider);
         tokenRequest.setKeyId(keyId);
         tokenRequest.setAudience(audience);
