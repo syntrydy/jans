@@ -422,8 +422,8 @@ public class UserAuthenticationFilterEmbeddedTest extends BaseTest {
 
         request.header("Content-Type", MediaType.APPLICATION_FORM_URLENCODED);
 
-        AuthCryptoProvider cryptoProvider = new AuthCryptoProvider(keyStoreFile, keyStoreSecret, dnName);
-
+//        AuthCryptoProvider cryptoProvider = new AuthCryptoProvider(keyStoreFile, keyStoreSecret, dnName);
+        AuthCryptoProvider cryptoProvider = new AuthCryptoProvider();
         io.jans.as.client.TokenRequest tokenRequest = new io.jans.as.client.TokenRequest(GrantType.RESOURCE_OWNER_PASSWORD_CREDENTIALS);
         tokenRequest.setScope("email read_stream manage_pages");
 
