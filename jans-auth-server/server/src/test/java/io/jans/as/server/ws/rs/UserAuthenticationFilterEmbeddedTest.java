@@ -7,7 +7,6 @@
 package io.jans.as.server.ws.rs;
 
 import io.jans.as.client.RegisterRequest;
-import io.jans.as.model.crypto.signature.SignatureAlgorithm;
 import io.jans.as.model.util.QueryStringDecoder;
 import io.jans.as.server.util.TestUtil;
 import io.jans.as.model.authorize.AuthorizeResponseParam;
@@ -34,7 +33,6 @@ import jakarta.ws.rs.client.Invocation.Builder;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.MultivaluedHashMap;
 import jakarta.ws.rs.core.Response;
-
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
@@ -382,7 +380,7 @@ public class UserAuthenticationFilterEmbeddedTest extends BaseTest {
         registerRequest.addCustomAttribute("jansTrustedClnt", "true");
 
         List<GrantType> grantTypes = Arrays.asList(
-                GrantType.RESOURCE_OWNER_PASSWORD_CREDENTIALS
+                GrantType.CLIENT_CREDENTIALS
         );
         registerRequest.setGrantTypes(grantTypes);
 
@@ -424,15 +422,15 @@ public class UserAuthenticationFilterEmbeddedTest extends BaseTest {
 
 //        AuthCryptoProvider cryptoProvider = new AuthCryptoProvider(keyStoreFile, keyStoreSecret, dnName);
         AuthCryptoProvider cryptoProvider = new AuthCryptoProvider();
-        io.jans.as.client.TokenRequest tokenRequest = new io.jans.as.client.TokenRequest(GrantType.RESOURCE_OWNER_PASSWORD_CREDENTIALS);
+
+        io.jans.as.client.TokenRequest tokenRequest = new io.jans.as.client.TokenRequest(GrantType.CLIENT_CREDENTIALS);
         tokenRequest.setScope("email read_stream manage_pages");
 
         tokenRequest.setAuthUsername(clientId4);
         tokenRequest.setAuthPassword(clientSecret4);
         tokenRequest.setAuthenticationMethod(AuthenticationMethod.CLIENT_SECRET_JWT);
-        tokenRequest.setAlgorithm(SignatureAlgorithm.RS256);
         tokenRequest.setCryptoProvider(cryptoProvider);
-        tokenRequest.setKeyId(keyId);
+//        tokenRequest.setKeyId(keyId);
         tokenRequest.setAudience(audience);
         tokenRequest.addCustomParameter("uid", userId);
         tokenRequest.addCustomParameter("pwd", userSecret);
