@@ -665,7 +665,7 @@ public class AuthorizationCodeFlowEmbeddedTest extends BaseTest {
     @Test(dependsOnMethods = {"dynamicClientRegistration", "tokenExpirationStep1"}, priority = 40)
     public void tokenExpirationStep2(final String tokenPath, final String redirectUri) throws Exception {
         // ...Wait until the authorization code expires...
-        System.out.println("Sleeping for 20 seconds .....");
+        System.out.println("Sleeping for 60 seconds .....");
         Thread.sleep(61000);
 
         Builder request = ResteasyClientBuilder.newClient().target(getApiTagetURL(url) + tokenPath).request();
