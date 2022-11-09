@@ -7,6 +7,7 @@ from collections import namedtuple
 
 from ldif import LDIFParser
 
+from jans.pycloudlib import get_manager
 from jans.pycloudlib.persistence import CouchbaseClient
 from jans.pycloudlib.persistence import LdapClient
 from jans.pycloudlib.persistence import SpannerClient
@@ -23,6 +24,8 @@ logging.config.dictConfig(LOGGING_CONFIG)
 logger = logging.getLogger("entrypoint")
 
 Entry = namedtuple("Entry", ["id", "attrs"])
+
+manager = get_manager()
 
 
 #: ID of base entry
@@ -130,24 +133,32 @@ def _transform_auth_dynamic_config(conf):
             conf["agamaConfiguration"]["defaultResponseHeaders"].pop("Content-Type", None)
             should_update = True
 
-        if "accessTokenSigningAlgValuesSupported" not in conf:
-            conf["accessTokenSigningAlgValuesSupported"] = [
-                "none",
-                "HS256",
-                "HS384",
-                "HS512",
-                "RS256",
-                "RS384",
-                "RS512",
-                "ES256",
-                "ES384",
-                "ES512",
-                "ES512",
-                "PS256",
-                "PS384",
-                "PS512"
-            ]
-            should_update = True
+        for grant_type in [
+            "urn:ietf:params:oauth:grant-type:device_code",
+            "urn:ietf:params:oauth:grant-type:token-exchange",
+        ]:
+            if grant_type not in conf["dynamicGrantTypeDefault"]:
+                conf["dynamicGrantTypeDefault"].append(grant_type)
+                should_update = True
+
+    if "accessTokenSigningAlgValuesSupported" not in conf:
+        conf["accessTokenSigningAlgValuesSupported"] = [
+            "none",
+            "HS256",
+            "HS384",
+            "HS512",
+            "RS256",
+            "RS384",
+            "RS512",
+            "ES256",
+            "ES384",
+            "ES512",
+            "ES512",
+            "PS256",
+            "PS384",
+            "PS512"
+        ]
+        should_update = True
 
     if "forceSignedRequestObject" not in conf:
         conf["forceSignedRequestObject"] = False
@@ -192,6 +203,23 @@ def _transform_auth_dynamic_config(conf):
             "127.0.0.1",
         ]
         should_update = True
+
+    if "ssaConfiguration" not in conf:
+        hostname = manager.config.get("hostname")
+        conf["ssaConfiguration"] = {
+            "ssaEndpoint": f"https://{hostname}/jans-auth/restv1/ssa",
+            "ssaSigningAlg": "RS256",
+            "ssaExpirationInDays": 30
+        }
+        should_update = True
+
+    for grant_type in [
+        "urn:ietf:params:oauth:grant-type:device_code",
+        "urn:ietf:params:oauth:grant-type:token-exchange",
+    ]:
+        if grant_type not in conf["grantTypesSupported"]:
+            conf["grantTypesSupported"].append(grant_type)
+            should_update = True
 
     # return the conf and flag to determine whether it needs update or not
     return conf, should_update
@@ -430,10 +458,11 @@ class Upgrade:
             self.backend.update_misc()
 
         self.update_auth_dynamic_config()
+        self.update_auth_errors_config()
+        self.update_auth_static_config()
         self.update_attributes_entries()
         self.update_scripts_entries()
         self.update_admin_ui_config()
-        self.update_api_dynamic_config()
 
     def update_scripts_entries(self):
         # default to ldap persistence
@@ -631,8 +660,11 @@ class Upgrade:
         should_update = False
 
         # add jansAdminUIRole to default admin user
-        if self.user_backend.type == "sql" and not entry.attrs["jansAdminUIRole"]["v"]:
+        if self.user_backend.type == "sql" and self.user_backend.client.dialect == "mysql" and not entry.attrs["jansAdminUIRole"]["v"]:
             entry.attrs["jansAdminUIRole"] = {"v": ["api-admin"]}
+            should_update = True
+        if self.user_backend.type == "sql" and self.user_backend.client.dialect == "pgsql" and not entry.attrs["jansAdminUIRole"]:
+            entry.attrs["jansAdminUIRole"] = ["api-admin"]
             should_update = True
         elif self.user_backend.type == "spanner" and not entry.attrs["jansAdminUIRole"]:
             entry.attrs["jansAdminUIRole"] = ["api-admin"]
@@ -651,54 +683,6 @@ class Upgrade:
             self.user_backend.modify_entry(entry.id, entry.attrs, **kwargs)
 
     def update_clients_entries(self):
-        # modify redirect UI of config-api client
-        def _update_jca_client():
-            kwargs = {}
-            jca_client_id = self.manager.config.get("jca_client_id")
-            id_ = f"inum={jca_client_id},ou=clients,o=jans"
-
-            if self.backend.type in ("sql", "spanner"):
-                kwargs = {"table_name": "jansClnt"}
-                id_ = doc_id_from_dn(id_)
-            elif self.backend.type == "couchbase":
-                kwargs = {"bucket": os.environ.get("CN_COUCHBASE_BUCKET_PREFIX", "jans")}
-                id_ = id_from_dn(id_)
-
-            entry = self.backend.get_entry(id_, **kwargs)
-
-            if not entry:
-                return
-
-            should_update = False
-
-            hostname = self.manager.config.get("hostname")
-            scopes = [JANS_SCIM_USERS_READ_SCOPE_DN, JANS_SCIM_USERS_WRITE_SCOPE_DN, JANS_STAT_SCOPE_DN]
-
-            if self.backend.type == "sql":
-                if f"https://{hostname}/admin" not in entry.attrs["jansRedirectURI"]["v"]:
-                    entry.attrs["jansRedirectURI"]["v"].append(f"https://{hostname}/admin")
-                    should_update = True
-
-                # add jans_stat, SCIM users.read, SCIM users.write scopes to config-api client
-                for scope in scopes:
-                    if scope not in entry.attrs["jansScope"]["v"]:
-                        entry.attrs["jansScope"]["v"].append(scope)
-                        should_update = True
-
-            else:  # ldap, couchbase, and spanner
-                if f"https://{hostname}/admin" not in entry.attrs["jansRedirectURI"]:
-                    entry.attrs["jansRedirectURI"].append(f"https://{hostname}/admin")
-                    should_update = True
-
-                # add jans_stat, SCIM users.read, SCIM users.write scopes to config-api client
-                for scope in scopes:
-                    if scope not in entry.attrs["jansScope"]:
-                        entry.attrs["jansScope"].append(scope)
-                        should_update = True
-
-            if should_update:
-                self.backend.modify_entry(entry.id, entry.attrs, **kwargs)
-
         # modify introspection script for token server client
         def _update_token_server_client():
             kwargs = {}
@@ -727,7 +711,6 @@ class Upgrade:
                 entry.attrs["jansAttrs"] = json.dumps(attrs)
                 self.backend.modify_entry(entry.id, entry.attrs, **kwargs)
 
-        _update_jca_client()
         _update_token_server_client()
 
     def update_admin_ui_config(self):
@@ -802,9 +785,10 @@ class Upgrade:
             entry.attrs["jansRevision"] += 1
             self.backend.modify_entry(entry.id, entry.attrs, **kwargs)
 
-    def update_api_dynamic_config(self):
+    def update_auth_errors_config(self):
+        # default to ldap persistence
         kwargs = {}
-        id_ = "ou=jans-config-api,ou=configuration,o=jans"
+        id_ = JANS_AUTH_CONFIG_DN
 
         if self.backend.type in ("sql", "spanner"):
             kwargs = {"table_name": "jansAppConf"}
@@ -819,45 +803,81 @@ class Upgrade:
             return
 
         if self.backend.type != "couchbase":
-            entry.attrs["jansConfDyn"] = json.loads(entry.attrs["jansConfDyn"])
+            entry.attrs["jansConfErrors"] = json.loads(entry.attrs["jansConfErrors"])
 
-        conf, should_update = _transform_api_dynamic_config(entry.attrs["jansConfDyn"])
+        conf, should_update = _transform_auth_errors_config(entry.attrs["jansConfErrors"])
 
         if should_update:
             if self.backend.type != "couchbase":
-                entry.attrs["jansConfDyn"] = json.dumps(conf)
+                entry.attrs["jansConfErrors"] = json.dumps(conf)
+
+            entry.attrs["jansRevision"] += 1
+            self.backend.modify_entry(entry.id, entry.attrs, **kwargs)
+
+    def update_auth_static_config(self):
+        # default to ldap persistence
+        kwargs = {}
+        id_ = JANS_AUTH_CONFIG_DN
+
+        if self.backend.type in ("sql", "spanner"):
+            kwargs = {"table_name": "jansAppConf"}
+            id_ = doc_id_from_dn(id_)
+        elif self.backend.type == "couchbase":
+            kwargs = {"bucket": os.environ.get("CN_COUCHBASE_BUCKET_PREFIX", "jans")}
+            id_ = id_from_dn(id_)
+
+        entry = self.backend.get_entry(id_, **kwargs)
+
+        if not entry:
+            return
+
+        if self.backend.type != "couchbase":
+            entry.attrs["jansConfStatic"] = json.loads(entry.attrs["jansConfStatic"])
+
+        conf, should_update = _transform_auth_static_config(entry.attrs["jansConfStatic"])
+
+        if should_update:
+            if self.backend.type != "couchbase":
+                entry.attrs["jansConfStatic"] = json.dumps(conf)
 
             entry.attrs["jansRevision"] += 1
             self.backend.modify_entry(entry.id, entry.attrs, **kwargs)
 
 
-def _transform_api_dynamic_config(conf):
+def _transform_auth_errors_config(conf):
     should_update = False
 
-    if "userExclusionAttributes" not in conf:
-        conf["userExclusionAttributes"] = ["userPassword"]
-        should_update = True
-
-    if "userMandatoryAttributes" not in conf:
-        conf["userMandatoryAttributes"] = [
-            "mail",
-            "displayName",
-            "jansStatus",
-            "userPassword",
-            "givenName",
+    if "ssa" not in conf:
+        conf["ssa"] = [
+            {
+                "id": "invalid_request",
+                "description": "The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed.",
+                "uri": None,
+            },
+            {
+                "id": "unauthorized_client",
+                "description": "The Client is not authorized to use this authentication flow.",
+                "uri": None,
+            },
+            {
+                "id": "invalid_client",
+                "description": "The Client is not authorized to use this authentication flow.",
+                "uri": None,
+            },
+            {
+                "id": "unknown_error",
+                "description": "Unknown or not found error.",
+                "uri": None,
+            },
         ]
         should_update = True
+    return conf, should_update
 
-    if "agamaConfiguration" not in conf:
-        conf["agamaConfiguration"] = {
-            "mandatoryAttributes": [
-                "qname",
-                "source",
-            ],
-            "optionalAttributes": [
-                "serialVersionUID",
-                "enabled",
-            ],
-        }
+
+def _transform_auth_static_config(conf):
+    should_update = False
+
+    if "ssa" not in conf["baseDn"]:
+        conf["baseDn"]["ssa"] = "ou=ssa,o=jans"
         should_update = True
     return conf, should_update

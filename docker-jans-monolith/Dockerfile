@@ -38,18 +38,10 @@ EXPOSE 443 8080 1636
 # jans-linux-setup
 # =====================
 
-ENV JANS_SOURCE_VERSION=960b87ff5ace40c63aada576816cae648e82d65c
+ENV JANS_SOURCE_VERSION=d1890e76c13c8c2c3dcdcc0625edd04cf552bbf9
 
 # cleanup
 RUN rm -rf /tmp/jans
-
-# ======
-# Python
-# ======
-COPY requirements.txt /app/requirements.txt
-RUN pip3 install --no-cache-dir -U pip wheel \
-    && pip3 install --no-cache-dir -r /app/requirements.txt \
-    && pip3 uninstall -y pip wheel
 
 # =======
 # License
@@ -73,7 +65,6 @@ ENV CN_HOSTNAME="demoexample.jans.io" \
     CN_INSTALL_CONFIG_API="true" \
     CN_INSTALL_SCIM="true" \
     CN_INSTALL_FIDO2="true" \
-    CN_INSTALL_CLIENT_API="true" \
     MYSQL_DATABASE="jans" \
     MYSQL_USER="jans" \
     MYSQL_PASSWORD=""
@@ -85,7 +76,7 @@ ENV CN_HOSTNAME="demoexample.jans.io" \
 LABEL name="janssenproject/monolith" \
     maintainer="Janssen Project <support@jans.io>" \
     vendor="Janssen Project" \
-    version="1.0.3" \
+    version="1.0.5" \
     release="dev" \
     summary="Janssen Monolith Image" \
     description="Janssen Authorization server"

@@ -34,8 +34,8 @@ EXPOSE 8080
 # FIDO2
 # =====
 
-ENV CN_VERSION=1.0.3-SNAPSHOT
-ENV CN_BUILD_DATE='2022-10-03 08:16'
+ENV CN_VERSION=1.0.5-SNAPSHOT
+ENV CN_BUILD_DATE='2022-11-08 08:33'
 ENV CN_SOURCE_URL=https://jenkins.jans.io/maven/io/jans/jans-fido2-server/${CN_VERSION}/jans-fido2-server-${CN_VERSION}.war
 
 # Install FIDO2
@@ -54,7 +54,7 @@ RUN mkdir -p ${JETTY_BASE}/jans-fido2/webapps \
 # jans-linux-setup sync
 # =====================
 
-ENV JANS_SOURCE_VERSION=8128244d16f212b9c687540ded6cb349abe4aafc
+ENV JANS_SOURCE_VERSION=d1890e76c13c8c2c3dcdcc0625edd04cf552bbf9
 ARG JANS_SETUP_DIR=jans-linux-setup/jans_setup
 
 # note that as we're pulling from a monorepo (with multiple project in it)
@@ -76,7 +76,6 @@ RUN mkdir -p /etc/jans/conf \
 # sync static files from linux-setup
 RUN cd /tmp/jans \
     && cp -R ${JANS_SETUP_DIR}/static/fido2/authenticator_cert /etc/jans/conf/fido2/authenticator_cert \
-    && cp ${JANS_SETUP_DIR}/static/fido2/mds_toc_cert/metadata-root-ca.cer /etc/jans/conf/fido2/mds/cert/ \
     && cp ${JANS_SETUP_DIR}/static/rdbm/sql_data_types.json /app/static/rdbm/ \
     && cp ${JANS_SETUP_DIR}/static/rdbm/ldap_sql_data_type_mapping.json /app/static/rdbm/ \
     && cp ${JANS_SETUP_DIR}/static/rdbm/opendj_attributes_syntax.json /app/static/rdbm/ \
@@ -212,15 +211,19 @@ ENV CN_MAX_RAM_PERCENTAGE=75.0 \
 LABEL name="janssenproject/fido2" \
     maintainer="Janssen Project <support@jans.io>" \
     vendor="Janssen Project" \
-    version="1.0.3" \
+    version="1.0.5" \
     release="dev" \
     summary="Janssen FIDO2" \
     description="FIDO2 server"
 
 RUN mkdir -p /etc/certs \
-    ${JETTY_BASE}/jans-fido2/logs
+    ${JETTY_BASE}/jans-fido2/logs \
+    ${JETTY_BASE}/jans-fido2/custom/libs \
+    ${JETTY_BASE}/common/libs/spanner \
+    ${JETTY_BASE}/common/libs/couchbase \
+    /usr/share/java
 
-COPY jetty/jans-fido2.xml ${JETTY_BASE}/jans-fido2/webapps/
+COPY --chown=1000:0 jetty/jans-fido2.xml ${JETTY_BASE}/jans-fido2/webapps/
 COPY jetty/log4j2.xml ${JETTY_BASE}/jans-fido2/resources/
 COPY conf/*.tmpl /app/templates/
 
@@ -238,7 +241,9 @@ RUN chmod -R g=u ${JETTY_BASE}/jans-fido2/resources \
     && chmod 664 /usr/java/latest/jre/lib/security/cacerts \
     && chmod 664 /opt/jetty/etc/jetty.xml \
     && chmod 664 /opt/jetty/etc/webdefault.xml \
-    && chown -R 1000:0 /etc/jans/conf/fido2/mds/toc
+    && chown -R 1000:0 /etc/jans/conf/fido2/mds/toc \
+    && chown -R 1000:0 ${JETTY_BASE}/common/libs \
+    && chown -R 1000:0 /usr/share/java
 
 USER 1000
 

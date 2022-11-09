@@ -2,12 +2,12 @@
 
 **This image is for testing and development purposes only! Use Janssen [helm charts](../charts) for production setups**
 
-Docker monolith image packaging for Janssen.This image packs janssen services including, the auth-server, client-api, config-api, fido2, and scim.
+Docker monolith image packaging for Janssen.This image packs janssen services including, the auth-server, config-api, fido2, and scim.
 
 ## Versions
 
 See [Releases](https://github.com/JanssenProject/docker-jans-monolith/releases) for stable versions. This image should never be used in production.
-For bleeding-edge/unstable version, use `janssenproject/monolith:1.0.3_dev`.
+For bleeding-edge/unstable version, use `janssenproject/monolith:1.0.4_dev`.
 
 ## Environment Variables
 
@@ -26,7 +26,6 @@ The following environment variables are supported by the container:
 | `CN_INSTALL_CONFIG_API` | Installs the Config API service.                 | `true`                                           |
 | `CN_INSTALL_SCIM`       | Installs the SCIM  API service.                  | `true`                                           |
 | `CN_INSTALL_FIDO2`      | Installs the FIDO2 API service.                  | `true`                                           |
-| `CN_INSTALL_CLIENT_API` | Installs the CLIENT API service.                 | `true`                                           |
 | `MYSQL_DATABASE`        | MySQL jans database.                             | `jans`                                           |
 | `MYSQL_USER`            | MySQL database user.                             | `jans`                                           |
 | `MYSQL_PASSWORD`        | MySQL database user password.                    | `1t5Fin3#security`                               |
@@ -82,3 +81,4 @@ Grab a fresh ubuntu 22.04 lts VM and run:
 ```bash
 wget https://raw.githubusercontent.com/JanssenProject/jans/main/automation/startjanssenmonolithdemo.sh && chmod u+x startjanssenmonolithdemo.sh && sudo bash startjanssenmonolithdemo.sh demoexample.jans.io MYSQL
 ```
+
