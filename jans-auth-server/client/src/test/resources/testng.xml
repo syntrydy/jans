@@ -2,6 +2,7 @@
 
 <suite name="jansAuthClient" parallel="tests" thread-count="4">
 
+<!--    COMMENTED TO TEST SERVER TESTS -->
 <!--    <listeners>-->
 <!--        <listener class-name="io.jans.as.client.RetryListener"/>-->
 <!--    </listeners>-->
