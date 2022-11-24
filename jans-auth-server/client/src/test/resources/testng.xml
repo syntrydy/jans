@@ -11,22 +11,22 @@
             <class name="io.jans.as.client.json.JsonApplierTest"/>
         </classes>
     </test>
-    <test name="RegisterRequest Client test" enabled="true">
-        <classes>
-            <class name="io.jans.as.client.client.RegisterRequestTest"/>
-        </classes>
-    </test>
-    <test name="PAR HTTP Client test" enabled="true">
-        <classes>
-            <class name="io.jans.as.client.ws.rs.par.ParHttpTest"/>
-        </classes>
-    </test>
+<!--    <test name="RegisterRequest Client test" enabled="true">-->
+<!--        <classes>-->
+<!--            <class name="io.jans.as.client.client.RegisterRequestTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+<!--    <test name="PAR HTTP Client test" enabled="true">-->
+<!--        <classes>-->
+<!--            <class name="io.jans.as.client.ws.rs.par.ParHttpTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
-    <test name="Native SSO Client test (HTTP)" enabled="true">
-        <classes>
-            <class name="io.jans.as.client.ws.rs.token.NativeSsoHttpTest"/>
-        </classes>
-    </test>
+<!--    <test name="Native SSO Client test (HTTP)" enabled="true">-->
+<!--        <classes>-->
+<!--            <class name="io.jans.as.client.ws.rs.token.NativeSsoHttpTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
     <!-- Address claims test -->
     <test name="Address claims test (HTTP)" enabled="true">
@@ -35,137 +35,137 @@
         </classes>
     </test>
 
-    <!-- Application Type Restriction test -->
-    <test name="Application Type Restriction (HTTP)" enabled="true">
-        <classes>
-            <class name="io.jans.as.client.ws.rs.ApplicationTypeRestrictionHttpTest"/>
-        </classes>
-    </test>
+<!--    &lt;!&ndash; Application Type Restriction test &ndash;&gt;-->
+<!--    <test name="Application Type Restriction (HTTP)" enabled="true">-->
+<!--        <classes>-->
+<!--            <class name="io.jans.as.client.ws.rs.ApplicationTypeRestrictionHttpTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
-    <test name="Authn Script Aliases Test" enabled="true">
-        <classes>
-            <class name="io.jans.as.client.ws.rs.AuthnScriptAliasesTest"/>
-        </classes>
-    </test>
+<!--    <test name="Authn Script Aliases Test" enabled="true">-->
+<!--        <classes>-->
+<!--            <class name="io.jans.as.client.ws.rs.AuthnScriptAliasesTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
-    <!-- Token binding -->
-    <test name="Token Binding test (HTTP)" enabled="true">
-        <classes>
-            <class name="io.jans.as.client.ws.rs.TokenBindingHttpTest"/>
-        </classes>
-    </test>
+<!--    &lt;!&ndash; Token binding &ndash;&gt;-->
+<!--    <test name="Token Binding test (HTTP)" enabled="true">-->
+<!--        <classes>-->
+<!--            <class name="io.jans.as.client.ws.rs.TokenBindingHttpTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
-    <!-- Access Token as JWT -->
-    <test name="Access Token as JWT test (HTTP)" enabled="true">
-        <classes>
-            <class name="io.jans.as.client.ws.rs.AccessTokenAsJwtHttpTest"/>
-        </classes>
-    </test>
+<!--    &lt;!&ndash; Access Token as JWT &ndash;&gt;-->
+<!--    <test name="Access Token as JWT test (HTTP)" enabled="true">-->
+<!--        <classes>-->
+<!--            <class name="io.jans.as.client.ws.rs.AccessTokenAsJwtHttpTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
-    <!-- Spontaneous scopes tests -->
-    <test name="Spontaneous Scope test (HTTP)" enabled="true">
-        <classes>
-            <class name="io.jans.as.client.ws.rs.SpontaneousScopeHttpTest"/>
-        </classes>
-    </test>
-    <test name="UMA Spontaneous Scope test (HTTP)" enabled="true">
-        <classes>
-            <class name="io.jans.as.client.ws.rs.uma.UmaSpontaneousScopeHttpTest"/>
-        </classes>
-    </test>
+<!--    &lt;!&ndash; Spontaneous scopes tests &ndash;&gt;-->
+<!--    <test name="Spontaneous Scope test (HTTP)" enabled="true">-->
+<!--        <classes>-->
+<!--            <class name="io.jans.as.client.ws.rs.SpontaneousScopeHttpTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+<!--    <test name="UMA Spontaneous Scope test (HTTP)" enabled="true">-->
+<!--        <classes>-->
+<!--            <class name="io.jans.as.client.ws.rs.uma.UmaSpontaneousScopeHttpTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
-    <test name="Select Account test (HTTP)" enabled="true">
-        <classes>
-            <class name="io.jans.as.client.ws.rs.SelectAccountHttpTest"/>
-        </classes>
-    </test>
+<!--    <test name="Select Account test (HTTP)" enabled="true">-->
+<!--        <classes>-->
+<!--            <class name="io.jans.as.client.ws.rs.SelectAccountHttpTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
-    <!-- Authorization Code Flow test -->
-    <test name="Authorization Code Flow test (HTTP)" enabled="true">
-        <classes>
-            <class name="io.jans.as.client.ws.rs.AuthorizationCodeFlowHttpTest"/>
-        </classes>
-    </test>
+<!--    &lt;!&ndash; Authorization Code Flow test &ndash;&gt;-->
+<!--    <test name="Authorization Code Flow test (HTTP)" enabled="true">-->
+<!--        <classes>-->
+<!--            <class name="io.jans.as.client.ws.rs.AuthorizationCodeFlowHttpTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
-    <!-- Authorization Response Custom Header test -->
-    <test name="Authorization Response Custom Header test" enabled="true">
-        <classes>
-            <class name="io.jans.as.client.ws.rs.AuthorizationResponseCustomHeaderTest"/>
-        </classes>
-    </test>
+<!--    &lt;!&ndash; Authorization Response Custom Header test &ndash;&gt;-->
+<!--    <test name="Authorization Response Custom Header test" enabled="true">-->
+<!--        <classes>-->
+<!--            <class name="io.jans.as.client.ws.rs.AuthorizationResponseCustomHeaderTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
-    <!-- Authorization Response Mode -->
-    <test name="Authorization Response Mode (HTTP)" enabled="true">
-        <classes>
-            <class name="io.jans.as.client.ws.rs.AuthorizationResponseModeHttpTest"/>
-        </classes>
-    </test>
+<!--    &lt;!&ndash; Authorization Response Mode &ndash;&gt;-->
+<!--    <test name="Authorization Response Mode (HTTP)" enabled="true">-->
+<!--        <classes>-->
+<!--            <class name="io.jans.as.client.ws.rs.AuthorizationResponseModeHttpTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
-    <test name="Authorization Support Custom Params" enabled="true">
-        <classes>
-            <class name="io.jans.as.client.ws.rs.AuthorizationSupportCustomParams"/>
-        </classes>
-    </test>
+<!--    <test name="Authorization Support Custom Params" enabled="true">-->
+<!--        <classes>-->
+<!--            <class name="io.jans.as.client.ws.rs.AuthorizationSupportCustomParams"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
-    <test name="Authorized Acr Values Test" enabled="true">
-        <classes>
-            <class name="io.jans.as.client.ws.rs.AuthorizedAcrValuesTest"/>
-        </classes>
-    </test>
+<!--    <test name="Authorized Acr Values Test" enabled="true">-->
+<!--        <classes>-->
+<!--            <class name="io.jans.as.client.ws.rs.AuthorizedAcrValuesTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
-    <!-- Authorize test -->
-    <test name="Authorize test (HTTP)" enabled="true">
-        <classes>
-            <class name="io.jans.as.client.ws.rs.AuthorizeRestWebServiceHttpTest"/>
-        </classes>
-    </test>
+<!--    &lt;!&ndash; Authorize test &ndash;&gt;-->
+<!--    <test name="Authorize test (HTTP)" enabled="true">-->
+<!--        <classes>-->
+<!--            <class name="io.jans.as.client.ws.rs.AuthorizeRestWebServiceHttpTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
-    <test name="Authorize regex redirect uris validation test" enabled="true">
-        <classes>
-            <class name="io.jans.as.client.ws.rs.AuthorizationRedirectUrisRegexTest"/>
-        </classes>
-    </test>
+<!--    <test name="Authorize regex redirect uris validation test" enabled="true">-->
+<!--        <classes>-->
+<!--            <class name="io.jans.as.client.ws.rs.AuthorizationRedirectUrisRegexTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
-    <!-- Authorize test -->
-    <test name="Authorize session id test (HTTP)" enabled="true">
-        <classes>
-            <class name="io.jans.as.client.ws.rs.AuthorizeSessionIdRestWebServiceHttpTest"/>
-        </classes>
-    </test>
+<!--    &lt;!&ndash; Authorize test &ndash;&gt;-->
+<!--    <test name="Authorize session id test (HTTP)" enabled="true">-->
+<!--        <classes>-->
+<!--            <class name="io.jans.as.client.ws.rs.AuthorizeSessionIdRestWebServiceHttpTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
-    <!-- Client Authentication Filter test -->
-    <test name="Client Authentication Filter test (HTTP)" enabled="true">
-        <classes>
-            <class name="io.jans.as.client.ws.rs.ClientAuthenticationFilterHttpTest"/>
-        </classes>
-    </test>
+<!--    &lt;!&ndash; Client Authentication Filter test &ndash;&gt;-->
+<!--    <test name="Client Authentication Filter test (HTTP)" enabled="true">-->
+<!--        <classes>-->
+<!--            <class name="io.jans.as.client.ws.rs.ClientAuthenticationFilterHttpTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
-    <!-- Client Credentials Grant test -->
-    <test name="Client Credentials Grant test (HTTP)" enabled="true">
-        <classes>
-            <class name="io.jans.as.client.ws.rs.ClientCredentialsGrantHttpTest"/>
-        </classes>
-    </test>
+<!--    &lt;!&ndash; Client Credentials Grant test &ndash;&gt;-->
+<!--    <test name="Client Credentials Grant test (HTTP)" enabled="true">-->
+<!--        <classes>-->
+<!--            <class name="io.jans.as.client.ws.rs.ClientCredentialsGrantHttpTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
-    <!-- Client Info test  -->
-    <test name="Client Info test (HTTP)" enabled="true">
-        <classes>
-            <class name="io.jans.as.client.ws.rs.ClientInfoRestWebServiceHttpTest"/>
-        </classes>
-    </test>
+<!--    &lt;!&ndash; Client Info test  &ndash;&gt;-->
+<!--    <test name="Client Info test (HTTP)" enabled="true">-->
+<!--        <classes>-->
+<!--            <class name="io.jans.as.client.ws.rs.ClientInfoRestWebServiceHttpTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
-    <test name="Client Language Metadata Test" enabled="true">
-        <classes>
-            <class name="io.jans.as.client.ws.rs.ClientLanguageMetadataTest"/>
-        </classes>
-    </test>
+<!--    <test name="Client Language Metadata Test" enabled="true">-->
+<!--        <classes>-->
+<!--            <class name="io.jans.as.client.ws.rs.ClientLanguageMetadataTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
-    <!-- Client Secret Basic test -->
-    <test name="Client Secret Basic test" enabled="true">
-        <classes>
-            <class name="io.jans.as.client.ws.rs.ClientSecretBasicTest"/>
-        </classes>
-    </test>
+<!--    &lt;!&ndash; Client Secret Basic test &ndash;&gt;-->
+<!--    <test name="Client Secret Basic test" enabled="true">-->
+<!--        <classes>-->
+<!--            <class name="io.jans.as.client.ws.rs.ClientSecretBasicTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
 <!--    &lt;!&ndash; Client Specific Access Token Expiration &ndash;&gt;-->
 <!--    <test name="Client Specific Access Token Expiration" enabled="true">-->
@@ -1174,25 +1174,25 @@
 <!--        </classes>-->
 <!--    </test>-->
 
-    <!-- SSA -->
-    <test name="SSA create test (HTTP)" enabled="true">
-        <classes>
-            <class name="io.jans.as.client.ssa.SsaCreateTest"/>
-        </classes>
-    </test>
-    <test name="SSA get test (HTTP)" enabled="true">
-        <classes>
-            <class name="io.jans.as.client.ssa.SsaGetTest"/>
-        </classes>
-    </test>
-    <test name="SSA validate test (HTTP)" enabled="true">
-        <classes>
-            <class name="io.jans.as.client.ssa.SsaValidateTest"/>
-        </classes>
-    </test>
-    <test name="SSA revoke test (HTTP)" enabled="true">
-        <classes>
-            <class name="io.jans.as.client.ssa.SsaRevokeTest"/>
-        </classes>
-    </test>
+<!--    &lt;!&ndash; SSA &ndash;&gt;-->
+<!--    <test name="SSA create test (HTTP)" enabled="true">-->
+<!--        <classes>-->
+<!--            <class name="io.jans.as.client.ssa.SsaCreateTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+<!--    <test name="SSA get test (HTTP)" enabled="true">-->
+<!--        <classes>-->
+<!--            <class name="io.jans.as.client.ssa.SsaGetTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+<!--    <test name="SSA validate test (HTTP)" enabled="true">-->
+<!--        <classes>-->
+<!--            <class name="io.jans.as.client.ssa.SsaValidateTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+<!--    <test name="SSA revoke test (HTTP)" enabled="true">-->
+<!--        <classes>-->
+<!--            <class name="io.jans.as.client.ssa.SsaRevokeTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 </suite>
