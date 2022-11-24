@@ -538,16 +538,16 @@
             <class name="io.jans.as.client.interop.IncludesCHashInIdTokenWhenCodeFlowUsed"/>
         </classes>
     </test>
-    <test name="OPRegistrationJwks" enabled="true">
-        <classes>
-            <class name="io.jans.as.client.interop.OPRegistrationJwks"/>
-        </classes>
-    </test>
-    <test name="ProvidingAcrValues" enabled="true">
-        <classes>
-            <class name="io.jans.as.client.interop.ProvidingAcrValues"/>
-        </classes>
-    </test>
+<!--    <test name="OPRegistrationJwks" enabled="true">-->
+<!--        <classes>-->
+<!--            <class name="io.jans.as.client.interop.OPRegistrationJwks"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+<!--    <test name="ProvidingAcrValues" enabled="true">-->
+<!--        <classes>-->
+<!--            <class name="io.jans.as.client.interop.ProvidingAcrValues"/>-->
+<!--        </classes>-->
+<!--    </test>-->
     <test name="OC5. FeatureTest-Providing ID Token with Essential auth time Claim" enabled="true">
         <classes>
             <class name="io.jans.as.client.interop.ProvidingIdTokenWithEssentialAuthTimeClaim"/>
@@ -558,317 +558,317 @@
             <class name="io.jans.as.client.interop.ProvidingIdTokenWithMaxAgeRestriction"/>
         </classes>
     </test>
-<!--    <test name="OC5. FeatureTest-Providing Individually Requested Essential and Voluntary Claims" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.interop.ProvidingIndividuallyRequestedEssentialAndVoluntaryClaims"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="OC5. FeatureTest-Providing Individually Requested Essential Claims" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.interop.ProvidingIndividuallyRequestedEssentialClaims"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="OC5. FeatureTest-Providing Individually Requested Voluntary Claims" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.interop.ProvidingIndividuallyRequestedVoluntaryClaims"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="OC5. FeatureTest-Publish openid-configuration Discovery Information" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.interop.PublishOpenIdConfigurationDiscoveryInformation"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="OC5. FeatureTest-Reject Invalid Asymmetric ID Token Signature" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.interop.RejectInvalidAsymmetricIdTokenSignature"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="OC5. FeatureTest-Reject Invalid Symmetric ID Token Signature" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.interop.RejectInvalidSymmetricIdTokenSignature"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="OC5. FeatureTest-Reject redirect uri Not Matching a Registered redirect uri" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.interop.RejectRedirectUriNotMatchingARegisteredRedirectUri"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="OC5. FeatureTest-Reject Registration of redirect uri with Fragment" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.interop.RejectRegistrationOfRedirectUriWithFragment"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="OC5. FeatureTest-Reject Requests Without nonce Using Implicit Flow" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.interop.RejectRequestsWithoutNonceUsingImplicitFlow"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="OC5. FeatureTest-Reject Request Without redirect uri when Multiple Registered" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.interop.RejectRequestWithoutRedirectUriWhenMultipleRegistered"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="OC5. FeatureTest-Reject Request Without response type" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.interop.RejectRequestWithoutResponseType"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="OC5. FeatureTest-Rejects Incorrect at hash when Implicit Flow Used" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.interop.RejectsIncorrectAtHashWhenImplicitFlowUsed"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="OC5. FeatureTest-Rejects Incorrect c hash when Code Flow Used" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.interop.RejectsIncorrectCHashWhenCodeFlowUsed"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="OC5. FeatureTest-Rejects redirect uri when Query Parameter Does Not Match" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.interop.RejectsRedirectUriWhenQueryParameterDoesNotMatch"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="OC5. FeatureTest-Rejects Second Use of Access Code" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.interop.RejectsSecondUseOfAccessCode"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="OC5. FeatureTest-Rejects Sector Identifier Not Containing Registered redirect uri Values"-->
-<!--          enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.interop.RejectsSectorIdentifierNotContainingRegisteredRedirectUriValues"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="OC5. FeatureTest-Requesting UserInfo Claims with OpenID Request Object" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.interop.RequestingUserInfoClaimsWithOpenIdRequestObject"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="OC5. FeatureTest-Requesting UserInfo Claims with scope Values" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.interop.RequestingUserInfoClaimsWithScopeValues"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="OC5. FeatureTest-Second Use of Access Code Revokes Previously Issued Access Token" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.interop.SecondUseOfAccessCodeRevokesPreviouslyIssuedAccessToken"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="OC5. FeatureTest-Support Authentication to Token Endpoint using Form-Encoded Client Credentials in POST Body"-->
-<!--          enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.interop.SupportAuthenticationToTokenEndpointUsingFormEncodedClientCredentialsInPostBody"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="OC5. FeatureTest-Support Authentication to Token Endpoint using HTTP Basic with POST" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.interop.SupportAuthenticationToTokenEndpointUsingHttpBasicWithPost"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="OC5. FeatureTest-Support Authentication to Token Endpoint with Asymmetrically Signed JWTs"-->
-<!--          enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.interop.SupportAuthenticationToTokenEndpointWithAsymmetricallySignedJWTs"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="OC5. FeatureTest-Support Authentication to Token Endpoint with Symmetrically Signed JWTs"-->
-<!--          enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.interop.SupportAuthenticationToTokenEndpointWithSymmetricallySignedJWTs"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="OC5. FeatureTest-Support code Response Type" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.interop.SupportCodeResponseType"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="OC5. FeatureTest-Support Combination of code id token token Response Types" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.interop.SupportCombinationOfCodeIdTokenTokenResponseTypes"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="OC5. FeatureTest-Support Combination of code token Response Types" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.interop.SupportCombinationOfCodeTokenResponseTypes"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="OC5. FeatureTest-Support Combination of id token code Response Types" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.interop.SupportCombinationOfIdTokenCodeResponseTypes"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="OC5. FeatureTest-Support Combination of id token token Response Types" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.interop.SupportCombinationOfIdTokenTokenResponseTypes"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="OC5. FeatureTest-Support display value page" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.interop.SupportDisplayValuePage"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="OC5. FeatureTest-Support display value popup" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.interop.SupportDisplayValuePopup"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="OC5. FeatureTest-Support id token Response Type" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.interop.SupportIdTokenResponseType"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="OC5. FeatureTest-Support prompt value login" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.interop.SupportPromptValueLogin"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="OC5. FeatureTest-Support prompt value none" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.interop.SupportPromptValueNone"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="OC5. FeatureTest-Support Registration Read" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.interop.SupportRegistrationRead"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="OC5. FeatureTest-Support Request File" enabled="false">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.interop.SupportRequestFile"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="OC5. FeatureTest-Support claims Request Specifying sub Value" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.interop.SupportClaimsRequestSpecifyingSubValue"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <test name="OC5. FeatureTest-Providing Individually Requested Essential and Voluntary Claims" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.interop.ProvidingIndividuallyRequestedEssentialAndVoluntaryClaims"/>
+        </classes>
+    </test>
+    <test name="OC5. FeatureTest-Providing Individually Requested Essential Claims" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.interop.ProvidingIndividuallyRequestedEssentialClaims"/>
+        </classes>
+    </test>
+    <test name="OC5. FeatureTest-Providing Individually Requested Voluntary Claims" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.interop.ProvidingIndividuallyRequestedVoluntaryClaims"/>
+        </classes>
+    </test>
+    <test name="OC5. FeatureTest-Publish openid-configuration Discovery Information" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.interop.PublishOpenIdConfigurationDiscoveryInformation"/>
+        </classes>
+    </test>
+    <test name="OC5. FeatureTest-Reject Invalid Asymmetric ID Token Signature" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.interop.RejectInvalidAsymmetricIdTokenSignature"/>
+        </classes>
+    </test>
+    <test name="OC5. FeatureTest-Reject Invalid Symmetric ID Token Signature" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.interop.RejectInvalidSymmetricIdTokenSignature"/>
+        </classes>
+    </test>
+    <test name="OC5. FeatureTest-Reject redirect uri Not Matching a Registered redirect uri" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.interop.RejectRedirectUriNotMatchingARegisteredRedirectUri"/>
+        </classes>
+    </test>
+    <test name="OC5. FeatureTest-Reject Registration of redirect uri with Fragment" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.interop.RejectRegistrationOfRedirectUriWithFragment"/>
+        </classes>
+    </test>
+    <test name="OC5. FeatureTest-Reject Requests Without nonce Using Implicit Flow" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.interop.RejectRequestsWithoutNonceUsingImplicitFlow"/>
+        </classes>
+    </test>
+    <test name="OC5. FeatureTest-Reject Request Without redirect uri when Multiple Registered" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.interop.RejectRequestWithoutRedirectUriWhenMultipleRegistered"/>
+        </classes>
+    </test>
+    <test name="OC5. FeatureTest-Reject Request Without response type" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.interop.RejectRequestWithoutResponseType"/>
+        </classes>
+    </test>
+    <test name="OC5. FeatureTest-Rejects Incorrect at hash when Implicit Flow Used" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.interop.RejectsIncorrectAtHashWhenImplicitFlowUsed"/>
+        </classes>
+    </test>
+    <test name="OC5. FeatureTest-Rejects Incorrect c hash when Code Flow Used" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.interop.RejectsIncorrectCHashWhenCodeFlowUsed"/>
+        </classes>
+    </test>
+    <test name="OC5. FeatureTest-Rejects redirect uri when Query Parameter Does Not Match" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.interop.RejectsRedirectUriWhenQueryParameterDoesNotMatch"/>
+        </classes>
+    </test>
+    <test name="OC5. FeatureTest-Rejects Second Use of Access Code" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.interop.RejectsSecondUseOfAccessCode"/>
+        </classes>
+    </test>
+    <test name="OC5. FeatureTest-Rejects Sector Identifier Not Containing Registered redirect uri Values"
+          enabled="true">
+        <classes>
+            <class name="io.jans.as.client.interop.RejectsSectorIdentifierNotContainingRegisteredRedirectUriValues"/>
+        </classes>
+    </test>
+    <test name="OC5. FeatureTest-Requesting UserInfo Claims with OpenID Request Object" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.interop.RequestingUserInfoClaimsWithOpenIdRequestObject"/>
+        </classes>
+    </test>
+    <test name="OC5. FeatureTest-Requesting UserInfo Claims with scope Values" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.interop.RequestingUserInfoClaimsWithScopeValues"/>
+        </classes>
+    </test>
+    <test name="OC5. FeatureTest-Second Use of Access Code Revokes Previously Issued Access Token" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.interop.SecondUseOfAccessCodeRevokesPreviouslyIssuedAccessToken"/>
+        </classes>
+    </test>
+    <test name="OC5. FeatureTest-Support Authentication to Token Endpoint using Form-Encoded Client Credentials in POST Body"
+          enabled="true">
+        <classes>
+            <class name="io.jans.as.client.interop.SupportAuthenticationToTokenEndpointUsingFormEncodedClientCredentialsInPostBody"/>
+        </classes>
+    </test>
+    <test name="OC5. FeatureTest-Support Authentication to Token Endpoint using HTTP Basic with POST" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.interop.SupportAuthenticationToTokenEndpointUsingHttpBasicWithPost"/>
+        </classes>
+    </test>
+    <test name="OC5. FeatureTest-Support Authentication to Token Endpoint with Asymmetrically Signed JWTs"
+          enabled="true">
+        <classes>
+            <class name="io.jans.as.client.interop.SupportAuthenticationToTokenEndpointWithAsymmetricallySignedJWTs"/>
+        </classes>
+    </test>
+    <test name="OC5. FeatureTest-Support Authentication to Token Endpoint with Symmetrically Signed JWTs"
+          enabled="true">
+        <classes>
+            <class name="io.jans.as.client.interop.SupportAuthenticationToTokenEndpointWithSymmetricallySignedJWTs"/>
+        </classes>
+    </test>
+    <test name="OC5. FeatureTest-Support code Response Type" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.interop.SupportCodeResponseType"/>
+        </classes>
+    </test>
+    <test name="OC5. FeatureTest-Support Combination of code id token token Response Types" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.interop.SupportCombinationOfCodeIdTokenTokenResponseTypes"/>
+        </classes>
+    </test>
+    <test name="OC5. FeatureTest-Support Combination of code token Response Types" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.interop.SupportCombinationOfCodeTokenResponseTypes"/>
+        </classes>
+    </test>
+    <test name="OC5. FeatureTest-Support Combination of id token code Response Types" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.interop.SupportCombinationOfIdTokenCodeResponseTypes"/>
+        </classes>
+    </test>
+    <test name="OC5. FeatureTest-Support Combination of id token token Response Types" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.interop.SupportCombinationOfIdTokenTokenResponseTypes"/>
+        </classes>
+    </test>
+    <test name="OC5. FeatureTest-Support display value page" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.interop.SupportDisplayValuePage"/>
+        </classes>
+    </test>
+    <test name="OC5. FeatureTest-Support display value popup" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.interop.SupportDisplayValuePopup"/>
+        </classes>
+    </test>
+    <test name="OC5. FeatureTest-Support id token Response Type" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.interop.SupportIdTokenResponseType"/>
+        </classes>
+    </test>
+    <test name="OC5. FeatureTest-Support prompt value login" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.interop.SupportPromptValueLogin"/>
+        </classes>
+    </test>
+    <test name="OC5. FeatureTest-Support prompt value none" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.interop.SupportPromptValueNone"/>
+        </classes>
+    </test>
+    <test name="OC5. FeatureTest-Support Registration Read" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.interop.SupportRegistrationRead"/>
+        </classes>
+    </test>
+    <test name="OC5. FeatureTest-Support Request File" enabled="false">
+        <classes>
+            <class name="io.jans.as.client.interop.SupportRequestFile"/>
+        </classes>
+    </test>
+    <test name="OC5. FeatureTest-Support claims Request Specifying sub Value" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.interop.SupportClaimsRequestSpecifyingSubValue"/>
+        </classes>
+    </test>
 <!--    <test name="OC5. FeatureTest-Support Requests Containing nonce" enabled="true">-->
 <!--        <classes>-->
 <!--            <class name="io.jans.as.client.interop.SupportRequestsContainingNonce"/>-->
 <!--        </classes>-->
 <!--    </test>-->
-<!--    <test name="OC5. FeatureTest-Support Requests Without nonce" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.interop.SupportRequestsWithoutNonce"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="OP-3rd_party-init-login" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.interop.Supports3rdPartyInitLogin"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="OP-3rd_party-init-login-nohttps" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.interop.Supports3rdPartyInitLoginNoHttps"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="OC5. FeatureTest-Supports Combining Claims Requested with scope and Request Object" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.interop.SupportsCombiningClaimsRequestedWithScopeAndRequestObject"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="OC5. FeatureTest-Support scope Requesting address Claims" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.interop.SupportScopeRequestingAddressClaims"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="OC5. FeatureTest-Support scope Requesting All Basic Claims" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.interop.SupportScopeRequestingAllBasicClaims"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="OC5. FeatureTest-Support scope Requesting email Claims" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.interop.SupportScopeRequestingEmailClaims"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <test name="OC5. FeatureTest-Support Requests Without nonce" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.interop.SupportRequestsWithoutNonce"/>
+        </classes>
+    </test>
+    <test name="OP-3rd_party-init-login" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.interop.Supports3rdPartyInitLogin"/>
+        </classes>
+    </test>
+    <test name="OP-3rd_party-init-login-nohttps" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.interop.Supports3rdPartyInitLoginNoHttps"/>
+        </classes>
+    </test>
+    <test name="OC5. FeatureTest-Supports Combining Claims Requested with scope and Request Object" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.interop.SupportsCombiningClaimsRequestedWithScopeAndRequestObject"/>
+        </classes>
+    </test>
+    <test name="OC5. FeatureTest-Support scope Requesting address Claims" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.interop.SupportScopeRequestingAddressClaims"/>
+        </classes>
+    </test>
+    <test name="OC5. FeatureTest-Support scope Requesting All Basic Claims" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.interop.SupportScopeRequestingAllBasicClaims"/>
+        </classes>
+    </test>
+    <test name="OC5. FeatureTest-Support scope Requesting email Claims" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.interop.SupportScopeRequestingEmailClaims"/>
+        </classes>
+    </test>
 <!--    <test name="OC5. FeatureTest-Support scope Requesting No Specific Claims" enabled="true">-->
 <!--        <classes>-->
 <!--            <class name="io.jans.as.client.interop.SupportScopeRequestingNoSpecificClaims"/>-->
 <!--        </classes>-->
 <!--    </test>-->
-<!--    <test name="OC5. FeatureTest-Support scope Requesting phone Claims" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.interop.SupportScopeRequestingPhoneClaims"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="OC5. FeatureTest-Support scope Requesting profile Claims" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.interop.SupportScopeRequestingProfileClaims"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="OC5. FeatureTest-Supports Returning Claims in ID Token" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.interop.SupportsReturningClaimsInIdToken"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="OC5. FeatureTest-Supports Returning Different Claims in ID Token and UserInfo Endpoint" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.interop.SupportsReturningDifferentClaimsInIdTokenAndUserInfoEndpoint"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="OC5. FeatureTest-Support token Response Type" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.interop.SupportTokenResponseType"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="OC5. FeatureTest-UserInfo Endpoint" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.interop.UserInfoEndpoint"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="OC5. FeatureTest-UserInfo Endpoint Access with Form-Encoded Body Method" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.interop.UserInfoEndpointAccessWithFormEncodedBodyMethod"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="OC5. FeatureTest-UserInfo Endpoint Access with Header Method" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.interop.UserInfoEndpointAccessWithHeaderMethod"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="OC5. FeatureTest-Uses Asymmetric ID Token Signatures" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.interop.UsesAsymmetricIdTokenSignatures"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="OC5. FeatureTest-Uses Discovery" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.interop.UsesDiscovery"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="OC5. FeatureTest-Uses Dynamic Registration" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.interop.UsesDynamicRegistration"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="OC5. FeatureTest-Uses Symmetric ID Token Signatures" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.interop.UsesSymmetricIdTokenSignatures"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="OC5. FeatureTest-Verifies Correct at hash when Implicit Flow Used" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.interop.VerifiesCorrectAtHashWhenImplicitFlowUsed"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="OC5. FeatureTest-Verifies Correct c hash when Code Flow Used" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.interop.VerifiesCorrectCHashWhenCodeFlowUsed"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <test name="OC5. FeatureTest-Support scope Requesting phone Claims" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.interop.SupportScopeRequestingPhoneClaims"/>
+        </classes>
+    </test>
+    <test name="OC5. FeatureTest-Support scope Requesting profile Claims" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.interop.SupportScopeRequestingProfileClaims"/>
+        </classes>
+    </test>
+    <test name="OC5. FeatureTest-Supports Returning Claims in ID Token" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.interop.SupportsReturningClaimsInIdToken"/>
+        </classes>
+    </test>
+    <test name="OC5. FeatureTest-Supports Returning Different Claims in ID Token and UserInfo Endpoint" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.interop.SupportsReturningDifferentClaimsInIdTokenAndUserInfoEndpoint"/>
+        </classes>
+    </test>
+    <test name="OC5. FeatureTest-Support token Response Type" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.interop.SupportTokenResponseType"/>
+        </classes>
+    </test>
+    <test name="OC5. FeatureTest-UserInfo Endpoint" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.interop.UserInfoEndpoint"/>
+        </classes>
+    </test>
+    <test name="OC5. FeatureTest-UserInfo Endpoint Access with Form-Encoded Body Method" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.interop.UserInfoEndpointAccessWithFormEncodedBodyMethod"/>
+        </classes>
+    </test>
+    <test name="OC5. FeatureTest-UserInfo Endpoint Access with Header Method" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.interop.UserInfoEndpointAccessWithHeaderMethod"/>
+        </classes>
+    </test>
+    <test name="OC5. FeatureTest-Uses Asymmetric ID Token Signatures" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.interop.UsesAsymmetricIdTokenSignatures"/>
+        </classes>
+    </test>
+    <test name="OC5. FeatureTest-Uses Discovery" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.interop.UsesDiscovery"/>
+        </classes>
+    </test>
+    <test name="OC5. FeatureTest-Uses Dynamic Registration" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.interop.UsesDynamicRegistration"/>
+        </classes>
+    </test>
+    <test name="OC5. FeatureTest-Uses Symmetric ID Token Signatures" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.interop.UsesSymmetricIdTokenSignatures"/>
+        </classes>
+    </test>
+    <test name="OC5. FeatureTest-Verifies Correct at hash when Implicit Flow Used" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.interop.VerifiesCorrectAtHashWhenImplicitFlowUsed"/>
+        </classes>
+    </test>
+    <test name="OC5. FeatureTest-Verifies Correct c hash when Code Flow Used" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.interop.VerifiesCorrectCHashWhenCodeFlowUsed"/>
+        </classes>
+    </test>
 
-<!--    &lt;!&ndash; CIBA &ndash;&gt;-->
-<!--    <test name="CIBA Configuration Test" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.ciba.ConfigurationTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="CIBA Dynamic Client Registration Test" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.ciba.RegistrationTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <!-- CIBA -->
+    <test name="CIBA Configuration Test" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.ciba.ConfigurationTest"/>
+        </classes>
+    </test>
+    <test name="CIBA Dynamic Client Registration Test" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.ciba.RegistrationTest"/>
+        </classes>
+    </test>
 <!--    <test name="CIBA Ping Mode" enabled="true">-->
 <!--        <classes>-->
 <!--            <class name="io.jans.as.client.ciba.BackchannelAuthenticationPingMode"/>-->
@@ -884,11 +884,11 @@
 <!--            <class name="io.jans.as.client.ciba.BackchannelAuthenticationPushMode"/>-->
 <!--        </classes>-->
 <!--    </test>-->
-<!--    <test name="CIBA Expired Requests" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.ciba.BackchannelAuthenticationExpiredRequestsTests"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <test name="CIBA Expired Requests" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.ciba.BackchannelAuthenticationExpiredRequestsTests"/>
+        </classes>
+    </test>
 <!--    <test name="CIBA Ping Mode JWT Requests" enabled="true">-->
 <!--        <classes>-->
 <!--            <class name="io.jans.as.client.ciba.CibaPingModeJwtAuthRequestTests"/>-->
@@ -900,299 +900,299 @@
 <!--        </classes>-->
 <!--    </test>-->
 
-<!--    &lt;!&ndash; Device authorization tests &ndash;&gt;-->
-<!--    <test name="Tests for Device Authz WS" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.ws.rs.deviceauthz.DeviceAuthzRequestRegistrationTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="Tests for Device Authz flow" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.ws.rs.deviceauthz.DeviceAuthzFlowHttpTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <!-- Device authorization tests -->
+    <test name="Tests for Device Authz WS" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.ws.rs.deviceauthz.DeviceAuthzRequestRegistrationTest"/>
+        </classes>
+    </test>
+    <test name="Tests for Device Authz flow" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.ws.rs.deviceauthz.DeviceAuthzFlowHttpTest"/>
+        </classes>
+    </test>
 
-<!--    &lt;!&ndash; JARM &ndash;&gt;-->
-<!--    <test name="Test Authorization Response Mode form_post.jwt Response Type code Encrypted" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.ws.rs.jarm.AuthorizationResponseModeFormPostJwtResponseTypeCodeEncryptedHttpTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="Test Authorization Response Mode form_post.jwt Response Type code id_token Encrypted" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.ws.rs.jarm.AuthorizationResponseModeFormPostJwtResponseTypeCodeIdTokenEncryptedHttpTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="Test Authorization Response Mode form_post.jwt Response Type code id_token Signed" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.ws.rs.jarm.AuthorizationResponseModeFormPostJwtResponseTypeCodeIdTokenSignedHttpTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="Test Authorization Response Mode form_post.jwt Response Type code id_token token Encrypted"-->
-<!--          enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.ws.rs.jarm.AuthorizationResponseModeFormPostJwtResponseTypeCodeIdTokenTokenEncryptedHttpTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="Test Authorization Response Mode form_post.jwt Response Type code id_token token Signed" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.ws.rs.jarm.AuthorizationResponseModeFormPostJwtResponseTypeCodeIdTokenTokenSignedHttpTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="Test Authorization Response Mode form_post.jwt Response Type code Signed" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.ws.rs.jarm.AuthorizationResponseModeFormPostJwtResponseTypeCodeSignedHttpTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="Test Authorization Response Mode form_post.jwt Response Type code token Encrypted" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.ws.rs.jarm.AuthorizationResponseModeFormPostJwtResponseTypeCodeTokenEncryptedHttpTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="Test Authorization Response Mode form_post.jwt Response Type code token Signed" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.ws.rs.jarm.AuthorizationResponseModeFormPostJwtResponseTypeCodeTokenSignedHttpTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="Test Authorization Response Mode form_post.jwt Response Type token Encrypted" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.ws.rs.jarm.AuthorizationResponseModeFormPostJwtResponseTypeTokenEncryptedHttpTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="Test Authorization Response Mode form_post.jwt Response Type token id_token Encrypted" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.ws.rs.jarm.AuthorizationResponseModeFormPostJwtResponseTypeTokenIdTokenEncryptedHttpTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="Test Authorization Response Mode form_post.jwt Response Type token id_token Signed" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.ws.rs.jarm.AuthorizationResponseModeFormPostJwtResponseTypeTokenIdTokenSignedHttpTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="Test Authorization Response Mode form_post.jwt Response Type token Signed" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.ws.rs.jarm.AuthorizationResponseModeFormPostJwtResponseTypeTokenSignedHttpTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <!-- JARM -->
+    <test name="Test Authorization Response Mode form_post.jwt Response Type code Encrypted" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.ws.rs.jarm.AuthorizationResponseModeFormPostJwtResponseTypeCodeEncryptedHttpTest"/>
+        </classes>
+    </test>
+    <test name="Test Authorization Response Mode form_post.jwt Response Type code id_token Encrypted" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.ws.rs.jarm.AuthorizationResponseModeFormPostJwtResponseTypeCodeIdTokenEncryptedHttpTest"/>
+        </classes>
+    </test>
+    <test name="Test Authorization Response Mode form_post.jwt Response Type code id_token Signed" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.ws.rs.jarm.AuthorizationResponseModeFormPostJwtResponseTypeCodeIdTokenSignedHttpTest"/>
+        </classes>
+    </test>
+    <test name="Test Authorization Response Mode form_post.jwt Response Type code id_token token Encrypted"
+          enabled="true">
+        <classes>
+            <class name="io.jans.as.client.ws.rs.jarm.AuthorizationResponseModeFormPostJwtResponseTypeCodeIdTokenTokenEncryptedHttpTest"/>
+        </classes>
+    </test>
+    <test name="Test Authorization Response Mode form_post.jwt Response Type code id_token token Signed" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.ws.rs.jarm.AuthorizationResponseModeFormPostJwtResponseTypeCodeIdTokenTokenSignedHttpTest"/>
+        </classes>
+    </test>
+    <test name="Test Authorization Response Mode form_post.jwt Response Type code Signed" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.ws.rs.jarm.AuthorizationResponseModeFormPostJwtResponseTypeCodeSignedHttpTest"/>
+        </classes>
+    </test>
+    <test name="Test Authorization Response Mode form_post.jwt Response Type code token Encrypted" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.ws.rs.jarm.AuthorizationResponseModeFormPostJwtResponseTypeCodeTokenEncryptedHttpTest"/>
+        </classes>
+    </test>
+    <test name="Test Authorization Response Mode form_post.jwt Response Type code token Signed" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.ws.rs.jarm.AuthorizationResponseModeFormPostJwtResponseTypeCodeTokenSignedHttpTest"/>
+        </classes>
+    </test>
+    <test name="Test Authorization Response Mode form_post.jwt Response Type token Encrypted" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.ws.rs.jarm.AuthorizationResponseModeFormPostJwtResponseTypeTokenEncryptedHttpTest"/>
+        </classes>
+    </test>
+    <test name="Test Authorization Response Mode form_post.jwt Response Type token id_token Encrypted" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.ws.rs.jarm.AuthorizationResponseModeFormPostJwtResponseTypeTokenIdTokenEncryptedHttpTest"/>
+        </classes>
+    </test>
+    <test name="Test Authorization Response Mode form_post.jwt Response Type token id_token Signed" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.ws.rs.jarm.AuthorizationResponseModeFormPostJwtResponseTypeTokenIdTokenSignedHttpTest"/>
+        </classes>
+    </test>
+    <test name="Test Authorization Response Mode form_post.jwt Response Type token Signed" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.ws.rs.jarm.AuthorizationResponseModeFormPostJwtResponseTypeTokenSignedHttpTest"/>
+        </classes>
+    </test>
 
-<!--    <test name="Test Authorization Response Mode fragment.jwt Response Type code Encrypted" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.ws.rs.jarm.AuthorizationResponseModeFragmentJwtResponseTypeCodeEncryptedHttpTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="Test Authorization Response Mode fragment.jwt Response Type code id_token Encrypted" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.ws.rs.jarm.AuthorizationResponseModeFragmentJwtResponseTypeCodeIdTokenEncryptedHttpTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="Test Authorization Response Mode fragment.jwt Response Type code id_token Signed" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.ws.rs.jarm.AuthorizationResponseModeFragmentJwtResponseTypeCodeIdTokenSignedHttpTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="Test Authorization Response Mode fragment.jwt Response Type code id_token token Encrypted"-->
-<!--          enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.ws.rs.jarm.AuthorizationResponseModeFragmentJwtResponseTypeCodeIdTokenTokenEncryptedHttpTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="Test Authorization Response Mode fragment.jwt Response Type code id_token token Signed" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.ws.rs.jarm.AuthorizationResponseModeFragmentJwtResponseTypeCodeIdTokenTokenSignedHttpTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="Test Authorization Response Mode fragment.jwt Response Type code Signed" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.ws.rs.jarm.AuthorizationResponseModeFragmentJwtResponseTypeCodeSignedHttpTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="Test Authorization Response Mode fragment.jwt Response Type code token Encrypted" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.ws.rs.jarm.AuthorizationResponseModeFragmentJwtResponseTypeCodeTokenEncryptedHttpTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="Test Authorization Response Mode fragment.jwt Response Type code token Signed" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.ws.rs.jarm.AuthorizationResponseModeFragmentJwtResponseTypeCodeTokenSignedHttpTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="Test Authorization Response Mode fragment.jwt Response Type token Encrypted" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.ws.rs.jarm.AuthorizationResponseModeFragmentJwtResponseTypeTokenEncryptedHttpTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="Test Authorization Response Mode fragment.jwt Response Type token id_token Encrypted" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.ws.rs.jarm.AuthorizationResponseModeFragmentJwtResponseTypeTokenIdTokenEncryptedHttpTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="Test Authorization Response Mode fragment.jwt Response Type token id_token Signed" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.ws.rs.jarm.AuthorizationResponseModeFragmentJwtResponseTypeTokenIdTokenSignedHttpTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="Test Authorization Response Mode fragment.jwt Response Type token Signed" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.ws.rs.jarm.AuthorizationResponseModeFragmentJwtResponseTypeTokenSignedHttpTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <test name="Test Authorization Response Mode fragment.jwt Response Type code Encrypted" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.ws.rs.jarm.AuthorizationResponseModeFragmentJwtResponseTypeCodeEncryptedHttpTest"/>
+        </classes>
+    </test>
+    <test name="Test Authorization Response Mode fragment.jwt Response Type code id_token Encrypted" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.ws.rs.jarm.AuthorizationResponseModeFragmentJwtResponseTypeCodeIdTokenEncryptedHttpTest"/>
+        </classes>
+    </test>
+    <test name="Test Authorization Response Mode fragment.jwt Response Type code id_token Signed" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.ws.rs.jarm.AuthorizationResponseModeFragmentJwtResponseTypeCodeIdTokenSignedHttpTest"/>
+        </classes>
+    </test>
+    <test name="Test Authorization Response Mode fragment.jwt Response Type code id_token token Encrypted"
+          enabled="true">
+        <classes>
+            <class name="io.jans.as.client.ws.rs.jarm.AuthorizationResponseModeFragmentJwtResponseTypeCodeIdTokenTokenEncryptedHttpTest"/>
+        </classes>
+    </test>
+    <test name="Test Authorization Response Mode fragment.jwt Response Type code id_token token Signed" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.ws.rs.jarm.AuthorizationResponseModeFragmentJwtResponseTypeCodeIdTokenTokenSignedHttpTest"/>
+        </classes>
+    </test>
+    <test name="Test Authorization Response Mode fragment.jwt Response Type code Signed" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.ws.rs.jarm.AuthorizationResponseModeFragmentJwtResponseTypeCodeSignedHttpTest"/>
+        </classes>
+    </test>
+    <test name="Test Authorization Response Mode fragment.jwt Response Type code token Encrypted" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.ws.rs.jarm.AuthorizationResponseModeFragmentJwtResponseTypeCodeTokenEncryptedHttpTest"/>
+        </classes>
+    </test>
+    <test name="Test Authorization Response Mode fragment.jwt Response Type code token Signed" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.ws.rs.jarm.AuthorizationResponseModeFragmentJwtResponseTypeCodeTokenSignedHttpTest"/>
+        </classes>
+    </test>
+    <test name="Test Authorization Response Mode fragment.jwt Response Type token Encrypted" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.ws.rs.jarm.AuthorizationResponseModeFragmentJwtResponseTypeTokenEncryptedHttpTest"/>
+        </classes>
+    </test>
+    <test name="Test Authorization Response Mode fragment.jwt Response Type token id_token Encrypted" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.ws.rs.jarm.AuthorizationResponseModeFragmentJwtResponseTypeTokenIdTokenEncryptedHttpTest"/>
+        </classes>
+    </test>
+    <test name="Test Authorization Response Mode fragment.jwt Response Type token id_token Signed" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.ws.rs.jarm.AuthorizationResponseModeFragmentJwtResponseTypeTokenIdTokenSignedHttpTest"/>
+        </classes>
+    </test>
+    <test name="Test Authorization Response Mode fragment.jwt Response Type token Signed" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.ws.rs.jarm.AuthorizationResponseModeFragmentJwtResponseTypeTokenSignedHttpTest"/>
+        </classes>
+    </test>
 
-<!--    <test name="Test Authorization Response Mode jwt Response Type code Encrypted" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.ws.rs.jarm.AuthorizationResponseModeJwtResponseTypeCodeEncryptedHttpTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="Test Authorization Response Mode jwt Response Type code id_token Encrypted" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.ws.rs.jarm.AuthorizationResponseModeJwtResponseTypeCodeIdTokenEncryptedHttpTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="Test Authorization Response Mode jwt Response Type code id_token Signed" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.ws.rs.jarm.AuthorizationResponseModeJwtResponseTypeCodeIdTokenSignedHttpTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="Test Authorization Response Mode jwt Response Type code id_token token Encrypted" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.ws.rs.jarm.AuthorizationResponseModeJwtResponseTypeCodeIdTokenTokenEncryptedHttpTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="Test Authorization Response Mode jwt Response Type code id_token token Signed" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.ws.rs.jarm.AuthorizationResponseModeJwtResponseTypeCodeIdTokenTokenSignedHttpTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="Test Authorization Response Mode jwt Response Type code Signed and Encrypted" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.ws.rs.jarm.AuthorizationResponseModeJwtResponseTypeCodeSignedEncryptedHttpTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="Test Authorization Response Mode jwt Response Type code Signed" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.ws.rs.jarm.AuthorizationResponseModeJwtResponseTypeCodeSignedHttpTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="Test Authorization Response Mode jwt Response Type code token Encrypted" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.ws.rs.jarm.AuthorizationResponseModeJwtResponseTypeCodeTokenEncryptedHttpTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="Test Authorization Response Mode jwt Response Type code token Signed" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.ws.rs.jarm.AuthorizationResponseModeJwtResponseTypeCodeTokenSignedHttpTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="Test Authorization Response Mode jwt Response Type token Encrypted" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.ws.rs.jarm.AuthorizationResponseModeJwtResponseTypeTokenEncryptedHttpTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="Test Authorization Response Mode jwt Response Type token id_token Encrypted" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.ws.rs.jarm.AuthorizationResponseModeJwtResponseTypeTokenIdTokenEncryptedHttpTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="Test Authorization Response Mode jwt Response Type token id_token Signed" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.ws.rs.jarm.AuthorizationResponseModeJwtResponseTypeTokenIdTokenSignedHttpTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="Test Authorization Response Mode jwt Response Type token Signed" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.ws.rs.jarm.AuthorizationResponseModeJwtResponseTypeTokenSignedHttpTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <test name="Test Authorization Response Mode jwt Response Type code Encrypted" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.ws.rs.jarm.AuthorizationResponseModeJwtResponseTypeCodeEncryptedHttpTest"/>
+        </classes>
+    </test>
+    <test name="Test Authorization Response Mode jwt Response Type code id_token Encrypted" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.ws.rs.jarm.AuthorizationResponseModeJwtResponseTypeCodeIdTokenEncryptedHttpTest"/>
+        </classes>
+    </test>
+    <test name="Test Authorization Response Mode jwt Response Type code id_token Signed" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.ws.rs.jarm.AuthorizationResponseModeJwtResponseTypeCodeIdTokenSignedHttpTest"/>
+        </classes>
+    </test>
+    <test name="Test Authorization Response Mode jwt Response Type code id_token token Encrypted" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.ws.rs.jarm.AuthorizationResponseModeJwtResponseTypeCodeIdTokenTokenEncryptedHttpTest"/>
+        </classes>
+    </test>
+    <test name="Test Authorization Response Mode jwt Response Type code id_token token Signed" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.ws.rs.jarm.AuthorizationResponseModeJwtResponseTypeCodeIdTokenTokenSignedHttpTest"/>
+        </classes>
+    </test>
+    <test name="Test Authorization Response Mode jwt Response Type code Signed and Encrypted" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.ws.rs.jarm.AuthorizationResponseModeJwtResponseTypeCodeSignedEncryptedHttpTest"/>
+        </classes>
+    </test>
+    <test name="Test Authorization Response Mode jwt Response Type code Signed" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.ws.rs.jarm.AuthorizationResponseModeJwtResponseTypeCodeSignedHttpTest"/>
+        </classes>
+    </test>
+    <test name="Test Authorization Response Mode jwt Response Type code token Encrypted" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.ws.rs.jarm.AuthorizationResponseModeJwtResponseTypeCodeTokenEncryptedHttpTest"/>
+        </classes>
+    </test>
+    <test name="Test Authorization Response Mode jwt Response Type code token Signed" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.ws.rs.jarm.AuthorizationResponseModeJwtResponseTypeCodeTokenSignedHttpTest"/>
+        </classes>
+    </test>
+    <test name="Test Authorization Response Mode jwt Response Type token Encrypted" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.ws.rs.jarm.AuthorizationResponseModeJwtResponseTypeTokenEncryptedHttpTest"/>
+        </classes>
+    </test>
+    <test name="Test Authorization Response Mode jwt Response Type token id_token Encrypted" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.ws.rs.jarm.AuthorizationResponseModeJwtResponseTypeTokenIdTokenEncryptedHttpTest"/>
+        </classes>
+    </test>
+    <test name="Test Authorization Response Mode jwt Response Type token id_token Signed" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.ws.rs.jarm.AuthorizationResponseModeJwtResponseTypeTokenIdTokenSignedHttpTest"/>
+        </classes>
+    </test>
+    <test name="Test Authorization Response Mode jwt Response Type token Signed" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.ws.rs.jarm.AuthorizationResponseModeJwtResponseTypeTokenSignedHttpTest"/>
+        </classes>
+    </test>
 
-<!--    <test name="Test Authorization Response Mode query jwt Response Type code Encrypted" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.ws.rs.jarm.AuthorizationResponseModeQueryJwtResponseTypeCodeEncryptedHttpTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="Test Authorization Response Mode query jwt Response Type code id_token Encrypted" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.ws.rs.jarm.AuthorizationResponseModeQueryJwtResponseTypeCodeIdTokenEncryptedHttpTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="Test Authorization Response Mode query jwt Response Type code id_token Signed" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.ws.rs.jarm.AuthorizationResponseModeQueryJwtResponseTypeCodeIdTokenSignedHttpTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="Test Authorization Response Mode query jwt Response Type code id_token token Encrypted" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.ws.rs.jarm.AuthorizationResponseModeQueryJwtResponseTypeCodeIdTokenTokenEncryptedHttpTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="Test Authorization Response Mode query jwt Response Type code id_token token Signed" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.ws.rs.jarm.AuthorizationResponseModeQueryJwtResponseTypeCodeIdTokenTokenSignedHttpTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="Test Authorization Response Mode query jwt Response Type code Signed" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.ws.rs.jarm.AuthorizationResponseModeQueryJwtResponseTypeCodeSignedHttpTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="Test Authorization Response Mode query jwt Response Type code token Encrypted" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.ws.rs.jarm.AuthorizationResponseModeQueryJwtResponseTypeCodeTokenEncryptedHttpTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="Test Authorization Response Mode query jwt Response Type code token Signed" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.ws.rs.jarm.AuthorizationResponseModeQueryJwtResponseTypeCodeTokenSignedHttpTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="Test Authorization Response Mode query jwt Response Type token Encrypted" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.ws.rs.jarm.AuthorizationResponseModeQueryJwtResponseTypeTokenEncryptedHttpTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="Test Authorization Response Mode query jwt Response Type token id_token Signed" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.ws.rs.jarm.AuthorizationResponseModeQueryJwtResponseTypeTokenIdTokenSignedHttpTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="Test Authorization Response Mode query jwt Response Type token id_token Encrypted" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.ws.rs.jarm.AuthorizationResponseModeQueryJwtResponseTypeTokenIdTokenEncryptedHttpTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="Test Authorization Response Mode query jwt Response Type token Signed" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.ws.rs.jarm.AuthorizationResponseModeQueryJwtResponseTypeTokenSignedHttpTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="Test Authorization Server Metadata" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.ws.rs.jarm.AuthorizationServerMetadataHttpTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="Test Authorization ACR values" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.ws.rs.AuthorizationAcrValuesTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <test name="Test Authorization Response Mode query jwt Response Type code Encrypted" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.ws.rs.jarm.AuthorizationResponseModeQueryJwtResponseTypeCodeEncryptedHttpTest"/>
+        </classes>
+    </test>
+    <test name="Test Authorization Response Mode query jwt Response Type code id_token Encrypted" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.ws.rs.jarm.AuthorizationResponseModeQueryJwtResponseTypeCodeIdTokenEncryptedHttpTest"/>
+        </classes>
+    </test>
+    <test name="Test Authorization Response Mode query jwt Response Type code id_token Signed" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.ws.rs.jarm.AuthorizationResponseModeQueryJwtResponseTypeCodeIdTokenSignedHttpTest"/>
+        </classes>
+    </test>
+    <test name="Test Authorization Response Mode query jwt Response Type code id_token token Encrypted" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.ws.rs.jarm.AuthorizationResponseModeQueryJwtResponseTypeCodeIdTokenTokenEncryptedHttpTest"/>
+        </classes>
+    </test>
+    <test name="Test Authorization Response Mode query jwt Response Type code id_token token Signed" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.ws.rs.jarm.AuthorizationResponseModeQueryJwtResponseTypeCodeIdTokenTokenSignedHttpTest"/>
+        </classes>
+    </test>
+    <test name="Test Authorization Response Mode query jwt Response Type code Signed" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.ws.rs.jarm.AuthorizationResponseModeQueryJwtResponseTypeCodeSignedHttpTest"/>
+        </classes>
+    </test>
+    <test name="Test Authorization Response Mode query jwt Response Type code token Encrypted" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.ws.rs.jarm.AuthorizationResponseModeQueryJwtResponseTypeCodeTokenEncryptedHttpTest"/>
+        </classes>
+    </test>
+    <test name="Test Authorization Response Mode query jwt Response Type code token Signed" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.ws.rs.jarm.AuthorizationResponseModeQueryJwtResponseTypeCodeTokenSignedHttpTest"/>
+        </classes>
+    </test>
+    <test name="Test Authorization Response Mode query jwt Response Type token Encrypted" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.ws.rs.jarm.AuthorizationResponseModeQueryJwtResponseTypeTokenEncryptedHttpTest"/>
+        </classes>
+    </test>
+    <test name="Test Authorization Response Mode query jwt Response Type token id_token Signed" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.ws.rs.jarm.AuthorizationResponseModeQueryJwtResponseTypeTokenIdTokenSignedHttpTest"/>
+        </classes>
+    </test>
+    <test name="Test Authorization Response Mode query jwt Response Type token id_token Encrypted" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.ws.rs.jarm.AuthorizationResponseModeQueryJwtResponseTypeTokenIdTokenEncryptedHttpTest"/>
+        </classes>
+    </test>
+    <test name="Test Authorization Response Mode query jwt Response Type token Signed" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.ws.rs.jarm.AuthorizationResponseModeQueryJwtResponseTypeTokenSignedHttpTest"/>
+        </classes>
+    </test>
+    <test name="Test Authorization Server Metadata" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.ws.rs.jarm.AuthorizationServerMetadataHttpTest"/>
+        </classes>
+    </test>
+    <test name="Test Authorization ACR values" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.ws.rs.AuthorizationAcrValuesTest"/>
+        </classes>
+    </test>
 
-<!--    &lt;!&ndash; SSA &ndash;&gt;-->
-<!--    <test name="SSA create test (HTTP)" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.ssa.SsaCreateTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="SSA get test (HTTP)" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.ssa.SsaGetTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="SSA validate test (HTTP)" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.ssa.SsaValidateTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="SSA revoke test (HTTP)" enabled="true">-->
-<!--        <classes>-->
-<!--            <class name="io.jans.as.client.ssa.SsaRevokeTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <!-- SSA -->
+    <test name="SSA create test (HTTP)" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.ssa.SsaCreateTest"/>
+        </classes>
+    </test>
+    <test name="SSA get test (HTTP)" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.ssa.SsaGetTest"/>
+        </classes>
+    </test>
+    <test name="SSA validate test (HTTP)" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.ssa.SsaValidateTest"/>
+        </classes>
+    </test>
+    <test name="SSA revoke test (HTTP)" enabled="true">
+        <classes>
+            <class name="io.jans.as.client.ssa.SsaRevokeTest"/>
+        </classes>
+    </test>
 </suite>
