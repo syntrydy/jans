@@ -7178,7 +7178,11 @@ components:
           $ref: '#/components/schemas/AttributeValidation'
         tooltip:
           type: string
+        whitePagesCanView:
+          type: boolean
         adminCanAccess:
+          type: boolean
+        adminCanView:
           type: boolean
         userCanAccess:
           type: boolean
@@ -7187,10 +7191,6 @@ components:
         userCanView:
           type: boolean
         userCanEdit:
-          type: boolean
-        adminCanView:
-          type: boolean
-        whitePagesCanView:
           type: boolean
         baseDn:
           type: string
@@ -7526,10 +7526,6 @@ components:
         ttl:
           type: integer
           format: int32
-        displayName:
-          type: string
-        tokenBindingSupported:
-          type: boolean
         authenticationMethod:
           type: string
           enum:
@@ -7622,6 +7618,8 @@ components:
         idTokenLifetime:
           type: integer
           format: int32
+        allowOfflineAccessWithoutConsent:
+          type: boolean
     CustomObjectAttribute:
       type: object
       properties:
@@ -7643,13 +7641,6 @@ components:
         values:
           type: object
           additionalProperties:
-            type: string
-        value:
-          type: string
-        languageTags:
-          uniqueItems: true
-          type: array
-          items:
             type: string
     AppConfiguration:
       type: object
@@ -8637,13 +8628,13 @@ components:
           type: boolean
         internal:
           type: boolean
+        locationPath:
+          type: string
         locationType:
           type: string
           enum:
           - ldap
           - file
-        locationPath:
-          type: string
         baseDn:
           type: string
     ScriptError:
@@ -8859,8 +8850,6 @@ components:
         jsLogoPath:
           type: string
         jsFaviconPath:
-          type: string
-        organizationTitle:
           type: string
         baseDn:
           type: string
