@@ -5,7 +5,7 @@
 	<groupId>io.jans</groupId>
 	<artifactId>jans-auth-server-parent</artifactId>
 	<packaging>pom</packaging>
-	<version>1.0.5-SNAPSHOT</version>
+	<version>1.0.6-SNAPSHOT</version>
 	<name>Jans authentication server parent</name>
     <distributionManagement>
 	  <repository>
@@ -54,7 +54,8 @@
 		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
 		<weld.version>4.0.3.Final</weld.version>
 		<org.jboss.resteasy.client.microprofile.version>4.7.5.Final</org.jboss.resteasy.client.microprofile.version>
-	</properties>
+        <jboss-jaxrs-api_3.0_spec.version>1.0.1.Final</jboss-jaxrs-api_3.0_spec.version>
+    </properties>
 
 	<prerequisites>
 		<maven>${maven.min-version}</maven>
@@ -99,13 +100,17 @@
 	</scm>
 
 	<modules>
-		<module>model</module>
-		<module>persistence-model</module>
-		<module>client</module>
-		<module>static</module>
-		<module>common</module>
-		<module>server</module>
-  </modules>
+        <module>model</module>
+        <module>agama/model</module>
+        <module>persistence-model</module>
+        <module>test-model</module>
+        <module>client</module>
+        <module>static</module>
+        <module>common</module>
+        <module>agama/engine</module>
+        <module>agama/inboundID</module>
+        <module>server</module>
+    </modules>
 
 	<dependencyManagement>
 		<dependencies>
@@ -151,9 +156,8 @@
 			</dependency>
 			<dependency>
 				<groupId>io.jans</groupId>
-				<artifactId>jans-auth-model</artifactId>
+				<artifactId>jans-auth-test-model</artifactId>
 				<version>${project.version}</version>
-				<type>test-jar</type>
 			</dependency>
 			<dependency>
 				<groupId>io.jans</groupId>
@@ -252,7 +256,7 @@
 			<dependency>
 				<groupId>commons-net</groupId>
 				<artifactId>commons-net</artifactId>
-				<version>3.0</version>
+				<version>3.9.0</version>
 			</dependency>
 
             <!-- Test -->
@@ -406,6 +410,15 @@
 						<source>1.8</source>
 						<target>1.8</target>
 						<encoding>UTF-8</encoding>
+						<annotationProcessors>
+							<annotationProcessor>
+								io.jans.doc.annotation.DocPropertyProcessor
+							</annotationProcessor>
+							<annotationProcessor>
+								io.jans.doc.annotation.DocFeatureFlagProcessor
+							</annotationProcessor>
+						</annotationProcessors>
+						<compilerArgument>-Amodule=Janssen Auth Server</compilerArgument>
 					</configuration>
 				</plugin>
 				<plugin>

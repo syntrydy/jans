@@ -88,6 +88,15 @@ public class ScopeService {
         persistenceEntryManager.merge(scope);
     }
 
+    public Scope getScope(String inum) {
+        try {
+            return persistenceEntryManager.find(Scope.class, getDnForScope(inum));
+        } catch (Exception ex) {
+            logger.error("Error while finding scope with inum:{} is:{}", inum, ex);
+        }
+        return null;
+    }
+
     public CustomScope getScopeByInum(String inum) {
         return getScopeByInum(inum, false);
     }
@@ -329,7 +338,7 @@ public class ScopeService {
 
         PagedResult<CustomScope> pagedResult = persistenceEntryManager.findPagedEntries(getDnForScope(null),
                 CustomScope.class, searchFilter, null, searchRequest.getSortBy(),
-                SortOrder.getByValue(searchRequest.getSortOrder()), searchRequest.getStartIndex() - 1,
+                SortOrder.getByValue(searchRequest.getSortOrder()), searchRequest.getStartIndex(),
                 searchRequest.getCount(), searchRequest.getMaxCount());
 
         if (pagedResult != null) {

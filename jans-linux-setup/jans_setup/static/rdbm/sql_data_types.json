@@ -832,6 +832,9 @@
     "mysql": {
       "type": "TEXT"
     },
+    "pgsql": {
+      "type": "TEXT"
+    },
     "spanner": {
       "type": "STRING(MAX)"
     }
@@ -840,12 +843,18 @@
     "mysql": {
       "type": "TEXT"
     },
+    "pgsql": {
+      "type": "TEXT"
+    },
     "spanner": {
       "type": "STRING(MAX)"
     }
   },
   "agFlowSt": {
     "mysql": {
+      "type": "TEXT"
+    },
+    "pgsql": {
       "type": "TEXT"
     },
     "spanner": {
@@ -857,9 +866,38 @@
       "size": 128,
       "type": "VARCHAR"
     },
+    "pgsql": {
+      "size": 128,
+      "type": "VARCHAR"
+    },
     "spanner": {
       "size": 128,
       "type": "STRING"
     }      
+  },
+  "adsPrjAssets": {
+    "mysql": {
+      "type": "LONGTEXT"
+    },
+    "pgsql": {
+      "type": "TEXT"
+    },
+    "spanner": {
+      "type": "STRING(MAX)"
+    }
+  },
+  "adsPrjDeplDetails": {
+    "mysql": {
+      "size": 2048,
+      "type": "VARCHAR"
+    },
+    "pgsql": {
+      "size": 2048,
+      "type": "VARCHAR"
+    },
+    "spanner": {
+      "size": 2048,
+      "type": "STRING"
+    }
   }
 }

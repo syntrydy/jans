@@ -1,20 +1,11 @@
-import os
-import sys
 import asyncio
-
-from typing import Sequence
-
-
 from prompt_toolkit.application import Application
 from prompt_toolkit.layout.containers import HSplit, VSplit, Window
 from prompt_toolkit.layout.dimension import D
-from prompt_toolkit.widgets import Button, Label, Frame
-from prompt_toolkit.formatted_text import HTML
+from prompt_toolkit.widgets import Button,  Frame
 from wui_components.jans_drop_down import DropDownWidget
-
 from utils.utils import DialogUtils
 from utils.multi_lang import _
-
 
 class Plugin(DialogUtils):
     """This is a general class for plugins 
@@ -26,7 +17,7 @@ class Plugin(DialogUtils):
         """init for Plugin class "scim"
 
         Args:
-            app (_type_): _description_
+            app (Generic): The main Application class
         """
         self.app = app
         self.pid = 'scim'
@@ -37,7 +28,6 @@ class Plugin(DialogUtils):
                             body=HSplit([Button(text=_("Get Scim Configuration"), handler=self.get_app_config)], width=D()),
                             height=D())
 
-
     def process(self) -> None:
         pass
 
@@ -45,7 +35,6 @@ class Plugin(DialogUtils):
         """center frame content
         """
         self.app.center_container = self.container
-
 
     def create_widgets(self) -> None:
         """SCIM Application configuration widgets are created in this fonction
@@ -57,7 +46,7 @@ class Plugin(DialogUtils):
                                     self.app.getTitledText(_("Application Url"), name='applicationUrl', value=self.app_config.get('applicationUrl',''), jans_help=self.app.get_help_from_schema(schema, 'applicationUrl'), style='class:outh-scope-text'),
                                     self.app.getTitledText(_("Base Endpoint"), name='baseEndpoint', value=self.app_config.get('baseEndpoint',''), jans_help=self.app.get_help_from_schema(schema, 'baseEndpoint'), style='class:outh-scope-text'),
                                     self.app.getTitledText(_("Person Custom Object Class"), name='personCustomObjectClass', value=self.app_config.get('personCustomObjectClass',''), jans_help=self.app.get_help_from_schema(schema, 'personCustomObjectClass'), style='class:outh-scope-text'),
-                                    self.app.getTitledText(_("Person Custom Object Class"), name='oxAuthIssuer', value=self.app_config.get('oxAuthIssuer',''), jans_help=self.app.get_help_from_schema(schema, 'oxAuthIssuer'), style='class:outh-scope-text'),
+                                    self.app.getTitledText(_("Auth Issuer"), name='oxAuthIssuer', value=self.app_config.get('oxAuthIssuer',''), jans_help=self.app.get_help_from_schema(schema, 'oxAuthIssuer'), style='class:outh-scope-text'),
                                     self.app.getTitledRadioButton(_("Protection Mode"), name='protectionMode', values=[('OAUTH', 'OAUTH'),('BYPASS', 'BYPASS')], current_value=self.app_config.get('protectionMode'), jans_help=self.app.get_help_from_schema(schema, 'protectionMode'), style='class:outh-client-radiobutton'),
                                     self.app.getTitledText(_("Max Count"), name='maxCount', value=self.app_config.get('maxCount',''), jans_help=self.app.get_help_from_schema(schema, 'maxCount'), text_type='integer', style='class:outh-scope-text'),
                                     self.app.getTitledText(_("Bulk Max Operations"), name='bulkMaxOperations', value=self.app_config.get('bulkMaxOperations',''), jans_help=self.app.get_help_from_schema(schema, 'bulkMaxOperations'), text_type='integer', style='class:outh-scope-text'),
@@ -87,7 +76,6 @@ class Plugin(DialogUtils):
 
         self.app.center_container = self.container
 
-
     def get_app_config(self) -> None:
         """Gets SCIM application configurations from server.
         """
@@ -104,7 +92,6 @@ class Plugin(DialogUtils):
 
         asyncio.ensure_future(coroutine())
 
-
     def save_app_config(self) -> None:
         """Save button handler for saving SCIM application configurations.
         Once configuration data was obtained from form, patch operations are prepared and saved to server.
@@ -119,9 +106,8 @@ class Plugin(DialogUtils):
             if data[key] and key not in self.app_config:
                 patche_list.append({'op':'add', 'path': key, 'value': data[key]})
 
-
         if not patche_list:
-            self.app.show_message(_("Warning"), _("No changes was done on Scim appilication configuration. Nothing to save."))
+            self.app.show_message(_("Warning"), _("No changes was done on Scim appilication configuration. Nothing to save."), tobefocused=self.app.center_container)
             return
 
         async def coroutine():

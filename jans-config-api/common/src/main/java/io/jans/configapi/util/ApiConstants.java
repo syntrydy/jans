@@ -78,6 +78,7 @@ public class ApiConstants {
     public static final String SESSIONID_PATH = "/{sessionId}";
     public static final String USERDN_PATH = "/{userDn}";
     public static final String AGAMA = "/agama";
+    public static final String ADS_DEPLOYMENTS = "/ads-deployment";
     public static final String QNAME_PATH = "{qname}";
     public static final String ENABLED = "enabled";
     public static final String QNAME = "qname";
@@ -121,7 +122,7 @@ public class ApiConstants {
     
     //Pagination
     public static final String DEFAULT_LIST_SIZE = "50";
-    public static final String DEFAULT_LIST_START_INDEX = "1";
+    public static final String DEFAULT_LIST_START_INDEX = "0";
     public static final int DEFAULT_MAX_COUNT = 200;  
     public static final String SORT_BY = "sortBy";
     public static final String SORT_ORDER = "sortOrder";

@@ -26,6 +26,7 @@ plugins:
 # Configuration
 theme:
     name: material
+    custom_dir: docs/overrides
     highlightjs: true
     hljs_languages:
         - yaml
@@ -139,16 +140,17 @@ nav:
         - 'Passwordless Authentication': 'admin/planning/passwordless-auth.md'
         - 'Machine-to-Machine Authentication': 'admin/planning/machine-to-machine.md'
     - 'Installation':
-        - 'admin/install/README.md'
         - 'VM Installation':
             - 'admin/install/vm-install/README.md'
             - 'VM Requirements': 'admin/install/vm-install/vm-requirements.md'
-            - 'Docker Quick Start': 'admin/install/vm-install/quick-start-install.md'
             - 'Ubuntu': 'admin/install/vm-install/ubuntu.md'
             - 'RHEL': 'admin/install/vm-install/rhel.md'
             - 'Suse': 'admin/install/vm-install/suse.md'
 #            - 'FIPS DISA STIG': 'admin/install/vm-install/disa-stig.md'
             - 'Dynamic Download': 'admin/install/vm-install/dynamic-download.md'
+        - 'Docker Installation': 
+            - 'Quick Start':  'admin/install/docker-install/quick-start.md' 
+            - 'Docker compose': 'admin/install/docker-install/compose.md'
         - 'Helm Deployments':
             - 'admin/install/helm-install/README.md'
             - 'Local Kubernetes Cluster': 'admin/install/helm-install/local.md'
@@ -157,7 +159,7 @@ nav:
 #            - 'Digital Ocean DOK': 'admin/install/helm-install/digitalocean-dok.md'
             - 'Microsoft Azure AKS': 'admin/install/helm-install/microsoft-azure.md'
 #            - 'Red Hat Open Shift': 'admin/install/helm-install/red-hat-open-shift.md'
-            - 'Using Rancher Marketplace': 'admin/install/helm-install/rancher.md'
+            - 'Using Rancher Marketplace': 'admin/install/helm-install/rancher.md'    
         - 'Setup Instructions': 'admin/install/setup.md'
         - 'FAQ': 'admin/install/install-faq.md'
     - 'Kubernetes Operation Guide':
@@ -221,8 +223,36 @@ nav:
                 - 'SCIM User Resources': 'admin/config-guide/jans-cli/cli-user.md'
                 - 'SCIM Group Management': 'admin/config-guide/jans-cli/cli-group.md'
             - 'Authentication via Device Flow': 'admin/config-guide/jans-cli/device-flow.md'
+        - 'Config TUI': 'admin/config-guide/tui.md'
         - 'CURL Guide': 'admin/config-guide/curl.md'
         - 'SCIM CLI': 'admin/config-guide/scim-cli.md'
+    - 'Database Guide':
+        - 'admin/reference/database/README.md'
+        - 'RDBMS Erwin Table': 'admin/reference/database/rdbms-erwin.md'
+        - 'LDAP': 
+            - 'LDAP Schema': 'admin/reference/database/ldap-schema.md'
+            - 'LDAP Configuration': 'admin/reference/database/ldap-config.md'
+            - 'LDAP Operation': 'admin/reference/database/ldap-ops.md'
+            - 'LDAP Namespace Diagram': 'admin/reference/database/ldap-namespace.md'
+        - 'Couchbase':    
+            - 'Couchbase Schema': 'admin/reference/database/cb-schema.md'
+            - 'Couchbase Configuration': 'admin/reference/database/cb-config.md'
+            - 'Couchbase Operation': 'admin/reference/database/cb-ops.md'
+            - 'Couchbase Buckets': 'admin/reference/database/cb-buckets.md'
+        - 'MySQL':
+            - 'MySQL Schema': 'admin/reference/database/mysql-schema.md'
+            - 'MySQL Configuration': 'admin/reference/database/mysql-config.md'
+            - 'MySQL Operation': 'admin/reference/database/mysql-ops.md'
+#        - 'MariaDB': 'admin/reference/database/mariadb.md'
+        - 'Spanner':
+            - 'Spanner Schema': 'admin/reference/database/spanner-schema.md'
+            - 'Spanner Configuration': 'admin/reference/database/spanner-config.md'
+            - 'Spanner Operation': 'admin/reference/database/spanner-ops.md'
+ #       - 'PostgreSQL':    
+ #           - 'PostgreSQL Schema': 'admin/reference/database/postgres-schema.md'
+ #           - 'PostgreSQL Configuration': 'admin/reference/database/postgres-config.md'
+ #           - 'PostgreSQL Operation': 'admin/reference/database/postgres-ops.md'
+        - 'Converting Data': 'admin/reference/database/converting-data.md'
     - 'Auth Server Admin Guide':
         - 'admin/auth-server/README.md'
         - 'Configuration': 'admin/auth-server/config.md'
@@ -385,48 +415,32 @@ nav:
     - 'Reference Guide':
         - 'admin/reference/README.md'
         - 'Javadocs / OpenAPI': 'admin/reference/openapi.md'
-        - 'Database Reference':
-            - 'admin/reference/database/README.md'
-            - 'RDBMS Erwin Table': 'admin/reference/database/rdbms-erwin.md'
-            - 'LDAP Schema': 'admin/reference/database/ldap-schema.md'
-            - 'LDAP Configuration': 'admin/reference/database/ldap-config.md'
-            - 'LDAP Operation': 'admin/reference/database/ldap-ops.md'
-            - 'LDAP Namespace Diagram': 'admin/reference/database/ldap-namespace.md'
-            - 'Couchbase Schema': 'admin/reference/database/cb-schema.md'
-            - 'Couchbase Configuration': 'admin/reference/database/cb-config.md'
-            - 'Couchbase Operation': 'admin/reference/database/cb-ops.md'
-            - 'Couchbase Buckets': 'admin/reference/database/cb-buckets.md'
-            - 'MySQL Schema': 'admin/reference/database/mysql-schema.md'
-            - 'MySQL Configuration': 'admin/reference/database/mysql-config.md'
-            - 'MySQL Operation': 'admin/reference/database/mysql-ops.md'
-    #        - 'MariaDB': 'admin/reference/database/mariadb.md'
-            - 'Spanner Schema': 'admin/reference/database/spanner-schema.md'
-            - 'Spanner Configuration': 'admin/reference/database/spanner-config.md'
-            - 'Spanner Operation': 'admin/reference/database/spanner-ops.md'
-     #       - 'PostgreSQL Schema': 'admin/reference/database/postgres-schema.md'
-     #       - 'PostgreSQL Configuration': 'admin/reference/database/postgres-config.md'
-     #       - 'PostgreSQL Operation': 'admin/reference/database/postgres-ops.md'
-            - 'Converting Data': 'admin/reference/database/converting-data.md'
         - 'JSON Configuration/Properties':
             - 'admin/reference/json/README.md'
-            - 'Auth Server': 'admin/reference/json/auth-server.md'
-            - 'FIDO': 'admin/reference/json/fido.md'
-            - 'SCIM': 'admin/reference/json/scim.md'
-            - 'Config API': 'admin/reference/json/config-api.md'
+            - 'Properties':
+                - 'admin/reference/json/properties/README.md'
+                - 'Auth Server': 'admin/reference/json/properties/janssenauthserver-properties.md'
+                - 'FIDO': 'admin/reference/json/properties/fido2-properties.md'
+                - 'SCIM': 'admin/reference/json/properties/scim-properties.md'
+                - 'Config API': 'admin/reference/json/properties/config-api-properties.md'
+            - 'Feature Flags':
+                  - 'admin/reference/json/feature-flags/README.md'
+                  - 'Auth Server': 'admin/reference/json/feature-flags/janssenauthserver-feature-flags.md'
+
         - 'Kubernetes':
             - 'admin/reference/kubernetes/README.md'
             - 'Helm Chart': 'admin/reference/kubernetes/helm-chart.md'
             - 'Config and Secret Keys': 'admin/reference/kubernetes/config-secret-keys.md'
             - 'Image Config Properties':
-                - 'Configurator': 'admin/reference/kubernetes/image-configurator.md'
-                - 'Auth Server': 'admin/reference/kubernetes/image-auth-server.md'
-                - 'Config Initialization': 'admin/reference/kubernetes/image-config-init.md'
-                - 'Config API': 'admin/reference/kubernetes/image-config-api.md'
-                - 'FIDO': 'admin/reference/kubernetes/image-fido.md'
-                - 'SCIM': 'admin/reference/kubernetes/image-scim.md'
-                - 'Persistence': 'admin/reference/kubernetes/image-persistence.md'
-                - 'Cert Manager': 'admin/reference/kubernetes/image-cert-mgr.md'
-                - 'Gluu OpenDJ': 'admin/reference/kubernetes/image-opendj.md'
+                - 'Auth Server': 'admin/reference/kubernetes/docker-jans-auth-server.md'
+                - 'Cert Manager': 'admin/reference/kubernetes/docker-jans-certmanager.md'
+                - 'Config API': 'admin/reference/kubernetes/docker-jans-config-api.md'
+                - 'Configurator': 'admin/reference/kubernetes/docker-jans-configurator.md'
+                - 'FIDO2': 'admin/reference/kubernetes/docker-jans-fido2.md'
+                - 'Monolith': 'admin/reference/kubernetes/docker-jans-monolith.md'
+                - 'Persistence': 'admin/reference/kubernetes/docker-jans-persistence-loader.md'
+                - 'SCIM': 'admin/reference/kubernetes/docker-jans-scim.md'
+                - 'Gluu OpenDJ': 'admin/reference/kubernetes/docker-opendj.md'
     - 'Jans Eleven Admin Guide':
         - 'admin/eleven/README.md'
         - 'Supported Algorithms': 'admin/eleven/supported-algs.md'
