@@ -172,12 +172,6 @@ public class AssertionService {
 				ObjectNode extensions = (ObjectNode) optionsResponseNode.get("extensions");
 				extensions.put("appid", fidoApplicationId);
 			} 
-			// TODO: this doesnt make any sense - test and remove
-			/*else {
-				ObjectNode extensions = dataMapperService.createObjectNode();
-				extensions.put("appid", fidoApplicationId);
-				optionsResponseNode.set("extensions", extensions);
-			}*/
 		}
 
 		// optionsResponseNode.put("status", "ok");
