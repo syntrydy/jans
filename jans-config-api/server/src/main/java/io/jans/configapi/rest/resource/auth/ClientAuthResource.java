@@ -57,12 +57,11 @@ public class ClientAuthResource extends ConfigBaseResource {
     @GET
     @ProtectedApi(scopes = { ApiAccessConstants.CLIENT_AUTHORIZATIONS_READ_ACCESS }, groupScopes = {
             ApiAccessConstants.OPENID_READ_ACCESS }, superScopes = { ApiAccessConstants.SUPER_ADMIN_READ_ACCESS })
+    @Path(ApiConstants.INUM_PATH)
     public Response getOpenIdConnectClients(
             @Parameter(description = "Client identifier") @PathParam(ApiConstants.INUM) @NotNull String inum) {
 
-        if (logger.isDebugEnabled()) {
-            logger.debug("Client serach param - inum:{}", escapeLog(inum));
-        }
+        logger.error("Client serach param - inum:{}", escapeLog(inum));
 
         Map<Client, Set<Scope>> clientAuths = clientAuthService.getUserAuthorizations(inum);
         logger.debug("Client serach param - clientAuths:{}", clientAuths);
