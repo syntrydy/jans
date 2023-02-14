@@ -40,16 +40,16 @@ public class ClientAuthService {
 
     public Map<Client, Set<Scope>> getUserAuthorizations(String userId) {
 
-        logger.error(" Authorizations details to be fetched for userId:{} ", userId);
+        logger.debug(" Authorizations details to be fetched for userId:{} ", userId);
 
         ClientAuthorization clientAuthorization = persistenceEntryManager.find(ClientAuthorization.class,
                 getClientAuthorizationDn(userId));
-        logger.error("{} client-authorization entries found", clientAuthorization);
+        logger.debug("{} client-authorization entries found", clientAuthorization);
 
         ClientAuthorization clientAuth = new ClientAuthorization();
         clientAuth.setId(userId);
         List<ClientAuthorization> authorizations = persistenceEntryManager.findEntries(clientAuth);
-        logger.error("{} client-authorization entries found", authorizations);
+        logger.debug("{} client-authorization entries found", authorizations);
 
         if (authorizations == null || authorizations.isEmpty()) {
             return Collections.emptyMap();
@@ -75,14 +75,14 @@ public class ClientAuthService {
         List<Scope> scopes = persistenceEntryManager.findEntries(scopeService.getDnForScope(null), Scope.class,
                 Filter.createORFilter(filters));
 
-        logger.error("Found {} client authorizations for user {}", clients.size(), userId);
+        logger.debug("Found {} client authorizations for user {}", clients.size(), userId);
         Map<Client, Set<Scope>> perms = new HashMap<>();
 
         for (Client client : clients) {
             Set<Scope> clientScopes = new HashSet<>();
-            logger.error("client:{}", client);
+            logger.debug("client:{}", client);
             for (ClientAuthorization auth : authorizations) {
-                logger.error("auth:{}", auth);
+                logger.debug("auth:{}", auth);
                 if (auth.getClientId().equals(client.getClientId())) {
                     for (String scopeName : auth.getScopes()) {
                         scopes.stream().filter(sc -> sc.getId().equals(scopeName)).findAny()
@@ -92,7 +92,7 @@ public class ClientAuthService {
             }
             perms.put(client, clientScopes);
         }
-        logger.error("perms {}", perms);
+        logger.debug("perms {}", perms);
         return perms;
     }
 

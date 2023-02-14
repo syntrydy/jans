@@ -61,7 +61,7 @@ public class ClientAuthResource extends ConfigBaseResource {
     public Response getOpenIdConnectClients(
             @Parameter(description = "Client identifier") @PathParam(ApiConstants.INUM) @NotNull String inum) {
 
-        logger.error("Client serach param - inum:{}", escapeLog(inum));
+        logger.debug("Client serach param - inum:{}", escapeLog(inum));
 
         Map<Client, Set<Scope>> clientAuths = clientAuthService.getUserAuthorizations(inum);
         logger.debug("Client serach param - clientAuths:{}", clientAuths);
