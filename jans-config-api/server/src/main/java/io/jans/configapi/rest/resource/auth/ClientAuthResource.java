@@ -7,7 +7,7 @@
 package io.jans.configapi.rest.resource.auth;
 
 import static io.jans.as.model.util.Util.escapeLog;
-import io.jans.as.common.model.registration.Client;
+import io.jans.as.persistence.model.ClientAuthorization;
 import io.jans.as.persistence.model.Scope;
 import io.jans.configapi.core.rest.ProtectedApi;
 
@@ -34,8 +34,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 @Hidden
 @Path(ApiConstants.CLIENTS + ApiConstants.AUTHORIZATIONS)
@@ -63,7 +62,7 @@ public class ClientAuthResource extends ConfigBaseResource {
 
         logger.debug("Client serach param - inum:{}", escapeLog(inum));
 
-        Map<Client, Set<Scope>> clientAuths = clientAuthService.getUserAuthorizations(inum);
+        List<ClientAuthorization> clientAuths = clientAuthService.getClientAuthorizations(inum);
         logger.debug("Client serach param - clientAuths:{}", clientAuths);
         return Response.ok(clientAuths).build();
     }

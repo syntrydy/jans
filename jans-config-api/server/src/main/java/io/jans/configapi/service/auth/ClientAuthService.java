@@ -6,6 +6,7 @@ import io.jans.as.persistence.model.ClientAuthorization;
 import io.jans.orm.PersistenceEntryManager;
 import io.jans.as.common.model.registration.Client;
 import io.jans.as.common.service.OrganizationService;
+import io.jans.as.common.util.AttributeConstants;
 import io.jans.as.model.config.StaticConfiguration;
 import io.jans.as.persistence.model.Scope;
 import java.util.*;
@@ -94,6 +95,15 @@ public class ClientAuthService {
         }
         logger.debug("perms {}", perms);
         return perms;
+    }
+    
+    public List<ClientAuthorization> getClientAuthorizations(String clientId) {
+        logger.debug(" Authorizations details to be fetched for clientId:{} ", clientId);
+        Filter clientIdFilter = Filter.createEqualityFilter("jansClntId", clientId);
+        List<ClientAuthorization> clientAuthorizations = persistenceEntryManager.findEntries(getClientAuthorizationDn(null), ClientAuthorization.class,
+                clientIdFilter);
+        logger.debug(" Authorizations details to be fetched for clientAuthorizations:{} ", clientAuthorizations);
+        return clientAuthorizations;
     }
 
     public String getClientAuthorizationDn(String id) {
