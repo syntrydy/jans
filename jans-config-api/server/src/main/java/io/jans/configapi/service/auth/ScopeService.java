@@ -30,6 +30,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -132,6 +133,22 @@ public class ScopeService {
             return persistenceEntryManager.findEntries(getDnForScope(null), Scope.class, searchFilter);
         } catch (Exception e) {
             logger.error("No scopes found by pattern: " + jsId, e);
+            return new ArrayList<>();
+        }
+    }
+    
+    public List<Scope> searchScopesById(Set<String> scopeIds) {
+        logger.debug("Scope to search based on scopeIds:{}",scopeIds);
+        try {
+            if(scopeIds==null || scopeIds.isEmpty()) {
+                return Collections.emptyList();
+            }
+        Filter[] filters = scopeIds.stream().map(id -> Filter.createEqualityFilter("jansId", id))
+                .collect(Collectors.toList()).toArray(new Filter[]{});
+        
+            return persistenceEntryManager.findEntries(getDnForScope(null), Scope.class, Filter.createORFilter(filters));
+        } catch (Exception e) {
+            logger.error("No scopes found by pattern: " + scopeIds, e);
             return new ArrayList<>();
         }
     }

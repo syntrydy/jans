@@ -1892,6 +1892,38 @@ paths:
       security:
       - oauth2:
         - https://jans.io/oauth/config/cache.write
+  /api/v1/clients/authorizations/{userId}:
+    get:
+      tags:
+      - OpenID Connect - Clients - Authorizations
+      summary: Gets list of client authorizations
+      description: Gets list of client authorizations
+      operationId: get-client-authorizations
+      parameters:
+      - name: userId
+        in: path
+        description: Client Auth user ID
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                Response json example:
+                  description: Response json example
+                  value: ""
+        "401":
+          description: Unauthorized
+        "500":
+          description: InternalServerError
+      security:
+      - oauth2:
+        - https://jans.io/oauth/client/authorizations.readonly
   /api/v1/openid/clients:
     get:
       tags:
@@ -7535,19 +7567,19 @@ components:
           $ref: '#/components/schemas/AttributeValidation'
         tooltip:
           type: string
-        whitePagesCanView:
-          type: boolean
         userCanEdit:
-          type: boolean
-        userCanView:
           type: boolean
         userCanAccess:
           type: boolean
-        adminCanEdit:
+        userCanView:
           type: boolean
         adminCanAccess:
           type: boolean
+        adminCanEdit:
+          type: boolean
         adminCanView:
+          type: boolean
+        whitePagesCanView:
           type: boolean
         baseDn:
           type: string
@@ -7953,6 +7985,8 @@ components:
           type: boolean
         disablePromptLogin:
           type: boolean
+        disablePromptConsent:
+          type: boolean
         sessionIdLifetime:
           type: integer
           format: int32
@@ -8268,8 +8302,6 @@ components:
           type: object
           additionalProperties:
             type: string
-        fapi:
-          type: boolean
         allResponseTypesSupported:
           uniqueItems: true
           type: array
@@ -8279,6 +8311,8 @@ components:
             - code
             - token
             - id_token
+        fapi:
+          type: boolean
     AuthenticationFilter:
       required:
       - baseDn

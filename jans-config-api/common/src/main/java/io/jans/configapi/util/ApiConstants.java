@@ -88,6 +88,8 @@ public class ApiConstants {
     public static final String PLUGIN = "/plugin";
     public static final String PLUGIN_NAME_PATH = "{pluginName}";
     public static final String AUTHORIZATIONS = "/authorizations";
+    public static final String USERID_PATH = "{userId}";
+    public static final String USERID = "userId";
 
     public static final String LIMIT = "limit";
     public static final String START_INDEX = "startIndex";
