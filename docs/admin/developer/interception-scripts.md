@@ -31,13 +31,14 @@ request authorization for each scope, and display the respective scope descripti
 1. [Dynamic Scopes](./scripts/dynamic-scope.md) : Enables admin to generate scopes on the fly, for example by
 calling external APIs
 1. ID Generator
+1. [Update Token](./scripts/update-token.md) : Enables transformation of claims and values in id_token, Access token and Refresh tokens; allows the setting of token lifetime; allows the addition or removal of scopes to / from tokens; allows the addition of audit logs each time a token is created.
 1. Session Management
 1. SCIM
-1. Inrospection
+1. [Introspection](./scripts/introspection.md) : Introspection scripts allows to modify response of Introspection Endpoint spec and present additional meta information surrounding the token.
+1. [Post Authentication](./scripts/post-authentication.md)
 1. Resource Owner Password Credentials
 1. UMA 2 RPT Authorization Policies
 1. UMA 2 Claims-Gathering
-
 
 ## Implementation languages - Jython or pure Java
 
@@ -195,7 +196,9 @@ where <library_name> is the name of the library to install.
 
 ### Debugging a Jython script
 
-This [article](../interception-scripts-debug) covers the details.
+1. This [article](../interception-scripts-debug-ce) covers the details for debugging a script in a developer environment (CE).
+
+2. This [article](../interception-scripts-debug) covers the details for debugging a script in a CN environment.
 
 ***
 
@@ -234,7 +237,7 @@ value for getApiVersion is greater than 10
 ### Building business logic in a custom script
 
 Jans-auth server uses Weld 3.0 (JSR-365 aka CDI 2.0) for managed beans. The most
-important aspects of business logic are implemented through a set of beans. This
+common business functions are implemented through a set of beans. This
 [article](https://jans.io/docs/admin/developer/managed-beans/) presents many
 ready-to-use beans which can be used to build a script.
 
@@ -256,7 +259,7 @@ The post-config-scripts and put-config-scripts require various details about the
 ### Basic schema of a custom script
 Command:
 
-`/opt/jans/jans-cli/config-cli.py --schema CustomScript`
+`/opt/jans/jans-cli/config-cli.py --schema CustomScript `
 
 Output:
 ```json

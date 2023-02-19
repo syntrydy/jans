@@ -7,6 +7,7 @@
 package io.jans.as.model.configuration;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.google.common.collect.Lists;
 import io.jans.agama.model.EngineConfig;
 import io.jans.as.model.common.*;
@@ -16,10 +17,7 @@ import io.jans.as.model.ssa.SsaConfiguration;
 import io.jans.as.model.ssa.SsaValidationConfig;
 import io.jans.doc.annotation.DocProperty;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Represents the configuration JSON file.
@@ -128,9 +126,6 @@ public class AppConfiguration implements Configuration {
 
     @DocProperty(description = "Mutual TLS (mTLS) device authorization endpoint URL")
     private String mtlsDeviceAuthzEndpoint;
-
-    @DocProperty(description = "Boolean value true saves session data as a JWT", defaultValue = "false")
-    private Boolean sessionAsJwt = false;
 
     @DocProperty(description = "Boolean value true encrypts request object", defaultValue = "false")
     private Boolean requireRequestObjectEncryption = false;
@@ -258,8 +253,11 @@ public class AppConfiguration implements Configuration {
     @DocProperty(description = "A list of the JWS signing algorithms (alg values) supported by the Token Endpoint for the signature on the JWT used to authenticate the Client at the Token Endpoint for the private_key_jwt and client_secret_jwt authentication methods")
     private List<String> tokenEndpointAuthSigningAlgValuesSupported;
 
-    @DocProperty(description = "This list details the custom attributes for dynamic registration")
+    @DocProperty(description = "This list details the custom attributes allowed for dynamic registration")
     private List<String> dynamicRegistrationCustomAttributes;
+
+    @DocProperty(description = "This map provides default custom attributes with values for dynamic registration")
+    private JsonNode dynamicRegistrationDefaultCustomAttributes;
 
     @DocProperty(description = "A list of the display parameter values that the OpenID Provider supports")
     private List<String> displayValuesSupported;
@@ -369,11 +367,11 @@ public class AppConfiguration implements Configuration {
     @DocProperty(description = "This list details LDAP custom object classes for dynamic person enrollment")
     private List<String> personCustomObjectClassList;
 
-    @DocProperty(description = "Specifies whether to persist id_token into LDAP (otherwise saves into cache)", defaultValue = "false")
-    private Boolean persistIdTokenInLdap = false;
+    @DocProperty(description = "Specifies whether to persist id_token (otherwise saves into cache)", defaultValue = "false")
+    private Boolean persistIdToken = false;
 
-    @DocProperty(description = "Specifies whether to persist refresh_token into LDAP (otherwise saves into cache)", defaultValue = "true")
-    private Boolean persistRefreshTokenInLdap = true;
+    @DocProperty(description = "Specifies whether to persist refresh_token (otherwise saves into cache)", defaultValue = "true")
+    private Boolean persistRefreshToken = true;
 
     @DocProperty(description = "Allows post-logout redirect without validation for the End Session endpoint (still AS validates it against clientWhiteList url pattern property)", defaultValue = "false")
     private Boolean allowPostLogoutRedirectWithoutValidation = false;
@@ -383,6 +381,9 @@ public class AppConfiguration implements Configuration {
 
     @DocProperty(description = "Boolean value specifying whether a client_secret is returned on client GET or PUT. Set to true by default which means to return secret", defaultValue = "false")
     private Boolean returnClientSecretOnRead = false;
+
+    @DocProperty(description = "Boolean value specifying whether to rotate client registration access token after each usage", defaultValue = "false")
+    private Boolean rotateClientRegistrationAccessTokenOnUsage = false;
 
     @DocProperty(description = "Boolean value specifying whether reject JWT requested or validated with algorithm None. Default value is true", defaultValue = "true")
     private Boolean rejectJwtWithNoneAlg = true;
@@ -399,9 +400,6 @@ public class AppConfiguration implements Configuration {
     @DocProperty(description = "The expiration notificator interval in second")
     private int expirationNotificatorIntervalInSeconds = 600;
 
-
-
-    //feature flags
     @DocProperty(description = "Enable/Disable redirect uris validation using regular expression", defaultValue = "false")
     private Boolean redirectUrisRegexEnabled = false;
 
@@ -450,6 +448,11 @@ public class AppConfiguration implements Configuration {
     @DocProperty(description = "Boolean value specifying whether to include sessionId in response", defaultValue = "false")
     private Boolean includeSidInResponse = false;
 
+    @DocProperty(description = "Boolean value specifying whether to disable prompt=login", defaultValue = "false")
+    private Boolean disablePromptLogin = false;
+
+    @DocProperty(description = "Boolean value specifying whether to disable prompt=consent", defaultValue = "false")
+    private Boolean disablePromptConsent = false;
 
     /**
      * SessionId will be expired after sessionIdLifetime seconds
@@ -569,6 +572,9 @@ public class AppConfiguration implements Configuration {
     @DocProperty(description = "JMS Password")
     private String jmsPassword;
 
+    @DocProperty(description = "This list specifies which external URIs can be called by AS (if empty any URI can be called)")
+    private List<String> externalUriWhiteList;
+
     @DocProperty(description = "This list specifies which client redirection URIs are white-listed")
     private List<String> clientWhiteList;
 
@@ -670,7 +676,7 @@ public class AppConfiguration implements Configuration {
     @DocProperty(description = "Boolean value specifying whether to return detailed reason of the error from AS. Default value is false", defaultValue = "false")
     private Boolean errorReasonEnabled = false;
 
-    @DocProperty(description = "Boolean value specifying whether to remove Refresh Tokens on logout. Default value is false", defaultValue = "true")
+    @DocProperty(description = "Boolean value specifying whether to remove Refresh Tokens on logout. Default value is true", defaultValue = "true")
     private Boolean removeRefreshTokensForClientOnLogout = true;
 
     @DocProperty(description = "Boolean value specifying whether to skip refreshing tokens on refreshing", defaultValue = "false")
@@ -812,6 +818,17 @@ public class AppConfiguration implements Configuration {
     @DocProperty(description = "Enable/Disable block authorizations that originate from Webview (Mobile apps).", defaultValue = "false")
     private Boolean blockWebviewAuthorizationEnabled = false;
 
+    @DocProperty(description = "List of key value date formatters, e.g. 'userinfo: 'yyyy-MM-dd', etc.")
+    private Map<String, String> dateFormatterPatterns = new HashMap<>();
+
+    public Map<String, String> getDateFormatterPatterns() {
+        return dateFormatterPatterns;
+    }
+
+    public void setDateFormatterPatterns(Map<String, String> dateFormatterPatterns) {
+        this.dateFormatterPatterns = dateFormatterPatterns;
+    }
+
     public List<SsaValidationConfig> getDcrSsaValidationConfigs() {
         if (dcrSsaValidationConfigs == null) dcrSsaValidationConfigs = new ArrayList<>();
         return dcrSsaValidationConfigs;
@@ -897,12 +914,8 @@ public class AppConfiguration implements Configuration {
         this.checkUserPresenceOnRefreshToken = checkUserPresenceOnRefreshToken;
     }
 
-    public Set<FeatureFlagType> getEnabledFeatureFlags() {
-        return FeatureFlagType.fromValues(getFeatureFlags());
-    }
-
     public boolean isFeatureEnabled(FeatureFlagType flagType) {
-        final Set<FeatureFlagType> flags = getEnabledFeatureFlags();
+        final Set<FeatureFlagType> flags = FeatureFlagType.from(this);
         if (flags.isEmpty())
             return true;
 
@@ -1105,6 +1118,24 @@ public class AppConfiguration implements Configuration {
         this.forceOfflineAccessScopeToEnableRefreshToken = forceOfflineAccessScopeToEnableRefreshToken;
     }
 
+    public Boolean getDisablePromptLogin() {
+        if (disablePromptLogin == null) disablePromptLogin = false;
+        return disablePromptLogin;
+    }
+
+    public void setDisablePromptLogin(Boolean disablePromptLogin) {
+        this.disablePromptLogin = disablePromptLogin;
+    }
+
+    public Boolean getDisablePromptConsent() {
+        if (disablePromptConsent == null) disablePromptConsent = false;
+        return disablePromptConsent;
+    }
+
+    public void setDisablePromptConsent(Boolean disablePromptConsent) {
+        this.disablePromptConsent = disablePromptConsent;
+    }
+
     public Boolean getIncludeSidInResponse() {
         if (includeSidInResponse == null) includeSidInResponse = false;
         return includeSidInResponse;
@@ -1130,6 +1161,15 @@ public class AppConfiguration implements Configuration {
 
     public void setChangeSessionIdOnAuthentication(Boolean changeSessionIdOnAuthentication) {
         this.changeSessionIdOnAuthentication = changeSessionIdOnAuthentication;
+    }
+
+    public Boolean getRotateClientRegistrationAccessTokenOnUsage() {
+        if (rotateClientRegistrationAccessTokenOnUsage == null) rotateClientRegistrationAccessTokenOnUsage = false;
+        return rotateClientRegistrationAccessTokenOnUsage;
+    }
+
+    public void setRotateClientRegistrationAccessTokenOnUsage(Boolean rotateClientRegistrationAccessTokenOnUsage) {
+        this.rotateClientRegistrationAccessTokenOnUsage = rotateClientRegistrationAccessTokenOnUsage;
     }
 
     public Boolean getReturnClientSecretOnRead() {
@@ -1304,14 +1344,6 @@ public class AppConfiguration implements Configuration {
 
     public void setUmaRptAsJwt(Boolean umaRptAsJwt) {
         this.umaRptAsJwt = umaRptAsJwt;
-    }
-
-    public Boolean getSessionAsJwt() {
-        return sessionAsJwt;
-    }
-
-    public void setSessionAsJwt(Boolean sessionAsJwt) {
-        this.sessionAsJwt = sessionAsJwt;
     }
 
     public Boolean getUmaAddScopesAutomatically() {
@@ -1840,6 +1872,14 @@ public class AppConfiguration implements Configuration {
         this.tokenEndpointAuthSigningAlgValuesSupported = tokenEndpointAuthSigningAlgValuesSupported;
     }
 
+    public JsonNode getDynamicRegistrationDefaultCustomAttributes() {
+        return dynamicRegistrationDefaultCustomAttributes;
+    }
+
+    public void setDynamicRegistrationDefaultCustomAttributes(JsonNode dynamicRegistrationDefaultCustomAttributes) {
+        this.dynamicRegistrationDefaultCustomAttributes = dynamicRegistrationDefaultCustomAttributes;
+    }
+
     public List<String> getDynamicRegistrationCustomAttributes() {
         return dynamicRegistrationCustomAttributes;
     }
@@ -2141,20 +2181,20 @@ public class AppConfiguration implements Configuration {
         this.dynamicRegistrationScopesParamEnabled = dynamicRegistrationScopesParamEnabled;
     }
 
-    public Boolean getPersistIdTokenInLdap() {
-        return persistIdTokenInLdap;
+    public Boolean getPersistIdToken() {
+        return persistIdToken;
     }
 
-    public void setPersistIdTokenInLdap(Boolean persistIdTokenInLdap) {
-        this.persistIdTokenInLdap = persistIdTokenInLdap;
+    public void setPersistIdToken(Boolean persistIdToken) {
+        this.persistIdToken = persistIdToken;
     }
 
-    public Boolean getPersistRefreshTokenInLdap() {
-        return persistRefreshTokenInLdap;
+    public Boolean getPersistRefreshToken() {
+        return persistRefreshToken;
     }
 
-    public void setPersistRefreshTokenInLdap(Boolean persistRefreshTokenInLdap) {
-        this.persistRefreshTokenInLdap = persistRefreshTokenInLdap;
+    public void setPersistRefreshToken(Boolean persistRefreshToken) {
+        this.persistRefreshToken = persistRefreshToken;
     }
 
     public Boolean getAllowPostLogoutRedirectWithoutValidation() {
@@ -2467,6 +2507,15 @@ public class AppConfiguration implements Configuration {
 
     public void setJmsPassword(String jmsPassword) {
         this.jmsPassword = jmsPassword;
+    }
+
+    public List<String> getExternalUriWhiteList() {
+        if (externalUriWhiteList == null) externalUriWhiteList = new ArrayList<>();
+        return externalUriWhiteList;
+    }
+
+    public void setExternalUriWhiteList(List<String> externalUriWhiteList) {
+        this.externalUriWhiteList = externalUriWhiteList;
     }
 
     public List<String> getClientWhiteList() {

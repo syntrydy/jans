@@ -408,7 +408,8 @@
     "ssaConfiguration": {
         "ssaEndpoint":"${config.oxauth.contextPath}/restv1/ssa",
         "ssaSigningAlg": "RS256",
-        "ssaExpirationInDays": 30
+        "ssaExpirationInDays": 30,
+        "ssaCustomAttributes": []
     },
     "backchannelClientId": "123-123-123",
     "backchannelRedirectUri": "https://ce.gluu.info:8443/ciba/home.htm",
@@ -450,5 +451,8 @@
             "Cache-Control": "max-age=0, no-store"
         }
     },
-    "blockWebviewAuthorizationEnabled": false
+    "blockWebviewAuthorizationEnabled": false,
+    "dateFormatterPatterns": {
+        "birthdate": "yyyy-MM-dd"
+    }
 }
