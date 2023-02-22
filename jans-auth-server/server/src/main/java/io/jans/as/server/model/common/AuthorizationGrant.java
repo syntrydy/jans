@@ -32,15 +32,17 @@ import io.jans.as.server.service.external.ExternalUpdateTokenService;
 import io.jans.as.server.service.external.context.ExternalIntrospectionContext;
 import io.jans.as.server.service.external.context.ExternalUpdateTokenContext;
 import io.jans.as.server.service.stat.StatService;
+import io.jans.as.server.util.ServerUtil;
 import io.jans.as.server.util.TokenHashUtil;
 import io.jans.model.metric.MetricType;
 import io.jans.service.CacheService;
+import jakarta.inject.Inject;
+import jakarta.ws.rs.WebApplicationException;
 import org.apache.commons.lang.StringUtils;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import jakarta.inject.Inject;
 import java.util.Date;
 import java.util.List;
 import java.util.function.Supplier;
@@ -222,6 +224,8 @@ public abstract class AuthorizationGrant extends AbstractAuthorizationGrant {
                 log.trace("Created plain access token: {}", accessToken.getCode());
 
             return accessToken;
+        } catch (WebApplicationException e) {
+            throw e;
         } catch (Exception e) {
             log.error(e.getMessage(), e);
             return null;
@@ -247,6 +251,8 @@ public abstract class AuthorizationGrant extends AbstractAuthorizationGrant {
         jwt.getClaims().setClaim("username", user != null ? user.getAttribute("displayName") : null);
         jwt.getClaims().setClaim("token_type", accessToken.getTokenType().getName());
         jwt.getClaims().setClaim("code", accessToken.getCode()); // guarantee uniqueness : without it we can get race condition
+        jwt.getClaims().setClaim("acr", getAcrValues());
+        jwt.getClaims().setClaim("auth_time", ServerUtil.dateToSeconds(getAuthenticationTime()));
         jwt.getClaims().setExpirationTime(accessToken.getExpirationDate());
         jwt.getClaims().setIssuedAt(accessToken.getCreationDate());
         jwt.getClaims().setSubjectIdentifier(getSub());
