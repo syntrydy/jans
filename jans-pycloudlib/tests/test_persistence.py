@@ -391,13 +391,14 @@ bucket.default: %(default_bucket)s
 connection.connect-timeout: 10000
 connection.connection-max-wait-time: 20000
 connection.scan-consistency: not_bounded
-buckets: {bucket_prefix}, {bucket_prefix}_user, {bucket_prefix}_cache, {bucket_prefix}_site, {bucket_prefix}_token, {bucket_prefix}_session
+buckets: {bucket_prefix}, {bucket_prefix}_user, {bucket_prefix}_cache, {bucket_prefix}_site, {bucket_prefix}_token, {bucket_prefix}_session, {bucket_prefix}_configuration
 bucket.default: {bucket_prefix}
 bucket.{bucket_prefix}_user.mapping: people, groups, authorizations
 bucket.{bucket_prefix}_cache.mapping: cache
 bucket.{bucket_prefix}_site.mapping: cache-refresh
 bucket.{bucket_prefix}_token.mapping: tokens
 bucket.{bucket_prefix}_session.mapping: sessions
+bucket.{bucket_prefix}_configuration.mapping: configuration
 """.strip().format(bucket_prefix=bucket_prefix)
 
     src = tmpdir.join("jans-couchbase.properties.tmpl")
@@ -490,6 +491,7 @@ def test_resolve_hybrid_storages(monkeypatch):
         "cache": "ldap",
         "token": "sql",
         "session": "sql",
+        "configuration": "sql",
     }))
     expected = {
         "storages": "couchbase, ldap, spanner, sql",
@@ -497,7 +499,7 @@ def test_resolve_hybrid_storages(monkeypatch):
         "storage.couchbase.mapping": "cache-refresh",
         "storage.ldap.mapping": "cache",
         "storage.spanner.mapping": "people, groups, authorizations",
-        "storage.sql.mapping": "tokens, sessions",
+        "storage.sql.mapping": "tokens, sessions, configuration",
     }
     mapper = PersistenceMapper()
     assert resolve_hybrid_storages(mapper) == expected
@@ -516,6 +518,7 @@ def test_render_hybrid_properties(monkeypatch, tmpdir):
             "cache": "sql",
             "token": "spanner",
             "session": "sql",
+            "configuration": "sql",
         })
     )
 
@@ -524,7 +527,7 @@ storages: couchbase, ldap, spanner, sql
 storage.default: ldap
 storage.couchbase.mapping: people, groups, authorizations
 storage.spanner.mapping: tokens
-storage.sql.mapping: cache-refresh, cache, sessions
+storage.sql.mapping: cache-refresh, cache, sessions, configuration
 """.strip()
 
     dest = tmpdir.join("jans-hybrid.properties")
@@ -849,6 +852,7 @@ def test_persistence_mapper_mapping(monkeypatch, type_):
         "cache",
         "token",
         "session",
+        "configuration",
     ], type_)
     assert PersistenceMapper().mapping == expected
 
@@ -863,29 +867,11 @@ def test_persistence_mapper_hybrid_mapping(monkeypatch):
         "cache": "sql",
         "token": "couchbase",
         "session": "sql",
+        "configuration": "sql",
     }
     monkeypatch.setenv("CN_PERSISTENCE_TYPE", "hybrid")
     monkeypatch.setenv("CN_HYBRID_MAPPING", json.dumps(mapping))
     assert PersistenceMapper().mapping == mapping
-
-
-@pytest.mark.parametrize("mapping", [
-    "ab",
-    "1",
-    "[]",
-    "{}",  # empty dict
-    {"user": "sql"},  # missing remaining keys
-    {"default": "sql", "user": "spanner", "cache": "ldap", "site": "couchbase", "token": "sql", "session": "random"},  # invalid type
-    {"default": "sql", "user": "spanner", "cache": "ldap", "site": "couchbase", "token": "sql", "foo": "sql"},  # invalid key
-])
-def test_persistence_mapper_validate_hybrid_mapping(monkeypatch, mapping):
-    from jans.pycloudlib.persistence.utils import PersistenceMapper
-
-    monkeypatch.setenv("CN_PERSISTENCE_TYPE", "hybrid")
-    monkeypatch.setenv("CN_HYBRID_MAPPING", json.dumps(mapping))
-
-    with pytest.raises(ValueError):
-        PersistenceMapper().validate_hybrid_mapping()
 
 
 def test_persistence_mapper_groups(monkeypatch):
@@ -899,13 +885,14 @@ def test_persistence_mapper_groups(monkeypatch):
         "cache": "sql",
         "token": "couchbase",
         "session": "sql",
+        "configuration": "sql",
     }))
 
     groups = {
         "couchbase": ["token"],
         "ldap": ["site"],
         "spanner": ["user"],
-        "sql": ["default", "cache", "session"],
+        "sql": ["default", "cache", "session", "configuration"],
     }
     assert PersistenceMapper().groups() == groups
 
@@ -921,12 +908,20 @@ def test_persistence_mapper_groups_rdn(monkeypatch):
         "cache": "sql",
         "token": "couchbase",
         "session": "sql",
+        "configuration": "sql",
     }))
 
     groups = {
         "couchbase": ["tokens"],
         "ldap": ["cache-refresh"],
         "spanner": ["people, groups, authorizations"],
-        "sql": ["", "cache", "sessions"],
+        "sql": ["cache", "sessions", "configuration"],
     }
     assert PersistenceMapper().groups_with_rdn() == groups
+
+
+def test_validate_hybrid_mapping():
+    from jans.pycloudlib.persistence.utils import PersistenceMapper
+
+    with pytest.deprecated_call():
+        PersistenceMapper().validate_hybrid_mapping()

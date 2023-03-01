@@ -71,6 +71,7 @@ PERSISTENCE_DATA_KEYS = (
     "cache",
     "token",
     "session",
+    "configuration",
 )
 """Data mapping of persistence, ordered by priority."""
 
@@ -78,11 +79,7 @@ PERSISTENCE_SQL_DIALECTS = (
     "mysql",
     "pgsql",
 )
-"""SQL dialects.
-
-!!! warning
-    The `pgsql` dialect is in experimental phase and may introduce bugs
-    hence it is not recommended at the moment."""
+"""SQL dialects."""
 
 RDN_MAPPING = {
     "default": "",
@@ -91,6 +88,7 @@ RDN_MAPPING = {
     "site": "cache-refresh",
     "token": "tokens",
     "session": "sessions",
+    "configuration": "configuration",
 }
 """Mapping of RDN (Relative Distinguished Name)."""
 
@@ -103,7 +101,6 @@ class PersistenceMapper:
     ```py
     os.environ["CN_PERSISTENCE_TYPE"] = "sql"
     mapper = PersistenceMapper()
-    mapper.validate_hybrid_mapping()
     print(mapper.mapping)
     ```
 
@@ -117,6 +114,7 @@ class PersistenceMapper:
         "cache": "sql",
         "token": "sql",
         "session": "sql",
+        "configuration": "sql",
     }
     ```
 
@@ -132,11 +130,11 @@ class PersistenceMapper:
         "site": "sql",
         "cache": "sql",
         "token": "sql",
-        "session": "sql",
+        "session": "couchbase",
+        "configuration": "sql",
     })
 
     mapper = PersistenceMapper()
-    mapper.validate_hybrid_mapping()
     print(mapper.mapping)
     ```
 
@@ -150,14 +148,14 @@ class PersistenceMapper:
         "cache": "sql",
         "token": "sql",
         "session": "sql",
+        "configuration": "sql",
     }
     ```
 
     Note that when using ``hybrid``, all mapping must be defined explicitly.
     """
 
-    def __init__(self) -> None:
-        self.type = os.environ.get("CN_PERSISTENCE_TYPE", "ldap")
+    def __init__(self, manager: _t.Optional[Manager] = None) -> None:
         self._mapping: dict[str, str] = {}
 
     @property
@@ -174,14 +172,22 @@ class PersistenceMapper:
             "cache": "sql",
             "token": "sql",
             "session": "sql",
+            "configuration": "sql",
         }
         ```
         """
         if not self._mapping:
-            if self.type != "hybrid":
-                self._mapping = dict.fromkeys(PERSISTENCE_DATA_KEYS, self.type)
+            type_ = os.environ.get("CN_PERSISTENCE_TYPE", "ldap")
+
+            if type_ != "hybrid":
+                self._mapping = dict.fromkeys(PERSISTENCE_DATA_KEYS, type_)
             else:
-                self._mapping = self.validate_hybrid_mapping()
+                mapping = json.loads(os.environ.get("CN_HYBRID_MAPPING", "{}"))
+                self._mapping = dict.fromkeys(PERSISTENCE_DATA_KEYS, "ldap")
+                self._mapping.update({
+                    k: v for k, v in mapping.items()
+                    if k in PERSISTENCE_DATA_KEYS
+                })
         return self._mapping
 
     def groups(self) -> dict[str, list[str]]:
@@ -193,7 +199,7 @@ class PersistenceMapper:
         {
             "sql": ["cache", "default", "session"],
             "couchbase": ["user"],
-            "spanner": ["token"],
+            "spanner": ["token", "configuration"],
             "ldap": ["site"],
         }
         ```
@@ -211,33 +217,32 @@ class PersistenceMapper:
 
         ```py
         {
-            "sql": ["cache", "", "sessions"],
+            "sql": ["cache", "sessions"],
             "couchbase": ["people, groups, authorizations"],
-            "spanner": ["tokens"],
+            "spanner": ["tokens", "configuration"],
             "ldap": ["cache-refresh"],
         }
         ```
         """
         mapper = defaultdict(list)
         for k, v in self.mapping.items():
-            mapper[v].append(RDN_MAPPING[k])
+            rdn = RDN_MAPPING[k]
+            if not rdn:
+                continue
+            mapper[v].append(rdn)
         return dict(sorted(mapper.items()))
 
     @classmethod
     def validate_hybrid_mapping(cls) -> dict[str, str]:
-        """Validate the value of ``hybrid_mapping`` attribute."""
-        mapping = json.loads(os.environ.get("CN_HYBRID_MAPPING", "{}"))
+        """Validate the value of ``hybrid_mapping`` attribute.
 
-        # build whitelisted mapping based on supported PERSISTENCE_DATA_KEYS and PERSISTENCE_TYPES
-        try:
-            sanitized_mapping = {
-                key: type_ for key, type_ in mapping.items()
-                if key in PERSISTENCE_DATA_KEYS and type_ in PERSISTENCE_TYPES
-            }
-        except AttributeError:
-            # likely not a dict
-            raise ValueError(f"Invalid hybrid mapping {mapping}")
+        This method is deprecated.
+        """
+        import warnings
 
-        if sorted(sanitized_mapping.keys()) != sorted(PERSISTENCE_DATA_KEYS):
-            raise ValueError(f"Missing key(s) in hybrid mapping {mapping}")
-        return sanitized_mapping
+        warnings.warn(
+            "'validate_hybrid_mapping' function is now a no-op function "
+            "and no longer required by hybrid persistence ",
+            DeprecationWarning,
+            stacklevel=2,
+        )
