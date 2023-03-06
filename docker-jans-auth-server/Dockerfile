@@ -55,8 +55,8 @@ RUN /opt/jython/bin/pip uninstall -y pip setuptools
 # Auth server
 # ===========
 
-ENV CN_VERSION=1.0.8-SNAPSHOT
-ENV CN_BUILD_DATE='2023-02-08 16:54'
+ENV CN_VERSION=1.0.9-SNAPSHOT
+ENV CN_BUILD_DATE='2023-03-01 15:52'
 ENV CN_SOURCE_URL=https://jenkins.jans.io/maven/io/jans/jans-auth-server/${CN_VERSION}/jans-auth-server-${CN_VERSION}.war
 
 # Install Jans Auth
@@ -88,7 +88,7 @@ ARG CASA_CONFIG_BUILD_DATE="2022-12-27 19:26"
 RUN wget -q https://jenkins.gluu.org/maven/org/gluu/casa-config/${CASA_CONFIG_VERSION}/casa-config-${CASA_CONFIG_VERSION}.jar -P /usr/share/java/
 
 # A workaround for Fido2 integration
-ARG FIDO2_CLIENT_VERSION=1.0.8-SNAPSHOT
+ARG FIDO2_CLIENT_VERSION=1.0.9-SNAPSHOT
 ARG FIDO2_CLIENT_BUILD_DATE="2023-01-31 15:04"
 RUN wget -q https://jenkins.jans.io/maven/io/jans/jans-fido2-client/${FIDO2_CLIENT_VERSION}/jans-fido2-client-${FIDO2_CLIENT_VERSION}.jar -P /usr/share/java/
 
@@ -96,7 +96,7 @@ RUN wget -q https://jenkins.jans.io/maven/io/jans/jans-fido2-client/${FIDO2_CLIE
 # Casa external scripts
 # =====================
 
-ARG FLEX_SOURCE_VERSION=5f065b7fb931199a26817ee22ffe5c2a9cc1e3f9
+ARG FLEX_SOURCE_VERSION=3f0281bbf381a63b28229388d6b0ae536902b455
 ARG CASA_EXTRAS_DIR=casa/extras
 
 RUN mkdir -p /opt/jans/python/libs
@@ -254,7 +254,7 @@ ENV CN_MAX_RAM_PERCENTAGE=75.0 \
 LABEL name="janssenproject/auth-server" \
     maintainer="Janssen Project <support@jans.io>" \
     vendor="Janssen Project" \
-    version="1.0.8" \
+    version="1.0.9" \
     release="dev" \
     summary="Janssen Authorization Server" \
     description="OAuth 2.0 server and client; OpenID Connect Provider (OP) & UMA Authorization Server (AS)"
