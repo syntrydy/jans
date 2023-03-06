@@ -1942,6 +1942,14 @@ paths:
       security:
       - oauth2:
         - https://jans.io/oauth/client/authorizations.readonly
+  /api/v1/clients/authorizations/test3:
+    get:
+      operationId: getAllAuthorizations3
+      responses:
+        default:
+          description: default response
+          content:
+            application/json: {}
   /api/v1/clients/authorizations/{userId}:
     get:
       tags:
@@ -7617,19 +7625,19 @@ components:
           $ref: '#/components/schemas/AttributeValidation'
         tooltip:
           type: string
-        whitePagesCanView:
-          type: boolean
-        adminCanEdit:
-          type: boolean
         userCanAccess:
-          type: boolean
-        adminCanAccess:
           type: boolean
         userCanView:
           type: boolean
+        userCanEdit:
+          type: boolean
         adminCanView:
           type: boolean
-        userCanEdit:
+        adminCanAccess:
+          type: boolean
+        adminCanEdit:
+          type: boolean
+        whitePagesCanView:
           type: boolean
         baseDn:
           type: string
@@ -8354,6 +8362,8 @@ components:
           type: object
           additionalProperties:
             type: string
+        fapi:
+          type: boolean
         allResponseTypesSupported:
           uniqueItems: true
           type: array
@@ -8363,8 +8373,6 @@ components:
             - code
             - token
             - id_token
-        fapi:
-          type: boolean
     AuthenticationFilter:
       required:
       - baseDn
@@ -9218,14 +9226,14 @@ components:
           type: boolean
         internal:
           type: boolean
-        locationPath:
-          type: string
         locationType:
           type: string
           enum:
           - ldap
           - db
           - file
+        locationPath:
+          type: string
         baseDn:
           type: string
     ScriptError:

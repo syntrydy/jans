@@ -62,10 +62,10 @@ public class ClientAuthResource extends ConfigBaseResource {
 	public Response getClientAuthorizations(
 			@Parameter(description = "Client Auth user ID") @PathParam(ApiConstants.USERID) @NotNull String userId) {
 
-		logger.error("Client serach param - user:{}", escapeLog(userId));
+		logger.debug("Client serach param - user:{}", escapeLog(userId));
 
 		Map<Client, Set<Scope>> clientAuths = clientAuthService.getUserClientAuthorizationData(userId);
-		logger.error("Client serach param - clientAuths:{}", clientAuths);
+		logger.debug("Client serach param - clientAuths:{}", clientAuths);
 		return Response.ok(clientAuths).build();
 	}
 
@@ -82,7 +82,7 @@ public class ClientAuthResource extends ConfigBaseResource {
 	@Path("/test1")
 	public Response getAllAuthorizations() {
 
-		logger.error("getAllAuthorizations()");
+		logger.debug("getAllAuthorizations()");
 		Map<String, HashMap<String, String>> nestedClientMap = new HashMap<>();
 
 		for (int i = 1; i <= 10; i++) {
@@ -91,7 +91,7 @@ public class ClientAuthResource extends ConfigBaseResource {
 			nestedClientMap.put("Nested" + i, clientMap);
 		}
 
-		logger.error("Client serach param - nestedClientMap:{}", nestedClientMap);
+		logger.debug("Client serach param - nestedClientMap:{}", nestedClientMap);
 		return Response.ok(nestedClientMap).build();
 	}
 
@@ -108,7 +108,7 @@ public class ClientAuthResource extends ConfigBaseResource {
 	@Path("/test2")
 	public Response getAllAuthorizations2() {
 
-		logger.error("getAllAuthorizations()");
+		logger.debug("getAllAuthorizations()");
 		Map<String, Client> nestedClientMap = new HashMap<>();
 		List<Client> clients = clientService.getAllClients(10);
 		if (clients != null && !clients.isEmpty()) {
@@ -117,8 +117,26 @@ public class ClientAuthResource extends ConfigBaseResource {
 			}
 		}
 
-		logger.error("Client serach param - nestedClientMap:{}", nestedClientMap);
+		logger.debug("Client serach param - nestedClientMap:{}", nestedClientMap);
 		return Response.ok(nestedClientMap).build();
 	}
 
+	@GET
+	@ProtectedApi(scopes = { ApiAccessConstants.CLIENT_AUTHORIZATIONS_READ_ACCESS }, groupScopes = {
+			ApiAccessConstants.OPENID_READ_ACCESS }, superScopes = { ApiAccessConstants.SUPER_ADMIN_READ_ACCESS })
+	@Path("/test3")
+	public Response getAllAuthorizations3() {
+
+		logger.debug("getAllAuthorizations()");
+		Map<String, HashMap<String, Object>> nestedMap = new HashMap<>();
+
+		for (int i = 1; i <= 5; i++) {
+			HashMap<String, Object> innerMap = new HashMap<>();
+			innerMap.put("innerKey-" + i, i);
+			nestedMap.put("Key-" + i, innerMap);
+		}
+
+		logger.debug("Client serach param - nestedMap:{}", nestedMap);
+		return Response.ok(nestedMap).build();
+	}
 }
