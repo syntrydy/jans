@@ -3,14 +3,18 @@
 from __future__ import annotations
 
 import json
+import logging
 import os
 import typing as _t
 from collections import defaultdict
+from importlib import import_module
 
 if _t.TYPE_CHECKING:  # pragma: no cover
     # imported objects for function type hint, completion, etc.
     # these won't be executed in runtime
     from jans.pycloudlib.manager import Manager
+
+logger = logging.getLogger(__name__)
 
 
 def render_salt(manager: Manager, src: str, dest: str) -> None:
@@ -157,6 +161,8 @@ class PersistenceMapper:
 
     def __init__(self, manager: _t.Optional[Manager] = None) -> None:
         self._mapping: dict[str, str] = {}
+        self._clients: dict[str, _t.Any] = {}
+        self._manager = manager
 
     @property
     def mapping(self) -> dict[str, str]:
@@ -182,12 +188,7 @@ class PersistenceMapper:
             if type_ != "hybrid":
                 self._mapping = dict.fromkeys(PERSISTENCE_DATA_KEYS, type_)
             else:
-                mapping = json.loads(os.environ.get("CN_HYBRID_MAPPING", "{}"))
-                self._mapping = dict.fromkeys(PERSISTENCE_DATA_KEYS, "ldap")
-                self._mapping.update({
-                    k: v for k, v in mapping.items()
-                    if k in PERSISTENCE_DATA_KEYS
-                })
+                self._mapping, _ = self.resolve_hybrid_mapping()
         return self._mapping
 
     def groups(self) -> dict[str, list[str]]:
@@ -233,16 +234,84 @@ class PersistenceMapper:
         return dict(sorted(mapper.items()))
 
     @classmethod
-    def validate_hybrid_mapping(cls) -> dict[str, str]:
-        """Validate the value of ``hybrid_mapping`` attribute.
+    def resolve_hybrid_mapping(cls) -> tuple[dict[str, str], str]:
+        """Validate the value of ``hybrid_mapping`` attribute."""
+        mapping = json.loads(os.environ.get("CN_HYBRID_MAPPING", "{}"))
 
-        This method is deprecated.
-        """
-        import warnings
+        # only allow `dict` format
+        if not isinstance(mapping, dict):
+            return {}, "Invalid hybrid mapping format"
 
-        warnings.warn(
-            "'validate_hybrid_mapping' function is now a no-op function "
-            "and no longer required by hybrid persistence ",
-            DeprecationWarning,
-            stacklevel=2,
-        )
+        # build whitelisted mapping based on the following rules:
+        #
+        # - each key must be one of PERSISTENCE_DATA_KEYS
+        # - each value must be one of PERSISTENCE_TYPES (prefix also considered as valid)
+        #
+        # note that prefix means anything that comes before first `.` character
+        sanitized_mapping = {}
+
+        for k, v in mapping.items():
+            if k not in PERSISTENCE_DATA_KEYS:
+                continue
+
+            prefix = v.split(".", 1)[0]
+            if prefix not in PERSISTENCE_TYPES:
+                continue
+
+            # item is valid
+            sanitized_mapping[k] = v
+
+        # keys must be as similar as PERSISTENCE_DATA_KEYS
+        if sorted(sanitized_mapping.keys()) != sorted(PERSISTENCE_DATA_KEYS):
+            return {}, f"Either key(s) or value(s) is missing or invalid in hybrid mapping {mapping}"
+
+        # mapping is valid (without error)
+        return sanitized_mapping, ""
+
+    @property
+    def manager(self) -> Manager:
+        """Get jans.pycloudlib.manager.Manager instance."""
+        if not self._manager:
+            from jans.pycloudlib import get_manager
+
+            logger.warning(
+                f"Manager object is not set when instantiating the {self.__class__.__name__} object, "
+                "thus it will be automatically created. Note that this behaviour will be "
+                "deprecated and changed in the future.",
+            )
+            self._manager = get_manager()
+        return self._manager
+
+    @property
+    def clients(self) -> dict[str, _t.Any]:
+        if not self._clients:
+            self._clients = {g: self._resolve_client(g) for g in self.groups()}
+        return self._clients
+
+    def get_mapping_client(self, mapping: str) -> _t.Any:
+        name: str = self.mapping.get(mapping, "")
+        return self.clients.get(name)
+
+    def _resolve_client(self, group: str) -> _t.Any:
+        client_mappings = {
+            "sql": ("jans.pycloudlib.persistence.sql", "SqlClient"),
+            "couchbase": ("jans.pycloudlib.persistence.couchbase", "CouchbaseClient"),
+            "spanner": ("jans.pycloudlib.persistence.spanner", "SpannerClient"),
+            "ldap": ("jans.pycloudlib.persistence.ldap", "LdapClient"),
+        }
+
+        client = None
+        for name in client_mappings:
+            if group.startswith(name):
+                mod, clsname = client_mappings.get(name) or [None, None]
+
+                if not (mod and clsname):
+                    continue
+
+                client_cls = getattr(import_module(mod), clsname)
+                kwargs = {
+                    "env_suffix": group.removeprefix(name).upper().replace(".", "_EXT_")
+                }
+                client = client_cls(self.manager, **kwargs)
+                break
+        return client  # noqa: R504

@@ -1,8 +1,7 @@
 """This module contains helpers to validate things."""
-
 from jans.pycloudlib.persistence.utils import PERSISTENCE_TYPES
-from jans.pycloudlib.persistence.utils import PERSISTENCE_SQL_DIALECTS
 from jans.pycloudlib.persistence.utils import PersistenceMapper
+from jans.pycloudlib.persistence.utils import PERSISTENCE_SQL_DIALECTS
 
 
 def validate_persistence_type(type_: str) -> None:
@@ -62,5 +61,6 @@ def validate_persistence_sql_dialect(dialect: str) -> None:
 
 def validate_persistence_hybrid_mapping() -> None:
     """Validate hybrid mapping."""
-    mapper = PersistenceMapper()
-    mapper.validate_hybrid_mapping()
+    _, err = PersistenceMapper().resolve_hybrid_mapping()
+    if err:
+        raise ValueError(err)

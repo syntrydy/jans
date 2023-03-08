@@ -920,8 +920,25 @@ def test_persistence_mapper_groups_rdn(monkeypatch):
     assert PersistenceMapper().groups_with_rdn() == groups
 
 
-def test_validate_hybrid_mapping():
+def test_validate_hybrid_mapping(caplog):
     from jans.pycloudlib.persistence.utils import PersistenceMapper
 
-    with pytest.deprecated_call():
-        PersistenceMapper().validate_hybrid_mapping()
+    PersistenceMapper().validate_hybrid_mapping()
+    assert "function is now a no-op" in caplog.records[0].message
+
+
+def test_persistence_mapper_no_manager(caplog):
+    from jans.pycloudlib.persistence.utils import PersistenceMapper
+
+    PersistenceMapper().manager
+    assert "Manager object is not set" in caplog.records[0].message
+
+
+def test_persistence_mapper_clients(gmanager):
+    from jans.pycloudlib.persistence.utils import PersistenceMapper
+    assert "ldap" in PersistenceMapper(gmanager).clients
+
+
+def test_persistence_mapper_mapping_client(gmanager):
+    from jans.pycloudlib.persistence.utils import PersistenceMapper
+    assert PersistenceMapper(gmanager).get_mapping_client("default") is not None

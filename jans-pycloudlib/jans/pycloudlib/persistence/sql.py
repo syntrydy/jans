@@ -250,8 +250,9 @@ class SqlClient(SqlSchemaMixin):
 
     def __init__(self, manager: Manager, *args: _t.Any, **kwargs: _t.Any) -> None:
         self.manager = manager
+        self.env_suffix = kwargs.get("env_suffix", "")
 
-        dialect = os.environ.get("CN_SQL_DB_DIALECT", "mysql")
+        dialect = self.get_env("CN_SQL_DB_DIALECT", "mysql")
         if dialect in ("pgsql", "postgresql"):
             self.adapter = PostgresqlAdapter()  # type: _t.Union[PostgresqlAdapter, MysqlAdapter]
         else:
@@ -268,10 +269,10 @@ class SqlClient(SqlSchemaMixin):
     @property
     def engine_url(self) -> str:
         """Engine connection URL."""
-        host = os.environ.get("CN_SQL_DB_HOST", "localhost")
-        port = os.environ.get("CN_SQL_DB_PORT", 3306)
-        database = os.environ.get("CN_SQL_DB_NAME", "jans")
-        user = os.environ.get("CN_SQL_DB_USER", "jans")
+        host = self.get_env("CN_SQL_DB_HOST", "localhost")
+        port = self.get_env("CN_SQL_DB_PORT", 3306)
+        database = self.get_env("CN_SQL_DB_NAME", "jans")
+        user = self.get_env("CN_SQL_DB_USER", "jans")
         password = get_sql_password(self.manager)
         return f"{self.adapter.connector}://{user}:{password}@{host}:{port}/{database}"
 
@@ -547,6 +548,11 @@ class SqlClient(SqlSchemaMixin):
         if pattern:
             version = [int(comp) for comp in pattern.group().split(".")]
         return tuple(version)
+
+    def get_env(self, name: str, default: _t.Any = "") -> str:
+        """Resolve prefixed environment variable value."""
+        env = "".join([name, self.env_suffix])
+        return os.environ.get(env) or default
 
 
 def render_sql_properties(manager: Manager, src: str, dest: str) -> None:
