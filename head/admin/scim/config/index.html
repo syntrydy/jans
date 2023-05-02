@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#this-content-is-in-progress" class="md-skip">
+        <a href="#scmi-configuration" class="md-skip">
           Skip to content
         </a>
       
@@ -177119,6 +177119,8 @@
       <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
       
       
+        
+      
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
           Configuration
@@ -177135,6 +177137,8 @@
   
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -177143,23 +177147,29 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#this-content-is-in-progress" class="md-nav__link">
-    This content is in progress
+  <a href="#existing-scim-dynamic-configuration" class="md-nav__link">
+    Existing SCIM dynamic configuration
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#have-questions-in-the-meantime" class="md-nav__link">
-    Have questions in the meantime?
+  <a href="#reflect-update" class="md-nav__link">
+    Reflect update
+  </a>
+  
+    <nav class="md-nav" aria-label="Reflect update">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#two-options-to-make-effect-of-the-changes-done-to-the-configuration" class="md-nav__link">
+    Two options to make effect of the changes done to the configuration
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#want-to-contribute" class="md-nav__link">
-    Want to contribute?
-  </a>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -177966,6 +177976,8 @@
   
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -177974,23 +177986,29 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#this-content-is-in-progress" class="md-nav__link">
-    This content is in progress
+  <a href="#existing-scim-dynamic-configuration" class="md-nav__link">
+    Existing SCIM dynamic configuration
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#have-questions-in-the-meantime" class="md-nav__link">
-    Have questions in the meantime?
+  <a href="#reflect-update" class="md-nav__link">
+    Reflect update
+  </a>
+  
+    <nav class="md-nav" aria-label="Reflect update">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#two-options-to-make-effect-of-the-changes-done-to-the-configuration" class="md-nav__link">
+    Two options to make effect of the changes done to the configuration
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#want-to-contribute" class="md-nav__link">
-    Want to contribute?
-  </a>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -178036,21 +178054,47 @@
   </a>
 
 
-  <h1>Configuration</h1>
-
-<h2 id="this-content-is-in-progress">This content is in progress<a class="headerlink" href="#this-content-is-in-progress" title="Permanent link">#</a></h2>
-<p>The Janssen Project documentation is currently in development. Topic pages are being created in order of broadest relevance, and this page is coming in the near future.</p>
-<h2 id="have-questions-in-the-meantime">Have questions in the meantime?<a class="headerlink" href="#have-questions-in-the-meantime" title="Permanent link">#</a></h2>
-<p>While this documentation is in progress, you can ask questions through <a href="https://github.com/JanssenProject/jans/discussion">GitHub Discussions</a> or the <a href="https://gitter.im/JanssenProject/Lobby">community chat on Gitter</a>. Any questions you have will help determine what information our documentation should cover.</p>
-<h2 id="want-to-contribute">Want to contribute?<a class="headerlink" href="#want-to-contribute" title="Permanent link">#</a></h2>
-<p>If you have content you'd like to contribute to this page in the meantime, you can get started with our <a href="https://docs.jans.io/head/CONTRIBUTING/">Contribution guide</a>.</p>
+<h1 id="scmi-configuration">SCMI configuration<a class="headerlink" href="#scmi-configuration" title="Permanent link">#</a></h1>
+<p><a href="https://github.com/JanssenProject/jans/tree/main/jans-scim">SCMI</a> configuration enables to manage application-level configuration.</p>
+<h3 id="existing-scim-dynamic-configuration">Existing SCIM dynamic configuration<a class="headerlink" href="#existing-scim-dynamic-configuration" title="Permanent link">#</a></h3>
+<blockquote>
+<p>```javascript
+{
+   "baseDN":"o=jans",</p>
+<p>"applicationUrl":"https://<your-jans-host>.info",
+   "baseEndpoint":"https://<your-jans-host>.info/jans-scim/restv1",</p>
+<p>"personCustomObjectClass":"jansCustomPerson",</p>
+<p>"oxAuthIssuer":"https://<your-jans-host>.info",
+   "umaIssuer":"https://<your-jans-host>.info",</p>
+<p>"maxCount": 200,
+   "bulkMaxOperations": 30,
+   "bulkMaxPayloadSize": 3072000,
+   "userExtensionSchemaURI": "urn:ietf:params:scim:schemas:extension:gluu:2.0:User",</p>
+<p>"useLocalCache":true,</p>
+<p>"disableJdkLogger":true,
+   "loggingLevel":"INFO",
+   "loggingLayout":"text",
+   "externalLoggerConfiguration":"",</p>
+<p>"metricReporterInterval":300,
+   "metricReporterKeepDataDays":15,
+   "metricReporterEnabled":true
+}
+```</p>
+</blockquote>
+<h2 id="reflect-update">Reflect update<a class="headerlink" href="#reflect-update" title="Permanent link">#</a></h2>
+<p><code>jansRevision</code> property of the configuration is used to manage any change</p>
+<h3 id="two-options-to-make-effect-of-the-changes-done-to-the-configuration">Two options to make effect of the changes done to the configuration<a class="headerlink" href="#two-options-to-make-effect-of-the-changes-done-to-the-configuration" title="Permanent link">#</a></h3>
+<ol>
+<li>Restart jans-scim</li>
+<li>Increment the <code>jansRevision</code> property of the configuration without restarting the application. The timer job will detect the change and fetch the latest configuration from the DB.</li>
+</ol>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-04-11T07:54:01+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-04-11</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-05-02T17:14:06+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-05-02</span>
       
         <br>
         Created:

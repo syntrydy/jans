@@ -2162,6 +2162,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#test-smtp-server-configuration" class="md-nav__link">
+    Test SMTP Server Configuration
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -178002,6 +178009,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#test-smtp-server-configuration" class="md-nav__link">
+    Test SMTP Server Configuration
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -178075,7 +178089,7 @@ Operation ID: delete-config-smtp
 Operation ID: test-config-smtp
   Description: Test SMTP server configuration.
 
-To get sample shema type /opt/jans/jans-cli/config-cli.py --schema &lt;schma&gt;, for example /opt/jans/jans-cli/config-cli.py --schema /components/schemas/SmtpConfiguration
+To get sample schema type /opt/jans/jans-cli/config-cli.py --schema &lt;schema&gt;, for example /opt/jans/jans-cli/config-cli.py --schema /components/schemas/SmtpConfiguration
 </code></pre></div>
 As we see, we can perform many operations such as <code>update</code>, <code>delete</code>, <code>test</code>, <code>post</code>, etc. Let's do some operations.</p>
 <h2 id="find-smtp-server-configuration">Find SMTP Server Configuration<a class="headerlink" href="#find-smtp-server-configuration" title="Permanent link">#</a></h2>
@@ -178128,13 +178142,20 @@ Server Response:
 <p><div class="highlight"><pre><span></span><code>/opt/jans/jans-cli/config-cli.py --operation-id put-config-smtp --data /tmp/smtp.json
 </code></pre></div>
 It will update the information.</p>
+<h2 id="test-smtp-server-configuration">Test SMTP Server Configuration<a class="headerlink" href="#test-smtp-server-configuration" title="Permanent link">#</a></h2>
+<p>Testing SMTP configuration token with <code>https://jans.io/oauth/config/smtp.write</code> scope is required.
+To test SMTP configuration update, change any information on <code>/tmp/smtp.json</code> file with test data and run the following command:</p>
+<p><div class="highlight"><pre><span></span><code>/opt/jans/jans-cli/config-cli.py --operation-id test-config-smtp --data /tmp/smtp.json
+</code></pre></div>
+This will be return status code 200 with response as true or false based on the SMTP test result.
+Note:  <code>SMTP Password</code> should be App password and not web login password.</p>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-04-11T07:54:01+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-04-11</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-05-02T17:14:06+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-05-02</span>
       
         <br>
         Created:

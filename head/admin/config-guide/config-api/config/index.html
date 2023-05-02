@@ -178248,23 +178248,22 @@
 
 <h1 id="config-api-configuration">Config-api-configuration<a class="headerlink" href="#config-api-configuration" title="Permanent link">#</a></h1>
 <h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">#</a></h2>
-<p><a href="https://github.com/JanssenProject/jans/tree/vreplace-janssen-version/jans-config-api">Jans Config Api</a> configuration enables to manage application-level configuration.</p>
-<p><img alt="" src="https://github.com/JanssenProject/jans/raw/vreplace-janssen-version/docs/assets/config-api-configuration.png" /></p>
+<p><a href="https://github.com/JanssenProject/jans/tree/main/jans-config-api">Jans Config Api</a> configuration enables to manage application-level configuration.</p>
 <h3 id="existing-config-api-dynamic-configuration">Existing Config-api dynamic configuration<a class="headerlink" href="#existing-config-api-dynamic-configuration" title="Permanent link">#</a></h3>
 <blockquote>
 <p><code>javascript
 {
  "configOauthEnabled": true,
- "apiApprovedIssuer": ["https://jans.server2"],
+ "apiApprovedIssuer": ["https://&lt;your-jans-host&gt;"],
  "apiProtectionType": "oauth2",
  "apiClientId": "1800.0a6a17a0-0d3b-4ce5-881c-f98b2f2b75a7",
  "apiClientPassword": "BlRk0TlvJp8QJg1vs5e1vw==",
  "endpointInjectionEnabled": false,
- "authIssuerUrl": "https://jans.server2",
- "authOpenidConfigurationUrl": "https://jans.server2/.well-known/openid-configuration",
- "authOpenidIntrospectionUrl": "https://jans.server2/jans-auth/restv1/introspection",
- "authOpenidTokenUrl": "https://jans.server2/jans-auth/restv1/token",
- "authOpenidRevokeUrl": "https://jans.server2/jans-auth/restv1/revoke",
+ "authIssuerUrl": "https://&lt;your-jans-host&gt;",
+ "authOpenidConfigurationUrl": "https://&lt;your-jans-host&gt;/.well-known/openid-configuration",
+ "authOpenidIntrospectionUrl": "https://&lt;your-jans-host&gt;/jans-auth/restv1/introspection",
+ "authOpenidTokenUrl": "https://&lt;your-jans-host&gt;/jans-auth/restv1/token",
+ "authOpenidRevokeUrl": "https://&lt;your-jans-host&gt;/jans-auth/restv1/revoke",
  "smallryeHealthRootPath": "/health-check",
  "disableJdkLogger":true,
  "loggingLevel":"INFO",
@@ -178312,8 +178311,7 @@
 }</code></p>
 </blockquote>
 <h2 id="revision-update">Revision update<a class="headerlink" href="#revision-update" title="Permanent link">#</a></h2>
-<p><code>jansRevision</code> property of the configuration is used to manage any change
-<img alt="" src="https://github.com/JanssenProject/jans/raw/vreplace-janssen-version/docs/assets/config-api-configuration-revision" /></p>
+<p><code>jansRevision</code> property of the configuration is used to manage any change</p>
 <h3 id="two-options-to-make-effect-of-the-changes-done-to-the-configuration">Two options to make effect of the changes done to the configuration<a class="headerlink" href="#two-options-to-make-effect-of-the-changes-done-to-the-configuration" title="Permanent link">#</a></h3>
 <ol>
 <li>Restart jans-config-api</li>
@@ -178340,7 +178338,7 @@
 <p><code>apiApprovedIssuer</code> property enables to set more than one authorization servers. By default, the current auth-server is set. You can add more server separated by comma.</p>
 <blockquote>
 <div class="highlight"><pre><span></span><code><span class="w"> </span><span class="p">...</span><span class="w"></span>
-<span class="nx">apiApprovedIssuer</span><span class="s2">&quot;: [&quot;</span><span class="nx">https</span><span class="o">:</span><span class="c1">//jans.server1,https://jans.server2&quot;]</span><span class="w"></span>
+<span class="nx">apiApprovedIssuer</span><span class="s2">&quot;: [&quot;</span><span class="nx">https</span><span class="o">:</span><span class="c1">//&lt;jans.auth.server&gt;,https://&lt;gluu.server&gt;,https://&lt;anyAuth.server&gt;&quot;]</span><span class="w"></span>
 <span class="w"> </span><span class="p">...</span><span class="w"></span>
 </code></pre></div>
 </blockquote>
@@ -178416,7 +178414,7 @@
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-04-11T07:54:01+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-04-11</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-05-02T17:14:06+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-05-02</span>
       
         <br>
         Created:
