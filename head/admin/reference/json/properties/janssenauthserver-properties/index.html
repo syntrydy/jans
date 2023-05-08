@@ -177325,6 +177325,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#httploggingresponsebodycontent" class="md-nav__link">
+    httpLoggingResponseBodyContent
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#idgenerationendpoint" class="md-nav__link">
     idGenerationEndpoint
   </a>
@@ -180602,6 +180609,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#httploggingresponsebodycontent" class="md-nav__link">
+    httpLoggingResponseBodyContent
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#idgenerationendpoint" class="md-nav__link">
     idGenerationEndpoint
   </a>
@@ -182243,6 +182257,11 @@
 <td>httpLoggingExcludePaths</td>
 <td>This list details the base URIs for which the request/response logging filter will not record activity</td>
 <td><a href="#httploggingexcludepaths">Details</a></td>
+</tr>
+<tr>
+<td>httpLoggingResponseBodyContent</td>
+<td>Defines if Response body will be logged, applied just if 'httpLoggingEnabled' is true and 'loggingLevel' is 'DEBUG', use 'httpLoggingExcludePaths' to avoid logging of unnecessary responses like ('/jans-auth/js/platform.js','/jans-auth/stylesheet/style.css'). Default value is false</td>
+<td><a href="#httploggingresponsebodycontent">Details</a></td>
 </tr>
 <tr>
 <td>idGenerationEndpoint</td>
@@ -184365,6 +184384,18 @@
 <p>Default value: None</p>
 </li>
 </ul>
+<h3 id="httploggingresponsebodycontent">httpLoggingResponseBodyContent<a class="headerlink" href="#httploggingresponsebodycontent" title="Permanent link">#</a></h3>
+<ul>
+<li>
+<p>Description: Defines if Response body will be logged, applied just if 'httpLoggingEnabled' is true and 'loggingLevel' is 'DEBUG', use 'httpLoggingExcludePaths' to avoid logging of unnecessary responses, suggested excludes: ('/jans-auth/stylesheet/fontawesome.min.css','/jans-auth/js/jquery-3.6.0.min.js','/jans-auth/js/bootstrap.min.js','/jans-auth/js/platform.js','/jans-auth/jakarta.faces.resource/jsf.js.htm','/jans-auth/stylesheet/font-awesome.css','/jans-auth/stylesheet/authorize.css','/jans-auth/stylesheet/site.css','/jans-auth/stylesheet/bootstrap.min.css','/jans-auth/stylesheet/style.css','/jans-auth/authorize.htm') this kind of responses will fill the log with non relevant information. Default value is false</p>
+</li>
+<li>
+<p>Required: No</p>
+</li>
+<li>
+<p>Default value: false</p>
+</li>
+</ul>
 <h3 id="idgenerationendpoint">idGenerationEndpoint<a class="headerlink" href="#idgenerationendpoint" title="Permanent link">#</a></h3>
 <ul>
 <li>
@@ -186087,7 +186118,7 @@
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-04-18T11:00:09+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-04-18</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-05-08T09:02:07+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-05-08</span>
       
         <br>
         Created:
