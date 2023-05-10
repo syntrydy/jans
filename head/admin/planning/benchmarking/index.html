@@ -178110,8 +178110,8 @@ justified.</p>
 <p><strong>Prerequisite</strong></p>
 <ol>
 <li>Create OpenID Connect client with </li>
-<li>Response Types: ['code', 'id_token]</li>
-<li>Grant Types: ['authorization_code', <code>implicit</code>, 'refresh_token']</li>
+<li>Response Types: <code>['code', 'id_token']</code></li>
+<li>Grant Types: <code>['authorization_code', 'implicit', 'refresh_token']</code></li>
 <li>Redirect Uri: valid redirect uri which is resolvable by machine which runs this load test
 Change the <code>FQDN</code> below and execute:
 <div class="highlight"><pre><span></span><code><span class="nv">FQDN</span><span class="o">=</span>example.gluu.info
@@ -178155,7 +178155,7 @@ cat <span class="s">&lt;&lt; EOF &gt; auth_code_client.json</span>
 </code></pre></div>
 <ol>
 <li>Create users by pattern:
-Set the following <a href="../../../demos/benchmarking/docker-jans-loadtesting-jmeter/README.md#loading-users">env vars</a> </li>
+Set the following <a href="https://github.com/JanssenProject/jans/blob/vreplace-janssen-version/demos/benchmarking/docker-jans-loadtesting-jmeter/README.md#loading-users">env vars</a> </li>
 </ol>
 <table>
 <thead>
@@ -178199,7 +178199,7 @@ Set the following <a href="../../../demos/benchmarking/docker-jans-loadtesting-j
 </tr>
 </tbody>
 </table>
-<p>Run the following script <a href="../../../demos/benchmarking/docker-jans-loadtesting-jmeter/scripts/add_users_rdbm.py">add_sequenced_jans_user_rdbm.py</a></p>
+<p>Run the following script <a href="https://github.com/JanssenProject/jans/blob/vreplace-janssen-version/demos/benchmarking/docker-jans-loadtesting-jmeter/yaml/load-users/load_users_rdbms_job.yaml">load_users_rdbms_job.py</a></p>
 <p><strong>Threads&amp;RampUp</strong></p>
 <p>Configure test script threads properties in <code>&lt;Root&gt; -&gt; Main</code> Thread Group inside script, like:</p>
 <ul>
@@ -178212,7 +178212,7 @@ Set the following <a href="../../../demos/benchmarking/docker-jans-loadtesting-j
 <div class="highlight"><pre><span></span><code>jmeter -n -t Authorization_Code_Flow_jans.jmx
 </code></pre></div></p>
 <h3 id="authorization-code-flow-jmeter-test">Authorization Code Flow jmeter test<a class="headerlink" href="#authorization-code-flow-jmeter-test" title="Permanent link">#</a></h3>
-<p>For load testing with Authorization Code Flow jmeter test is used located <a href="https://github.com/JanssenProject/jans/blob/main/demos/load-testing/jmeter/test/Authorization%20Code%20Flow_jans.jmx">here</a></p>
+<p>For load testing with Authorization Code Flow jmeter test is used located <a href="https://github.com/JanssenProject/jans/blob/vreplace-janssen-version/demos/benchmarking/docker-jans-loadtesting-jmeter/scripts/tests/authorization_code_flow.jmx">here</a></p>
 <ol>
 <li>Configure Script</li>
 <li>Open jmeter script by GUI</li>
@@ -178232,7 +178232,7 @@ Set the following <a href="../../../demos/benchmarking/docker-jans-loadtesting-j
 </code></pre></div>
 2. <code>/token</code> step must be passed successfully (marked=passed which confirmed that <code>access_token</code> and <code>id_token</code> are present in response).</p>
 <h3 id="resource-owner-password-grant-ropc-flow-jmeter-test">Resource Owner Password Grant (ROPC) Flow jmeter test<a class="headerlink" href="#resource-owner-password-grant-ropc-flow-jmeter-test" title="Permanent link">#</a></h3>
-<p>For load testing with Resource Owner Password Grant (ROPC) Flow jmeter test is used located <a href="https://github.com/JanssenProject/jans/blob/main/demos/load-testing/jmeter/test/ResourceOwnerPasswordCredentials_jans.jmx">here</a></p>
+<p>For load testing with Resource Owner Password Grant (ROPC) Flow jmeter test is used located <a href="https://github.com/JanssenProject/jans/blob/vreplace-janssen-version/demos/benchmarking/docker-jans-loadtesting-jmeter/scripts/tests/resource_owner_password_credentials.jmx">here</a></p>
 <ol>
 <li>Configure Script</li>
 <li>Open jmeter script by GUI</li>
@@ -178248,7 +178248,7 @@ Set the following <a href="../../../demos/benchmarking/docker-jans-loadtesting-j
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-04-03T10:21:34+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-04-03</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-05-10T07:04:38+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-05-10</span>
       
         <br>
         Created:
