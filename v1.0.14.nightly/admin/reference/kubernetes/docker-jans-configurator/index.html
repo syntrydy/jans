@@ -176846,52 +176846,12 @@
     load
   </a>
   
-    <nav class="md-nav" aria-label="load">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#docker" class="md-nav__link">
-    Docker
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#kubernetes" class="md-nav__link">
-    Kubernetes
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
         
           <li class="md-nav__item">
   <a href="#dump" class="md-nav__link">
     dump
   </a>
-  
-    <nav class="md-nav" aria-label="dump">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#docker_1" class="md-nav__link">
-    Docker
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#kubernetes_1" class="md-nav__link">
-    Kubernetes
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
         
@@ -178094,52 +178054,12 @@
     load
   </a>
   
-    <nav class="md-nav" aria-label="load">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#docker" class="md-nav__link">
-    Docker
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#kubernetes" class="md-nav__link">
-    Kubernetes
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
         
           <li class="md-nav__item">
   <a href="#dump" class="md-nav__link">
     dump
   </a>
-  
-    <nav class="md-nav" aria-label="dump">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#docker_1" class="md-nav__link">
-    Docker
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#kubernetes_1" class="md-nav__link">
-    Kubernetes
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
         
@@ -178200,8 +178120,7 @@
 <h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">#</a></h2>
 <p>Configuration manager is a special container used to load (generate/restore) and dump (backup) the configuration and secrets.</p>
 <h2 id="versions">Versions<a class="headerlink" href="#versions" title="Permanent link">#</a></h2>
-<p>See <a href="https://github.com/JanssenProject/docker-jans-configurator/releases">Releases</a> for stable versions.
-For bleeding-edge/unstable version, use <code>janssenproject/configurator:1.0.13_dev</code>.</p>
+<p>See <a href="https://github.com/orgs/JanssenProject/packages/container/package/jans%2Fconfigurator">Packages</a> for available versions.</p>
 <h2 id="environment-variables">Environment Variables<a class="headerlink" href="#environment-variables" title="Permanent link">#</a></h2>
 <p>The following environment variables are supported by the container:</p>
 <ul>
@@ -178287,31 +178206,13 @@ cat /dev/urandom | tr -dc &#39;a-zA-Z0-9&#39; | fold -w 24 | head -n 1
 python -c &#39;import random, string; print(&quot;&quot;.join(random.choices(string.ascii_letters + string.digits, k=24)))&#39;
 # ouput: HsPzqiPkRzNySWlOVui8Ilmw
 </code></pre></div>
-<h4 id="docker">Docker<a class="headerlink" href="#docker" title="Permanent link">#</a></h4>
+<p>To generate initial config and secrets:</p>
 <ol>
 <li>
-<p>Mount the <code>generate.json</code> into container:</p>
-<div class="highlight"><pre><span></span><code>docker run <span class="se">\</span>
-    --rm <span class="se">\</span>
-    --network container:consul <span class="se">\</span>
-    -e <span class="nv">CN_CONFIG_ADAPTER</span><span class="o">=</span>consul <span class="se">\</span>
-    -e <span class="nv">CN_CONFIG_CONSUL_HOST</span><span class="o">=</span>consul <span class="se">\</span>
-    -e <span class="nv">CN_SECRET_ADAPTER</span><span class="o">=</span>vault <span class="se">\</span>
-    -e <span class="nv">CN_SECRET_VAULT_HOST</span><span class="o">=</span>vault <span class="se">\</span>
-    -v /path/to/host/volume:/app/db <span class="se">\</span>
-    -v /path/to/vault_role_id.txt:/etc/certs/vault_role_id <span class="se">\</span>
-    -v /path/to/vault_secret_id.txt:/etc/certs/vault_secret_id <span class="se">\</span>
-    janssenproject/configurator:1.0.13_dev load
-</code></pre></div>
-</li>
-</ol>
-<h4 id="kubernetes">Kubernetes<a class="headerlink" href="#kubernetes" title="Permanent link">#</a></h4>
-<ol>
-<li>Create config map <code>config-generate-params</code> to store the contents of <code>generate.json</code></li>
-</ol>
+<p>Create config map <code>config-generate-params</code> to store the contents of <code>generate.json</code></p>
 <div class="highlight"><pre><span></span><code>kubectl create cm config-generate-params --from-file<span class="o">=</span>generate.json
 </code></pre></div>
-<ol>
+</li>
 <li>
 <p>Mount the configmap into container and apply the yaml:</p>
 <div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">batch/v1</span><span class="w"></span>
@@ -178328,7 +178229,7 @@ python -c &#39;import random, string; print(&quot;&quot;.join(random.choices(str
 <span class="w">            </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">config-generate-params</span><span class="w"></span>
 <span class="w">      </span><span class="nt">containers</span><span class="p">:</span><span class="w"></span>
 <span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">configurator-load</span><span class="w"></span>
-<span class="w">          </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">janssenproject/configurator:1.0.13_dev</span><span class="w"></span>
+<span class="w">          </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ghcr.io/janssenproject/jans/configurator:replace-janssen-version-1</span><span class="w"></span>
 <span class="w">          </span><span class="nt">volumeMounts</span><span class="p">:</span><span class="w"></span>
 <span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">mountPath</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/app/db/generate.json</span><span class="w"></span>
 <span class="w">              </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">config-generate-params</span><span class="w"></span>
@@ -178339,68 +178240,51 @@ python -c &#39;import random, string; print(&quot;&quot;.join(random.choices(str
 <span class="w">          </span><span class="nt">args</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;load&quot;</span><span class="p p-Indicator">]</span><span class="w"></span>
 </code></pre></div>
 </li>
-<li>
+</ol>
 <p>To restore configuration and secrets from a backup of <code>/path/to/host/volume/config.json</code> and <code>/path/to/host/volume/secret.json</code>: mount the directory as <code>/app/db</code> inside the container:</p>
-</li>
+<ol>
 <li>
 <p>Create config map <code>config-params</code> and <code>secret-params</code>:</p>
-</li>
-</ol>
 <div class="highlight"><pre><span></span><code>kubectl create cm config-params --from-file<span class="o">=</span>config.json
 kubectl create cm secret-params --from-file<span class="o">=</span>secret.json
 </code></pre></div>
-<ol>
+</li>
 <li>
 <p>Mount the configmap into container and apply the yaml:</p>
-<p><code>yaml
-apiVersion: batch/v1
-kind: Job
-metadata:
-  name: configurator-load-job
-spec:
-  template:
-    spec:
-      restartPolicy: Never
-      volumes:
-        - name: config-params
-          configMap:
-            name: config-params
-           - name: secret-params
-          configMap:
-            name: secret-params
-      containers:
-        - name: configurator-load
-          image: janssenproject/configurator:1.0.13_dev
-          volumeMounts:
-            - mountPath: /app/db/config.json
-              name: config-params
-              subPath: config.json
-            - mountPath: /app/db/secret.json
-              name: secret-params
-              subPath: secret.json
-          envFrom:
-          - configMapRef:
-              name: config-cm
-          args: ["load"]</code></p>
+<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">batch/v1</span><span class="w"></span>
+<span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Job</span><span class="w"></span>
+<span class="nt">metadata</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">configurator-load-job</span><span class="w"></span>
+<span class="nt">spec</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">template</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">spec</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">restartPolicy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Never</span><span class="w"></span>
+<span class="w">      </span><span class="nt">volumes</span><span class="p">:</span><span class="w"></span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">config-params</span><span class="w"></span>
+<span class="w">          </span><span class="nt">configMap</span><span class="p">:</span><span class="w"></span>
+<span class="w">            </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">config-params</span><span class="w"></span>
+<span class="w">          </span><span class="w w-Error"> </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">secret-params</span><span class="w"></span>
+<span class="w">          </span><span class="nt">configMap</span><span class="p">:</span><span class="w"></span>
+<span class="w">            </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">secret-params</span><span class="w"></span>
+<span class="w">      </span><span class="nt">containers</span><span class="p">:</span><span class="w"></span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">configurator-load</span><span class="w"></span>
+<span class="w">          </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ghcr.io/janssenproject/jans/configurator:replace-janssen-version-1</span><span class="w"></span>
+<span class="w">          </span><span class="nt">volumeMounts</span><span class="p">:</span><span class="w"></span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">mountPath</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/app/db/config.json</span><span class="w"></span>
+<span class="w">              </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">config-params</span><span class="w"></span>
+<span class="w">              </span><span class="nt">subPath</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">config.json</span><span class="w"></span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">mountPath</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/app/db/secret.json</span><span class="w"></span>
+<span class="w">              </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">secret-params</span><span class="w"></span>
+<span class="w">              </span><span class="nt">subPath</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">secret.json</span><span class="w"></span>
+<span class="w">          </span><span class="nt">envFrom</span><span class="p">:</span><span class="w"></span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">configMapRef</span><span class="p">:</span><span class="w"></span>
+<span class="w">              </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">config-cm</span><span class="w"></span>
+<span class="w">          </span><span class="nt">args</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;load&quot;</span><span class="p p-Indicator">]</span><span class="w"></span>
+</code></pre></div>
 </li>
 </ol>
 <h3 id="dump">dump<a class="headerlink" href="#dump" title="Permanent link">#</a></h3>
 <p>The dump command will dump all configuration and secrets from the backends saved into the <code>/app/db/config.json</code> and <code>/app/db/secret.json</code> files.</p>
-<h4 id="docker_1">Docker<a class="headerlink" href="#docker_1" title="Permanent link">#</a></h4>
-<p>Please note that to dump this file into the host, mount a volume to the <code>/app/db</code> directory as seen in the following example:</p>
-<div class="highlight"><pre><span></span><code>docker run <span class="se">\</span>
-    --rm <span class="se">\</span>
-    --network container:consul <span class="se">\</span>
-    -e <span class="nv">CN_CONFIG_ADAPTER</span><span class="o">=</span>consul <span class="se">\</span>
-    -e <span class="nv">CN_CONFIG_CONSUL_HOST</span><span class="o">=</span>consul <span class="se">\</span>
-    -e <span class="nv">CN_SECRET_ADAPTER</span><span class="o">=</span>vault <span class="se">\</span>
-    -e <span class="nv">CN_SECRET_VAULT_HOST</span><span class="o">=</span>vault <span class="se">\</span>
-    -v /path/to/host/volume:/app/db <span class="se">\</span>
-    -v /path/to/vault_role_id.txt:/etc/certs/vault_role_id <span class="se">\</span>
-    -v /path/to/vault_secret_id.txt:/etc/certs/vault_secret_id <span class="se">\</span>
-    janssenproject/configurator:1.0.13_dev dump
-</code></pre></div>
-<h4 id="kubernetes_1">Kubernetes<a class="headerlink" href="#kubernetes_1" title="Permanent link">#</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">batch/v1</span><span class="w"></span>
 <span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Job</span><span class="w"></span>
 <span class="nt">metadata</span><span class="p">:</span><span class="w"></span>
@@ -178411,7 +178295,7 @@ spec:
 <span class="w">      </span><span class="nt">restartPolicy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Never</span><span class="w"></span>
 <span class="w">      </span><span class="nt">containers</span><span class="p">:</span><span class="w"></span>
 <span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">configurator-dump-job</span><span class="w"></span>
-<span class="w">          </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">janssenproject/configurator:1.0.13_dev</span><span class="w"></span>
+<span class="w">          </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ghcr.io/janssenproject/jans/configurator:replace-janssen-version-1</span><span class="w"></span>
 <span class="w">          </span><span class="nt">command</span><span class="p">:</span><span class="w"></span>
 <span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/bin/sh</span><span class="w"></span>
 <span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">-c</span><span class="w"></span>
@@ -178430,7 +178314,7 @@ spec:
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-05-10T08:51:17+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-05-10</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-05-10T17:22:59+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-05-10</span>
       
         <br>
         Created:
