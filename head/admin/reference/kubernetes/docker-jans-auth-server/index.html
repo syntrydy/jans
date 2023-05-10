@@ -178121,7 +178121,7 @@
 <p>Docker image packaging for Janssen Authorization Server.</p>
 <h2 id="versions">Versions<a class="headerlink" href="#versions" title="Permanent link">#</a></h2>
 <p>See <a href="https://github.com/JanssenProject/docker-jans-auth-server/releases">Releases</a> for stable versions.
-For bleeding-edge/unstable version, use <code>janssenproject/auth-server:1.0.12_dev</code>.</p>
+For bleeding-edge/unstable version, use <code>janssenproject/auth-server:1.0.13_dev</code>.</p>
 <h2 id="environment-variables">Environment Variables<a class="headerlink" href="#environment-variables" title="Permanent link">#</a></h2>
 <p>The following environment variables are supported by the container:</p>
 <ul>
@@ -178178,7 +178178,7 @@ For bleeding-edge/unstable version, use <code>janssenproject/auth-server:1.0.12_
 <li><code>CN_JACKRABBIT_ADMIN_PASSWORD_FILE</code>: Absolute path to file contains password for admin user (default to <code>/etc/jans/conf/jackrabbit_admin_password</code>).</li>
 <li><code>CN_SYNC_JKS_ENABLED</code>: Whether to enable JKS sync (default to <code>false</code>). Enable this flag if using <code>gluufederation/key-rotation:4.1.1_02</code> and below (for key-regeneration).</li>
 <li><code>CN_SYNC_JKS_INTERVAL</code>: Interval of JKS sync in seconds (if needed); obsolete.</li>
-<li><code>GOOGLE_APPLICATION_CREDENTIALS</code>: JSON file (contains Google credentials) that should be injected into container.</li>
+<li><code>GOOGLE_APPLICATION_CREDENTIALS</code>: Optional JSON file (contains Google credentials) that can be injected into container for authentication. Refer to https://cloud.google.com/docs/authentication/provide-credentials-adc#how-to for supported credentials.</li>
 <li><code>GOOGLE_PROJECT_ID</code>: ID of Google project.</li>
 <li><code>CN_GOOGLE_SECRET_VERSION_ID</code>: Janssen secret version ID in Google Secret Manager. Defaults to <code>latest</code>, which is recommended.</li>
 <li><code>CN_GOOGLE_SECRET_NAME_PREFIX</code>: Prefix for Janssen secret in Google Secret Manager. Defaults to <code>jans</code>. If left <code>jans-secret</code> secret will be created.</li>
@@ -178282,7 +178282,7 @@ To customize the config, mount custom config file to <code>/opt/prometheus/prome
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-04-18T10:42:32+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-04-18</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-05-10T08:51:17+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-05-10</span>
       
         <br>
         Created:

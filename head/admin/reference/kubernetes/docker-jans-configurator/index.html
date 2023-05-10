@@ -178201,7 +178201,7 @@
 <p>Configuration manager is a special container used to load (generate/restore) and dump (backup) the configuration and secrets.</p>
 <h2 id="versions">Versions<a class="headerlink" href="#versions" title="Permanent link">#</a></h2>
 <p>See <a href="https://github.com/JanssenProject/docker-jans-configurator/releases">Releases</a> for stable versions.
-For bleeding-edge/unstable version, use <code>janssenproject/configurator:1.0.12_dev</code>.</p>
+For bleeding-edge/unstable version, use <code>janssenproject/configurator:1.0.13_dev</code>.</p>
 <h2 id="environment-variables">Environment Variables<a class="headerlink" href="#environment-variables" title="Permanent link">#</a></h2>
 <p>The following environment variables are supported by the container:</p>
 <ul>
@@ -178233,7 +178233,7 @@ For bleeding-edge/unstable version, use <code>janssenproject/configurator:1.0.12
 <li><code>CN_SECRET_KUBERNETES_USE_KUBE_CONFIG</code>: Load credentials from <code>$HOME/.kube/config</code>, only useful for non-container environment (default to <code>false</code>).</li>
 <li><code>CN_WAIT_MAX_TIME</code>: How long the startup "health checks" should run (default to <code>300</code> seconds).</li>
 <li><code>CN_WAIT_SLEEP_DURATION</code>: Delay between startup "health checks" (default to <code>10</code> seconds).</li>
-<li><code>GOOGLE_APPLICATION_CREDENTIALS</code>: JSON file (contains Google credentials) that should be injected into container.</li>
+<li><code>GOOGLE_APPLICATION_CREDENTIALS</code>: Optional JSON file (contains Google credentials) that can be injected into container for authentication. Refer to https://cloud.google.com/docs/authentication/provide-credentials-adc#how-to for supported credentials.</li>
 <li><code>GOOGLE_PROJECT_ID</code>: ID of Google project.</li>
 <li><code>CN_GOOGLE_SECRET_VERSION_ID</code>: Janssen secret version ID in Google Secret Manager. Defaults to <code>latest</code>, which is recommended.</li>
 <li><code>CN_GOOGLE_SECRET_NAME_PREFIX</code>: Prefix for Janssen secret in Google Secret Manager. Defaults to <code>jans</code>. If left <code>jans-secret</code> secret will be created.</li>
@@ -178301,7 +178301,7 @@ python -c &#39;import random, string; print(&quot;&quot;.join(random.choices(str
     -v /path/to/host/volume:/app/db <span class="se">\</span>
     -v /path/to/vault_role_id.txt:/etc/certs/vault_role_id <span class="se">\</span>
     -v /path/to/vault_secret_id.txt:/etc/certs/vault_secret_id <span class="se">\</span>
-    janssenproject/configurator:1.0.12_dev load
+    janssenproject/configurator:1.0.13_dev load
 </code></pre></div>
 </li>
 </ol>
@@ -178328,7 +178328,7 @@ python -c &#39;import random, string; print(&quot;&quot;.join(random.choices(str
 <span class="w">            </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">config-generate-params</span><span class="w"></span>
 <span class="w">      </span><span class="nt">containers</span><span class="p">:</span><span class="w"></span>
 <span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">configurator-load</span><span class="w"></span>
-<span class="w">          </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">janssenproject/configurator:1.0.12_dev</span><span class="w"></span>
+<span class="w">          </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">janssenproject/configurator:1.0.13_dev</span><span class="w"></span>
 <span class="w">          </span><span class="nt">volumeMounts</span><span class="p">:</span><span class="w"></span>
 <span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">mountPath</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/app/db/generate.json</span><span class="w"></span>
 <span class="w">              </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">config-generate-params</span><span class="w"></span>
@@ -178370,7 +178370,7 @@ spec:
             name: secret-params
       containers:
         - name: configurator-load
-          image: janssenproject/configurator:1.0.12_dev
+          image: janssenproject/configurator:1.0.13_dev
           volumeMounts:
             - mountPath: /app/db/config.json
               name: config-params
@@ -178398,7 +178398,7 @@ spec:
     -v /path/to/host/volume:/app/db <span class="se">\</span>
     -v /path/to/vault_role_id.txt:/etc/certs/vault_role_id <span class="se">\</span>
     -v /path/to/vault_secret_id.txt:/etc/certs/vault_secret_id <span class="se">\</span>
-    janssenproject/configurator:1.0.12_dev dump
+    janssenproject/configurator:1.0.13_dev dump
 </code></pre></div>
 <h4 id="kubernetes_1">Kubernetes<a class="headerlink" href="#kubernetes_1" title="Permanent link">#</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">batch/v1</span><span class="w"></span>
@@ -178411,7 +178411,7 @@ spec:
 <span class="w">      </span><span class="nt">restartPolicy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Never</span><span class="w"></span>
 <span class="w">      </span><span class="nt">containers</span><span class="p">:</span><span class="w"></span>
 <span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">configurator-dump-job</span><span class="w"></span>
-<span class="w">          </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">janssenproject/configurator:1.0.12_dev</span><span class="w"></span>
+<span class="w">          </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">janssenproject/configurator:1.0.13_dev</span><span class="w"></span>
 <span class="w">          </span><span class="nt">command</span><span class="p">:</span><span class="w"></span>
 <span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/bin/sh</span><span class="w"></span>
 <span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">-c</span><span class="w"></span>
@@ -178430,7 +178430,7 @@ spec:
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-04-18T10:42:32+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-04-18</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-05-10T08:51:17+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-05-10</span>
       
         <br>
         Created:
