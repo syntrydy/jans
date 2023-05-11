@@ -178077,7 +178077,6 @@
 <li>Config API endpoint can be used to create new user, clients, scopes, etc. This data is stores into the same persistence store as the Jans-Auth server.</li>
 </ol>
 <h3 id="jans-config-api-flow">Jans Config API Flow<a class="headerlink" href="#jans-config-api-flow" title="Permanent link">#</a></h3>
-<p><a href="../../../assets/sequence-config-api-flow.png">Diagram reference</a></p>
 <pre class="mermaid"><code>
 sequenceDiagram
 title Jans Config API request flow
@@ -178090,7 +178089,7 @@ participant Auth-Server
 participant Jans Persistence
 
 Admin-&gt;&gt;Admin-ui: Create Client
-note over Admin-ui: Click on (+) Create Client and Save button to create new client
+note over Admin-ui: Click on plus sign to Create Client and Save button to create new client
 Config-api-&gt;&gt;Auth-Server: Introspect Token
 Auth-Server-&gt;&gt;Config-api: Returns Introspection Response
 Config-api-&gt;&gt;Config-api: Successful validation of token claim with Introspection Response
@@ -178109,7 +178108,7 @@ Config-api-&gt;&gt;Admin-ui: Returns persistence status</code></pre>
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-04-20T16:58:46+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-04-20</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-05-11T16:57:16+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-05-11</span>
       
         <br>
         Created:
