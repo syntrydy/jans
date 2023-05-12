@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#this-content-is-in-progress" class="md-skip">
+        <a href="#change-password-for-user-jans" class="md-skip">
           Skip to content
         </a>
       
@@ -2564,22 +2564,29 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#this-content-is-in-progress" class="md-nav__link">
-    This content is in progress
+  <a href="#change-password-for-user-jans" class="md-nav__link">
+    Change password for user jans :
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#have-questions-in-the-meantime" class="md-nav__link">
-    Have questions in the meantime?
+  <a href="#create-new-user-claims-to-jansperson" class="md-nav__link">
+    Create new user claims to jansPerson:
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#want-to-contribute" class="md-nav__link">
-    Want to contribute?
+  <a href="#modify-column-size-of-jansperson" class="md-nav__link">
+    Modify column size of jansPerson :
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ldap-to-mysql-migration-script" class="md-nav__link">
+    LDAP to MySQL Migration Script
   </a>
   
 </li>
@@ -177992,22 +177999,29 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#this-content-is-in-progress" class="md-nav__link">
-    This content is in progress
+  <a href="#change-password-for-user-jans" class="md-nav__link">
+    Change password for user jans :
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#have-questions-in-the-meantime" class="md-nav__link">
-    Have questions in the meantime?
+  <a href="#create-new-user-claims-to-jansperson" class="md-nav__link">
+    Create new user claims to jansPerson:
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#want-to-contribute" class="md-nav__link">
-    Want to contribute?
+  <a href="#modify-column-size-of-jansperson" class="md-nav__link">
+    Modify column size of jansPerson :
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ldap-to-mysql-migration-script" class="md-nav__link">
+    LDAP to MySQL Migration Script
   </a>
   
 </li>
@@ -178044,6 +178058,21 @@
         <span class="md-tag">database</span>
       
     
+      
+      
+        <span class="md-tag">additional claims to database</span>
+      
+    
+      
+      
+        <span class="md-tag">jansPerson</span>
+      
+    
+      
+      
+        <span class="md-tag">LDAP to MySQL Migration Script</span>
+      
+    
   </nav>
 
 
@@ -178056,19 +178085,56 @@
 
   <h1>MySQL Operation</h1>
 
-<h2 id="this-content-is-in-progress">This content is in progress<a class="headerlink" href="#this-content-is-in-progress" title="Permanent link">#</a></h2>
-<p>The Janssen Project documentation is currently in development. Topic pages are being created in order of broadest relevance, and this page is coming in the near future.</p>
-<h2 id="have-questions-in-the-meantime">Have questions in the meantime?<a class="headerlink" href="#have-questions-in-the-meantime" title="Permanent link">#</a></h2>
-<p>While this documentation is in progress, you can ask questions through <a href="https://github.com/JanssenProject/jans/discussion">GitHub Discussions</a> or the <a href="https://gitter.im/JanssenProject/Lobby">community chat on Gitter</a>. Any questions you have will help determine what information our documentation should cover.</p>
-<h2 id="want-to-contribute">Want to contribute?<a class="headerlink" href="#want-to-contribute" title="Permanent link">#</a></h2>
-<p>If you have content you'd like to contribute to this page in the meantime, you can get started with our <a href="https://docs.jans.io/head/CONTRIBUTING/">Contribution guide</a>.</p>
+<h3 id="change-password-for-user-jans"><strong>Change password for user <code>jans</code></strong> :<a class="headerlink" href="#change-password-for-user-jans" title="Permanent link">#</a></h3>
+<ul>
+<li><code>ALTER USER 'jans'@'localhost' IDENTIFIED BY 'TopSecret';</code></li>
+<li><code>GRANT ALL PRIVILEGES ON jansdb.* TO 'jans'@'localhost';</code></li>
+</ul>
+<h3 id="create-new-user-claims-to-jansperson">Create new user claims to <code>jansPerson</code>:<a class="headerlink" href="#create-new-user-claims-to-jansperson" title="Permanent link">#</a></h3>
+<ul>
+<li>You can add additional attributes to <code>jansPerson</code> table and use them. This will be similar to LDAP where DB stores all user attributes in one entry. Additional attributes will not affect the server functionality.</li>
+<li>Ensure you restart services after DB schema modification</li>
+</ul>
+<h3 id="modify-column-size-of-jansperson"><strong>Modify column size of jansPerson</strong> :<a class="headerlink" href="#modify-column-size-of-jansperson" title="Permanent link">#</a></h3>
+<p>Say we want to increase the size of <code>mail</code> field to 144. Do the following:<br>
+* a. Modify column size - 
+ <div class="highlight"><pre><span></span><code>ALTER TABLE `jansdb`.`jansPerson` CHANGE COLUMN `mail` `mail` VARCHAR(144) NULL DEFAULT NULL ;
+</code></pre></div>
+* b. Drop indexes and re-create - 
+ <div class="highlight"><pre><span></span><code>ALTER TABLE jansdb.jansPerson DROP INDEX `jansPerson_CustomIdx2`;
+ALTER TABLE jansdb.jansPerson ADD INDEX `jansPerson_CustomIdx2` ((lower(`mail`)));
+</code></pre></div>
+* c. Ensure you restart services after DB schema modification</p>
+<h3 id="ldap-to-mysql-migration-script">LDAP to MySQL Migration Script<a class="headerlink" href="#ldap-to-mysql-migration-script" title="Permanent link">#</a></h3>
+<p>This script migrates data from ldap to MySQL.</p>
+<ol>
+<li>
+<p>To use this script, firt install <strong>python3-ldap</strong> module
+  <code>apt install python3-ldap</code></p>
+</li>
+<li>
+<p>Install MySQL Server, create a database (namely <strong>jansdb</strong>), add a user (namely <strong>jans</strong>) and
+give grant previlages to user <strong>jans</strong> on <strong>jansdb</strong></p>
+</li>
+<li>
+<p>Download script to <code>/opt/jans/jans-setup</code>
+  <div class="highlight"><pre><span></span><code>wget https://raw.githubusercontent.com/JanssenProject/jans/jans-linux-setup-ldap2mysql/jans-linux-setup/tools/ldap2mysql/ldap2mysql.py -O /opt/jans/jans-setup/ldap2mysql.py
+</code></pre></div></p>
+</li>
+<li>
+<p>Execute
+  <div class="highlight"><pre><span></span><code>cd /opt/jans/jans-setup`
+python3 ldap2mysql.py -remote-rdbm=mysql -rdbm-user=jans -rdbm-password=&lt;password&gt; -rdbm-db=jansdb -rdbm-host=&lt;rdbm_host&gt;
+</code></pre></div></p>
+</li>
+</ol>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2022-12-08T20:20:00+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2022-12-08</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-05-12T16:12:58+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-05-12</span>
       
         <br>
         Created:
