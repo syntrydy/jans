@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#this-content-is-in-progress" class="md-skip">
+        <a href="#mysql-as-choice-for-persistence" class="md-skip">
           Skip to content
         </a>
       
@@ -2550,22 +2550,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#this-content-is-in-progress" class="md-nav__link">
-    This content is in progress
+  <a href="#mysql-as-choice-for-persistence" class="md-nav__link">
+    MySQL as choice for Persistence
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#have-questions-in-the-meantime" class="md-nav__link">
-    Have questions in the meantime?
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#want-to-contribute" class="md-nav__link">
-    Want to contribute?
+  <a href="#database-configuration-file-name" class="md-nav__link">
+    Database configuration file name
   </a>
   
 </li>
@@ -177992,22 +177985,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#this-content-is-in-progress" class="md-nav__link">
-    This content is in progress
+  <a href="#mysql-as-choice-for-persistence" class="md-nav__link">
+    MySQL as choice for Persistence
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#have-questions-in-the-meantime" class="md-nav__link">
-    Have questions in the meantime?
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#want-to-contribute" class="md-nav__link">
-    Want to contribute?
+  <a href="#database-configuration-file-name" class="md-nav__link">
+    Database configuration file name
   </a>
   
 </li>
@@ -178044,6 +178030,11 @@
         <span class="md-tag">database</span>
       
     
+      
+      
+        <span class="md-tag">remote database</span>
+      
+    
   </nav>
 
 
@@ -178056,19 +178047,68 @@
 
   <h1>MySQL Configuration</h1>
 
-<h2 id="this-content-is-in-progress">This content is in progress<a class="headerlink" href="#this-content-is-in-progress" title="Permanent link">#</a></h2>
-<p>The Janssen Project documentation is currently in development. Topic pages are being created in order of broadest relevance, and this page is coming in the near future.</p>
-<h2 id="have-questions-in-the-meantime">Have questions in the meantime?<a class="headerlink" href="#have-questions-in-the-meantime" title="Permanent link">#</a></h2>
-<p>While this documentation is in progress, you can ask questions through <a href="https://github.com/JanssenProject/jans/discussion">GitHub Discussions</a> or the <a href="https://gitter.im/JanssenProject/Lobby">community chat on Gitter</a>. Any questions you have will help determine what information our documentation should cover.</p>
-<h2 id="want-to-contribute">Want to contribute?<a class="headerlink" href="#want-to-contribute" title="Permanent link">#</a></h2>
-<p>If you have content you'd like to contribute to this page in the meantime, you can get started with our <a href="https://docs.jans.io/head/CONTRIBUTING/">Contribution guide</a>.</p>
+<h3 id="mysql-as-choice-for-persistence">MySQL as choice for Persistence<a class="headerlink" href="#mysql-as-choice-for-persistence" title="Permanent link">#</a></h3>
+<p>While installing the Jans Server, the administrator will be presented a menu of the possible choices for the persistence layer (LDAP, MySQL, Couchbase, Postgres etc). 
+MySQL database can be installed in 2 possible ways and the administrator will be prompted to make this choice during installation:
+1. <strong>Locally</strong> : 
+<br>The administrator can configure:
+*  RDBM username
+*  RDBM password
+*  RDBM database name
+2. <strong>Remotely</strong> :
+<br>The administrator will be prompted to configure:
+*  RDBM username
+*  RDBM password
+*  RDBM port
+*  RDBM database
+*  RDBM host</p>
+<h3 id="database-configuration-file-name">Database configuration file name<a class="headerlink" href="#database-configuration-file-name" title="Permanent link">#</a></h3>
+<p>The database configurations are stored in <code>/etc/gluu/conf/jans-sql.properties</code> and contain the following information: 
+ <div class="highlight"><pre><span></span><code>db.schema.name=jansdb
+
+connection.uri=jdbc:mysql://localhost:3306/jansdb?enabledTLSProtocols=TLSv1.2
+
+connection.driver-property.serverTimezone=UTC+0000
+# Prefix connection.driver-property.key=value will be coverterd to key=value JDBC driver properties
+#connection.driver-property.driverProperty=driverPropertyValue
+
+#connection.driver-property.useServerPrepStmts=false
+connection.driver-property.cachePrepStmts=false
+connection.driver-property.cacheResultSetMetadata=true
+connection.driver-property.metadataCacheSize=500
+#connection.driver-property.prepStmtCacheSize=500
+#connection.driver-property.prepStmtCacheSqlLimit=1024
+
+auth.userName=vi....bo
+auth.userPassword=qphWF1h....XmUAvn9g==
+
+# Password hash method
+password.encryption.method=SSHA-256
+
+# Connection pool size
+connection.pool.max-total=40
+connection.pool.max-idle=15
+connection.pool.min-idle=5
+
+# Max time needed to create connection pool in milliseconds
+connection.pool.create-max-wait-time-millis=20000
+
+# Max wait 20 seconds
+connection.pool.max-wait-time-millis=20000
+
+# Allow to evict connection in pool after 30 minutes
+connection.pool.min-evictable-idle-time-millis=1800000
+
+binaryAttributes=objectGUID
+certificateAttributes=userCertificate
+</code></pre></div></p>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2022-12-08T20:20:00+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2022-12-08</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-05-12T16:09:59+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-05-12</span>
       
         <br>
         Created:

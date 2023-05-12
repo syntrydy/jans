@@ -178206,7 +178206,7 @@ list = Call com.foods.RecipeUtils#retrieveIngredients choice.meal
 <thead>
 <tr>
 <th>Endpoint -&gt;</th>
-<th><code>/agama-deployment/list</code></th>
+<th><code>/agama-deployment</code></th>
 </tr>
 </thead>
 <tbody>
@@ -178262,7 +178262,7 @@ list = Call com.foods.RecipeUtils#retrieveIngredients choice.meal
 </tr>
 <tr>
 <td>Status</td>
-<td>200 (deployment task is finished), 204 (task still in course), 404 (project unknown), 400 (a param is missing)</td>
+<td>200 (deployment task is finished), 204 (task still in course), 404 (project unknown)</td>
 </tr>
 </tbody>
 </table>
@@ -178292,7 +178292,7 @@ list = Call com.foods.RecipeUtils#retrieveIngredients choice.meal
 </tr>
 <tr>
 <td>taskActive</td>
-<td>Boolean value indicating if the deployment task is being currently processed, ie. the .agama file is being scanned, flows analysed, etc.</td>
+<td>Boolean value indicating if the deployment task is being currently processed, ie. the <code>gama</code> file is being scanned, flows analysed, etc.</td>
 <td><code>false</code></td>
 </tr>
 <tr>
@@ -178318,7 +178318,7 @@ list = Call com.foods.RecipeUtils#retrieveIngredients choice.meal
 <tbody>
 <tr>
 <td>projectMetadata</td>
-<td>Includes author, type, description, and project's name - as supplied when the deployment task was created</td>
+<td>Includes author, type, description, project's name, and example configuration - as supplied when the deployment task was created</td>
 <td></td>
 </tr>
 <tr>
@@ -178330,6 +178330,11 @@ list = Call com.foods.RecipeUtils#retrieveIngredients choice.meal
 <td>flowsError</td>
 <td>A mapping of the errors obtained per flow found in the archive. The keys correspond to qualified names. A <code>null</code> value indicates the flow was successfully added</td>
 <td><code>{ "co.acme.example": "Syntax error on line 4", "io.jans.test": null }</code></td>
+</tr>
+<tr>
+<td>libs</td>
+<td>A listing of paths to <code>java</code>, <code>groovy</code>, or <code>jar</code> files included in the project archive</td>
+<td></td>
 </tr>
 </tbody>
 </table>
@@ -178393,7 +178398,7 @@ list = Call com.foods.RecipeUtils#retrieveIngredients choice.meal
 </tr>
 <tr>
 <td>Status</td>
-<td>200 (successful response), 204 (this project is still in course of deployment), 404 (unknown project), 400 (a param is missing)</td>
+<td>200 (successful response), 204 (this project is still in course of deployment), 404 (unknown project)</td>
 </tr>
 </tbody>
 </table>
@@ -178416,6 +178421,10 @@ list = Call com.foods.RecipeUtils#retrieveIngredients choice.meal
 <tr>
 <td>Path params</td>
 <td><code>name</code> (the project's name)</td>
+</tr>
+<tr>
+<td>Body</td>
+<td>JSON payload</td>
 </tr>
 <tr>
 <td>Output</td>
@@ -178449,7 +178458,7 @@ list = Call com.foods.RecipeUtils#retrieveIngredients choice.meal
 </tr>
 <tr>
 <td>Status</td>
-<td>204 (scheduled for removal), 409 (the project is being deployed currently), 404 (unknown project), 400 (a param is missing)</td>
+<td>204 (scheduled for removal), 409 (the project is being deployed currently), 404 (unknown project)</td>
 </tr>
 </tbody>
 </table>
@@ -178491,7 +178500,7 @@ list = Call com.foods.RecipeUtils#retrieveIngredients choice.meal
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-04-12T16:51:23+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-04-12</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-05-12T07:24:20+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-05-12</span>
       
         <br>
         Created:
