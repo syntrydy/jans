@@ -5209,6 +5209,19 @@
     Flow finish
   </a>
   
+    <nav class="md-nav" aria-label="Flow finish">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#identity-of-the-user-to-login" class="md-nav__link">
+    Identity of the user to login
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -178535,6 +178548,19 @@
     Flow finish
   </a>
   
+    <nav class="md-nav" aria-label="Flow finish">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#identity-of-the-user-to-login" class="md-nav__link">
+    Identity of the user to login
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -179291,6 +179317,8 @@ Finish it.nonsense
 <li>A flow cannot be aborted by itself. This can only be achieved through a parent flow. Learn more about aborted flows <a href="../flows-lifecycle/#cancellation">here</a></li>
 <li>Check the best practices on finishing flows <a href="../flows-lifecycle/#finishing-flows">here</a></li>
 </ul>
+<h3 id="identity-of-the-user-to-login">Identity of the user to login<a class="headerlink" href="#identity-of-the-user-to-login" title="Permanent link">#</a></h3>
+<p>When a top-level flow (i.e. no parents) finishes successfully, the selection of the user to authenticate is driven by the <code>userId</code> passed in <code>data</code>. By default this maps to the <code>uid</code> attribute that in most cases all user entries already have in the database, namely, the "user name". This attribute is configurable though via property <code>finish_userid_db_attribute</code> of the bridge script. Note this is a global configuration that applies to all Agama flows running in your server.</p>
 <h2 id="web-interaction">Web interaction<a class="headerlink" href="#web-interaction" title="Permanent link">#</a></h2>
 <p>Web interaction constructs bring the most value to Agama. Developers can express the concepts of ”redirect a user to an external site and retrieve any data later provided” or “show a page and grab user data after interaction” using atomic instructions.</p>
 <h3 id="rfac">RFAC<a class="headerlink" href="#rfac" title="Permanent link">#</a></h3>
@@ -180081,7 +180109,7 @@ x[2] = &quot;polo&quot;    //adds the key/value pair &quot;2&quot; / &quot;polo&
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-04-04T06:19:51+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-04-04</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-05-16T13:50:54+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-05-16</span>
       
         <br>
         Created:
