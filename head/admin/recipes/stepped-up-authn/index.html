@@ -19,7 +19,7 @@
     
     
       
-        <title>Stepped up authn - Janssen Documentation</title>
+        <title>Stepped-up Authentication - Janssen Documentation</title>
       
     
     
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#stepped-up-authentication-use-case" class="md-skip">
+        <a href="#what-is-stepped-up-authentication" class="md-skip">
           Skip to content
         </a>
       
@@ -128,7 +128,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Stepped up authn
+              Stepped-up Authentication
             
           </span>
         </div>
@@ -225,13 +225,15 @@
         
   
   
+    
+  
 
 
   
   
   
     <li class="md-tabs__item">
-      <a href="../../" class="md-tabs__link">
+      <a href="../../" class="md-tabs__link md-tabs__link--active">
         Administration
       </a>
     </li>
@@ -325,12 +327,14 @@
 
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" checked>
       
       
       
@@ -172214,18 +172218,22 @@
               
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_13" type="checkbox" id="__nav_1_13" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_13" type="checkbox" id="__nav_1_13" checked>
       
       
       
         
           
             
+          
+        
           
         
           
@@ -172341,6 +172349,125 @@
       <a href="../locking-accounts/" class="md-nav__link">
         Locking or Disabling Accounts
       </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Stepped-up Authentication
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Stepped-up Authentication
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-stepped-up-authentication" class="md-nav__link">
+    What is Stepped Up Authentication ?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementation-details" class="md-nav__link">
+    Implementation details :
+  </a>
+  
+    <nav class="md-nav" aria-label="Implementation details :">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-a-ensure-id_token-has-some-info-to-identify-the-user" class="md-nav__link">
+    Step A: Ensure id_token has some info to identify the user:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-b-website-rp-extracts-the-user-info-from-id_token" class="md-nav__link">
+    Step B: Website (RP) extracts the user info from id_token:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-c-critical-resource-accessed-by-user" class="md-nav__link">
+    Step C: Critical Resource accessed by user.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-d-stepped-up-authentication" class="md-nav__link">
+    Step D: Stepped-up authentication
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-e-access-the-critical-resource-with-new-access-token" class="md-nav__link">
+    Step E: Access the critical resource with new Access token:
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#update-token-script" class="md-nav__link">
+    Update token script
+  </a>
+  
+    <nav class="md-nav" aria-label="Update token script">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#otp-script" class="md-nav__link">
+    OTP script
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -172905,44 +173032,57 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#stepped-up-authentication-use-case" class="md-nav__link">
-    Stepped up authentication use case
+  <a href="#what-is-stepped-up-authentication" class="md-nav__link">
+    What is Stepped Up Authentication ?
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#implementation-details" class="md-nav__link">
-    Implementation details
+    Implementation details :
+  </a>
+  
+    <nav class="md-nav" aria-label="Implementation details :">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-a-ensure-id_token-has-some-info-to-identify-the-user" class="md-nav__link">
+    Step A: Ensure id_token has some info to identify the user:
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#steps-1-6" class="md-nav__link">
-    Steps 1-6:
+        
+          <li class="md-nav__item">
+  <a href="#step-b-website-rp-extracts-the-user-info-from-id_token" class="md-nav__link">
+    Step B: Website (RP) extracts the user info from id_token:
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#step-7-12" class="md-nav__link">
-    Step 7-12:
+        
+          <li class="md-nav__item">
+  <a href="#step-c-critical-resource-accessed-by-user" class="md-nav__link">
+    Step C: Critical Resource accessed by user.
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#step-13-20" class="md-nav__link">
-    Step 13-20:
+        
+          <li class="md-nav__item">
+  <a href="#step-d-stepped-up-authentication" class="md-nav__link">
+    Step D: Stepped-up authentication
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#step-22" class="md-nav__link">
-    Step 22:
+        
+          <li class="md-nav__item">
+  <a href="#step-e-access-the-critical-resource-with-new-access-token" class="md-nav__link">
+    Step E: Access the critical resource with new Access token:
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -172951,12 +173091,18 @@
     Update token script
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
+    <nav class="md-nav" aria-label="Update token script">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#otp-script" class="md-nav__link">
     OTP script
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -172975,40 +173121,6 @@
                   
   
 
-  <nav class="md-tags" >
-    
-      
-      
-        <span class="md-tag">administration</span>
-      
-    
-      
-      
-        <span class="md-tag">recipes</span>
-      
-    
-      
-      
-        <span class="md-tag">stepped-up authentication</span>
-      
-    
-      
-      
-        <span class="md-tag">Update token</span>
-      
-    
-      
-      
-        <span class="md-tag">modify access token</span>
-      
-    
-      
-      
-        <span class="md-tag">scope</span>
-      
-    
-  </nav>
-
 
 
   <a href="https://github.com/JanssenProject/jans/edit/main/docs/admin/recipes/stepped-up-authn.md" title="Edit this page" class="md-content__button md-icon">
@@ -173017,10 +173129,23 @@
   </a>
 
 
-  <h1>Stepped up authn</h1>
+  <h1>Stepped-up Authentication</h1>
 
-<h3 id="stepped-up-authentication-use-case">Stepped up authentication use case<a class="headerlink" href="#stepped-up-authentication-use-case" title="Permanent link">#</a></h3>
-<p>When a user is challenged to produce an additional authentication when a certain API is accessed by the client does not have the needed scope.</p>
+<p>tags:
+  - administration
+  - recipes
+  - stepped-up authentication
+  - Update token
+  - modify access token
+  - scope</p>
+<hr />
+<h3 id="what-is-stepped-up-authentication">What is Stepped Up Authentication ?<a class="headerlink" href="#what-is-stepped-up-authentication" title="Permanent link">#</a></h3>
+<p>While navigating through an application, a user is challenged to produce an additional authentication when a certain API (of higher criticality) accessed by the client, does not have the needed scope.</p>
+<p>Consider the following sequence of events :
+1. A user is logged in to an app using very basic authentication mechanism. Say login- password.
+2. The user navigates through the app.
+3. When the user attempts to access a critical resource, he is presented with another authentication step say otp.
+4. The user, after successful authentication, has the needed access token to access the critical resource.</p>
 <pre class="mermaid"><code>
 sequenceDiagram
 
@@ -173040,14 +173165,17 @@ API-&gt;&gt;Website: 3. 401 Unauthorized&lt;br&gt;WWW-Authenticate: Bearer error
 Website-&gt;&gt;Browser: Enforce additional challenge on the user&lt;br&gt; (Enter OTP) 
 Person-&gt;&gt;Browser:Enter OTP
 Browser-&gt;&gt;Auth Server: /authorize endpoint
+Note right of Auth Server: Stepped-up Authentication
 Auth Server-&gt;&gt;Auth Server:Validate OTP (Person authentication script)
+Note right of Auth Server: Modify scope of AT
 Auth Server-&gt;&gt;Auth Server: Modify scope of AT to include OTP (Update token script)
 Auth Server-&gt;&gt; Website: Return Access Token with scope containing OTP
 </code></pre>
-<h3 id="implementation-details">Implementation details<a class="headerlink" href="#implementation-details" title="Permanent link">#</a></h3>
+<h2 id="implementation-details">Implementation details :<a class="headerlink" href="#implementation-details" title="Permanent link">#</a></h2>
+<p>This implementation has been broken down to 5 parts highlighted in different colours. The details contain sample code that can be used to be build the flow using <code>Person Authentication Scripts</code> and <code>Update Token Scripts</code>
 <pre class="mermaid"><code>
 sequenceDiagram
-title Mapping OAuth Scopes to ACR
+title Implementation Stepped-up authn in Janssen's Authentication server
 
 actor Person
 participant Browser
@@ -173055,7 +173183,7 @@ participant Website
 participant Auth Server
 participant API
 autonumber
-rect rgb(191, 223, 255)
+rect rgb(255, 223, 211)
 Website-&gt;&gt;Browser: html login form
 Person-&gt;&gt;Browser: Update PII
 Browser-&gt;&gt;Website: POST 
@@ -173063,15 +173191,20 @@ Website-&gt;&gt;Auth Server: login request /authorize?response_type=code id_toke
 Auth Server-&gt;&gt; Auth Server: UpdateTokenScript - place user info in id_token &lt;br&gt;e.g. encrypted inum
 Auth Server -&gt;&gt;Website: return id_token and code
 end
-rect rgb(181, 200, 255)
+rect rgb(211,211,211)
+Website-&gt;&gt; Website: Extract the user info from id_token and save in website's session (not to be confused with Auth Server session)
+end
+
+rect rgb(212, 238, 227)
 Website-&gt;&gt;API: request some endpoint
 API-&gt;&gt;API:  Enforce&lt;br&gt; presence of &lt;br&gt; 'otp' scope&lt;br&gt; in  access_token
 API-&gt;&gt;Website: 401 Unauthorized&lt;br&gt;WWW-Authenticate: &lt;br&gt;Bearer error="insufficient_user_authentication" 
-Website-&gt;&gt;Website: Extract the encrypted inum from id_token
-Website-&gt;&gt;Browser:  redirect to AS, &lt;br&gt;pass the encrypted inum &lt;br&gt;as login_hint
-Browser-&gt;&gt;Auth Server: authorize?acr_values=otp&lt;br&gt;&amp;client_id=1234&lt;br&gt;&amp;scope=otp + other scopes&lt;br&gt;&amp;response_type=code&lt;br&gt;&amp;client_id=____&lt;br&gt;&amp;redirect_uri=____&lt;br&gt;&amp;state=_____&lt;br&gt;&amp;nonce=____&lt;br&gt;&amp;prompt=login&amp;&lt;br&gt;login_hint=encrypted_inum
+Website-&gt;&gt;Browser:  redirect to AS
 end
-rect rgb(190, 200, 255)
+
+
+rect rgb(186,225,255)
+Browser-&gt;&gt;Auth Server: authorize?acr_values=otp&lt;br&gt;&amp;client_id=1234&lt;br&gt;&amp;scope=otp + other scopes&lt;br&gt;&amp;response_type=code&lt;br&gt;&amp;client_id=____&lt;br&gt;&amp;redirect_uri=____&lt;br&gt;&amp;state=_____&lt;br&gt;&amp;nonce=____&lt;br&gt;&amp;prompt=login&amp;&lt;br&gt;login_hint=encrypted_inum
 Auth Server-&gt;&gt;Auth Server:  Get encrypted user inum,&lt;br&gt;from login_hint, and decrypt&lt;br&gt;return None, if inum not found&lt;br&gt; 
 Auth Server-&gt;&gt;Browser:  Display OTP Page
 Person-&gt;&gt;Browser:  enter OTP
@@ -173085,15 +173218,18 @@ Auth Server-&gt;&gt;Auth Server:  Update token script is invoked. &lt;br&gt; rea
 Auth Server-&gt;&gt;Website: access_token, id_token,&lt;br&gt;refresh_token
 end 
 
-rect rgb(195, 212, 255)
+rect rgb(255,255,186)
 Website-&gt;&gt;API:  request some endpoint&lt;br&gt;(with new access_token)
 API-&gt;&gt;API:  verify the acess_token. It should contain the necessary scope i.e otp
 end
-</code></pre>
-<h3 id="steps-1-6">Steps 1-6:<a class="headerlink" href="#steps-1-6" title="Permanent link">#</a></h3>
+</code></pre></p>
+<h3 id="step-a-ensure-id_token-has-some-info-to-identify-the-user">Step A: Ensure id_token has some info to identify the user:<a class="headerlink" href="#step-a-ensure-id_token-has-some-info-to-identify-the-user" title="Permanent link">#</a></h3>
 <ol>
-<li>The client should be configured to return id_token (hybrid flow)</li>
-<li>Update token script should be updated to return encrypted inum in id_token.
+<li>When the user logs in for the very first time and performs basic authentication, the Update Token script can be used to place a custom claim containing some user identification.<br />
+In this example, we store the encrypted inum of the user as a "custom claim" in the id_token. </li>
+<li>A good practice is to not put the primary key / user identifier in plain text</li>
+</ol>
+<p>UpdateToken script:
 <div class="highlight"><pre><span></span><code>   def modifyIdToken(self, jsonWebResponse, context):
         print &quot;Update token script. Modify idToken: %s&quot; % jsonWebResponse
         sessionIdService = CdiUtil.bean(SessionIdService)
@@ -173102,24 +173238,32 @@ end
         user_name = session.getSessionAttributes().get(&quot;auth_user&quot;)                
         foundUser = userService.getUserByAttribute(&quot;uid&quot;, user_name)        
         userInum = foundUser.getAttribute(&quot;inum&quot;) 
-        print userInum
+
         encryptedInum = CdiUtil.bean(EncryptionService).encrypt(userInum)
         print encryptedInum 
+
         #custom claim in id_token
         jsonWebResponse.getClaims().setClaim(&quot;someFancyName&quot;, encryptedInum)
-        #print &quot;Update token script. After modify idToken: %s&quot; % jsonWebResponse
-        #jsonWebResponse.getClaims().setClaim(&quot;someFancyName&quot;, &quot;madhu&quot;)
+
         return True
-</code></pre></div></li>
-</ol>
-<h3 id="step-7-12">Step 7-12:<a class="headerlink" href="#step-7-12" title="Permanent link">#</a></h3>
+</code></pre></div></p>
+<h3 id="step-b-website-rp-extracts-the-user-info-from-id_token">Step B: Website (RP) extracts the user info from id_token:<a class="headerlink" href="#step-b-website-rp-extracts-the-user-info-from-id_token" title="Permanent link">#</a></h3>
 <ol>
-<li>call /authorize endpoint with login_hint=encrypted_inum</li>
-<li>Instead of login_hint, the implementation can use <code>id_token_hint</code> in the request parameter or jwe <code>request</code> object in the request parameter containing all the parameters that will identify the user and his session. </li>
+<li>The Website (RP / client) should extract the user info from id_token and save it in the website's session.</li>
+<li>The website's session should not be confused with the Auth Server's session. </li>
+<li>The Auth Server sessions are state-less and any session related information that the website wishes to consume can only be that which can be extracted from an id_token.</li>
 </ol>
-<h3 id="step-13-20">Step 13-20:<a class="headerlink" href="#step-13-20" title="Permanent link">#</a></h3>
+<h3 id="step-c-critical-resource-accessed-by-user">Step C: Critical Resource accessed by user.<a class="headerlink" href="#step-c-critical-resource-accessed-by-user" title="Permanent link">#</a></h3>
 <ol>
-<li>Extract user info from <code>login_hint</code>, <code>id_token_hint</code> or <code>request</code>-jwe.
+<li>Website detects critical resource, examines the Access token presented by the client.</li>
+<li>Redirects to RP for stepped-up authentication</li>
+</ol>
+<h3 id="step-d-stepped-up-authentication">Step D: Stepped-up authentication<a class="headerlink" href="#step-d-stepped-up-authentication" title="Permanent link">#</a></h3>
+<ol>
+<li>Website calls /authorize endpoint with login_hint=encrypted_inum, which was previously extracted from id_token in Step B</li>
+<li>Use <code>login_hint</code>, <code>id_token_hint</code> or <code>request</code>-jwe to identify the user in Person Authentication script used to perform the additional authentication step.</li>
+</ol>
+<p>Stepped-up Authn Person Authentication script:
 <div class="highlight"><pre><span></span><code> def prepareForStep(self, configurationAttributes, requestParameters, step):
         print &quot;OTP test. Prepare for steps %s&quot; %step
         if (step ==1):
@@ -173144,10 +173288,9 @@ end
 
         else:
             return False
-</code></pre></div></li>
-<li>Validate user otp</li>
-<li>"enforce_scope=otp", add to session</li>
-</ol>
+</code></pre></div>
+3. Validate user otp
+4. "enforce_scope=otp", add to session</p>
 <div class="highlight"><pre><span></span><code>def authenticate(self, configurationAttributes, requestParameters, step):
         print(&quot;OTP, authentication for step %s&quot; %step)
         authenticationService = CdiUtil.bean(AuthenticationService)
@@ -173173,7 +173316,10 @@ end
             return errorMessage(&quot;Wrong otp entered&quot;)
             return False
 </code></pre></div>
-<h3 id="step-22">Step 22:<a class="headerlink" href="#step-22" title="Permanent link">#</a></h3>
+<p>5: Update AT with relevant scope
+* Check the session variable "enforce_scope" and add the "scope" to the Access token. 
+* You can also modify Access token header claims and regular claims using the <code>modifyAccessToken</code> in the Update Token Script.
+Update Token script:
 <div class="highlight"><pre><span></span><code>    def modifyAccessToken(self, accessToken, context):
 
         #read from session
@@ -173183,8 +173329,13 @@ end
         enforce_scope = sessionId.getSessionAttributes().get(&quot;enforce_scope &quot;)
     if enforce_scope not None:
                context.overwriteAccessTokenScopes(accessToken, Sets.newHashSet(&quot;existingScope1&quot;, &quot;existingScope2&quot;, &quot;mynewscope&quot;))
-</code></pre></div>
-<h3 id="update-token-script">Update token script<a class="headerlink" href="#update-token-script" title="Permanent link">#</a></h3>
+
+        context.getHeader().setClaim(&quot;custom_header_name&quot;, &quot;custom_header_value&quot;)
+        context.getClaims().setClaim(&quot;claim_name&quot;, &quot;claimValue&quot;)
+</code></pre></div></p>
+<h3 id="step-e-access-the-critical-resource-with-new-access-token">Step E: Access the critical resource with new Access token:<a class="headerlink" href="#step-e-access-the-critical-resource-with-new-access-token" title="Permanent link">#</a></h3>
+<p>The access token contains needed scope because the scopes were updated in Step D,  point 5</p>
+<h2 id="update-token-script">Update token script<a class="headerlink" href="#update-token-script" title="Permanent link">#</a></h2>
 <div class="highlight"><pre><span></span><code>from io.jans.as.server.service import AuthenticationService
 from io.jans.as.server.service import UserService
 from io.jans.as.server.service import SessionIdService
@@ -173192,6 +173343,7 @@ from io.jans.as.server.util import ServerUtil
 from io.jans.service.cdi.util import CdiUtil
 from io.jans.as.service.common import EncryptionService
 from io.jans.model.custom.script.type.token import UpdateTokenType
+
 
 class UpdateToken(UpdateTokenType):
     def __init__(self, currentTimeMillis):
@@ -173267,9 +173419,6 @@ from org.gluu.jsf2.message import FacesMessages
 from org.gluu.jsf2.service import FacesService
 from io.jans.util import StringHelper
 from java.util import Arrays
-
-import java
-import sys
 
 def errorMessage(errorInfo):
     facesMessages = CdiUtil.bean(FacesMessages)
@@ -173367,15 +173516,16 @@ class PersonAuthentication(PersonAuthenticationType):
             return False
 
     def getExtraParametersForStep(self, configurationAttributes, step):
-        return Arrays.asList(&quot;username&quot;, &quot;enforce_scope&quot;)
-
+        return Arrays.asList(&quot;uusername&quot;, &quot;enforce_scope&quot;)
     def getCountAuthenticationSteps(self, configurationAttributes):
         return 1
 
     def getPageForStep(self, configurationAttributes, step):
         print(&quot;Get page for step %s&quot; %step)
         if( step==1 ) :
+
                 return &quot;/auth/otp/otplogin.xhtml&quot;
+
         else:
             return &quot;&quot;
 
@@ -173396,7 +173546,7 @@ class PersonAuthentication(PersonAuthenticationType):
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-05-09T09:47:47+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-05-09</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-05-18T17:53:19+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-05-18</span>
       
         <br>
         Created:
@@ -173420,6 +173570,42 @@ class PersonAuthentication(PersonAuthenticationType):
       </main>
       
         <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+        
+        <a href="../locking-accounts/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Locking or Disabling Accounts" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Locking or Disabling Accounts
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../../upgrade/" class="md-footer__link md-footer__link--next" aria-label="Next: Overview" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Overview
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
