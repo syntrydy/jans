@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#this-content-is-in-progress" class="md-skip">
+        <a href="#software-statements" class="md-skip">
           Skip to content
         </a>
       
@@ -4341,6 +4341,8 @@
       <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
       
       
+        
+      
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
           Software Statements
@@ -4357,6 +4359,8 @@
   
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -4365,15 +4369,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#this-content-is-in-progress" class="md-nav__link">
-    This content is in progress
+  <a href="#use-during-dynamic-client-registration" class="md-nav__link">
+    Use During Dynamic Client Registration
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#have-questions-in-the-meantime" class="md-nav__link">
-    Have questions in the meantime?
+  <a href="#as-client-identifier" class="md-nav__link">
+    As Client identifier
   </a>
   
 </li>
@@ -172972,6 +172976,8 @@
   
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -172980,15 +172986,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#this-content-is-in-progress" class="md-nav__link">
-    This content is in progress
+  <a href="#use-during-dynamic-client-registration" class="md-nav__link">
+    Use During Dynamic Client Registration
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#have-questions-in-the-meantime" class="md-nav__link">
-    Have questions in the meantime?
+  <a href="#as-client-identifier" class="md-nav__link">
+    As Client identifier
   </a>
   
 </li>
@@ -173029,7 +173035,7 @@
     
       
       
-        <span class="md-tag">software-statements</span>
+        <span class="md-tag">software statements</span>
       
     
   </nav>
@@ -173042,12 +173048,23 @@
   </a>
 
 
-  <h1>Software Statements</h1>
-
-<h2 id="this-content-is-in-progress">This content is in progress<a class="headerlink" href="#this-content-is-in-progress" title="Permanent link">#</a></h2>
-<p>The Janssen Project documentation is currently in development. Topic pages are being created in order of broadest relevance, and this page is coming in the near future.</p>
-<h2 id="have-questions-in-the-meantime">Have questions in the meantime?<a class="headerlink" href="#have-questions-in-the-meantime" title="Permanent link">#</a></h2>
-<p>While this documentation is in progress, you can ask questions through <a href="https://github.com/JanssenProject/jans/discussion">GitHub Discussions</a> or the <a href="https://gitter.im/JanssenProject/Lobby">community chat on Gitter</a>. Any questions you have will help determine what information our documentation should cover.</p>
+<h1 id="software-statements">Software Statements<a class="headerlink" href="#software-statements" title="Permanent link">#</a></h1>
+<p>Software Statement is defined by OAuth dynamic client registration RFC
+<a href="https://datatracker.ietf.org/doc/html/rfc7591#section-1.2">7591</a> as</p>
+<div class="highlight"><pre><span></span><code>A digitally signed or MACed JSON Web Token (JWT) 
+that asserts metadata values about the client software.
+</code></pre></div>
+<p>Janssen Server supports usage of software statements during dynamic client registration and as a client identifier
+in absence of prior client registration.</p>
+<h2 id="use-during-dynamic-client-registration">Use During Dynamic Client Registration<a class="headerlink" href="#use-during-dynamic-client-registration" title="Permanent link">#</a></h2>
+<p>Janssen Server supports dynamic client registration using software statements. It can be
+<a href="../../endpoints/client-registration/#using-software-statement">used as software statements</a> or
+<a href="../../endpoints/client-registration/#special-mention-about-fapi">as software statement assertions (SSA)</a>
+to register client dynamically.</p>
+<p>Janssen Server also provides <a href="../../endpoints/ssa/">SSA endpoint</a> to create and manage SSAs on the server.</p>
+<h2 id="as-client-identifier">As Client identifier<a class="headerlink" href="#as-client-identifier" title="Permanent link">#</a></h2>
+<div class="highlight"><pre><span></span><code>Content in progress
+</code></pre></div>
 <h2 id="want-to-contribute">Want to contribute?<a class="headerlink" href="#want-to-contribute" title="Permanent link">#</a></h2>
 <p>If you have content you'd like to contribute to this page in the meantime, you can get started with our <a href="https://docs.jans.io/head/CONTRIBUTING/">Contribution guide</a>.</p>
 
@@ -173056,7 +173073,7 @@
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-04-11T07:54:01+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-04-11</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-05-20T11:33:13+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-05-20</span>
       
         <br>
         Created:
