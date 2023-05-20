@@ -172979,10 +172979,10 @@ use below to upgrade jans.</p>
 </code></pre></div></p>
 <p><strong>jans upgrade on Suse</strong>
 1) if you want to upgrade to latest,download and upgrade latest package file
-<div class="highlight"><pre><span></span><code>wget http:$(curl -s -L https://api.github.com/repos/JanssenProject/jans/releases/latest | egrep -o &#39;/.*suse15.x86_64.rpm&#39; | head -n -O ./jans-1.0.14.nightly.nightly-suse15.x86_64.rpm
+<div class="highlight"><pre><span></span><code>wget http:$(curl -s -L https://api.github.com/repos/JanssenProject/jans/releases/latest | egrep -o &#39;/.*suse15.x86_64.rpm&#39; | head -n -O ./jans-replace-janssen-version.nightly-suse15.x86_64.rpm
 </code></pre></div>
 2) upgrade package
-<div class="highlight"><pre><span></span><code>sudo rpm -U jans-1.0.14.nightly.nightly-suse15.x86_64.rpm
+<div class="highlight"><pre><span></span><code>sudo rpm -U jans-replace-janssen-version.nightly-suse15.x86_64.rpm
 </code></pre></div>
 3) verify upgraded version
 <div class="highlight"><pre><span></span><code>rpm -qa |grep jans
