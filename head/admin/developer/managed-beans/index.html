@@ -173666,21 +173666,26 @@ emailIds = user.getAttribute(&quot;oxEmailAlternate&quot;)
 <h4 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">#</a></h4>
 <h4 id="a-add-a-user">a. Add a user<a class="headerlink" href="#a-add-a-user" title="Permanent link">#</a></h4>
 <div class="highlight"><pre><span></span><code>from  io.jans.as.common.service.common import UserService
+from io.jans.orm.model.base import CustomObjectAttribute;
 ...
 
 new_user = User()
-new_user.setAttribute(&quot;uid&quot;, user_email, True)
-new_user.setAttribute(&quot;givenName&quot;, username, True)
-new_user.setAttribute(&quot;displayName&quot;, username, True)
-new_user.setAttribute(&quot;sn&quot;, &quot;-&quot;, True)
-new_user.setAttribute(&quot;mail&quot;, user_email, True)
-new_user.setAttribute(&quot;gluuStatus&quot;, &quot;active&quot;, True)
-new_user.setAttribute(&quot;password&quot;, user_password)
+found_user.getCustomAttributes().add(new CustomObjectAttribute(&quot;address&quot;, Arrays.asList(&quot;London&quot;, &quot;Texas&quot;, &quot;Kiev&quot;)));
+found_user.getCustomAttributes().add(new CustomObjectAttribute(&quot;jansGuid&quot;, &quot;test_value&quot;));
+found_user.getCustomAttributes().add(new CustomObjectAttribute(&quot;birthdate&quot;, new Date()));
+found_user.getCustomAttributes().add(new CustomObjectAttribute(&quot;jansActive&quot;, false));
+found_user.getCustomAttributes().add(new CustomObjectAttribute(&quot;scimCustomThird&quot;, 18));
+found_user.setUserRole(UserRole.ADMIN);
+found_user.setMemberOf(Arrays.asList(&quot;group_1&quot;, &quot;group_2&quot;, &quot;group_3&quot;));
+
+CustomObjectAttribute multiValuedSingleValue = new CustomObjectAttribute(&quot;oxExternalUid&quot;, &quot;multivalued_single_valued&quot;);
+multiValuedSingleValue.setMultiValued(true);
+foundUser.getCustomAttributes().add(multiValuedSingleValue);
 
 new_user = CdiUtil.bean(UserService).addUser(new_user, True)
 </code></pre></div>
 <h4 id="b-add-user-attributes">b. Add user attributes<a class="headerlink" href="#b-add-user-attributes" title="Permanent link">#</a></h4>
-<div class="highlight"><pre><span></span><code>userObject = userService.addUserAttribute(user_name, &quot;oxExternalUid&quot;, cert_user_external_uid)
+<div class="highlight"><pre><span></span><code>userObject = userService.addUserAttribute(user_name, &quot;oxExternalUid&quot;, cert_user_external_uid, true)
 </code></pre></div>
 <h4 id="c-get-user">c. Get User<a class="headerlink" href="#c-get-user" title="Permanent link">#</a></h4>
 <div class="highlight"><pre><span></span><code># example 1 - get User by userId
@@ -173701,7 +173706,16 @@ customAttributeValue = userService.getCustomAttribute(user, &quot;oxExternalUid&
 </code></pre></div>
 <h4 id="g-update-users">g. Update users<a class="headerlink" href="#g-update-users" title="Permanent link">#</a></h4>
 <div class="highlight"><pre><span></span><code>found_user = userService.getUser(user_name)
-found_user.setAttribute(&quot;userPassword&quot;, new_password)
+
+found_user.getCustomAttributes().add(new CustomObjectAttribute(&quot;address&quot;, Arrays.asList(&quot;London&quot;, &quot;Texas&quot;, &quot;Kiev&quot;)));
+found_user.getCustomAttributes().add(new CustomObjectAttribute(&quot;jansGuid&quot;, &quot;test_value&quot;));
+found_user.getCustomAttributes().add(new CustomObjectAttribute(&quot;birthdate&quot;, new Date()));
+found_user.getCustomAttributes().add(new CustomObjectAttribute(&quot;jansActive&quot;, false));
+found_user.getCustomAttributes().add(new CustomObjectAttribute(&quot;jansActive&quot;, false));
+found_user.getCustomAttributes().add(new CustomObjectAttribute(&quot;scimCustomThird&quot;, 18));
+found_user.setUserRole(UserRole.ADMIN);
+found_user.setMemberOf(Arrays.asList(&quot;group_1&quot;, &quot;group_2&quot;, &quot;group_3&quot;));
+
 userService.updateUser(found_user)
 </code></pre></div>
 <h3 id="4-user">4.  <a href="https://github.com/JanssenProject/jans/blob/main/jans-auth-server/common/src/main/java/io/jans/as/common/model/common/User.java">User</a><a class="headerlink" href="#4-user" title="Permanent link">#</a></h3>
@@ -173944,7 +173958,7 @@ Base64Util.base64urlencode(input_string.encode(&#39;utf-8&#39;)));
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-01-10T14:59:00+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-01-10</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-05-22T13:19:06+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-05-22</span>
       
         <br>
         Created:
