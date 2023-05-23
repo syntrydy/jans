@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#this-content-is-in-progress" class="md-skip">
+        <a href="#usage" class="md-skip">
           Skip to content
         </a>
       
@@ -5594,22 +5594,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#this-content-is-in-progress" class="md-nav__link">
-    This content is in progress
+  <a href="#usage" class="md-nav__link">
+    Usage:
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#have-questions-in-the-meantime" class="md-nav__link">
-    Have questions in the meantime?
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#want-to-contribute" class="md-nav__link">
-    Want to contribute?
+  <a href="#hashed-passwords" class="md-nav__link">
+    Hashed Passwords
   </a>
   
 </li>
@@ -172980,22 +172973,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#this-content-is-in-progress" class="md-nav__link">
-    This content is in progress
+  <a href="#usage" class="md-nav__link">
+    Usage:
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#have-questions-in-the-meantime" class="md-nav__link">
-    Have questions in the meantime?
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#want-to-contribute" class="md-nav__link">
-    Want to contribute?
+  <a href="#hashed-passwords" class="md-nav__link">
+    Hashed Passwords
   </a>
   
 </li>
@@ -173032,6 +173018,21 @@
         <span class="md-tag">scripts</span>
       
     
+      
+      
+        <span class="md-tag">Hashed Passwords</span>
+      
+    
+      
+      
+        <span class="md-tag">Entry manager</span>
+      
+    
+      
+      
+        <span class="md-tag">Persistence Extension</span>
+      
+    
   </nav>
 
 
@@ -173044,19 +173045,46 @@
 
   <h1>Persistence</h1>
 
-<h2 id="this-content-is-in-progress">This content is in progress<a class="headerlink" href="#this-content-is-in-progress" title="Permanent link">#</a></h2>
-<p>The Janssen Project documentation is currently in development. Topic pages are being created in order of broadest relevance, and this page is coming in the near future.</p>
-<h2 id="have-questions-in-the-meantime">Have questions in the meantime?<a class="headerlink" href="#have-questions-in-the-meantime" title="Permanent link">#</a></h2>
-<p>While this documentation is in progress, you can ask questions through <a href="https://github.com/JanssenProject/jans/discussion">GitHub Discussions</a> or the <a href="https://gitter.im/JanssenProject/Lobby">community chat on Gitter</a>. Any questions you have will help determine what information our documentation should cover.</p>
-<h2 id="want-to-contribute">Want to contribute?<a class="headerlink" href="#want-to-contribute" title="Permanent link">#</a></h2>
-<p>If you have content you'd like to contribute to this page in the meantime, you can get started with our <a href="https://docs.jans.io/head/CONTRIBUTING/">Contribution guide</a>.</p>
+<p>By overriding the interface methods in [PersistenceType]
+(https://github.com/JanssenProject/jans/blob/vreplace-janssen-version/jans-core/script/src/main/java/io/jans/model/custom/script/type/persistence/PersistenceType.java) inside a custom script you can</p>
+<ol>
+<li>Load initialization data from DB or initialize services after the creation of Entry Manager. </li>
+<li>Release resources, terminate services etc. after the destruction of Entry Manager.</li>
+<li>Create hashed passwords </li>
+<li>Compare hashed passwords</li>
+</ol>
+<p>!!! Information: 
+What is Entry Manager?
+The Janssen server's Peristence Layer can be any one of LDAP, MySQL database, Postgres database, Couchbase etc. 
+Information about an entity (person, session, client, scripts etc) constitutes an Entry.
+The Entry Manager (CRUD operations) implementation for each type of Persistence is available in the Janssen server and the relevant Entry Manager ( LDAPEntryManager, SQLEntryManager, etc.) is created when the server starts up. </p>
+<h3 id="usage">Usage:<a class="headerlink" href="#usage" title="Permanent link">#</a></h3>
+<p>The Jans-Auth server contains a <a href="https://github.com/JanssenProject/jans/blob/vreplace-janssen-version/docs/script-catalog/persistence_extension/PersistenceExtension.py"><code>PeristenceType</code></a> script.</p>
+<h3 id="hashed-passwords">Hashed Passwords<a class="headerlink" href="#hashed-passwords" title="Permanent link">#</a></h3>
+<p>Hashed passwords can be created using any method from this <a href="https://github.com/JanssenProject/jans/blob/main/jans-orm/core/src/main/java/io/jans/orm/operation/auth/PasswordEncryptionMethod.java">enum</a>, instead of the native/default SSHA256.
+The ORM module of the Janssen server does the following: 
+1. When User entry is persisted and <code>userPassword</code> is specified, ORM calls <code>createHashedPassword</code>
+2. User authenticates and the password is checked, the ORM module invokes <code>compareHashedPasswords</code> 
+3. We need to specify which one to use in <code>/etc/gluu/conf/jans-couchbase.properties</code>
+ <code>password.encryption.method: SSHA-256
+<div class="highlight"><pre><span></span><code>4. Implementation `createHashedPassword` and `compareHashedPasswords` the script: 
+- Creation
+</code></pre></div>
+    def createHashedPassword(self, credential):
+        hashed_password= PasswordEncryptionHelper.createStoragePassword(credential, PasswordEncryptionMethod.HASH_METHOD_PKCS5S2)
+        return hashed_password
+<div class="highlight"><pre><span></span><code>- Comparing Hashed Password:
+</code></pre></div>
+    def compareHashedPasswords(self, credential, storedCredential):
+        auth_result = PasswordEncryptionHelper.compareCredentials(credential, storedCredential)
+        return auth_result</code></p>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2022-12-08T20:20:00+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2022-12-08</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-05-23T17:55:55+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-05-23</span>
       
         <br>
         Created:
