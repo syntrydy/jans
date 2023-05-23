@@ -173225,7 +173225,10 @@ end
 </code></pre></p>
 <h3 id="step-a-ensure-id_token-has-some-info-to-identify-the-user">Step A: Ensure id_token has some info to identify the user:<a class="headerlink" href="#step-a-ensure-id_token-has-some-info-to-identify-the-user" title="Permanent link">#</a></h3>
 <ol>
-<li>When the user logs in for the very first time and performs basic authentication, the Update Token script can be used to place a custom claim containing some user identification.<br />
+<li>When the user logs in for the very first time and performs basic authentication, the Update Token script can be used to place a custom claim containing some user information like</li>
+<li>User permissions</li>
+<li>User personal information </li>
+<li>Internal user identifier.<br />
 In this example, we store the encrypted inum of the user as a "custom claim" in the id_token. </li>
 <li>A good practice is to not put the primary key / user identifier in plain text</li>
 </ol>
@@ -173546,7 +173549,7 @@ class PersonAuthentication(PersonAuthenticationType):
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-05-18T17:53:19+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-05-18</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-05-23T12:14:28+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-05-23</span>
       
         <br>
         Created:
