@@ -172945,37 +172945,37 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#client-tools" class="md-nav__link">
-    Client Tools
+  <a href="#client-management-tools" class="md-nav__link">
+    Client Management Tools
   </a>
   
-    <nav class="md-nav" aria-label="Client Tools">
+    <nav class="md-nav" aria-label="Client Management Tools">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#openid-dynamic-client-registration" class="md-nav__link">
-    OpenID Dynamic Client Registration
+  <a href="#a-openid-dynamic-client-registration" class="md-nav__link">
+    A. OpenID Dynamic Client Registration
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#jans-cli" class="md-nav__link">
-    Jans-CLI
+  <a href="#b-jans-cli" class="md-nav__link">
+    B. Jans-CLI
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#using-tui" class="md-nav__link">
-    Using TUI
+  <a href="#c-tui" class="md-nav__link">
+    C. TUI
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#using-curl" class="md-nav__link">
-    Using curl
+  <a href="#d-using-curl-commands" class="md-nav__link">
+    D. Using curl commands
   </a>
   
 </li>
@@ -173049,20 +173049,21 @@ encryption of tokens, what scopes are available to the client (which determines
 the extent of access to APIs), what <a href="client-configuration/#grants">grants</a> are available,  what is a valid
 <a href="client-configuration/#redirect-uri">redirect_uri</a>, timeouts, whether to use a value or reference token, whether to
 expire the client, and several other options that impact security.</p>
-<h2 id="client-tools">Client Tools<a class="headerlink" href="#client-tools" title="Permanent link">#</a></h2>
-<p>There are a few ways clients are created and managed in Jans Auth Server:</p>
+<h2 id="client-management-tools">Client Management Tools<a class="headerlink" href="#client-management-tools" title="Permanent link">#</a></h2>
+<p>A client can be created (and managed) by using one of the following tools offered by the Jans Auth server:</p>
 <ul>
 <li><a href="../../config-guide/config-api/">Jans Config API</a></li>
 <li><a href="../../config-guide/jans-cli/">Command Line Tool (CLI)</a></li>
 <li><a href="../../config-guide/jans-tui/">Jans Text UI (TUI)</a></li>
 <li><a href="https://openid.net/specs/openid-connect-registration-1_0.html">OpenID Connect Dynamic Client Registration</a></li>
 </ul>
-<p>Which mechanism to use depends on the deployment requirements. For <em>ad hoc</em>
-creation, the TUI is great. If you need to quickly script client creation (e.g.
-in a bash script), use the CLI or use <code>curl</code> to call the Jans Config API.  If
-developers need to have the ability to register clients, then adopt OpenID
-Connect Dynamic Client Registration.</p>
-<h3 id="openid-dynamic-client-registration">OpenID Dynamic Client Registration<a class="headerlink" href="#openid-dynamic-client-registration" title="Permanent link">#</a></h3>
+<p>The choice of tool should be made based on your business requirement. 
+- For <em>ad hoc</em> creation, the TUI is great. 
+- If you need to quickly script client creation (e.g. in a bash script) use the CLI 
+- Use <code>curl</code> to call the Jans Config API. 
+- To allow apps to register as OIDC clients, without a manual process, the OpenID
+Connect Dynamic Client Registration (DCR) can be used.</p>
+<h3 id="a-openid-dynamic-client-registration">A. OpenID Dynamic Client Registration<a class="headerlink" href="#a-openid-dynamic-client-registration" title="Permanent link">#</a></h3>
 <p>Jans Auth server publishes the <code>registration_endpoint</code> in the OpenID
 configuration JSON response, which you can find at <code>.well-known/openid-configuration</code>
 in your specific deployment. Typically, it is
@@ -173072,7 +173073,7 @@ which aligns with the requirements of OpenID Connect dynamic client
 registration. Also, check the
 <a href="../endpoints/client-registration/">Registration Endpoint documentation</a> for
 more details on the steps involved in dynamic client registration.</p>
-<h3 id="jans-cli">Jans-CLI<a class="headerlink" href="#jans-cli" title="Permanent link">#</a></h3>
+<h3 id="b-jans-cli">B. Jans-CLI<a class="headerlink" href="#b-jans-cli" title="Permanent link">#</a></h3>
 <p>Below is a one liner to add a client.</p>
 <div class="highlight"><pre><span></span><code>./config-cli-tui.pyz --host $FQDN --client-id $MY_CLIENT_ID \
 --client-secret $MY_CLIENT_SECRET --no-tui \
@@ -173080,13 +173081,13 @@ more details on the steps involved in dynamic client registration.</p>
 </code></pre></div>
 <p>For more information about how to use
 the Jans-CLI, see the <a href="../../config-guide/jans-cli/">docs</a></p>
-<h3 id="using-tui">Using TUI<a class="headerlink" href="#using-tui" title="Permanent link">#</a></h3>
+<h3 id="c-tui">C. TUI<a class="headerlink" href="#c-tui" title="Permanent link">#</a></h3>
 <p>To start registering a new client, navigate to
 <code>Auth Server</code>-&gt;<code>Clients</code>-&gt;<code>Add Client</code>.  This brings up a screen as shown below
 with various sections to input client details.</p>
 <p><img alt="" src="../../../assets/Jans_TUI_Auth_Server_Add_new_client.png" /></p>
 <p>Refer to complete documentation <a href="../../config-guide/jans-tui/">here</a></p>
-<h3 id="using-curl">Using curl<a class="headerlink" href="#using-curl" title="Permanent link">#</a></h3>
+<h3 id="d-using-curl-commands">D. Using curl commands<a class="headerlink" href="#d-using-curl-commands" title="Permanent link">#</a></h3>
 <p>To add a client via <code>curl</code>, see the information on the
 <a href="../../config-guide/curl/">curl documentation page</a>.</p>
 
@@ -173095,7 +173096,7 @@ with various sections to input client details.</p>
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-03-30T10:51:22+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-03-30</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-05-23T07:03:37+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-05-23</span>
       
         <br>
         Created:
