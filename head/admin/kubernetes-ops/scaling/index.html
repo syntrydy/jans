@@ -173114,7 +173114,7 @@
   <h1>Scaling</h1>
 
 <h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">#</a></h2>
-<p>Scaling is the ability of handling the increase of usage by expanding the existing resources(nodes/pods).</p>
+<p>Scaling is the ability to handle the increase in usage by expanding the existing resources(nodes/pods).</p>
 <h2 id="scaling-types">Scaling types<a class="headerlink" href="#scaling-types" title="Permanent link">#</a></h2>
 <p>Scaling in Kubernetes can be done <code>automatically</code> and <code>manually</code>.</p>
 <h3 id="automatic-scaling">Automatic Scaling<a class="headerlink" href="#automatic-scaling" title="Permanent link">#</a></h3>
@@ -173129,7 +173129,7 @@
 </code></pre></div>
 </li>
 <li>
-<p>Define <code>requests</code>for the metric used</p>
+<p>Define <code>requests</code> for the metric used</p>
 </li>
 </ol>
 <p>It is configured and enabled by default in the deployed <code>jans</code> components. </p>
@@ -173147,10 +173147,10 @@
 </code></pre></div>
 <h4 id="cluster-autoscaler">Cluster Autoscaler<a class="headerlink" href="#cluster-autoscaler" title="Permanent link">#</a></h4>
 <p>Cluster Autoscaler automatically resizes the number of <code>nodes</code> in a given node pool, based on the demands of your workloads. </p>
-<p>Cluster Autoscaler is available in <a href="https://docs.aws.amazon.com/eks/latest/userguide/autoscaling.html">AWS</a>, <a href="https://cloud.google.com/kubernetes-engine/docs/concepts/cluster-autoscaler">GCP</a> and <a href="https://learn.microsoft.com/en-us/azure/aks/cluster-autoscaler">Azure</a>.</p>
+<p>Cluster Autoscaler is available in <a href="https://docs.aws.amazon.com/eks/latest/userguide/autoscaling.html">AWS</a>, <a href="https://cloud.google.com/kubernetes-engine/docs/concepts/cluster-autoscaler">GCP</a>, and <a href="https://learn.microsoft.com/en-us/azure/aks/cluster-autoscaler">Azure</a>.</p>
 <h3 id="manual-scaling">Manual Scaling<a class="headerlink" href="#manual-scaling" title="Permanent link">#</a></h3>
 <p>Kubernetes also offers the option to manually scale your resources.</p>
-<p>For example you can increase <code>manually</code> the pod replicas of auth-server deployment using the following command: </p>
+<p>For example, you can increase <code>manually</code> the pod replicas of auth-server deployment using the following command: </p>
 <div class="highlight"><pre><span></span><code>kubectl scale --replicas<span class="o">=</span><span class="m">3</span> deployment/auth-server -n &lt;namespace&gt;
 </code></pre></div>
 
@@ -173159,7 +173159,7 @@
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-02-02T17:46:07+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-02-02</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-05-24T09:31:04+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-05-24</span>
       
         <br>
         Created:

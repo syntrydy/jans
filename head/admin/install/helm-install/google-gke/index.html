@@ -173162,22 +173162,25 @@
 <h2 id="initial-setup">Initial Setup<a class="headerlink" href="#initial-setup" title="Permanent link">#</a></h2>
 <ol>
 <li>
-<p>If you are using Cloud Shell, you can skip to step 4.</p>
+<p>Enable <a href="https://console.cloud.google.com/kubernetes">GKE API</a> if not enabled yet.</p>
 </li>
 <li>
-<p>Install <a href="https://cloud.google.com/sdk/docs/quickstarts">gcloud</a></p>
+<p>If you are using <code>Cloud Shell</code>, you can skip to step 4.</p>
 </li>
 <li>
-<p>Install kubectl using <code>gcloud components install kubectl</code> command</p>
+<p>Install <a href="https://cloud.google.com/sdk/docs/quickstarts">gcloud</a>.</p>
+</li>
+<li>
+<p>Install <code>kubectl</code> using <code>gcloud components install kubectl</code> command.</p>
+</li>
+<li>
+<p>Install <a href="https://helm.sh/docs/intro/install/">Helm3</a>.</p>
 </li>
 <li>
 <p>Create cluster using a command such as the following example:</p>
 <p><div class="highlight"><pre><span></span><code>gcloud container clusters create janssen-cluster --num-nodes 2 --machine-type e2-highcpu-8 --zone us-west1-a
 </code></pre></div>
 You can adjust <code>num-nodes</code> and <code>machine-type</code> as per your desired cluster size</p>
-</li>
-<li>
-<p>Install <a href="https://helm.sh/docs/intro/install/">Helm3</a>    </p>
 </li>
 <li>
 <p>Create <code>jans</code> namespace where our resources will reside
@@ -173320,7 +173323,7 @@ helm install janssen janssen/janssen -n jans -f override.yaml
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-01-11T14:05:59+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-01-11</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-05-24T09:31:04+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-05-24</span>
       
         <br>
         Created:
