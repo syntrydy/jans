@@ -173112,10 +173112,10 @@
 
 <h1 id="key-generation">Key Generation<a class="headerlink" href="#key-generation" title="Permanent link">#</a></h1>
 <h2 id="generating-cryptographic-keys">Generating Cryptographic Keys<a class="headerlink" href="#generating-cryptographic-keys" title="Permanent link">#</a></h2>
-<p>The Jans Server is compatible with the <a href="https://docs.oracle.com/javase/7/docs/api/javax/crypto/KeyGenerator.html">Java KeyGenerator</a> to create new cryptographic keys if needed.</p>
+<p>The Jans Server is compatible with the <a href="https://github.com/JanssenProject/jans/blob/main/jans-auth-server/client/src/main/java/io/jans/as/client/util/KeyGenerator.java">Java KeyGenerator</a> to create new cryptographic keys if needed.</p>
 <h3 id="backup">Backup<a class="headerlink" href="#backup" title="Permanent link">#</a></h3>
 <ul>
-<li>Backup <code>jansConfWebKeys</code> attribute data from LDAP. Location of this attribute is: <code>o=jans &gt; ou=configuration &gt; ou=jans-auth</code></li>
+<li>Backup <code>jansConfWebKeys</code> attribute data of <code>jansAppConf</code> entity from persistence. Location of this attribute is: <code>o=jans &gt; ou=configuration &gt; ou=jans-auth</code></li>
 <li>Backup <code>jans-auth-keys.p12</code> from <code>/etc/certs/</code></li>
 </ul>
 <p>[N.B] Below if <code>Keystore</code> location is anywhere except <code>/etc/certs/</code> no need to backup.</p>
@@ -173146,10 +173146,6 @@
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>-at</td>
-<td>oxEleven Access Token</td>
-</tr>
 <tr>
 <td>-dnname</td>
 <td>DN of certificate issuer</td>
@@ -173187,20 +173183,24 @@
 <td>Key Store file (such as /etc/certs/jans-auth-keys.p12)</td>
 </tr>
 <tr>
-<td>-ox11</td>
-<td>oxEleven Generate Key Endpoint.</td>
-</tr>
-<tr>
 <td>-sig_keys</td>
 <td>Signature keys to generate. (For example: RS256 RS384 RS512 ES256 ES384 ES512 PS256 PS384 PS512)</td>
 </tr>
 <tr>
-<td>test_prop_file</td>
-<td></td>
-</tr>
-<tr>
 <td>_keyId</td>
 <td>Key name suffix</td>
+</tr>
+<tr>
+<td>-test_prop_file</td>
+<td>Test property file used for test purpose only</td>
+</tr>
+<tr>
+<td>-ox11</td>
+<td>oxEleven Generate Key Endpoint.</td>
+</tr>
+<tr>
+<td>-at</td>
+<td>oxEleven Access Token</td>
 </tr>
 </tbody>
 </table>
@@ -173210,7 +173210,7 @@
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-03-30T10:51:22+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-03-30</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-05-25T19:55:56+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-05-25</span>
       
         <br>
         Created:

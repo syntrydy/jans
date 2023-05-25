@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#this-content-is-in-progress" class="md-skip">
+        <a href="#managing-key-rotation" class="md-skip">
           Skip to content
         </a>
       
@@ -1563,6 +1563,8 @@
       <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
       
       
+        
+      
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
           Managing Key Rotation
@@ -1579,6 +1581,8 @@
   
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -1587,22 +1591,22 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#this-content-is-in-progress" class="md-nav__link">
-    This content is in progress
+  <a href="#built-in-key-rotation" class="md-nav__link">
+    Built-in key rotation
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#have-questions-in-the-meantime" class="md-nav__link">
-    Have questions in the meantime?
+  <a href="#external-key-rotation" class="md-nav__link">
+    External key rotation
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#want-to-contribute" class="md-nav__link">
-    Want to contribute?
+  <a href="#useful-references" class="md-nav__link">
+    Useful references
   </a>
   
 </li>
@@ -173015,6 +173019,8 @@
   
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -173023,22 +173029,22 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#this-content-is-in-progress" class="md-nav__link">
-    This content is in progress
+  <a href="#built-in-key-rotation" class="md-nav__link">
+    Built-in key rotation
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#have-questions-in-the-meantime" class="md-nav__link">
-    Have questions in the meantime?
+  <a href="#external-key-rotation" class="md-nav__link">
+    External key rotation
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#want-to-contribute" class="md-nav__link">
-    Want to contribute?
+  <a href="#useful-references" class="md-nav__link">
+    Useful references
   </a>
   
 </li>
@@ -173085,21 +173091,58 @@
   </a>
 
 
-  <h1>Managing Key Rotation</h1>
-
-<h2 id="this-content-is-in-progress">This content is in progress<a class="headerlink" href="#this-content-is-in-progress" title="Permanent link">#</a></h2>
-<p>The Janssen Project documentation is currently in development. Topic pages are being created in order of broadest relevance, and this page is coming in the near future.</p>
-<h2 id="have-questions-in-the-meantime">Have questions in the meantime?<a class="headerlink" href="#have-questions-in-the-meantime" title="Permanent link">#</a></h2>
-<p>While this documentation is in progress, you can ask questions through <a href="https://github.com/JanssenProject/jans/discussion">GitHub Discussions</a> or the <a href="https://gitter.im/JanssenProject/Lobby">community chat on Gitter</a>. Any questions you have will help determine what information our documentation should cover.</p>
-<h2 id="want-to-contribute">Want to contribute?<a class="headerlink" href="#want-to-contribute" title="Permanent link">#</a></h2>
-<p>If you have content you'd like to contribute to this page in the meantime, you can get started with our <a href="https://docs.jans.io/head/CONTRIBUTING/">Contribution guide</a>.</p>
+<h1 id="managing-key-rotation">Managing Key Rotation<a class="headerlink" href="#managing-key-rotation" title="Permanent link">#</a></h1>
+<p>There are two possible ways to manage key rotation:
+- built-in key rotation
+- external key rotation</p>
+<p>For VM by default built-in key rotation is on.</p>
+<p>Key alias or <code>kid</code> has following format (example <code>connect_76297462-a3f8-498e-afc2-670285292553_sig_rs256</code>):</p>
+<div class="highlight"><pre><span></span><code>&lt;operation_type&gt;_&lt;guid&gt;_&lt;use&gt;_&lt;algorithm&gt;
+</code></pre></div>
+<ul>
+<li>operation_type - specifies operation type of the key, possible values:</li>
+<li>connect - used for OpenID Connect - usually expirable key</li>
+<li>ssa - used for SSA - usually with very big expiration date (almost non-expirable)</li>
+<li>all - key can be use for both <code>connect</code> and <code>ssa</code> </li>
+<li>guid - unique identifier</li>
+<li>use - use purpose, possible values are <code>sig</code> for signature and <code>enc</code> for encryption  </li>
+<li>algorithm - algorithm use with given key</li>
+<li>in signature case it can be <code>RS256</code>, <code>RS384</code>, <code>RS512</code>, <code>ES256</code>, <code>ES384</code>, <code>ES512</code>, <code>PS256</code>, <code>PS384</code>, <code>PS512</code></li>
+<li>in encryption case case it can be <code>RSA1_5</code>, <code>RSA-OAEP</code></li>
+</ul>
+<p>Key rotation means that new keys are generated and old one are removed for given algorithm (full replacement).  </p>
+<p>Keys are stored in:<br />
+- key store file (specified by <code>keyStoreFile</code>)
+- on persistence level jwks representation of the key are stored in <code>jansConfWebKeys</code> attribute of <code>jansAppConf</code> entity</p>
+<p>It's important to note that key inside key store file must have representation in jwks and vice versa. It must be always in sync otherwise AS will throw error.</p>
+<p>Configuration properties related to key store file:
+- <code>keyStoreFile</code> - The Key Store File (JKS or PKCS12)
+- <code>keyStoreSecret</code> - The Key Store password</p>
+<h2 id="built-in-key-rotation">Built-in key rotation<a class="headerlink" href="#built-in-key-rotation" title="Permanent link">#</a></h2>
+<p><code>jans-auth-server</code> has <a href="https://github.com/JanssenProject/jans/blob/70a566b67f660750bf742f19ee127f79b2db8930/jans-auth-server/client/src/main/java/io/jans/as/client/util/KeyGenerator.java">KeyGeneratorTimer</a> 
+which is responsible for key rotation. Built-in rotation can be switch on/off via <code>keyRegenerationEnabled</code> AS configuration property (by setting <code>true</code> or <code>false</code> value).</p>
+<p>Configuration properties relation to built-in rotation:
+- <code>keyRegenerationEnabled</code> - boolean value specifying whether to turn on (<code>true</code> value) or off (<code>false</code> value) built-in key rotation
+- <code>keyRegenerationInterval</code> - the interval for key regeneration in hours
+- <code>keyAlgsAllowedForGeneration</code> - List of algorithm allowed to be used for key generation</p>
+<p>Expiration date during built-in rotation is set as <code>now</code> + <code>keyRegenerationInterval</code>.</p>
+<h2 id="external-key-rotation">External key rotation<a class="headerlink" href="#external-key-rotation" title="Permanent link">#</a></h2>
+<p>External rotation means that keys are rotated by script. In this case <code>keyRegenerationEnabled</code> must be set to <code>false</code> value.
+Script can be scheduled to run periodically. Such script must invoke <code>KeyGenerator</code> class from <code>jans-auth-client-jar-with-dependencies.jar</code> which will keep keys in key store and in AS persistence consistent. 
+See <a href="../../auth-server/crypto/key-generation/">Key Generation</a> page for more details how to generate keys externally.</p>
+<div class="highlight"><pre><span></span><code>/opt/jre/bin/java -Dlog4j.defaultInitOverride=true -cp /opt/dist/jans/jans-auth-client-jar-with-dependencies.jar io.jans.as.client.util.KeyGenerator -keystore /etc/certs/jans-auth-keys.p12 -keypasswd &lt;Password&gt; -sig_keys RS256 RS384 -enc_keys RSA1_5 RSA-OAEP -key_ops_type ALL -dnname &quot;CN=jansAuth CA Certificates&quot; -expiration 2 &gt; /etc/certs/jans-auth-keys.json
+</code></pre></div>
+<h2 id="useful-references">Useful references<a class="headerlink" href="#useful-references" title="Permanent link">#</a></h2>
+<ul>
+<li><a href="../../auth-server/crypto/key-generation/">Key Generation</a></li>
+</ul>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2022-12-08T20:20:00+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2022-12-08</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-05-25T19:55:56+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-05-25</span>
       
         <br>
         Created:
