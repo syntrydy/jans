@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#this-content-is-in-progress" class="md-skip">
+        <a href="#oauth-protection" class="md-skip">
           Skip to content
         </a>
       
@@ -172234,22 +172234,36 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#this-content-is-in-progress" class="md-nav__link">
-    This content is in progress
+  <a href="#oauth-protection" class="md-nav__link">
+    OAuth protection
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#have-questions-in-the-meantime" class="md-nav__link">
-    Have questions in the meantime?
+  <a href="#client-details" class="md-nav__link">
+    Client details
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#want-to-contribute" class="md-nav__link">
-    Want to contribute?
+  <a href="#getting-a-token" class="md-nav__link">
+    Getting a token
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#issue-a-request-to-the-service" class="md-nav__link">
+    Issue a request to the service
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deactivating-oauth-mode" class="md-nav__link">
+    Deactivating OAuth mode
   </a>
   
 </li>
@@ -173023,22 +173037,36 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#this-content-is-in-progress" class="md-nav__link">
-    This content is in progress
+  <a href="#oauth-protection" class="md-nav__link">
+    OAuth protection
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#have-questions-in-the-meantime" class="md-nav__link">
-    Have questions in the meantime?
+  <a href="#client-details" class="md-nav__link">
+    Client details
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#want-to-contribute" class="md-nav__link">
-    Want to contribute?
+  <a href="#getting-a-token" class="md-nav__link">
+    Getting a token
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#issue-a-request-to-the-service" class="md-nav__link">
+    Issue a request to the service
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deactivating-oauth-mode" class="md-nav__link">
+    Deactivating OAuth mode
   </a>
   
 </li>
@@ -173082,19 +173110,86 @@
 
   <h1>OAuth Protection</h1>
 
-<h2 id="this-content-is-in-progress">This content is in progress<a class="headerlink" href="#this-content-is-in-progress" title="Permanent link">#</a></h2>
-<p>The Janssen Project documentation is currently in development. Topic pages are being created in order of broadest relevance, and this page is coming in the near future.</p>
-<h2 id="have-questions-in-the-meantime">Have questions in the meantime?<a class="headerlink" href="#have-questions-in-the-meantime" title="Permanent link">#</a></h2>
-<p>While this documentation is in progress, you can ask questions through <a href="https://github.com/JanssenProject/jans/discussion">GitHub Discussions</a> or the <a href="https://gitter.im/JanssenProject/Lobby">community chat on Gitter</a>. Any questions you have will help determine what information our documentation should cover.</p>
-<h2 id="want-to-contribute">Want to contribute?<a class="headerlink" href="#want-to-contribute" title="Permanent link">#</a></h2>
-<p>If you have content you'd like to contribute to this page in the meantime, you can get started with our <a href="https://docs.jans.io/head/CONTRIBUTING/">Contribution guide</a>.</p>
+<h2 id="oauth-protection">OAuth protection<a class="headerlink" href="#oauth-protection" title="Permanent link">#</a></h2>
+<p>The SCIM API endpoints are by default protected by (Bearer) OAuth 2.0 tokens. Depending on the operation, these tokens must have certain scopes for the operations to be authorized. The table below summarizes this fact:</p>
+<table>
+<thead>
+<tr>
+<th>Scope</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>https://jans.io/scim/users.read</code></td>
+<td>Query/Search user resources</td>
+</tr>
+<tr>
+<td><code>https://jans.io/scim/users.write</code></td>
+<td>Modify user resources</td>
+</tr>
+<tr>
+<td><code>https://jans.io/scim/groups.read</code></td>
+<td>Query group resources</td>
+</tr>
+<tr>
+<td><code>https://jans.io/scim/groups.write</code></td>
+<td>Modify group resources</td>
+</tr>
+<tr>
+<td><code>https://jans.io/scim/fido.read</code></td>
+<td>Query fido resources</td>
+</tr>
+<tr>
+<td><code>https://jans.io/scim/fido.write</code></td>
+<td>Modify fido resources</td>
+</tr>
+<tr>
+<td><code>https://jans.io/scim/fido2.read</code></td>
+<td>Query fido 2 resources</td>
+</tr>
+<tr>
+<td><code>https://jans.io/scim/fido2.write</code></td>
+<td>Modify fido 2 resources</td>
+</tr>
+<tr>
+<td><code>https://jans.io/scim/bulk</code></td>
+<td>Send requests to the bulk endpoint</td>
+</tr>
+<tr>
+<td><code>https://jans.io/scim/all-resources.search</code></td>
+<td>Access the root <code>.search</code> endpoint</td>
+</tr>
+</tbody>
+</table>
+<p>Correspondence of endpoints vs. scopes can be found in the SCIM OpenAPI descriptor you can find <a href="https://github.com/JanssenProject/jans/blob/main/jans-scim/server/src/main/resources/jans-scim-openapi.yaml">here</a>.</p>
+<h2 id="client-details">Client details<a class="headerlink" href="#client-details" title="Permanent link">#</a></h2>
+<p>To obtain valid tokens, you would normally have to register a client (in the server) capable of obtaining tokens with the scopes needed. Registration is out of the scope of this document, however you can leverage the client that is already bundled in your server for SCIM interaction. With this client you can issue tokens with any SCIM-related scope.</p>
+<p>Let's obtain the credentials of this client first. In TUI, navigate to <code>Auth Server</code> &gt; <code>Clients</code>. In the search field type <strong>SCIM</strong> (uppercase). Highlight the row that matches a client named "SCIM Client" and press Enter.</p>
+<p>From the "Basic" section, grab the "client id" and "client secret". This secret is encrypted, to decrypt it, in a terminal run <code>/opt/jans/bin/encode.py -D ENCRYPTED-SECRET-HERE</code>.</p>
+<h2 id="getting-a-token">Getting a token<a class="headerlink" href="#getting-a-token" title="Permanent link">#</a></h2>
+<p>This is a <code>curl</code> example of how to get a token valid for retrieving and modifying users (line breaks added for readability). Note the use of white space to separate scope names.</p>
+<div class="highlight"><pre><span></span><code>curl -k -u &#39;CLIENT_ID:DECRYPTED_CLIENT_SECRET&#39; -k -d grant_type=client_credentials -d 
+    scope=&#39;https://jans.io/scim/users.read https://jans.io/scim/users.write&#39; 
+    https://your-jans-server/jans-auth/restv1/token
+</code></pre></div>
+<p>Grab the "access_token" from the obtained response.</p>
+<h2 id="issue-a-request-to-the-service">Issue a request to the service<a class="headerlink" href="#issue-a-request-to-the-service" title="Permanent link">#</a></h2>
+<p>The below is a curl example of how to call an operation by passing the previously obtained token (line breaks added for readability):</p>
+<div class="highlight"><pre><span></span><code>curl -k -G -H &#39;Authorization: Bearer ACCESS_TOKEN&#39; --data-urlencode &#39;filter=displayName co &quot;Admin&quot;&#39; 
+    https://your-jans-server/jans-scim/restv1/v2/Users
+</code></pre></div>
+<p>The output should show valid SCIM (JSON) output. Account the access token is short-lived: once it expires you will get a status response of 401 and need to re-request the token as in the previous step.</p>
+<h2 id="deactivating-oauth-mode">Deactivating OAuth mode<a class="headerlink" href="#deactivating-oauth-mode" title="Permanent link">#</a></h2>
+<p>OAuth tokens usage is a safe, standardized approach for controlling access to resources. If for some reason you want to turn off protection you can do so by activating bypass mode: in TUI, navigate to SCIM tab and under "Protection Mode" select "BYPASS". Finally press "Save".</p>
+<p>Caution: keep in mind that with "BYPASS" you should add some sort of protection to your endpoints, say, at the network level to avoid anyone to mess with your user base among other resources.</p>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2022-12-08T20:20:00+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2022-12-08</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-05-25T14:41:36+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-05-25</span>
       
         <br>
         Created:
