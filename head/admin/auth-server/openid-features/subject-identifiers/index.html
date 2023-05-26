@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#this-content-is-in-progress" class="md-skip">
+        <a href="#subject-identifiers" class="md-skip">
           Skip to content
         </a>
       
@@ -3604,6 +3604,8 @@
       <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
       
       
+        
+      
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
           Pairwise/Public Subject Identifiers
@@ -3620,6 +3622,8 @@
   
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -3628,15 +3632,55 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#this-content-is-in-progress" class="md-nav__link">
-    This content is in progress
+  <a href="#types-of-subject-identifiers" class="md-nav__link">
+    Types of Subject Identifiers
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#have-questions-in-the-meantime" class="md-nav__link">
-    Have questions in the meantime?
+  <a href="#public-subject-identifiers" class="md-nav__link">
+    Public Subject Identifiers
+  </a>
+  
+    <nav class="md-nav" aria-label="Public Subject Identifiers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#customizing-subject-identifier-attribute" class="md-nav__link">
+    Customizing Subject Identifier Attribute
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pairwise-subject-identifiers" class="md-nav__link">
+    Pairwise Subject Identifiers
+  </a>
+  
+    <nav class="md-nav" aria-label="Pairwise Subject Identifiers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pairwise-identifier-generation" class="md-nav__link">
+    Pairwise Identifier Generation
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#properties" class="md-nav__link">
+    Properties
   </a>
   
 </li>
@@ -173017,6 +173061,8 @@
   
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -173025,15 +173071,55 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#this-content-is-in-progress" class="md-nav__link">
-    This content is in progress
+  <a href="#types-of-subject-identifiers" class="md-nav__link">
+    Types of Subject Identifiers
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#have-questions-in-the-meantime" class="md-nav__link">
-    Have questions in the meantime?
+  <a href="#public-subject-identifiers" class="md-nav__link">
+    Public Subject Identifiers
+  </a>
+  
+    <nav class="md-nav" aria-label="Public Subject Identifiers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#customizing-subject-identifier-attribute" class="md-nav__link">
+    Customizing Subject Identifier Attribute
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pairwise-subject-identifiers" class="md-nav__link">
+    Pairwise Subject Identifiers
+  </a>
+  
+    <nav class="md-nav" aria-label="Pairwise Subject Identifiers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pairwise-identifier-generation" class="md-nav__link">
+    Pairwise Identifier Generation
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#properties" class="md-nav__link">
+    Properties
   </a>
   
 </li>
@@ -173082,6 +173168,11 @@
         <span class="md-tag">feature</span>
       
     
+      
+      
+        <span class="md-tag">subject identifier</span>
+      
+    
   </nav>
 
 
@@ -173092,12 +173183,71 @@
   </a>
 
 
-  <h1>Pairwise/Public Subject Identifiers</h1>
-
-<h2 id="this-content-is-in-progress">This content is in progress<a class="headerlink" href="#this-content-is-in-progress" title="Permanent link">#</a></h2>
-<p>The Janssen Project documentation is currently in development. Topic pages are being created in order of broadest relevance, and this page is coming in the near future.</p>
-<h2 id="have-questions-in-the-meantime">Have questions in the meantime?<a class="headerlink" href="#have-questions-in-the-meantime" title="Permanent link">#</a></h2>
-<p>While this documentation is in progress, you can ask questions through <a href="https://github.com/JanssenProject/jans/discussion">GitHub Discussions</a> or the <a href="https://gitter.im/JanssenProject/Lobby">community chat on Gitter</a>. Any questions you have will help determine what information our documentation should cover.</p>
+<h1 id="subject-identifiers">Subject identifiers<a class="headerlink" href="#subject-identifiers" title="Permanent link">#</a></h1>
+<p>Subject identifiers(defined in
+<a href="https://openid.net/specs/openid-connect-core-1_0.html#Terminology">OpenID Connect Core SPEC</a>) are unique identifiers
+generated by Janssen Server(i.e. OpenId Provider) for an end-user. Subject identifiers are unique per Janssen Server
+instance and it is shared with the client (or clients) via ID token or access token. Whether the same subject identifier
+is used for the same end-user across multiple clients depends on the kind of subject identifier configured for a particular
+client.</p>
+<h2 id="types-of-subject-identifiers">Types of Subject Identifiers<a class="headerlink" href="#types-of-subject-identifiers" title="Permanent link">#</a></h2>
+<p>Janssen Server supports both subject identifier types, <code>public</code> and <code>pairwise</code>, as specified in OpenID Connect
+specification. For a particular Janssen Server deployment, the supported types are listed in the response of Janssen
+Server's well-known configuration endpoint is given below.</p>
+<div class="highlight"><pre><span></span><code>https://janssen.server.host/jans-auth/.well-known/openid-configuration
+</code></pre></div>
+<p>The <code>subject_types_supported</code> claim in the response specifies the list of all the supported types.</p>
+<p>More details about both types are given in
+<a href="https://openid.net/specs/openid-connect-core-1_0.html#SubjectIDTypes">this section</a> of specification.</p>
+<h2 id="public-subject-identifiers">Public Subject Identifiers<a class="headerlink" href="#public-subject-identifiers" title="Permanent link">#</a></h2>
+<p>Public subject identifiers are identifiers that the server generates and assigns to each subject. These identifiers are
+unique for each server deployment. All the clients that are configured to use a <code>public</code> type subject identifier will
+be supplied this same identifier for a given subject by the Janssen Server.</p>
+<p>Sharing common subject identifiers across multiple clients may enable clients to correlate data about a particular
+subject. If this is an unwanted situation, then the client should use <a href="#pairwise-subject-identifiers">pairwise</a>
+subject identifiers.</p>
+<p>By default, the Janssen Server uses the subject attribute <code>inum</code> as the subject identifier.</p>
+<h3 id="customizing-subject-identifier-attribute">Customizing Subject Identifier Attribute<a class="headerlink" href="#customizing-subject-identifier-attribute" title="Permanent link">#</a></h3>
+<p>At the server level, the administrator specifies which subject attribute should be used as subject identifiers.
+This can be done by updating the value of
+<a href="../../../reference/json/properties/janssenauthserver-properties/#openidsubattribute">openidSubAttribute</a>
+Janssen Server property.</p>
+<p>At the client level, this can be further customized. If a client uses <code>public</code> type subject identifier, the client can
+configure the subject attribute that should be used as a subject identifier. This should be done at the client
+registration time.</p>
+<p>To enable client level customization, the Janssen Server property
+<a href="../../../reference/json/properties/janssenauthserver-properties/#publicsubjectidentifierperclientenabled">publicSubjectIdentifierPerClientEnabled</a>
+should be set to <code>true</code> and also the desired attribute should be part of the list
+defined by the Janssen Server property
+<a href="../../../reference/json/properties/janssenauthserver-properties/#subjectidentifiersperclientsupported">subjectIdentifiersPerClientSupported</a>.
+Both these properties can be set by the administrator using <a href="../../../config-guide/jans-tui/">TUI</a>.</p>
+<h2 id="pairwise-subject-identifiers">Pairwise Subject Identifiers<a class="headerlink" href="#pairwise-subject-identifiers" title="Permanent link">#</a></h2>
+<p>When a client chooses to use <code>pairwise</code> subject identifier, the Janssen Server generates and attaches a new identifier
+to all the subjects requested by the client. This identifier is consistently used for the subject-client pair and never
+used for any other clients configured on the Janssen Server. If multiple clients are using <code>pairwise</code> type subject
+identifiers, then the same subject will have different identifiers for each subject.</p>
+<p>Since every client has a different identifier for the same subject, the clients can't match identifiers and correlate
+information about a subject out of the band.</p>
+<h3 id="pairwise-identifier-generation">Pairwise Identifier Generation<a class="headerlink" href="#pairwise-identifier-generation" title="Permanent link">#</a></h3>
+<p>Janssen Server uses host name string from redirect URI or sector identifier, local user ID, and a salt string as
+initial inputs to generate pairwise identifiers. This input is then signed with the HS256 signing algorithm to generate
+a pairwise identifier.</p>
+<p>Sector identifier configuration influences how pairwise identifiers are calculated. See
+<a href="../../client-management/sector-identifiers/">this</a> document for more details.</p>
+<h2 id="properties">Properties<a class="headerlink" href="#properties" title="Permanent link">#</a></h2>
+<p>Janssen Server allows customization concerning subject identifiers using the properties below:</p>
+<ul>
+<li><a href="../../../reference/json/properties/janssenauthserver-properties/#subjecttypessupported">subjectTypesSupported</a></li>
+<li><a href="../../../reference/json/properties/janssenauthserver-properties/#defaultsubjecttype">defaultSubjectType</a></li>
+<li><a href="../../../reference/json/properties/janssenauthserver-properties/#sharesubjectidbetweenclientswithsamesectorid">shareSubjectIdBetweenClientsWithSameSectorId</a></li>
+<li><a href="../../../reference/json/properties/janssenauthserver-properties/#openidsubattribute">openidSubAttribute</a></li>
+<li><a href="../../../reference/json/properties/janssenauthserver-properties/#publicsubjectidentifierperclientenabled">publicSubjectIdentifierPerClientEnabled</a></li>
+<li><a href="../../../reference/json/properties/janssenauthserver-properties/#subjectidentifiersperclientsupported">subjectIdentifiersPerClientSupported</a></li>
+<li><a href="../../../reference/json/properties/janssenauthserver-properties/#skipauthorizationforopenidscopeandpairwiseid">skipAuthorizationForOpenIdScopeAndPairwiseId</a></li>
+<li><a href="../../../reference/json/properties/janssenauthserver-properties/#pairwisecalculationkey">pairwiseCalculationKey</a></li>
+<li><a href="../../../reference/json/properties/janssenauthserver-properties/#pairwisecalculationsalt">pairwiseCalculationSalt</a></li>
+<li><a href="../../../reference/json/properties/janssenauthserver-properties/#pairwiseidtype">pairwiseIdType</a></li>
+</ul>
 <h2 id="want-to-contribute">Want to contribute?<a class="headerlink" href="#want-to-contribute" title="Permanent link">#</a></h2>
 <p>If you have content you'd like to contribute to this page in the meantime, you can get started with our <a href="https://docs.jans.io/head/CONTRIBUTING/">Contribution guide</a>.</p>
 
@@ -173106,7 +173256,7 @@
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2022-12-08T20:20:00+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2022-12-08</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-05-26T12:35:24+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-05-26</span>
       
         <br>
         Created:
