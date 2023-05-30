@@ -172295,6 +172295,8 @@
         
           
         
+          
+        
       
       
         
@@ -172409,6 +172411,20 @@
     <li class="md-nav__item">
       <a href="../../recipes/stepped-up-authn/" class="md-nav__link">
         Stepped-up Authentication
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../recipes/ACRouter/" class="md-nav__link">
+        User Journeys
       </a>
     </li>
   
@@ -173022,6 +173038,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#command-line-logs" class="md-nav__link">
+    Command Line Logs
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#standalone-installation" class="md-nav__link">
     Standalone Installation
   </a>
@@ -173143,6 +173166,14 @@ TUI, you can view/update details of the FIDO configuration.</p>
 that simplifies the exchange of user identity information across different
 domains. The Janssen Server provides implementation for the SCIM specification.</p>
 <p>With Janssen CLI-TUI, it's possible to view / update SCIM configuration. <img alt="image" src="../../../assets/Janssen_TUI_SCIM_1.png" /></p>
+<h2 id="command-line-logs">Command Line Logs<a class="headerlink" href="#command-line-logs" title="Permanent link">#</a></h2>
+<p>Jans TUI logs all write (post/put/patch) activities to file <code>&lt;log-dir&gt;/cli_cmd.log</code>, default <code>log-dir</code> is home directory 
+of user executing TUI. Consider that we create a user as below</p>
+<p><img alt="" src="../../../assets/jans-tui-create-user.png" /></p>
+<p>We will have following line in <code>cli_cmd.log</code>:</p>
+<div class="highlight"><pre><span></span><code>/usr/bin/python3 /opt/jans/jans-cli/cli/config_cli.py --operation-id post-user --data &#39;{&quot;customObjectClasses&quot;: [&quot;top&quot;, &quot;jansPerson&quot;], &quot;customAttributes&quot;: [{&quot;name&quot;: &quot;middleName&quot;, &quot;multiValued&quot;: false, &quot;values&quot;: [&quot;&quot;]}, {&quot;name&quot;: &quot;sn&quot;, &quot;multiValued&quot;: false, &quot;values&quot;: [&quot;Watts&quot;]}, {&quot;name&quot;: &quot;nickname&quot;, &quot;multiValued&quot;: false, &quot;values&quot;: [&quot;&quot;]}], &quot;mail&quot;: &quot;ewatts@foo.org&quot;, &quot;userId&quot;: &quot;ewatts&quot;, &quot;displayName&quot;: &quot;Emelia Watts&quot;, &quot;givenName&quot;: &quot;Emelia&quot;, &quot;userPassword&quot;: &quot;TopSecret&quot;, &quot;jansStatus&quot;: &quot;active&quot;}&#39;
+</code></pre></div>
+<p>By using this line, you can create user via <code>jans-config.py</code>, <a href="../jans-cli/cli-using-command-line-log/">see for example</a></p>
 <h2 id="standalone-installation">Standalone Installation<a class="headerlink" href="#standalone-installation" title="Permanent link">#</a></h2>
 <p>Installation of a Jans TUI ( Text-Based User Interface ) need a Jans server to be installed as base. After that download and build Jans-ClI-TUI and make it.</p>
 <h3 id="build">Build:<a class="headerlink" href="#build" title="Permanent link">#</a></h3>
@@ -173179,7 +173210,7 @@ pip3 install shiv
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-04-03T10:21:34+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-04-03</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-05-30T10:15:57+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-05-30</span>
       
         <br>
         Created:
