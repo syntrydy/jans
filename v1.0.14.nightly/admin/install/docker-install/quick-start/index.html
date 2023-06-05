@@ -173180,7 +173180,7 @@
 <p>Installation depends on a <a href="https://github.com/JanssenProject/jans/tree/main/docker-jans-monolith#environment-variables">set of environment variables</a>.
 These environment variables can be set to customize installation as per the need. If not set, the installer uses default values.</p>
 <p>Run this command to start the installation:</p>
-<div class="highlight"><pre><span></span><code>wget https://raw.githubusercontent.com/JanssenProject/jans/v1.0.14.nightly/automation/startjanssenmonolithdemo.sh <span class="o">&amp;&amp;</span> chmod u+x startjanssenmonolithdemo.sh <span class="o">&amp;&amp;</span> sudo bash startjanssenmonolithdemo.sh demoexample.jans.io MYSQL
+<div class="highlight"><pre><span></span><code>wget https://raw.githubusercontent.com/JanssenProject/jans/vreplace-janssen-version/automation/startjanssenmonolithdemo.sh <span class="o">&amp;&amp;</span> chmod u+x startjanssenmonolithdemo.sh <span class="o">&amp;&amp;</span> sudo bash startjanssenmonolithdemo.sh demoexample.jans.io MYSQL
 </code></pre></div>
 <p>Console messages like below confirms the successful installation:</p>
 <div class="highlight"><pre><span></span><code>[+] Running 3/3
@@ -173205,9 +173205,14 @@ Testing openid-configuration endpoint..
 <div class="highlight"><pre><span></span><code>docker <span class="nb">exec</span> -ti docker-jans-monolith-jans-1 bash
 </code></pre></div>
 <p>And then use CLI tools to configure Janssen Server as needed.</p>
-<div class="highlight"><pre><span></span><code>/opt/jans/jans-cli/config-cli.py
+<p><div class="highlight"><pre><span></span><code>/opt/jans/jans-cli/config-cli.py
 <span class="c1">#or</span>
 /opt/jans/jans-cli/scim-cli.py
+</code></pre></div>
+Administrative password can be collected from <code>setup.properties.last</code> file. </p>
+<div class="highlight"><pre><span></span><code> - find / -name <span class="s1">&#39;setup.properties.last&#39;</span>
+ - cat /var/lib/docker/overlay2/xxxxxx/diff/opt/jans/jans-setup/setup.properties.last <span class="p">|</span> grep -i password
+ - <span class="sb">`</span>admin_password<span class="sb">`</span> value is the password
 </code></pre></div>
 <h2 id="uninstall-remove-the-janssen-server">Uninstall / Remove the Janssen Server<a class="headerlink" href="#uninstall-remove-the-janssen-server" title="Permanent link">#</a></h2>
 <p>This docker based installation uses <code>docker compose</code> under the hood to create containers. Hence uninstalling Janssen server involves invoking <code>docker compose</code> with appropriate yml file. Run command below to stop and remove containers.</p>
@@ -173225,7 +173230,7 @@ Testing openid-configuration endpoint..
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-04-03T10:21:34+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-04-03</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-06-05T08:24:56+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-06-05</span>
       
         <br>
         Created:
