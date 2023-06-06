@@ -173061,26 +173061,26 @@
 <pre class="mermaid"><code>
 sequenceDiagram
 title Jans Config API request flow
-autonumber 1
+autonumber
 
 participant Admin
-participant Admin-ui
-participant Config-api
-participant Auth-Server
+participant Admin UI
+participant Config API
+participant Auth Server
 participant Jans Persistence
 
-Admin-&gt;&gt;Admin-ui: Create Client
-note over Admin-ui: Click on plus sign to Create Client and Save button to create new client
-Config-api-&gt;&gt;Auth-Server: Introspect Token
-Auth-Server-&gt;&gt;Config-api: Returns Introspection Response
-Config-api-&gt;&gt;Config-api: Successful validation of token claim with Introspection Response
-Config-api-&gt;&gt;Jans Persistence: Validate and persist client data
-Config-api-&gt;&gt;Admin-ui: Returns persistence status</code></pre>
+Admin-&gt;&gt;Admin UI: Create Client
+note over Admin UI: Click on plus sign to Create Client and Save button to create new client
+Config API-&gt;&gt;Auth Server: Introspect Token
+Auth Server-&gt;&gt;Config API: Returns Introspection Response
+Config API-&gt;&gt;Config API: Successful validation of token claim with Introspection Response
+Config API-&gt;&gt;Jans Persistence: Validate and persist client data
+Config API-&gt;&gt;Admin UI: Returns persistence status</code></pre>
 <ol>
-<li><strong>Admin</strong>: Administrator of the application. Will use Admin-ui to configure application. </li></li>
-<li><strong>Admin-ui</strong>: Gluu graphical user interface for the administrators to manage configuration and other properties of Jans Auth Server via Jans Config API.</li></li>
-<li><strong>Config-api</strong>: Jans API gateway for configuring Janssen modules like Jans Auth Server, fido2, SCIM, etc. </li></li>
-<li><strong>Auth-Server</strong>: Janssen federated identity with comprehensive implementation of OpenID Connect. Used for introspection of access token in this flow.</li></li>
+<li><strong>Admin</strong>: Administrator of the application. Will use Admin UI to configure application. </li></li>
+<li><strong>Admin UI</strong>: Gluu graphical user interface for the administrators to manage configuration and other properties of Jans Auth Server via Jans Config API.</li></li>
+<li><strong>Config API</strong>: Jans API gateway for configuring Janssen modules like Jans Auth Server, fido2, SCIM, etc. </li></li>
+<li><strong>Auth Server</strong>: Janssen federated identity with comprehensive implementation of OpenID Connect. Used for introspection of access token in this flow.</li></li>
 <li><strong>Jans Persistence</strong>: Jans Persistence layer to persist data in backend.</li></li>
 </ol>
 
@@ -173089,7 +173089,7 @@ Config-api-&gt;&gt;Admin-ui: Returns persistence status</code></pre>
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-05-17T14:12:36+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-05-17</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-06-06T14:04:51+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-06-06</span>
       
         <br>
         Created:
