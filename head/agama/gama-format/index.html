@@ -173128,7 +173128,7 @@
 }
 </code></pre></div>
 <p>The <code>configs</code> section is a JSON object containing exemplifying <a href="../language-reference/#header-basics">configuration properties</a> for flows that may need them. Note <code>.gama</code> files <strong>must not</strong> contain <strong>real</strong> configuration properties because these files can be freely distributed; in practice, configurations hold sensitive data that should not be exposed. The keys of object <code>configs</code>, if any, are qualified flow names already part of the project.  </p>
-<p>The <code>noDirectLaunch</code> section is an array holding zero or more qualified flow names. Use this list to prevent certain flows to be launched directly from a web browser. This is a security measure to avoid users trigger flows that may inadvertently grant access due to poor design.</p>
+<p>The <code>noDirectLaunch</code> section is an array holding zero or more qualified flow names. Use this list to prevent certain flows to be launched directly from a web browser. This is a security measure to avoid end-users triggering flows at will.</p>
 <p>Other fields can be added in <code>project.json</code>.</p>
 <h2 id="sample-project">Sample project<a class="headerlink" href="#sample-project" title="Permanent link">#</a></h2>
 <p>As an example assume you want to deliver these two flows:</p>
@@ -173180,7 +173180,7 @@ list = Call com.foods.RecipeUtils#retrieveIngredients choice.meal
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-06-06T16:44:10+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-06-06</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-06-07T14:36:09+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-06-07</span>
       
         <br>
         Created:
