@@ -173078,6 +173078,17 @@
 <h2 id="built-in-key-rotation">Built-in key rotation<a class="headerlink" href="#built-in-key-rotation" title="Permanent link">#</a></h2>
 <p><code>jans-auth-server</code> has <a href="https://github.com/JanssenProject/jans/blob/70a566b67f660750bf742f19ee127f79b2db8930/jans-auth-server/client/src/main/java/io/jans/as/client/util/KeyGenerator.java">KeyGeneratorTimer</a> 
 which is responsible for key rotation. Built-in rotation can be switch on/off via <code>keyRegenerationEnabled</code> AS configuration property (by setting <code>true</code> or <code>false</code> value).</p>
+<pre class="mermaid"><code>graph LR
+A[Auth Server] --&gt; V(Properties)
+</code></pre>
+<pre class="mermaid"><code>erDiagram
+    keyRotation {
+        string keyRegenerationEnabled "True"
+        string keyRenerationInterval  "48"
+        string keySelectionStrategy "OLDER"
+        string keySignWithSameKeyButDiffAlg "False"
+        string keyStoreFile "/etc/certs/jans-auth-keys.pkcs12"
+    }</code></pre>
 <p>Configuration properties relation to built-in rotation:
 - <code>keyRegenerationEnabled</code> - boolean value specifying whether to turn on (<code>true</code> value) or off (<code>false</code> value) built-in key rotation
 - <code>keyRegenerationInterval</code> - the interval for key regeneration in hours
@@ -173099,7 +173110,7 @@ See <a href="../../auth-server/crypto/key-generation/">Key Generation</a> page f
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-06-07T04:11:59+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-06-07</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-06-07T04:42:24+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-06-07</span>
       
         <br>
         Created:
