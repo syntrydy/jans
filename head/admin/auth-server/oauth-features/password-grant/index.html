@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#this-content-is-in-progress" class="md-skip">
+        <a href="#password-grant" class="md-skip">
           Skip to content
         </a>
       
@@ -4124,6 +4124,8 @@
       <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
       
       
+        
+      
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
           Password Grant
@@ -4140,6 +4142,8 @@
   
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -4148,15 +4152,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#this-content-is-in-progress" class="md-nav__link">
-    This content is in progress
+  <a href="#configuration" class="md-nav__link">
+    Configuration
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#have-questions-in-the-meantime" class="md-nav__link">
-    Have questions in the meantime?
+  <a href="#usage" class="md-nav__link">
+    Usage
   </a>
   
 </li>
@@ -172973,6 +172977,8 @@
   
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -172981,15 +172987,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#this-content-is-in-progress" class="md-nav__link">
-    This content is in progress
+  <a href="#configuration" class="md-nav__link">
+    Configuration
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#have-questions-in-the-meantime" class="md-nav__link">
-    Have questions in the meantime?
+  <a href="#usage" class="md-nav__link">
+    Usage
   </a>
   
 </li>
@@ -173058,12 +173064,21 @@
   </a>
 
 
-  <h1>Password Grant</h1>
-
-<h2 id="this-content-is-in-progress">This content is in progress<a class="headerlink" href="#this-content-is-in-progress" title="Permanent link">#</a></h2>
-<p>The Janssen Project documentation is currently in development. Topic pages are being created in order of broadest relevance, and this page is coming in the near future.</p>
-<h2 id="have-questions-in-the-meantime">Have questions in the meantime?<a class="headerlink" href="#have-questions-in-the-meantime" title="Permanent link">#</a></h2>
-<p>While this documentation is in progress, you can ask questions through <a href="https://github.com/JanssenProject/jans/discussion">GitHub Discussions</a> or the <a href="https://gitter.im/JanssenProject/Lobby">community chat on Gitter</a>. Any questions you have will help determine what information our documentation should cover.</p>
+<h1 id="password-grant">Password Grant<a class="headerlink" href="#password-grant" title="Permanent link">#</a></h1>
+<p>Janssen Server supports the password grant. At the same time, inline with
+<a href="https://oauth.net/2/oauth-best-practice/">OAuth 2.0 security best practices</a>, this password grant should never be used
+in practice. <a href="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-v2-1-08">OAuth 2.1</a> has removed this grant type.</p>
+<h2 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">#</a></h2>
+<p>A client can use the password grant if it is enabled in the configuration. An administrator can use
+<a href="../../../config-guide/jans-tui/">TUI</a> to enable password grant for a client.</p>
+<p><img alt="" src="../../../../assets/image-tui-client-registration-basic.png" /></p>
+<h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">#</a></h2>
+<p>Using the password grant involves sharing user credentials with a third-party application. This third-party app which has
+registered with Janssen Server as a client, will then use user-id/password credentials from the user to obtain an
+access token from Janssen Server.</p>
+<p>Janssen Server also requires the client to authenticate itself based on the client configuration.</p>
+<p>Since sharing user credentials with a third-party app is a security risk and against the basic purpose of OAuth, this
+grant type shall not be used.</p>
 <h2 id="want-to-contribute">Want to contribute?<a class="headerlink" href="#want-to-contribute" title="Permanent link">#</a></h2>
 <p>If you have content you'd like to contribute to this page in the meantime, you can get started with our <a href="https://docs.jans.io/head/CONTRIBUTING/">Contribution guide</a>.</p>
 
@@ -173072,7 +173087,7 @@
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-04-11T07:54:01+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-04-11</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-06-09T12:04:30+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-06-09</span>
       
         <br>
         Created:
