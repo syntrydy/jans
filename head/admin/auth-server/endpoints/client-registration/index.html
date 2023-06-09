@@ -173402,7 +173402,12 @@ claim of the OpenID Connect configuration reponse, typically deployed at </p>
 <ol>
 <li><code>dynamicRegistrationEnabled</code> : <code>true</code> or <code>false</code></li>
 <li><code>dynamicRegistrationExpirationTime</code> : Expiration time in seconds for clients created with dynamic registration, 0 or -1 means never expire</li>
+<li><code>dcrForbidExpirationTimeInRequest</code> : Boolean value specifying whether to allow to set client's expiration time in seconds during dynamic registration.. Default value is <code>false</code>.</li>
 </ol>
+<p><strong>Client expiration</strong></p>
+<p>Client expiration is set based on <code>dynamicRegistrationExpirationTime</code> AS configuration property or otherwise 
+if <code>dcrForbidExpirationTimeInRequest</code> is <code>false</code> then it can be requested in Dynamic Client Registration Request via <code>lifetime</code> parameter 
+which expected value in seconds. </p>
 <p>Configure the Janssen AS using steps explained in the <a href="#curl-commands-to-configure-jans-auth-server">link</a></p>
 <h3 id="client-registration-requests">Client registration Requests<a class="headerlink" href="#client-registration-requests" title="Permanent link">#</a></h3>
 <p>Client registration request primarily does two things: Communicate client metadata to the authorization server, and 
@@ -173438,6 +173443,7 @@ in example below:</p>
 <span class="w">    </span><span class="nt">&quot;backchannel_logout_session_required&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w"></span>
 <span class="w">    </span><span class="nt">&quot;client_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;my.jans.client&quot;</span><span class="p">,</span><span class="w"></span>
 <span class="w">    </span><span class="nt">&quot;par_lifetime&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">600</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;lifetime&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3600</span><span class="p">,</span><span class="w"></span>
 <span class="w">    </span><span class="nt">&quot;spontaneous_scopes&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w"></span>
 <span class="w">    </span><span class="nt">&quot;id_token_signed_response_alg&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;RS256&quot;</span><span class="p">,</span><span class="w"></span>
 <span class="w">    </span><span class="nt">&quot;access_token_as_jwt&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w"></span>
@@ -173858,7 +173864,7 @@ authorization server.</p>
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-06-07T11:24:26+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-06-07</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-06-09T05:41:11+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-06-09</span>
       
         <br>
         Created:
