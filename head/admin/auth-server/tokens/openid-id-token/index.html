@@ -173063,7 +173063,7 @@
     
       
       
-        <span class="md-tag">id-token</span>
+        <span class="md-tag">id token</span>
       
     
       
@@ -173132,12 +173132,14 @@ returned from the authorization endpoint, don't check <code>id_token</code> in t
 response_type for the authorization endpoint, as it will waste compute and
 storage generating a token you don't need.</p>
 <h2 id="validating-an-id-token">Validating an ID Token<a class="headerlink" href="#validating-an-id-token" title="Permanent link">#</a></h2>
-<p>At a minimum, client developers should always validate the following:
-- Signature of the ID token
-- <code>iss</code> make sure the ID Token was issued by the OP you trust
-- <code>aud</code> make sure the ID Token was issued to your <code>client_id</code>
-- <code>exp</code> make sure the token is not expired
-- <code>nonce</code> make sure the id_token correlates to your original authn request</p>
+<p>At a minimum, client developers should always validate the following:</p>
+<ul>
+<li>Signature of the ID token</li>
+<li><code>iss</code> make sure the ID Token was issued by the OP you trust</li>
+<li><code>aud</code> make sure the ID Token was issued to your <code>client_id</code></li>
+<li><code>exp</code> make sure the token is not expired</li>
+<li><code>nonce</code> make sure the id_token correlates to your original authn request</li>
+</ul>
 <h2 id="using-the-id-token-as-an-access-token-for-apis">Using the ID Token as an access token for API's<a class="headerlink" href="#using-the-id-token-as-an-access-token-for-apis" title="Permanent link">#</a></h2>
 <p>Don't do this. The ID Token is an identity assertion, not an access token. It
 may be passed in the payload to an API, but it should not be used in lieu of
@@ -173146,16 +173148,18 @@ was authenticated, not which API's a client is authorized to call. Also,
 OAuth access tokens are short lived, while the expiration of an identity
 assertion is much longer.</p>
 <h2 id="customizing-claims-in-an-id_token">Customizing claims in an id_token<a class="headerlink" href="#customizing-claims-in-an-id_token" title="Permanent link">#</a></h2>
-<p>The <a href="https://docs.jans.io/head/admin/developer/scripts/update-token/">UpdateTokenType</a> can be used in the following scenarios:
-1. In addition to the default claims in an ID token (<code>iss</code>, <code>aud</code>, <code>exp</code> etc), additional custom claims can be added to an ID token.
-2. You can also change the default value of a claim </p>
+<p>The <a href="https://docs.jans.io/head/admin/developer/scripts/update-token/">UpdateTokenType</a> can be used in the following scenarios:</p>
+<ol>
+<li>In addition to the default claims in an ID token (<code>iss</code>, <code>aud</code>, <code>exp</code> etc), additional custom claims can be added to an ID token.</li>
+<li>You can also change the default value of a claim </li>
+</ol>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-05-23T07:28:46+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-05-23</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-06-12T15:07:22+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-06-12</span>
       
         <br>
         Created:
