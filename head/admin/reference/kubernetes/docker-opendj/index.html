@@ -77,11 +77,6 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
-        
-        <a href="#overview" class="md-skip">
-          Skip to content
-        </a>
-      
     </div>
     <div data-md-component="announce">
       
@@ -171733,86 +171728,9 @@
       
       
       
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          Gluu OpenDJ
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
       <a href="./" class="md-nav__link md-nav__link--active">
         Gluu OpenDJ
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#overview" class="md-nav__link">
-    Overview
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#versions" class="md-nav__link">
-    Versions
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#environment-variables" class="md-nav__link">
-    Environment Variables
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#deployment-strategy" class="md-nav__link">
-    Deployment Strategy
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#ldap-replication" class="md-nav__link">
-    LDAP Replication
-  </a>
-  
-    <nav class="md-nav" aria-label="LDAP Replication">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#replication-using-advertised-address-and-port" class="md-nav__link">
-    Replication Using Advertised Address and Port
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#serf-encryption-key" class="md-nav__link">
-    Serf Encryption Key
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
       
     </li>
   
@@ -173010,69 +172928,6 @@
   
   
   
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#overview" class="md-nav__link">
-    Overview
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#versions" class="md-nav__link">
-    Versions
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#environment-variables" class="md-nav__link">
-    Environment Variables
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#deployment-strategy" class="md-nav__link">
-    Deployment Strategy
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#ldap-replication" class="md-nav__link">
-    LDAP Replication
-  </a>
-  
-    <nav class="md-nav" aria-label="LDAP Replication">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#replication-using-advertised-address-and-port" class="md-nav__link">
-    Replication Using Advertised Address and Port
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#serf-encryption-key" class="md-nav__link">
-    Serf Encryption Key
-  </a>
-  
-</li>
-      
-    </ul>
-  
 </nav>
                   </div>
                 </div>
@@ -173096,134 +172951,14 @@
 
   <h1>Gluu OpenDJ</h1>
 
-<hr />
-<p>tags:
-  - administration
-  - reference
-  - kubernetes
- - docker image</p>
-<hr />
-<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">#</a></h2>
-<p>Docker image packaging for OpenDJ.</p>
-<h2 id="versions">Versions<a class="headerlink" href="#versions" title="Permanent link">#</a></h2>
-<p>See <a href="https://github.com/GluuFederation/docker-opendj/releases">Releases</a> for stable versions.
-For bleeding-edge/unstable version, use <code>gluufederation/opendj:5.0.0_dev</code>.</p>
-<h2 id="environment-variables">Environment Variables<a class="headerlink" href="#environment-variables" title="Permanent link">#</a></h2>
-<p>The following environment variables are supported by the container:</p>
-<ul>
-<li><code>CN_CONFIG_ADAPTER</code>: The config backend adapter, can be <code>consul</code> (default), <code>kubernetes</code>, or <code>google</code>.</li>
-<li><code>CN_CONFIG_CONSUL_HOST</code>: hostname or IP of Consul (default to <code>localhost</code>).</li>
-<li><code>CN_CONFIG_CONSUL_PORT</code>: port of Consul (default to <code>8500</code>).</li>
-<li><code>CN_CONFIG_CONSUL_CONSISTENCY</code>: Consul consistency mode (choose one of <code>default</code>, <code>consistent</code>, or <code>stale</code>). Default to <code>stale</code> mode.</li>
-<li><code>CN_CONFIG_CONSUL_SCHEME</code>: supported Consul scheme (<code>http</code> or <code>https</code>).</li>
-<li><code>CN_CONFIG_CONSUL_VERIFY</code>: whether to verify cert or not (default to <code>false</code>).</li>
-<li><code>CN_CONFIG_CONSUL_CACERT_FILE</code>: path to Consul CA cert file (default to <code>/etc/certs/consul_ca.crt</code>). This file will be used if it exists and <code>CN_CONFIG_CONSUL_VERIFY</code> set to <code>true</code>.</li>
-<li><code>CN_CONFIG_CONSUL_CERT_FILE</code>: path to Consul cert file (default to <code>/etc/certs/consul_client.crt</code>).</li>
-<li><code>CN_CONFIG_CONSUL_KEY_FILE</code>: path to Consul key file (default to <code>/etc/certs/consul_client.key</code>).</li>
-<li><code>CN_CONFIG_CONSUL_TOKEN_FILE</code>: path to file contains ACL token (default to <code>/etc/certs/consul_token</code>).</li>
-<li><code>CN_CONFIG_KUBERNETES_NAMESPACE</code>: Kubernetes namespace (default to <code>default</code>).</li>
-<li><code>CN_CONFIG_KUBERNETES_CONFIGMAP</code>: Kubernetes configmaps name (default to <code>jans</code>).</li>
-<li><code>CN_CONFIG_KUBERNETES_USE_KUBE_CONFIG</code>: Load credentials from <code>$HOME/.kube/config</code>, only useful for non-container environment (default to <code>false</code>).</li>
-<li><code>CN_CONFIG_GOOGLE_SECRET_VERSION_ID</code>: Janssen configuration secret version ID in Google Secret Manager. Defaults to <code>latest</code>, which is recommended.</li>
-<li><code>CN_CONFIG_GOOGLE_SECRET_NAME_PREFIX</code>: Prefix for Janssen configuration secret in Google Secret Manager. Defaults to <code>jans</code>. If left intact <code>jans-configuration</code> secret will be created.</li>
-<li><code>CN_SECRET_ADAPTER</code>: The secrets adapter, can be <code>vault</code> (default), <code>kubernetes</code>, or <code>google</code>.</li>
-<li><code>CN_SECRET_VAULT_SCHEME</code>: supported Vault scheme (<code>http</code> or <code>https</code>).</li>
-<li><code>CN_SECRET_VAULT_HOST</code>: hostname or IP of Vault (default to <code>localhost</code>).</li>
-<li><code>CN_SECRET_VAULT_PORT</code>: port of Vault (default to <code>8200</code>).</li>
-<li><code>CN_SECRET_VAULT_VERIFY</code>: whether to verify cert or not (default to <code>false</code>).</li>
-<li><code>CN_SECRET_VAULT_ROLE_ID_FILE</code>: path to file contains Vault AppRole role ID (default to <code>/etc/certs/vault_role_id</code>).</li>
-<li><code>CN_SECRET_VAULT_SECRET_ID_FILE</code>: path to file contains Vault AppRole secret ID (default to <code>/etc/certs/vault_secret_id</code>).</li>
-<li><code>CN_SECRET_VAULT_CERT_FILE</code>: path to Vault cert file (default to <code>/etc/certs/vault_client.crt</code>).</li>
-<li><code>CN_SECRET_VAULT_KEY_FILE</code>: path to Vault key file (default to <code>/etc/certs/vault_client.key</code>).</li>
-<li><code>CN_SECRET_VAULT_CACERT_FILE</code>: path to Vault CA cert file (default to <code>/etc/certs/vault_ca.crt</code>). This file will be used if it exists and <code>CN_SECRET_VAULT_VERIFY</code> set to <code>true</code>.</li>
-<li><code>CN_SECRET_KUBERNETES_NAMESPACE</code>: Kubernetes namespace (default to <code>default</code>).</li>
-<li><code>CN_SECRET_KUBERNETES_CONFIGMAP</code>: Kubernetes secrets name (default to <code>jans</code>).</li>
-<li><code>CN_SECRET_KUBERNETES_USE_KUBE_CONFIG</code>: Load credentials from <code>$HOME/.kube/config</code>, only useful for non-container environment (default to <code>false</code>).</li>
-<li><code>CN_SECRET_GOOGLE_SECRET_VERSION_ID</code>:  Janssen secret version ID in Google Secret Manager. Defaults to <code>latest</code>, which is recommended.</li>
-<li><code>CN_SECRET_GOOGLE_SECRET_MANAGER_PASSPHRASE</code>: Passphrase for Janssen secret in Google Secret Manager. This is recommended to be changed and defaults to <code>secret</code>.</li>
-<li><code>CN_SECRET_GOOGLE_SECRET_NAME_PREFIX</code>: Prefix for Janssen secret in Google Secret Manager. Defaults to <code>jans</code>. If left <code>jans-secret</code> secret will be created.</li>
-<li><code>CN_WAIT_MAX_TIME</code>: How long the startup "health checks" should run (default to <code>300</code> seconds).</li>
-<li><code>CN_WAIT_SLEEP_DURATION</code>: Delay between startup "health checks" (default to <code>10</code> seconds).</li>
-<li><code>CN_CERT_ALT_NAME</code>: an additional DNS name set as Subject Alt Name in cert. If the value is not an empty string and doesn't match existing Subject Alt Name (or doesn't exist) in existing cert, then new cert will be regenerated and overwrite the one that saved in config backend. This environment variable is <strong>required only if</strong> oxShibboleth is deployed, to address issue with mismatched <code>CN</code> and destination hostname while trying to connect to OpenDJ. Note, any existing containers that connect to OpenDJ must be re-deployed to download new cert.</li>
-<li><code>CN_MAX_RAM_PERCENTAGE</code>: Value passed to Java option <code>-XX:MaxRAMPercentage</code>.</li>
-<li><code>CN_JAVA_OPTIONS</code>: Java options passed to entrypoint, i.e. <code>-Xmx1024m</code> (default to empty-string).</li>
-<li><code>CN_LDAP_AUTO_REPLICATE</code>: enable replication automatically (default to <code>true</code>).</li>
-<li><code>CN_LDAP_REPL_CHECK_INTERVAL</code> : Interval between replication check in seconds (default to <code>10</code>).</li>
-<li><code>CN_LDAP_REPL_MAX_RETRIES</code>: Maximum retries for auto-replication initialization (default to <code>30</code>). After max. retries is reached, the process will be stopped regardless of replication status (may need to run the process manually).</li>
-<li><code>CN_SERF_PROFILE</code>: Serf timing profile (one of <code>local</code>, <code>lan</code>, or <code>wan</code>) To support setting the correct configuration values for each environment (default to <code>lan</code>).</li>
-<li><code>CN_SERF_LOG_LEVEL</code>: The level of logging to show after the Serf agent has started (one of <code>trace</code>, <code>debug</code>, <code>info</code>, <code>warn</code>, <code>err</code>; default to <code>warn</code>).</li>
-<li><code>CN_SERF_MULTICAST_DISCOVER</code>: Auto-discover cluster using mDNS (default to <code>false</code>). Note this requires multicast support on network environment.</li>
-<li><code>CN_SERF_ADVERTISE_ADDR</code>: The address (<code>host:ip</code> format) that advertised to other Serf nodes in the cluster. If the value is empty, fallback to FQDN of container's hostname and port 7946. Note that port 7946 will always be opened inside container.</li>
-<li><code>CN_SERF_KEY_FILE</code>: Absolute path to file contains encryption key for Serf (default to <code>/etc/jans/conf/serf-key</code>). See <a href="#serf-encryption-key">Serf encryption key</a> for reference.</li>
-<li><code>CN_LDAP_ADVERTISE_ADMIN_PORT</code>: The admin port that advertised to other OpenDJ nodes in the cluster (default to <code>4444</code>). Note that the port inside the container will use this value instead of <code>4444</code>.</li>
-<li><code>CN_LDAP_ADVERTISE_REPLICATION_PORT</code>: The replication port that advertised to other OpenDJ nodes in the cluster (default to <code>8989</code>). Note that the port inside container will use this value instead of <code>8989</code>.</li>
-<li><code>CN_LDAP_ADVERTISE_LDAPS_PORT</code>: The secure port that advertised to other OpenDJ nodes in the cluster (default to <code>1636</code>). Note that port 1636 will always be opened inside container.</li>
-<li><code>CN_LDAP_ADVERTISE_LDAP_PORT</code>: The non-secure port that advertised to other OpenDJ nodes in the cluster (default to <code>1389</code>). Note that port 1389 will always be opened inside container.</li>
-<li><code>CN_LDAP_USE_SSL</code>: Whether to use SSL connection to LDAP server (default to <code>true</code>).</li>
-<li><code>GOOGLE_PROJECT_ID</code>: Google Project ID (default to empty string). Used when <code>CN_CONFIG_ADAPTER</code> or <code>CN_SECRET_ADAPTER</code> set to <code>google</code>.</li>
-<li><code>GOOGLE_APPLICATION_CREDENTIALS</code>: Path to Google credentials JSON file (default to <code>/etc/jans/conf/google-credentials.json</code>). Used when <code>CN_CONFIG_ADAPTER</code> or <code>CN_SECRET_ADAPTER</code> set to <code>google</code>.</li>
-</ul>
-<h2 id="deployment-strategy">Deployment Strategy<a class="headerlink" href="#deployment-strategy" title="Permanent link">#</a></h2>
-<ol>
-<li>Deploy single OpenDJ instance</li>
-<li>Initialize the data (see <a href="#initializing-ldap-data">Initializing LDAP Data</a>)</li>
-<li>Scale up OpenDJ instances and auto replication will occur by default (see also <a href="#ldap-replication">LDAP Replication</a>)</li>
-<li>Run <code>python3 /app/scripts/deregister_peer.py</code> inside the container before removing any OpenDJ instance (in Kubernetes, we can use <code>preStop</code> hook instead)</li>
-</ol>
-<h2 id="ldap-replication">LDAP Replication<a class="headerlink" href="#ldap-replication" title="Permanent link">#</a></h2>
-<p>The replication process is automatically run when the container runs, only if these conditions are met:</p>
-<ol>
-<li>There are multiple LDAP containers running in the cluster</li>
-<li>The <code>o=jans</code>, <code>o=site</code>, <code>o=metric</code> backends have not been replicated nor have entries</li>
-</ol>
-<p>Check the LDAP container logs to see the result and optionally run <code>/opt/opendj/bin/dsreplication status</code> inside the container.</p>
-<h3 id="replication-using-advertised-address-and-port">Replication Using Advertised Address and Port<a class="headerlink" href="#replication-using-advertised-address-and-port" title="Permanent link">#</a></h3>
-<p><strong>WARNING:</strong> this feature is considered alpha and should be used with caution.</p>
-<p>By default, each container will open the following ports internally:</p>
-<ul>
-<li>1636/tcp (LDAPS port)</li>
-<li>4444/tcp (admin port)</li>
-<li>8989/tcp (replication port)</li>
-<li>7946/udp+tcp (Serf port)</li>
-</ul>
-<p>All replication communication is done via address that resolved from container's hostname (FQDN format; i.e. <code>opendj-0.opendj.gluu.svc.cluster.local</code>).</p>
-<p>If somehow we want to use another address and ports, it can be done by running the following steps on each container:</p>
-<ol>
-<li>Set the <code>CN_SERF_ADVERTISE_ADDR</code> envvar; i.e. <code>CN_SERF_ADVERTISE_ADDR=node1.example.com:30946</code>. Make sure there is port mapping between 30946 (node) and 7946 (container) for both TCP and UDP protocols. Note that <code>node1.example.com</code> address must be reachable from all containers.</li>
-<li>Set the <code>CN_LDAP_ADVERTISE_ADMIN_PORT</code> envvar; i.e. <code>CN_LDAP_ADVERTISE_ADMIN_PORT=30444</code>. Make sure there is port mapping between 30444 (node) and 30444 (container).</li>
-<li>Set the <code>CN_LDAP_ADVERTISE_LDAPS_PORT</code> envvar; i.e. <code>CN_LDAP_ADVERTISE_LDAPS_PORT=30636</code>. Make sure there is port mapping between 30636 (node) and 1636 (container).</li>
-<li>Set the <code>CN_LDAP_ADVERTISE_REPLICATION_PORT</code> envvar; i.e. <code>CN_LDAP_ADVERTISE_REPLICATION_PORT=30989</code>. Make sure there is port mapping between 30989 (node) and 30989 (container).</li>
-</ol>
-<p>Check the LDAP container logs to see the result of replication and optionally run <code>/opt/opendj/bin/dsreplication status -X</code> inside the container.</p>
-<h2 id="serf-encryption-key">Serf Encryption Key<a class="headerlink" href="#serf-encryption-key" title="Permanent link">#</a></h2>
-<p>Each Serf agent running inside the container requires same encryption key to communicate to each other.</p>
-<p>The key is resolved by the following order:</p>
-<ol>
-<li>
-<p>Load from secrets (if any).</p>
-</li>
-<li>
-<p>Load from file (if any) where the absolute path is defined in <code>CN_SERF_KEY_FILE</code> environment variable (default to <code>/etc/jans/conf/serf-key</code>).
-    The key size must be a 16, 24, or 32 bytes encoded as base64 string.</p>
-<p>Example of valid key string:</p>
-<div class="codehilite"><pre><span></span><code><span class="c1"># python 3.6+</span>
-<span class="n">python</span> <span class="o">-</span><span class="n">c</span> <span class="s2">&quot;import secrets, base64; print(base64.b64encode(secrets.token_bytes()).decode())&quot;</span>
-<span class="c1"># output: Z51b6PgKU1MZ75NCZOTGGoc0LP2OF3qvF6sjxHyQCYk=</span>
-</code></pre></div>
 
-<p>This key will be saved to secrets.</p>
-</li>
-<li>
-<p>Load from <code>serf keygen</code> command. This key will be saved to secrets.</p>
-</li>
-</ol>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-04-18T10:42:32+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-04-18</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-06-12T07:03:26+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-06-12</span>
       
         <br>
         Created:
