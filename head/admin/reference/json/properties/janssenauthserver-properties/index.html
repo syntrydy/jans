@@ -171815,8 +171815,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#trustedssaissuers" class="md-nav__link">
-    trustedSsaIssuers
+  <a href="#dcrforbidexpirationtimeinrequest" class="md-nav__link">
+    dcrForbidExpirationTimeInRequest
   </a>
   
 </li>
@@ -172529,6 +172529,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#lognotfoundentityaserror" class="md-nav__link">
+    logNotFoundEntityAsError
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#metricreporterinterval" class="md-nav__link">
     metricReporterInterval
   </a>
@@ -173084,6 +173091,13 @@
         <li class="md-nav__item">
   <a href="#trustedclientenabled" class="md-nav__link">
     trustedClientEnabled
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#trustedssaissuers" class="md-nav__link">
+    trustedSsaIssuers
   </a>
   
 </li>
@@ -175229,8 +175243,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#trustedssaissuers" class="md-nav__link">
-    trustedSsaIssuers
+  <a href="#dcrforbidexpirationtimeinrequest" class="md-nav__link">
+    dcrForbidExpirationTimeInRequest
   </a>
   
 </li>
@@ -175943,6 +175957,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#lognotfoundentityaserror" class="md-nav__link">
+    logNotFoundEntityAsError
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#metricreporterinterval" class="md-nav__link">
     metricReporterInterval
   </a>
@@ -176503,6 +176524,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#trustedssaissuers" class="md-nav__link">
+    trustedSsaIssuers
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#uilocalessupported" class="md-nav__link">
     uiLocalesSupported
   </a>
@@ -177007,9 +177035,9 @@
 <td><a href="#dcrauthorizationwithmtls">Details</a></td>
 </tr>
 <tr>
-<td>trustedSsaIssuers</td>
-<td>List of trusted SSA issuers. If MTLS private key is used to sign DCR JWT, certificate issuer is checked as well.</td>
-<td><a href="#trustedssaissuers">Details</a></td>
+<td>dcrForbidExpirationTimeInRequest</td>
+<td>Boolean value specifying whether to allow to set client's expiration time in seconds during dynamic registration.</td>
+<td><a href="#dcrforbidexpirationtimeinrequest">Details</a></td>
 </tr>
 <tr>
 <td>dcrSignatureValidationEnabled</td>
@@ -177513,7 +177541,7 @@
 </tr>
 <tr>
 <td>loggingLevel</td>
-<td>Specify the logging level for oxAuth loggers</td>
+<td>Specify the logging level of loggers</td>
 <td><a href="#logginglevel">Details</a></td>
 </tr>
 <tr>
@@ -177920,6 +177948,11 @@
 <td>trustedClientEnabled</td>
 <td>Boolean value specifying whether a client is trusted and no authorization is required</td>
 <td><a href="#trustedclientenabled">Details</a></td>
+</tr>
+<tr>
+<td>trustedSsaIssuers</td>
+<td>List of trusted SSA issuers. If MTLS private key is used to sign DCR JWT, certificate issuer is checked as well.</td>
+<td><a href="#trustedssaissuers">Details</a></td>
 </tr>
 <tr>
 <td>uiLocalesSupported</td>
@@ -178748,16 +178781,16 @@
 <p>Default value: false</p>
 </li>
 </ul>
-<h3 id="trustedssaissuers">trustedSsaIssuers<a class="headerlink" href="#trustedssaissuers" title="Permanent link">#</a></h3>
+<h3 id="dcrforbidexpirationtimeinrequest">dcrForbidExpirationTimeInRequest<a class="headerlink" href="#dcrforbidexpirationtimeinrequest" title="Permanent link">#</a></h3>
 <ul>
 <li>
-<p>Description: List of trusted SSA issuers. If MTLS private key is used to sign DCR JWT, certificate issuer is checked as well.</p>
+<p>Description: Boolean value specifying whether to allow to set client's expiration time in seconds during dynamic registration.</p>
 </li>
 <li>
 <p>Required: No</p>
 </li>
 <li>
-<p>Default value: None</p>
+<p>Default value: false</p>
 </li>
 </ul>
 <h3 id="dcrsignaturevalidationenabled">dcrSignatureValidationEnabled<a class="headerlink" href="#dcrsignaturevalidationenabled" title="Permanent link">#</a></h3>
@@ -179963,7 +179996,19 @@
 <h3 id="logginglevel">loggingLevel<a class="headerlink" href="#logginglevel" title="Permanent link">#</a></h3>
 <ul>
 <li>
-<p>Description: Specify the logging level for oxAuth loggers</p>
+<p>Description: Specify the logging level of loggers</p>
+</li>
+<li>
+<p>Required: No</p>
+</li>
+<li>
+<p>Default value: None</p>
+</li>
+</ul>
+<h3 id="lognotfoundentityaserror">logNotFoundEntityAsError<a class="headerlink" href="#lognotfoundentityaserror" title="Permanent link">#</a></h3>
+<ul>
+<li>
+<p>Description: Boolean value specifying whether to log not_found entity exception as error or as trace. Default value is false (trace).</p>
 </li>
 <li>
 <p>Required: No</p>
@@ -180932,6 +180977,18 @@
 <p>Default value: None</p>
 </li>
 </ul>
+<h3 id="trustedssaissuers">trustedSsaIssuers<a class="headerlink" href="#trustedssaissuers" title="Permanent link">#</a></h3>
+<ul>
+<li>
+<p>Description: List of trusted SSA issuers. If MTLS private key is used to sign DCR JWT, certificate issuer is checked as well.</p>
+</li>
+<li>
+<p>Required: No</p>
+</li>
+<li>
+<p>Default value: None</p>
+</li>
+</ul>
 <h3 id="uilocalessupported">uiLocalesSupported<a class="headerlink" href="#uilocalessupported" title="Permanent link">#</a></h3>
 <ul>
 <li>
@@ -181190,7 +181247,7 @@
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-06-07T11:24:26+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-06-07</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-06-12T09:30:46+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-06-12</span>
       
         <br>
         Created:
