@@ -171849,6 +171849,19 @@
     Configuration Parameters of Janssen's FIDO2 server:
   </a>
   
+    <nav class="md-nav" aria-label="Configuration Parameters of Janssen's FIDO2 server:">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fido2configuration-structure" class="md-nav__link">
+    Fido2Configuration structure
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -173030,6 +173043,19 @@
     Configuration Parameters of Janssen's FIDO2 server:
   </a>
   
+    <nav class="md-nav" aria-label="Configuration Parameters of Janssen's FIDO2 server:">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fido2configuration-structure" class="md-nav__link">
+    Fido2Configuration structure
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -173212,6 +173238,18 @@
 <td>See JSON contents in the below example</td>
 <td>FIDO2 Configuration</td>
 </tr>
+</tbody>
+</table>
+<h4 id="fido2configuration-structure">Fido2Configuration structure<a class="headerlink" href="#fido2configuration-structure" title="Permanent link">#</a></h4>
+<table>
+<thead>
+<tr>
+<th>Field named</th>
+<th>Example</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
 <tr>
 <td>authenticatorCertsFolder</td>
 <td>/etc/jans/conf/fido2/authenticator_cert</td>
@@ -173231,6 +173269,11 @@
 <td>serverMetadataFolder</td>
 <td>/etc/jans/conf/fido2/server_metadata</td>
 <td>Authenticators metadata in json format. Example: virtual devices.</td>
+</tr>
+<tr>
+<td>metadataUrlsProvider</td>
+<td>https://mds3.fido.tools</td>
+<td>String value to provide source of URLs with external metadata.</td>
 </tr>
 <tr>
 <td>requestedCredentialTypes</td>
@@ -173291,6 +173334,7 @@
     &quot;unfinishedRequestExpiration&quot;: 180,
     &quot;authenticationHistoryExpiration&quot;: 1296000,
     &quot;serverMetadataFolder&quot;: &quot;/etc/jans/conf/fido2/server_metadata&quot;,
+    &quot;metadataUrlsProvider&quot;: &quot;&quot;,
     &quot;requestedCredentialTypes&quot;: [
       &quot;RS256&quot;,
       &quot;ES256&quot;
@@ -173335,7 +173379,7 @@ A[ou=jans] --&gt; V(ou=configuration)
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-03-21T08:32:36+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-03-21</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-06-13T14:41:20+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-06-13</span>
       
         <br>
         Created:

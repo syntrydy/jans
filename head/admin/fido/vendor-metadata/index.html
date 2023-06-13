@@ -171887,6 +171887,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#4-how-apple-does-it-differently" class="md-nav__link">
+    4. How Apple does it differently
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#references" class="md-nav__link">
     References:
   </a>
@@ -173021,6 +173028,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#4-how-apple-does-it-differently" class="md-nav__link">
+    4. How Apple does it differently
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#references" class="md-nav__link">
     References:
   </a>
@@ -173287,6 +173301,15 @@
 </ol>
 <h3 id="3-skip-metadata-validation">3. Skip metadata validation<a class="headerlink" href="#3-skip-metadata-validation" title="Permanent link">#</a></h3>
 <p>Metadata validation is recommended but not mandatory as per FIDO2 specifications. As per the current implementation, there is no provision in the jans-fido2 server to turn this feature off. However, the intention is to implement it in the future.</p>
+<h3 id="4-how-apple-does-it-differently">4. How Apple does it differently<a class="headerlink" href="#4-how-apple-does-it-differently" title="Permanent link">#</a></h3>
+<p>If you check <code>attStmt</code> and it contains <code>x5c</code>, it is a FULL attestation. FULL basically means that it is a certificate
+that is chained to the vendor. It's signed by a batch private key whose public key is in a batch certificate that is
+chained to the Apple attestation root certificate. Usually certificates have an authorityInfoAccess extension that helps
+locate the root, but Apple chose not to do that. Nevertheless, a quick google give us the needed root
+certificate https://www.apple.com/certificateauthority/Apple_WebAuthn_Root_CA.pem.</p>
+<p>This certificate is downloaded to the path <code>/etc/jans/conf/fido2/authenticator_cert</code>.</p>
+<p>You can see more details of the implementation in this link from
+https://medium.com/webauthnworks/webauthn-fido2-verifying-apple-anonymous-attestation-5eaff334c849.</p>
 <h3 id="references">References:<a class="headerlink" href="#references" title="Permanent link">#</a></h3>
 <ol>
 <li>https://fidoalliance.org/announcing-the-new-streamlined-and-simplified-metadata-service-for-authenticator-vendors-and-customers/</li>
@@ -173297,7 +173320,7 @@
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2022-11-10T17:41:26+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2022-11-10</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-06-13T14:41:20+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-06-13</span>
       
         <br>
         Created:
