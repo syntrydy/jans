@@ -387,6 +387,8 @@
         
           
         
+          
+        
       
       
         
@@ -3580,8 +3582,6 @@
         
           
         
-          
-        
       
       
         
@@ -3787,20 +3787,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../auth-server/openid-features/siop/" class="md-nav__link">
-        SIOP
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../../../auth-server/openid-features/native-sso/" class="md-nav__link">
         Native SSO
       </a>
@@ -3818,7 +3804,7 @@
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_9_8_12" type="checkbox" id="__nav_1_9_8_12" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_9_8_11" type="checkbox" id="__nav_1_9_8_11" >
       
       
       
@@ -3840,14 +3826,14 @@
         <div class="md-nav__link md-nav__link--index ">
           <a href="../../../auth-server/openid-features/user-claims/">User Claims</a>
           
-            <label for="__nav_1_9_8_12">
+            <label for="__nav_1_9_8_11">
               <span class="md-nav__icon md-icon"></span>
             </label>
           
         </div>
       
       <nav class="md-nav" aria-label="User Claims" data-md-level="4">
-        <label class="md-nav__title" for="__nav_1_9_8_12">
+        <label class="md-nav__title" for="__nav_1_9_8_11">
           <span class="md-nav__icon md-icon"></span>
           User Claims
         </label>
@@ -3913,7 +3899,7 @@
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_9_8_13" type="checkbox" id="__nav_1_9_8_13" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_9_8_12" type="checkbox" id="__nav_1_9_8_12" >
       
       
       
@@ -3937,14 +3923,14 @@
         <div class="md-nav__link md-nav__link--index ">
           <a href="../../../auth-server/openid-features/logout/">Logout</a>
           
-            <label for="__nav_1_9_8_13">
+            <label for="__nav_1_9_8_12">
               <span class="md-nav__icon md-icon"></span>
             </label>
           
         </div>
       
       <nav class="md-nav" aria-label="Logout" data-md-level="4">
-        <label class="md-nav__title" for="__nav_1_9_8_13">
+        <label class="md-nav__title" for="__nav_1_9_8_12">
           <span class="md-nav__icon md-icon"></span>
           Logout
         </label>
@@ -172365,6 +172351,101 @@
 
             
           
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_16" type="checkbox" id="__nav_1_16" >
+      
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../usermgmt/">User Management</a>
+          
+            <label for="__nav_1_16">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="User Management" data-md-level="2">
+        <label class="md-nav__title" for="__nav_1_16">
+          <span class="md-nav__icon md-icon"></span>
+          User Management
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../usermgmt/usermgmt-scim/" class="md-nav__link">
+        Using SCIM
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../usermgmt/usermgmt-cli-tui/" class="md-nav__link">
+        Using CLI/TUI
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../usermgmt/usermgmt-cache-refresh/" class="md-nav__link">
+        Cache Refresh
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -173047,7 +173128,7 @@
   <h1>Persistence</h1>
 
 <p>By overriding the interface methods in [PersistenceType]
-(https://github.com/JanssenProject/jans/blob/v1.0.15.nightly/jans-core/script/src/main/java/io/jans/model/custom/script/type/persistence/PersistenceType.java) inside a custom script you can</p>
+(https://github.com/JanssenProject/jans/blob/vreplace-janssen-version/jans-core/script/src/main/java/io/jans/model/custom/script/type/persistence/PersistenceType.java) inside a custom script you can</p>
 <ol>
 <li>Load initialization data from DB or initialize services after the creation of Entry Manager. </li>
 <li>Release resources, terminate services etc. after the destruction of Entry Manager.</li>
@@ -173060,7 +173141,7 @@ The Janssen server's Peristence Layer can be any one of LDAP, MySQL database, Po
 Information about an entity (person, session, client, scripts etc) constitutes an Entry.
 The Entry Manager (CRUD operations) implementation for each type of Persistence is available in the Janssen server and the relevant Entry Manager ( LDAPEntryManager, SQLEntryManager, etc.) is created when the server starts up. </p>
 <h3 id="usage">Usage:<a class="headerlink" href="#usage" title="Permanent link">#</a></h3>
-<p>The Jans-Auth server contains a <a href="https://github.com/JanssenProject/jans/blob/v1.0.15.nightly/docs/script-catalog/persistence_extension/PersistenceExtension.py"><code>PeristenceType</code></a> script.</p>
+<p>The Jans-Auth server contains a <a href="https://github.com/JanssenProject/jans/blob/vreplace-janssen-version/docs/script-catalog/persistence_extension/PersistenceExtension.py"><code>PeristenceType</code></a> script.</p>
 <h3 id="hashed-passwords">Hashed Passwords<a class="headerlink" href="#hashed-passwords" title="Permanent link">#</a></h3>
 <p>Hashed passwords can be created using any method from this <a href="https://github.com/JanssenProject/jans/blob/main/jans-orm/core/src/main/java/io/jans/orm/operation/auth/PasswordEncryptionMethod.java">enum</a>, instead of the native/default SSHA256.
 The ORM module of the Janssen server does the following: 

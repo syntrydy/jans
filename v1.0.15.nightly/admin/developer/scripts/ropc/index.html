@@ -387,6 +387,8 @@
         
           
         
+          
+        
       
       
         
@@ -3580,8 +3582,6 @@
         
           
         
-          
-        
       
       
         
@@ -3787,20 +3787,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../auth-server/openid-features/siop/" class="md-nav__link">
-        SIOP
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../../../auth-server/openid-features/native-sso/" class="md-nav__link">
         Native SSO
       </a>
@@ -3818,7 +3804,7 @@
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_9_8_12" type="checkbox" id="__nav_1_9_8_12" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_9_8_11" type="checkbox" id="__nav_1_9_8_11" >
       
       
       
@@ -3840,14 +3826,14 @@
         <div class="md-nav__link md-nav__link--index ">
           <a href="../../../auth-server/openid-features/user-claims/">User Claims</a>
           
-            <label for="__nav_1_9_8_12">
+            <label for="__nav_1_9_8_11">
               <span class="md-nav__icon md-icon"></span>
             </label>
           
         </div>
       
       <nav class="md-nav" aria-label="User Claims" data-md-level="4">
-        <label class="md-nav__title" for="__nav_1_9_8_12">
+        <label class="md-nav__title" for="__nav_1_9_8_11">
           <span class="md-nav__icon md-icon"></span>
           User Claims
         </label>
@@ -3913,7 +3899,7 @@
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_9_8_13" type="checkbox" id="__nav_1_9_8_13" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_9_8_12" type="checkbox" id="__nav_1_9_8_12" >
       
       
       
@@ -3937,14 +3923,14 @@
         <div class="md-nav__link md-nav__link--index ">
           <a href="../../../auth-server/openid-features/logout/">Logout</a>
           
-            <label for="__nav_1_9_8_13">
+            <label for="__nav_1_9_8_12">
               <span class="md-nav__icon md-icon"></span>
             </label>
           
         </div>
       
       <nav class="md-nav" aria-label="Logout" data-md-level="4">
-        <label class="md-nav__title" for="__nav_1_9_8_13">
+        <label class="md-nav__title" for="__nav_1_9_8_12">
           <span class="md-nav__icon md-icon"></span>
           Logout
         </label>
@@ -172426,6 +172412,101 @@
 
             
           
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_16" type="checkbox" id="__nav_1_16" >
+      
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../usermgmt/">User Management</a>
+          
+            <label for="__nav_1_16">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="User Management" data-md-level="2">
+        <label class="md-nav__title" for="__nav_1_16">
+          <span class="md-nav__icon md-icon"></span>
+          User Management
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../usermgmt/usermgmt-scim/" class="md-nav__link">
+        Using SCIM
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../usermgmt/usermgmt-cli-tui/" class="md-nav__link">
+        Using CLI/TUI
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../usermgmt/usermgmt-cache-refresh/" class="md-nav__link">
+        Cache Refresh
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -173162,7 +173243,7 @@
 <p>Resource Owner Password Credentials script allows modifying the behavior of Resource Owner Password Credentials Grant (<a href="https://www.rfc-editor.org/rfc/rfc6749#section-4.3">RFC 6749</a>).</p>
 <p>The script is invoked after normal authentication and can either leave current result or change it - authenticate if not authenticated - it should return True and optionally set user (via <code>context.setUser(user)</code>).</p>
 <h2 id="interface">Interface<a class="headerlink" href="#interface" title="Permanent link">#</a></h2>
-<p>The ROPC script implements the <a href="https://github.com/JanssenProject/jans/blob/v1.0.15.nightly/jans-core/script/src/main/java/io/jans/model/custom/script/type/owner/ResourceOwnerPasswordCredentialsType.java">ResourceOwnerPasswordCredentialsType</a> interface. This extends methods from the base script type in addition to adding new method:</p>
+<p>The ROPC script implements the <a href="https://github.com/JanssenProject/jans/blob/vreplace-janssen-version/jans-core/script/src/main/java/io/jans/model/custom/script/type/owner/ResourceOwnerPasswordCredentialsType.java">ResourceOwnerPasswordCredentialsType</a> interface. This extends methods from the base script type in addition to adding new method:</p>
 <h3 id="inherited-methods">Inherited Methods<a class="headerlink" href="#inherited-methods" title="Permanent link">#</a></h3>
 <table>
 <thead>
@@ -173212,7 +173293,7 @@
 <tbody>
 <tr>
 <td align="left"><code>customScript</code></td>
-<td align="left">The custom script object. <a href="https://github.com/JanssenProject/jans/blob/v1.0.15.nightly/jans-core/script/src/main/java/io/jans/model/custom/script/model/CustomScript.java">Reference</a></td>
+<td align="left">The custom script object. <a href="https://github.com/JanssenProject/jans/blob/vreplace-janssen-version/jans-core/script/src/main/java/io/jans/model/custom/script/model/CustomScript.java">Reference</a></td>
 </tr>
 <tr>
 <td align="left"><code>configurationAttributes</code></td>
@@ -173220,11 +173301,11 @@
 </tr>
 <tr>
 <td align="left"><code>SimpleCustomProperty</code></td>
-<td align="left">Map of configuration properties. <a href="https://github.com/JanssenProject/jans/blob/v1.0.15.nightly/jans-core/util/src/main/java/io/jans/model/SimpleCustomProperty.java">Reference</a></td>
+<td align="left">Map of configuration properties. <a href="https://github.com/JanssenProject/jans/blob/vreplace-janssen-version/jans-core/util/src/main/java/io/jans/model/SimpleCustomProperty.java">Reference</a></td>
 </tr>
 <tr>
 <td align="left"><code>context</code></td>
-<td align="left"><a href="https://github.com/JanssenProject/jans/blob/v1.0.15.nightly/jans-auth-server/server/src/main/java/io/jans/as/server/service/external/context/ExternalResourceOwnerPasswordCredentialsContext.java">Reference</a></td>
+<td align="left"><a href="https://github.com/JanssenProject/jans/blob/vreplace-janssen-version/jans-auth-server/server/src/main/java/io/jans/as/server/service/external/context/ExternalResourceOwnerPasswordCredentialsContext.java">Reference</a></td>
 </tr>
 </tbody>
 </table>

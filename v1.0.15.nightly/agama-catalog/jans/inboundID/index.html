@@ -383,6 +383,8 @@
         
           
         
+          
+        
       
       
         
@@ -3576,8 +3578,6 @@
         
           
         
-          
-        
       
       
         
@@ -3783,20 +3783,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../admin/auth-server/openid-features/siop/" class="md-nav__link">
-        SIOP
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../../../admin/auth-server/openid-features/native-sso/" class="md-nav__link">
         Native SSO
       </a>
@@ -3814,7 +3800,7 @@
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_9_8_12" type="checkbox" id="__nav_1_9_8_12" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_9_8_11" type="checkbox" id="__nav_1_9_8_11" >
       
       
       
@@ -3836,14 +3822,14 @@
         <div class="md-nav__link md-nav__link--index ">
           <a href="../../../admin/auth-server/openid-features/user-claims/">User Claims</a>
           
-            <label for="__nav_1_9_8_12">
+            <label for="__nav_1_9_8_11">
               <span class="md-nav__icon md-icon"></span>
             </label>
           
         </div>
       
       <nav class="md-nav" aria-label="User Claims" data-md-level="4">
-        <label class="md-nav__title" for="__nav_1_9_8_12">
+        <label class="md-nav__title" for="__nav_1_9_8_11">
           <span class="md-nav__icon md-icon"></span>
           User Claims
         </label>
@@ -3909,7 +3895,7 @@
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_9_8_13" type="checkbox" id="__nav_1_9_8_13" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_9_8_12" type="checkbox" id="__nav_1_9_8_12" >
       
       
       
@@ -3933,14 +3919,14 @@
         <div class="md-nav__link md-nav__link--index ">
           <a href="../../../admin/auth-server/openid-features/logout/">Logout</a>
           
-            <label for="__nav_1_9_8_13">
+            <label for="__nav_1_9_8_12">
               <span class="md-nav__icon md-icon"></span>
             </label>
           
         </div>
       
       <nav class="md-nav" aria-label="Logout" data-md-level="4">
-        <label class="md-nav__title" for="__nav_1_9_8_13">
+        <label class="md-nav__title" for="__nav_1_9_8_12">
           <span class="md-nav__icon md-icon"></span>
           Logout
         </label>
@@ -172313,6 +172299,101 @@
 
             
           
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_16" type="checkbox" id="__nav_1_16" >
+      
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../admin/usermgmt/">User Management</a>
+          
+            <label for="__nav_1_16">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="User Management" data-md-level="2">
+        <label class="md-nav__title" for="__nav_1_16">
+          <span class="md-nav__icon md-icon"></span>
+          User Management
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../admin/usermgmt/usermgmt-scim/" class="md-nav__link">
+        Using SCIM
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../admin/usermgmt/usermgmt-cli-tui/" class="md-nav__link">
+        Using CLI/TUI
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../admin/usermgmt/usermgmt-cache-refresh/" class="md-nav__link">
+        Cache Refresh
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -173262,7 +173343,7 @@
 </table>
 <p>Edit the file with the properties you consider relevant for every provider. Generally, the first six are the only needed.</p>
 <h3 id="supply-the-main-flow-configurations">Supply the main flow configurations<a class="headerlink" href="#supply-the-main-flow-configurations" title="Permanent link">#</a></h3>
-<p>The main flow (<code>io.jans.inbound.ExternalSiteLogin</code>) has to be parameterized as well. The configuration is held in a JSON object whose keys are the identifiers of the existing identity providers. The associated value for a key is a JSON object itself and follows the structure represented by <a href="https://github.com/JanssenProject/jans/blob/v1.0.15.nightly/jans-auth-server/agama/inboundID/src/main/java/io/jans/inbound/Provider.java">this</a> Java class.</p>
+<p>The main flow (<code>io.jans.inbound.ExternalSiteLogin</code>) has to be parameterized as well. The configuration is held in a JSON object whose keys are the identifiers of the existing identity providers. The associated value for a key is a JSON object itself and follows the structure represented by <a href="https://github.com/JanssenProject/jans/blob/vreplace-janssen-version/jans-auth-server/agama/inboundID/src/main/java/io/jans/inbound/Provider.java">this</a> Java class.</p>
 <p>This is an example of a configuration for a couple of identity providers:</p>
 <div class="highlight"><pre><span></span><code>{
 

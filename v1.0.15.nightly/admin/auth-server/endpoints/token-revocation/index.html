@@ -387,6 +387,8 @@
         
           
         
+          
+        
       
       
         
@@ -3646,8 +3648,6 @@
         
           
         
-          
-        
       
       
         
@@ -3853,20 +3853,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../../openid-features/siop/" class="md-nav__link">
-        SIOP
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../../openid-features/native-sso/" class="md-nav__link">
         Native SSO
       </a>
@@ -3884,7 +3870,7 @@
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_9_8_12" type="checkbox" id="__nav_1_9_8_12" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_9_8_11" type="checkbox" id="__nav_1_9_8_11" >
       
       
       
@@ -3906,14 +3892,14 @@
         <div class="md-nav__link md-nav__link--index ">
           <a href="../../openid-features/user-claims/">User Claims</a>
           
-            <label for="__nav_1_9_8_12">
+            <label for="__nav_1_9_8_11">
               <span class="md-nav__icon md-icon"></span>
             </label>
           
         </div>
       
       <nav class="md-nav" aria-label="User Claims" data-md-level="4">
-        <label class="md-nav__title" for="__nav_1_9_8_12">
+        <label class="md-nav__title" for="__nav_1_9_8_11">
           <span class="md-nav__icon md-icon"></span>
           User Claims
         </label>
@@ -3979,7 +3965,7 @@
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_9_8_13" type="checkbox" id="__nav_1_9_8_13" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_9_8_12" type="checkbox" id="__nav_1_9_8_12" >
       
       
       
@@ -4003,14 +3989,14 @@
         <div class="md-nav__link md-nav__link--index ">
           <a href="../../openid-features/logout/">Logout</a>
           
-            <label for="__nav_1_9_8_13">
+            <label for="__nav_1_9_8_12">
               <span class="md-nav__icon md-icon"></span>
             </label>
           
         </div>
       
       <nav class="md-nav" aria-label="Logout" data-md-level="4">
-        <label class="md-nav__title" for="__nav_1_9_8_13">
+        <label class="md-nav__title" for="__nav_1_9_8_12">
           <span class="md-nav__icon md-icon"></span>
           Logout
         </label>
@@ -172383,6 +172369,101 @@
 
             
           
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_16" type="checkbox" id="__nav_1_16" >
+      
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../usermgmt/">User Management</a>
+          
+            <label for="__nav_1_16">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="User Management" data-md-level="2">
+        <label class="md-nav__title" for="__nav_1_16">
+          <span class="md-nav__icon md-icon"></span>
+          User Management
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../usermgmt/usermgmt-scim/" class="md-nav__link">
+        Using SCIM
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../usermgmt/usermgmt-cli-tui/" class="md-nav__link">
+        Using CLI/TUI
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../usermgmt/usermgmt-cache-refresh/" class="md-nav__link">
+        Cache Refresh
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -173084,7 +173165,7 @@ looks like below:</p>
 <div class="highlight"><pre><span></span><code>https://jans-dynamic-ldap/jans-auth/restv1/revoke
 </code></pre></div>
 <p>More information about request and response of the revocation endpoint can be found in
-the OpenAPI specification of <a href="https://gluu.org/swagger-ui/?url=https://raw.githubusercontent.com/JanssenProject/jans/v1.0.15.nightly/jans-auth-server/docs/swagger.yaml#/Token/revoke">jans-auth-server module</a>.</p>
+the OpenAPI specification of <a href="https://gluu.org/swagger-ui/?url=https://raw.githubusercontent.com/JanssenProject/jans/vreplace-janssen-version/jans-auth-server/docs/swagger.yaml#/Token/revoke">jans-auth-server module</a>.</p>
 <h2 id="disabling-the-endpoint-using-feature-flag">Disabling The Endpoint Using Feature Flag<a class="headerlink" href="#disabling-the-endpoint-using-feature-flag" title="Permanent link">#</a></h2>
 <p><code>Token revocation</code> endpoint can be enabled or disable using <a href="../../../reference/json/feature-flags/janssenauthserver-feature-flags/#revoketoken">REVOKE_TOKEN feature flag</a>.
 Use <a href="../../../config-guide/jans-tui/">Janssen Text-based UI(TUI)</a> or <a href="../../../config-guide/jans-cli/">Janssen command-line interface</a> to perform this task.</p>
