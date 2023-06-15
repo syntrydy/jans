@@ -19,7 +19,7 @@
     
     
       
-        <title>Overview - Janssen Documentation</title>
+        <title>Logout - Janssen Documentation</title>
       
     
     
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#overview" class="md-skip">
+        <a href="#logout" class="md-skip">
           Skip to content
         </a>
       
@@ -128,7 +128,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Overview
+              Logout
             
           </span>
         </div>
@@ -173008,6 +173008,88 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#client-configuration" class="md-nav__link">
+    Client Configuration
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#janssen-server-configuration-properties" class="md-nav__link">
+    Janssen Server Configuration Properties
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rp-initiated-logout" class="md-nav__link">
+    RP-Initiated Logout
+  </a>
+  
+    <nav class="md-nav" aria-label="RP-Initiated Logout">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#configuration-properties" class="md-nav__link">
+    Configuration Properties
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#front-channel-logout" class="md-nav__link">
+    Front-Channel Logout
+  </a>
+  
+    <nav class="md-nav" aria-label="Front-Channel Logout">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#configuration-properties_1" class="md-nav__link">
+    Configuration Properties
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#back-channel-logout" class="md-nav__link">
+    Back-Channel Logout
+  </a>
+  
+    <nav class="md-nav" aria-label="Back-Channel Logout">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#configuration-properties_2" class="md-nav__link">
+    Configuration Properties
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -173048,6 +173130,21 @@
         <span class="md-tag">logout</span>
       
     
+      
+      
+        <span class="md-tag">front channel logout</span>
+      
+    
+      
+      
+        <span class="md-tag">back channel logout</span>
+      
+    
+      
+      
+        <span class="md-tag">RP initiated logout</span>
+      
+    
   </nav>
 
 
@@ -173058,24 +173155,110 @@
   </a>
 
 
-<h1 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">#</a></h1>
+<h1 id="logout">Logout<a class="headerlink" href="#logout" title="Permanent link">#</a></h1>
+<p>Janssen Server supports various end-user logout mechanisms by implementing OpenID Connect specifications. OpenID Connect
+specifications for <a href="https://openid.net/specs/openid-connect-rpinitiated-1_0.html">RP-Initiated Logout</a>,
+<a href="https://openid.net/specs/openid-connect-frontchannel-1_0.html">Front-Channel Logout</a> and
+<a href="https://openid.net/specs/openid-connect-backchannel-1_0.html">Back-Channel Logout</a> can be leveraged by
+applications(RPs) to implement end-user logout. Simpler logout scenarios can be fulfilled by using features of one of the
+specifications (just using RP-initiated logout for example), but for more complex scenarios like single sign-out,
+features from multiple specifications may have to be used in combination.</p>
+<p>To understand how various logout mechanisms work, it is important to first understand</p>
+<ul>
+<li><a href="https://docs.jans.io/v1.0.14/admin/auth-server/session-management/">How Janssen Server manages sessions?</a></li>
+<li><a href="https://openid.net/specs/openid-connect-session-1_0.html">OpenID Connect Session management specification</a></li>
+</ul>
+<p>User logout can be initiated either at RP (application) first or at the OpenID Provider (OP) first. Whichever party
+(RP or OP) gets the logout request first, and has to inform the other party about the event so that both the RP and OP
+sessions get properly terminated. RP-initiated logout is RP's method to let OP know about the event while
+Front-channel logout or back-channel logouts are the mechanisms used by OP to initiate logout and let RP know.</p>
+<h2 id="client-configuration">Client Configuration<a class="headerlink" href="#client-configuration" title="Permanent link">#</a></h2>
+<p>Which kind of logout mechanism is used by the client(RP) is dictated by the client's configuration on Janssen Server.</p>
+<p>When using
+<a href="../../config-guide/jans-tui/README.md">Janssen Text-based UI(TUI)</a> to configure the client, navigate via <code>Auth Server</code>-&gt;
+<code>Clients</code>-&gt;<code>logout</code> as shown in the image below:</p>
+<p><img alt="" src="../../../../assets/image-logout-client-config.png" /></p>
+<h2 id="janssen-server-configuration-properties">Janssen Server Configuration Properties<a class="headerlink" href="#janssen-server-configuration-properties" title="Permanent link">#</a></h2>
+<p>Following properties drive how Janssen Server as OpenID Connect Provider (OP) will execute logout.</p>
+<ul>
+<li><a href="../../../reference/json/properties/janssenauthserver-properties/#allowpostlogoutredirectwithoutvalidation">allowPostLogoutRedirectWithoutValidation</a></li>
+<li><a href="../../../reference/json/properties/janssenauthserver-properties/#frontchannellogoutsessionsupported">frontChannelLogoutSessionSupported</a></li>
+<li><a href="../../../reference/json/properties/janssenauthserver-properties/#removerefreshtokensforclientonlogout">removeRefreshTokensForClientOnLogout</a></li>
+</ul>
+<h2 id="rp-initiated-logout">RP-Initiated Logout<a class="headerlink" href="#rp-initiated-logout" title="Permanent link">#</a></h2>
+<p>RP can initiate logout for a user by redirecting the user-agent to Janssen Server's <code>end_session_endpoint</code>. This URL can be
+obtained as the value of the <code>end_session_endpoint</code> claim in the OpenID Connect
+<a href="../../endpoints/configuration/">.well-known metadata</a> endpoint response. Please read about <code>end_session_endpoint</code> in
+more details <a href="../../endpoints/end-session/">here</a></p>
+<p>A request to the <code>end_session_endpoint</code> endpoint of OP will clear the user session on OP. Along with this, it is important
+that RP also removes the local user session. RP can do this before redirecting the user agent to <code>end_session_endpoint</code>. In
+case RP is configured to receive an intimation from the OP about user logouts
+(either via front or backchannel logout mechanisms), then RP may choose to remove the local session after OP informs
+the RP about the successful logout.</p>
+<h3 id="configuration-properties">Configuration Properties<a class="headerlink" href="#configuration-properties" title="Permanent link">#</a></h3>
+<p>Client configuration property of <code>Post Logout Redirection URIs</code> plays an important role when using RP-initiated logout.
+After successful logout from Janssen Server, the server will redirect the user-agent to the URI specified in this property.</p>
+<h2 id="front-channel-logout">Front-Channel Logout<a class="headerlink" href="#front-channel-logout" title="Permanent link">#</a></h2>
 <p>Although Jans Auth Server has a <code>session_id</code> for each person who has authenticated,
-applications generally have their <em>own</em> sessions. Upon logout from an OpenID Provider, ideally all RPs are notified, so they can also their local sessions. The OpenID solution to implement logout is currently described in the <a href="http://openid.net/specs/openid-connect-frontchannel-1_0.html">OpenID Connect Front Channel Logout specification</a>.</p>
+applications generally have their <em>own</em> sessions. Upon logout from an OpenID Provider, ideally, all RPs are notified,
+so they can also remove their local sessions. The OpenID solution to implement logout is currently described in
+the <a href="http://openid.net/specs/openid-connect-frontchannel-1_0.html">OpenID Connect Front Channel Logout specification</a>.</p>
 <p>In practice, here's how it works:</p>
 <ul>
-<li>Jans Auth Server <code>end_session</code> endpoint returns an HTML page, which contains an iFrame for each application to which the user has authenticated.</li>
+<li>From the user-agent when the end-user initiates logout, the Janssen Server <code>end_session</code> endpoint is called.</li>
+<li><code>end_session</code> endpoint returns an HTML page, which contains an iFrame for each application to
+  which the user has authenticated.</li>
 <li>The iFrame contains a link to each application's respective logout URL.</li>
 <li>The special HTML page should be loaded in the background and not displayed to the user.</li>
 <li>The iFrame URLs should be loaded by the browser.</li>
-<li>Now, upon logout, the user is calling the logout page of each application, the local cookies are cleared, and the user is signed out of all applications.  </li>
+<li>Now, upon logout, the user is calling the logout page of each application, the local cookies are cleared,
+  and the user is signed out of all applications.</li>
 </ul>
+<h3 id="configuration-properties_1">Configuration Properties<a class="headerlink" href="#configuration-properties_1" title="Permanent link">#</a></h3>
+<p>A client can use configuration values of <code>Front Channel Logout URI</code> to specify URI to be used by Janssen Server to
+render in the iFrame at the time of logout. These
+configuration values can be updated using TUI as shown <a href="#client-configuration">here</a></p>
+<p>Janssen Server also provides a feature flag
+<a href="../../../reference/json/feature-flags/janssenauthserver-feature-flags/#endsession">END_SESSION</a>
+that enables or disables this endpoint. If this flag is enabled, it has the same effect as having
+<code>frontchannel_logout_supported</code> and <code>frontchannel_logout_session_supported</code> metadata values set to <code>true</code>. These
+metadata values are defined <a href="https://openid.net/specs/openid-connect-frontchannel-1_0.html#OPLogout">here</a> in
+<code>OpenID Connect Front-Channel Logout 1.0</code> specification.</p>
+<h2 id="back-channel-logout">Back-Channel Logout<a class="headerlink" href="#back-channel-logout" title="Permanent link">#</a></h2>
+<p>Janssen Server supports back-channel logout as a mechanism for OP to intimate the RP about user logout. As against
+front-channel logout, where OP intimates RP about user logout using user-agent, the back-channel logout uses
+direct message communication over HTTP with RP to convey the logout.</p>
+<p>Since this approach doesn't depend on the user-agent, it is more reliable. At the same time, it is more complex to implement
+since clearing the user-agent state has to be taken care of separately by RP.</p>
+<p>Central to the back-channel logout approach is the <code>logout token</code>. This token along with claims like <code>sid</code>, <code>sub</code>, and <code>iss</code>
+are sent by OP to RP to indicate that the subject or the session identified in the logout token has been logged out.
+Janssen Server follows recommendations published in the
+<a href="https://openid.net/specs/openid-connect-backchannel-1_0.html#LogoutToken">specification</a> in order to construct the
+logout token.</p>
+<p>Upon receipt of the logout token, the RP should
+<a href="https://openid.net/specs/openid-connect-backchannel-1_0.html#Validation">validate the token</a> and
+<a href="https://openid.net/specs/openid-connect-backchannel-1_0.html#BCActions">perform appropriate actions</a>. It should also
+send
+<a href="https://openid.net/specs/openid-connect-backchannel-1_0.html#BCResponse">an appropriate response</a> to OP informing the
+OP that logout has been successfully executed by RP.</p>
+<h3 id="configuration-properties_2">Configuration Properties<a class="headerlink" href="#configuration-properties_2" title="Permanent link">#</a></h3>
+<p>If an RP has specified <code>Back channel logout URL</code> as part of its <a href="#client-configuration">client configuration</a> then
+Janssen Server uses this URI to send the HTTP logout request. The client can also enable
+<code>backchannel_logout_session_required</code> as specified
+<a href="https://openid.net/specs/openid-connect-backchannel-1_0.html#BCRegistration">here</a> by using client configuration.</p>
+<p>Janssen Server also provides a feature flag
+<a href="../../../reference/json/feature-flags/janssenauthserver-feature-flags/#endsession">END_SESSION</a>
+that enables or disables this endpoint. If this flag is enabled, it has the same effect as having
+<code>backchannel_logout_supported</code> and <code>backchannel_logout_session_supported</code> metadata values set to <code>true</code>. These
+metadata values are defined <a href="https://openid.net/specs/openid-connect-backchannel-1_0.html#BCSupport">here</a> in
+<code>OpenID Connect Back-Channel Logout 1.0</code> specification.</p>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2022-12-28T23:29:38+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2022-12-28</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-06-15T16:15:50+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-06-15</span>
       
         <br>
         Created:
