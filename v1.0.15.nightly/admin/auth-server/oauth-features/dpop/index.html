@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#this-content-is-in-progress" class="md-skip">
+        <a href="#dpop-demonstrating-proof-of-possession-at-the-application-layer" class="md-skip">
           Skip to content
         </a>
       
@@ -4166,6 +4166,8 @@
       <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
       
       
+        
+      
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
           DPoP
@@ -4182,6 +4184,8 @@
   
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -4190,8 +4194,35 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#this-content-is-in-progress" class="md-nav__link">
-    This content is in progress
+  <a href="#using-dpop" class="md-nav__link">
+    Using DPoP
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-dpop-proof-jwt" class="md-nav__link">
+    Using DPoP Proof JWT
+  </a>
+  
+    <nav class="md-nav" aria-label="Using DPoP Proof JWT">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#using-introspection-endpoint" class="md-nav__link">
+    Using Introspection Endpoint
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#janssen-server-configuration-for-dpop" class="md-nav__link">
+    Janssen Server Configuration for DPoP
   </a>
   
 </li>
@@ -173054,6 +173085,8 @@
   
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -173062,8 +173095,35 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#this-content-is-in-progress" class="md-nav__link">
-    This content is in progress
+  <a href="#using-dpop" class="md-nav__link">
+    Using DPoP
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-dpop-proof-jwt" class="md-nav__link">
+    Using DPoP Proof JWT
+  </a>
+  
+    <nav class="md-nav" aria-label="Using DPoP Proof JWT">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#using-introspection-endpoint" class="md-nav__link">
+    Using Introspection Endpoint
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#janssen-server-configuration-for-dpop" class="md-nav__link">
+    Janssen Server Configuration for DPoP
   </a>
   
 </li>
@@ -173134,21 +173194,59 @@
   </a>
 
 
-  <h1>DPoP</h1>
-
-<h2 id="this-content-is-in-progress">This content is in progress<a class="headerlink" href="#this-content-is-in-progress" title="Permanent link">#</a></h2>
-<p>The Janssen Project documentation is currently in development. Topic pages are being created in order of broadest relevance, and this page is coming in the near future.</p>
+<h1 id="dpop-demonstrating-proof-of-possession-at-the-application-layer">DPoP (Demonstrating Proof-of-Possession at the Application Layer)<a class="headerlink" href="#dpop-demonstrating-proof-of-possession-at-the-application-layer" title="Permanent link">#</a></h1>
+<p>Janssen Server supports <code>DPoP</code> (Demonstrating Proof-of-Possession) at the Application Layer, which is OAuth 2.0 feature
+to enhance the security of resources protected by access tokens.</p>
+<p>When DPoP is being used, the Janssen Server checks whether the presenter of the access token is the one to whom the
+access token was issued. Hence, making sure that a stolen access token is not being used by someone
+else to access the protected resource. OAuth 2.0 DPoP specification is available
+<a href="https://www.ietf.org/archive/id/draft-ietf-oauth-dpop-16.html">here</a></p>
+<p>Janssen Server also supports OAuth <a href="../mtls/">MTLS(Mutual TLS)</a> as a mechanism to ensure that the token presenting
+party is legitimate. While <strong>MTLS should be preferred</strong> whenever it is possible to use it, for other cases like single
+page application(SPA), DPoP can be used.</p>
+<h2 id="using-dpop">Using DPoP<a class="headerlink" href="#using-dpop" title="Permanent link">#</a></h2>
+<h2 id="using-dpop-proof-jwt">Using DPoP Proof JWT<a class="headerlink" href="#using-dpop-proof-jwt" title="Permanent link">#</a></h2>
+<p>To use DPoP protection, the client needs to create DPoP Proof JWT (or DPoP Proof) and send it using <code>DPoP</code>
+request header to Janssen Server when:</p>
+<ol>
+<li>Requesting for a new access token</li>
+<li>Accessing a protected resource using the access token</li>
+</ol>
+<p>DPoP proofs are created differently for the cases listed above. DPoP specification describes
+<a href="https://www.ietf.org/archive/id/draft-ietf-oauth-dpop-16.html#name-dpop-proof-jwts">how</a>.</p>
+<p>When an access token is requested with the DPoP header (1 above), the Janssen Server returns an access token (or refresh token) that
+is bound(mapped) to the public key attached with the DPoP proof.</p>
+<p>Subsequently, when the client uses the access token to access the protected resource (2 above), it again creates and
+attaches the DPoP Proof with the request. The resource server checks the validity of the request by ensuring that the
+access token used is bound to the same public key which is presented in the DPoP proof in the request. The resource
+server uses steps laid out in the
+<a href="https://www.ietf.org/archive/id/draft-ietf-oauth-dpop-16.html#name-checking-dpop-proofs">specification</a> to acertain 
+this.</p>
+<h3 id="using-introspection-endpoint">Using Introspection Endpoint<a class="headerlink" href="#using-introspection-endpoint" title="Permanent link">#</a></h3>
+<p>Janssen Server <a href="../../endpoints/introspection/">introspection endpoint</a> supports the JWK thumbprint
+confirmation method. Using this, the resource server can introspect an access token and obtain the hash of the public
+key associated with the access token. Response from the introspection endpoint will share this information in the format
+recommended in the
+<a href="https://www.ietf.org/archive/id/draft-ietf-oauth-dpop-16.html#name-jwk-thumbprint-confirmation-">specificaiton</a></p>
+<h2 id="janssen-server-configuration-for-dpop">Janssen Server Configuration for DPoP<a class="headerlink" href="#janssen-server-configuration-for-dpop" title="Permanent link">#</a></h2>
+<p>Following properties of the Janssen Server can be used to tailor the behavior concerning DPoP.</p>
+<ul>
+<li><a href="https://docs.jans.io/head/admin/reference/json/properties/janssenauthserver-properties/#dpopjticachetime">dpopJtiCacheTime</a></li>
+<li><a href="https://docs.jans.io/head/admin/reference/json/properties/janssenauthserver-properties/#dpopsigningalgvaluessupported">dpopSigningAlgValuesSupported</a></li>
+<li><a href="https://docs.jans.io/head/admin/reference/json/properties/janssenauthserver-properties/#dpoptimeframe">dpopTimeframe</a></li>
+</ul>
 <h2 id="have-questions-in-the-meantime">Have questions in the meantime?<a class="headerlink" href="#have-questions-in-the-meantime" title="Permanent link">#</a></h2>
 <p>While this documentation is in progress, you can ask questions through <a href="https://github.com/JanssenProject/jans/discussion">GitHub Discussions</a> or the <a href="https://gitter.im/JanssenProject/Lobby">community chat on Gitter</a>. Any questions you have will help determine what information our documentation should cover.</p>
 <h2 id="want-to-contribute">Want to contribute?<a class="headerlink" href="#want-to-contribute" title="Permanent link">#</a></h2>
-<p>If you have content you'd like to contribute to this page in the meantime, you can get started with our <a href="https://docs.jans.io/head/CONTRIBUTING/">Contribution guide</a>.</p>
+<p>If you have content you'd
+like to contribute to this page in the meantime, you can get started with our <a href="https://docs.jans.io/head/CONTRIBUTING/">Contribution guide</a>.</p>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-04-11T07:54:01+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-04-11</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-06-20T08:13:39+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-06-20</span>
       
         <br>
         Created:

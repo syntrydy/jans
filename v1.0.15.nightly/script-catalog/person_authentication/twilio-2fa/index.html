@@ -19,7 +19,7 @@
     
     
       
-        <title>Index - Janssen Documentation</title>
+        <title>SMS One-Time Password (OTP) Authentication - Janssen Documentation</title>
       
     
     
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#this-content-is-in-progress" class="md-skip">
+        <a href="#sms-one-time-password-otp-authentication" class="md-skip">
           Skip to content
         </a>
       
@@ -128,7 +128,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Index
+              SMS One-Time Password (OTP) Authentication
             
           </span>
         </div>
@@ -172995,6 +172995,8 @@
   
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -173003,22 +173005,118 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#this-content-is-in-progress" class="md-nav__link">
-    This content is in progress
+  <a href="#overview" class="md-nav__link">
+    Overview
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#have-questions-in-the-meantime" class="md-nav__link">
-    Have questions in the meantime?
+  <a href="#prerequisites" class="md-nav__link">
+    Prerequisites
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#want-to-contribute" class="md-nav__link">
-    Want to contribute?
+  <a href="#twilio-as-a-2fa-method" class="md-nav__link">
+    Twilio as a 2FA method
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#add-twilio-library-to-jans-auth" class="md-nav__link">
+    Add Twilio library to jans-auth
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#properties" class="md-nav__link">
+    Properties
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#enable-twilio_sms-script" class="md-nav__link">
+    Enable twilio_sms script
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#enable-twilio_sms-script-as-default-authentication-script" class="md-nav__link">
+    Enable twilio_sms Script as default authentication script:
+  </a>
+  
+    <nav class="md-nav" aria-label="Enable twilio_sms Script as default authentication script:">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#test-the-feature" class="md-nav__link">
+    Test the feature
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sms-otp-login-pages" class="md-nav__link">
+    SMS OTP Login Pages
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-sms-otp" class="md-nav__link">
+    Using SMS OTP
+  </a>
+  
+    <nav class="md-nav" aria-label="Using SMS OTP">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#phone-number-enrollment" class="md-nav__link">
+    Phone Number Enrollment
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#subsequent-logins" class="md-nav__link">
+    Subsequent Logins
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#credential-management" class="md-nav__link">
+    Credential Management
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    Troubleshooting
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#self-service-account-security" class="md-nav__link">
+    Self-service account security
   </a>
   
 </li>
@@ -173046,21 +173144,129 @@
   </a>
 
 
-  <h1>Index</h1>
-
-<h2 id="this-content-is-in-progress">This content is in progress<a class="headerlink" href="#this-content-is-in-progress" title="Permanent link">#</a></h2>
-<p>The Janssen Project documentation is currently in development. Topic pages are being created in order of broadest relevance, and this page is coming in the near future.</p>
-<h2 id="have-questions-in-the-meantime">Have questions in the meantime?<a class="headerlink" href="#have-questions-in-the-meantime" title="Permanent link">#</a></h2>
-<p>While this documentation is in progress, you can ask questions through <a href="https://github.com/JanssenProject/jans/discussion">GitHub Discussions</a> or the <a href="https://gitter.im/JanssenProject/Lobby">community chat on Gitter</a>. Any questions you have will help determine what information our documentation should cover.</p>
-<h2 id="want-to-contribute">Want to contribute?<a class="headerlink" href="#want-to-contribute" title="Permanent link">#</a></h2>
-<p>If you have content you'd like to contribute to this page in the meantime, you can get started with our <a href="https://docs.jans.io/head/CONTRIBUTING/">Contribution guide</a>.</p>
+<h1 id="sms-one-time-password-otp-authentication">SMS One-Time Password (OTP) Authentication<a class="headerlink" href="#sms-one-time-password-otp-authentication" title="Permanent link">#</a></h1>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">#</a></h2>
+<p>SMS is a common technology used for the delivery of OTPs. Text messages provide a ubiquitous communication channel, and are directly available in nearly all mobile handsets and, through text-to-speech conversion, any mobile or landline telephone. </p>
+<p>This document explains how to configure the Gluu Server for two-step, two-factor authentication (2FA) with username / password as the first step, and an OTP sent via text message as the second step. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>As indicated, this script uses the <a href="https://www.twilio.com">Twilio cloud communications platform</a> to deliver SMS messages.     </p>
+</div>
+<h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">#</a></h2>
+<ul>
+<li>The <a href="https://github.com/JanssenProject/jans/blob/main/docs/script-catalog/person_authentication/twilio-2fa/twilio2FA.py">Twilio SMS OTP script</a> (included in the default Janssen Server distribution);   </li>
+<li>A <a href="https://www.twilio.com/">Twilio account</a>.     </li>
+<li>The twilio <a href="http://search.maven.org/remotecontent?filepath=com/twilio/sdk/twilio/7.17.6/twilio-7.17.6.jar">jar library</a> added to jans-auth</li>
+<li>A mobile device and phone number that can receive SMS text messages</li>
+</ul>
+<h2 id="twilio-as-a-2fa-method">Twilio as a 2FA method<a class="headerlink" href="#twilio-as-a-2fa-method" title="Permanent link">#</a></h2>
+<p>Twilio offers Voice, SMS, and MMS capabilities, but we will only need SMS for the purpose of this document. </p>
+<p>When registering for a Twilio account, you will be asked to verify your personal phone number, and then will be given a Twilio phone number. </p>
+<p>Ensure the number given is <a href="https://support.twilio.com/hc/en-us/articles/223183068-Twilio-international-phone-number-availability-and-their-capabilities">SMS enabled</a> and supports sending messages to the countries you are targeting. You may need to enable countries manually (see the <a href="https://www.twilio.com/console/sms/settings/geo-permissions">Geo permissions page</a>).</p>
+<p>Twilio trial accounts only allow sending messages to mobile numbers already linked to the account, so for testing you will want to add (and verify) some additional numbers besides your personal one to make sure the integration is working as expected. When you are ready to move to production, you will want to purchase a Twilio plan.</p>
+<h2 id="add-twilio-library-to-jans-auth">Add Twilio library to jans-auth<a class="headerlink" href="#add-twilio-library-to-jans-auth" title="Permanent link">#</a></h2>
+<ul>
+<li>
+<p>Copy the Twilio jar file to the following jans-auth folder inside the Gluu Server chroot: <code>/opt/jans/jetty/jans-auth/custom/libs</code> </p>
+</li>
+<li>
+<p>Edit <code>/opt/jans/jetty/jans-auth/webapps/jans-auth.xml</code> and add the following line:</p>
+<div class="highlight"><pre><span></span><code>&lt;Set name=&quot;extraClasspath&quot;&gt;/opt/jans/jetty/jans-auth/custom/libs/twilio.jar&lt;/Set&gt;
+</code></pre></div>
+</li>
+<li>
+<p><a href="../operation/services.md#restart">Restart</a> the <code>jans-auth</code> service     </p>
+</li>
+</ul>
+<h2 id="properties">Properties<a class="headerlink" href="#properties" title="Permanent link">#</a></h2>
+<p>The custom script has the following properties:    </p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Description</th>
+<th>Input value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>twilio_sid</td>
+<td>Twilio account SID</td>
+<td>Obtain from your Twilio account</td>
+</tr>
+<tr>
+<td>twilio_token</td>
+<td>Access token associated to Twilio account</td>
+<td>Obtain from your Twilio account</td>
+</tr>
+<tr>
+<td>from_number</td>
+<td>Twilio phone number assigned to the account</td>
+<td>Obtain from your Twilio account</td>
+</tr>
+</tbody>
+</table>
+<h2 id="enable-twilio_sms-script">Enable twilio_sms script<a class="headerlink" href="#enable-twilio_sms-script" title="Permanent link">#</a></h2>
+<p>By default, users will get the default authentication mechanism as specified above. However, <strong>using the OpenID Connect acr_values parameter, web and mobile clients can request any enabled authentication mechanism</strong>.</p>
+<ol>
+<li>Obtain the json contents of <code>twilio_sms</code> custom script by using a jans-cli command like <code>get-config-scripts-by-type</code>, <code>get-config-scripts-by-inum</code> etc.</li>
+</ol>
+<p>e.g : <code>/opt/jans/jans-cli/config-cli.py --operation-id get-config-scripts-by-type --url-suffix type:PERSON_AUTHENTICATION</code> , <code>/opt/jans/jans-cli/config-cli.py --operation-id get-config-scripts-by-inum --url-suffix inum:6122281b-b55d-4dd0-8115-b098eeeee2b7</code></p>
+<ol>
+<li><a href="https://github.com/JanssenProject/jans-cli/blob/vreplace-janssen-version/docs/cli/cli-custom-scripts.md#update-an-existing-custom-script">Update the custom script</a> and change the <code>enabled</code> attribute to <code>true</code>  </li>
+</ol>
+<p>Now <code>twilio_sms</code> is an available authentication mechanism for your Janssen Server. This means that, using OpenID Connect <code>acr_values</code>, applications can now request <code>twilio_sms</code> authentication for users.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>To make sure <code>twilio_sms</code> has been enabled successfully, you can check your Janssen's Auth Server OpenID Connect
+configuration by navigating to the following URL: <code>https://&lt;hostname&gt;/.well-known/openid-configuration</code>.
+Find <code>"acr_values_supported":</code> and you should see <code>twilio_sms</code> .</p>
+</div>
+<h2 id="enable-twilio_sms-script-as-default-authentication-script">Enable <code>twilio_sms</code> Script as default authentication script:<a class="headerlink" href="#enable-twilio_sms-script-as-default-authentication-script" title="Permanent link">#</a></h2>
+<p>Use this <a href="https://github.com/JanssenProject/jans-cli-tui/blob/vreplace-janssen-version/docs/cli/cli-default-authentication-method.md">link</a> as a reference.
+Follow the steps below to enable <code>twilio_sms</code> authentication:
+1. Create a file say <code>twilio_sms</code> -auth-default.json<code>with the following contents
+<div class="highlight"><pre><span></span><code>{
+  &quot;defaultAcr&quot;: &quot;`twilio_sms` &quot;
+}
+</code></pre></div>
+2.Update the default authentication method to ``twilio_sms</code> `
+<div class="highlight"><pre><span></span><code>/opt/jans/jans-cli/config-cli.py --operation-id put-acrs --data /tmp/twilio_sms-auth-default.json
+</code></pre></div></p>
+<h3 id="test-the-feature">Test the feature<a class="headerlink" href="#test-the-feature" title="Permanent link">#</a></h3>
+<p>To test, enter the complete URL for authorization in a browser or create a simple webpage with a link that simulates the user sign-in attempt. If the server is configured properly, the first page for the selected authentication method will be displayed to the user.</p>
+<p>An example of a complete URL looks like this -
+<div class="highlight"><pre><span></span><code>https://&lt;your.jans.server&gt;/jans-auth/authorize.htm?response_type=code&amp;redirect_uri=https://&lt;your.jans.server&gt;/admin&amp;client_id=&lt;replace_with_inum_client_id&gt;&amp;scope=openid+profile+email+user_name&amp;state=faad2cdjfdddjfkdf&amp;nonce=dajdffdfsdcfff
+</code></pre></div></p>
+<h2 id="sms-otp-login-pages">SMS OTP Login Pages<a class="headerlink" href="#sms-otp-login-pages" title="Permanent link">#</a></h2>
+<p>The Jans Server includes one page for SMS OTP:</p>
+<ol>
+<li>A <strong>login</strong> page that is displayed for all SMS OTP authentications. 
+<img alt="image" src="https://github.com/JanssenProject/jans/assets/12072533/3a8feb9b-8e4f-46ba-b524-cd5e89113c6c" /></li>
+</ol>
+<p>The designs are being rendered from the <a href="https://github.com/JanssenProject/jans/blob/main/jans-auth-server/server/src/main/webapp/auth/otp_sms/otp_sms.xhtml">SMS xhtml page</a>. To customize the look and feel of the pages, follow the <a href="https://github.com/JanssenProject/jans/blob/main/docs/admin/developer/customization/customize-web-pages.md">customization guide</a>.</p>
+<h2 id="using-sms-otp">Using SMS OTP<a class="headerlink" href="#using-sms-otp" title="Permanent link">#</a></h2>
+<h3 id="phone-number-enrollment">Phone Number Enrollment<a class="headerlink" href="#phone-number-enrollment" title="Permanent link">#</a></h3>
+<p>The script assumes the user phone number is already stored in his corresponding LDAP entry (attribute <code>phoneNumberVerified</code>). You can change the attribute by altering the script directly (see authenticate routine).</p>
+<h3 id="subsequent-logins">Subsequent Logins<a class="headerlink" href="#subsequent-logins" title="Permanent link">#</a></h3>
+<p>All <!--subsequent--> authentications will trigger an SMS with an OTP to the registered phone number. Enter the OTP to pass authentication. </p>
+<h3 id="credential-management">Credential Management<a class="headerlink" href="#credential-management" title="Permanent link">#</a></h3>
+<p>A user's registered phone number can be removed by a Gluu administrator either via the jans TUI, or in LDAP under the user entry. Once the phone number has been removed from the user's account, the user can re-enroll a new phone number following the <a href="#phone-number-enrollment">phone number enrollment</a> instructions above. </p>
+<h2 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">#</a></h2>
+<p>If problems are encountered, take a look at the logs, specifically <code>/opt/jans/jetty/jans-auth/logs/jans-auth_script.log</code>. Inspect all messages related to Twilio. For instance, the following messages show an example of correct script initialization:</p>
+<div class="highlight"><pre><span></span><code>Twilio SMS. Initialization
+Twilio SMS. Initialized successfully
+</code></pre></div>
+<p>Also make sure you are using the latest version of the script that can be found <a href="https://github.com/JanssenProject/jans/blob/main/docs/script-catalog/person_authentication/twilio-2fa/twilio2FA.py">here</a>.</p>
+<h2 id="self-service-account-security">Self-service account security<a class="headerlink" href="#self-service-account-security" title="Permanent link">#</a></h2>
+<p>To offer end-users a portal where they can manage their own account security preferences, including two-factor authentication credentials like phone numbers for SMS OTP, check out our new app, <a href="https://casa.gluu.org">Gluu Casa</a>. </p>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2022-12-08T20:20:00+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2022-12-08</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-06-20T12:49:55+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-06-20</span>
       
         <br>
         Created:
