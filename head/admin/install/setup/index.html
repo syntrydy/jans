@@ -173207,21 +173207,24 @@ Install Fido2 Server? <span class="o">[</span>Yes<span class="o">]</span>:
 <p>To check usage of this script run help command</p>
 <div class="highlight"><pre><span></span><code>    python3 /opt/jans/jans-setup/setup.py --help
 
-      usage: setup.py [-h] [--version] [-c] [-d D] [-f F] [-n] [-N] [-u] [-csx] [-remote-rdbm {mysql,pgsql,spanner} | -local-rdbm 
-      {mysql,pgsql}]
-      [-ip-address IP_ADDRESS] [-host-name HOST_NAME] [-org-name ORG_NAME] [-email EMAIL] [-city CITY] [-state STATE] [-country COUNTRY] 
-      [-rdbm-user RDBM_USER] [-rdbm-password RDBM_PASSWORD] [-rdbm-port RDBM_PORT] [-rdbm-db RDBM_DB] [-rdbm-host RDBM_HOST] 
-      [--reset-rdbm-db] [--shell] [--dump-config-on-error] [--no-progress] [-admin-password ADMIN_PASSWORD]  [-jans-max-mem JANS_MAX_MEM] 
-      [-properties-password PROPERTIES_PASSWORD] [-approved-issuer APPROVED_ISSUER] [--force-download] [--download-exit] 
-      [-jans-app-version JANS_APP_VERSION] [-jans-build JANS_BUILD] [-setup-branch SETUP_BRANCH]  [--disable-config-api-security]
-      [--cli-test-client] [--import-ldif IMPORT_LDIF] [-enable-script ENABLE_SCRIPT]  [-disable-script DISABLE_SCRIPT] [-stm] [-w]
-      [-t] [-x] [--allow-pre-released-features] [--listen_all_interfaces] [--remote-ldap | --disable-local-ldap] [--remote-couchbase]
-      [--local-couchbase] [-couchbase-admin-user COUCHBASE_ADMIN_USER]  [-couchbase-admin-password COUCHBASE_ADMIN_PASSWORD] 
-      [-couchbase-bucket-prefix COUCHBASE_BUCKET_PREFIX][-couchbase-hostname COUCHBASE_HOSTNAME] [--no-data] [--no-jsauth] 
-      [-ldap-admin-password LDAP_ADMIN_PASSWORD] [--no-config-api] [--no-scim] [--no-fido2] [--install-eleven] [--load-config-api-test] 
-      [-config-patch-creds CONFIG_PATCH_CREDS] [-spanner-project SPANNER_PROJECT] [-spanner-instance SPANNER_INSTANCE] [
-      -spanner-database SPANNER_DATABASE]  [-spanner-emulator-host SPANNER_EMULATOR_HOST | -google-application-credentials       
-      GOOGLE_APPLICATION_CREDENTIALS]
+      usage: setup.py [-h] [--version] [-c] [-d D] [-f F] [-n] [-N] [-u] [-csx]
+                     [-remote-rdbm {mysql,pgsql,spanner} | -local-rdbm {mysql,pgsql}] [-ip-address IP_ADDRESS] [-host-name HOST_NAME]
+                     [-org-name ORG_NAME] [-email EMAIL] [-city CITY] [-state STATE] [-country COUNTRY] [-rdbm-user RDBM_USER]
+                     [-rdbm-password RDBM_PASSWORD] [-rdbm-port RDBM_PORT] [-rdbm-db RDBM_DB] [-rdbm-host RDBM_HOST] [--reset-rdbm-db]
+                     [--shell] [--dump-config-on-error] [--no-progress] [-admin-password ADMIN_PASSWORD] [-jans-max-mem JANS_MAX_MEM]
+                     [-properties-password PROPERTIES_PASSWORD] [-approved-issuer APPROVED_ISSUER] [--force-download] [--download-exit]
+                     [-jans-app-version JANS_APP_VERSION] [-jans-build JANS_BUILD] [-setup-branch SETUP_BRANCH]
+                     [--disable-config-api-security] [--cli-test-client] [--import-ldif IMPORT_LDIF] [-enable-script ENABLE_SCRIPT]
+                     [-disable-script DISABLE_SCRIPT] [-stm] [-w] [-t] [-x] [--allow-pre-released-features] [--listen_all_interfaces]
+                     [--remote-ldap | --disable-local-ldap] [--remote-couchbase] [--local-couchbase]
+                     [-couchbase-admin-user COUCHBASE_ADMIN_USER] [-couchbase-admin-password COUCHBASE_ADMIN_PASSWORD]
+                     [-couchbase-bucket-prefix COUCHBASE_BUCKET_PREFIX] [-couchbase-hostname COUCHBASE_HOSTNAME] [--no-data]
+                     [--no-jsauth] [-ldap-admin-password LDAP_ADMIN_PASSWORD] [--no-config-api] [--no-scim] [--no-fido2]
+                     [--install-eleven] [--install-cache-refresh] [--load-config-api-test] [-config-patch-creds CONFIG_PATCH_CREDS]
+                     [-spanner-project SPANNER_PROJECT] [-spanner-instance SPANNER_INSTANCE] [-spanner-database SPANNER_DATABASE]
+                     [-spanner-emulator-host SPANNER_EMULATOR_HOST | -google-application-credentials GOOGLE_APPLICATION_CREDENTIALS]
+                     [-test-client-id TEST_CLIENT_ID] [-test-client-pw TEST_CLIENT_PW]
+                     [-test-client-redirect-uri TEST_CLIENT_REDIRECT_URI] [--test-client-trusted]
 </code></pre></div>
 <p>Use this script to configure your Jans Server and to add initial data required for oxAuth and oxTrust to start. If setup.properties is found in this folder, these properties will automatically be used instead of the interactive setup.</p>
 <p>Below are the optional arguments:</p>
@@ -173486,6 +173489,10 @@ Install Fido2 Server? <span class="o">[</span>Yes<span class="o">]</span>:
 <td>Load Config Api Test Data</td>
 </tr>
 <tr>
+<td>--install-cache-refresh</td>
+<td>Install Cache Refresh Server</td>
+</tr>
+<tr>
 <td>-config-patch-creds CONFIG_PATCH_CREDS</td>
 <td>password:username for downloading auto test ciba password</td>
 </tr>
@@ -173509,6 +173516,22 @@ Install Fido2 Server? <span class="o">[</span>Yes<span class="o">]</span>:
 <td>-google-application-credentials GOOGLE_APPLICATION_CREDENTIALS</td>
 <td>Path to Google application credentials json file</td>
 </tr>
+<tr>
+<td>-test-client-id TEST_CLIENT_ID</td>
+<td>ID of test client which has all available scopes. Must be in UUID format.</td>
+</tr>
+<tr>
+<td>-test-client-pw TEST_CLIENT_PW</td>
+<td>Secret for test client</td>
+</tr>
+<tr>
+<td>-test-client-redirect-uri TEST_CLIENT_REDIRECT_URI</td>
+<td>Redirect URI for test client</td>
+</tr>
+<tr>
+<td>--test-client-trusted</td>
+<td>Make test client trusted</td>
+</tr>
 </tbody>
 </table>
 
@@ -173517,7 +173540,7 @@ Install Fido2 Server? <span class="o">[</span>Yes<span class="o">]</span>:
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-04-11T07:54:01+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-04-11</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-06-21T09:07:33+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-06-21</span>
       
         <br>
         Created:
