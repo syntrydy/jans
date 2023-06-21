@@ -173199,9 +173199,14 @@
 <li>If the server firewall is running, make sure to disable it during installation. </li>
 </ul>
 <p>For example:</p>
-<div class="highlight"><pre><span></span><code>firewall-cmd --permanent --zone=public --add-service=https
+<p><div class="highlight"><pre><span></span><code>firewall-cmd --permanent --zone=public --add-service=https
 firewall-cmd --reload
 </code></pre></div>
+-Download the GPG key zip file , unzip and import GPG key
+<div class="highlight"><pre><span></span><code>wget https://github.com/JanssenProject/jans/files/11814522/automation-jans-public-gpg.zip
+unzip automation-jans-public-gpg.zip
+rpm -import automation-jans-public-gpg.asc
+</code></pre></div></p>
 <ul>
 <li>Download the release package from the GitHub Janssen Project
   <a href="https://github.com/JanssenProject/jans/releases">Releases</a></li>
@@ -173293,7 +173298,7 @@ Removing /etc/apache2/sites-available/https_jans.conf
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-04-11T18:49:35+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-04-11</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-06-21T12:37:10+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-06-21</span>
       
         <br>
         Created:
