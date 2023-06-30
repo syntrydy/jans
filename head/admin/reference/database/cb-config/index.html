@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#this-content-is-in-progress" class="md-skip">
+        <a href="#couchbase-orm-persistence-layer" class="md-skip">
           Skip to content
         </a>
       
@@ -2508,6 +2508,8 @@
       <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
       
       
+        
+      
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
           Couchbase Configuration
@@ -2524,6 +2526,8 @@
   
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -2532,22 +2536,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#this-content-is-in-progress" class="md-nav__link">
-    This content is in progress
+  <a href="#configuration-properties" class="md-nav__link">
+    Configuration properties
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#have-questions-in-the-meantime" class="md-nav__link">
-    Have questions in the meantime?
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#want-to-contribute" class="md-nav__link">
-    Want to contribute?
+  <a href="#doc_id-building-rules" class="md-nav__link">
+    doc_id building rules
   </a>
   
 </li>
@@ -173070,6 +173067,8 @@
   
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -173078,22 +173077,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#this-content-is-in-progress" class="md-nav__link">
-    This content is in progress
+  <a href="#configuration-properties" class="md-nav__link">
+    Configuration properties
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#have-questions-in-the-meantime" class="md-nav__link">
-    Have questions in the meantime?
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#want-to-contribute" class="md-nav__link">
-    Want to contribute?
+  <a href="#doc_id-building-rules" class="md-nav__link">
+    doc_id building rules
   </a>
   
 </li>
@@ -173140,21 +173132,175 @@
   </a>
 
 
-  <h1>Couchbase Configuration</h1>
+<h1 id="couchbase-orm-persistence-layer">Couchbase ORM persistence layer<a class="headerlink" href="#couchbase-orm-persistence-layer" title="Permanent link">#</a></h1>
+<p>The recommended Couchbase version is 7.x or newer. This DB should be installed before installing Jans.
+After running Jans setup administrator should provide user/password with role which allow to create buckets and import initial data and configuration.</p>
+<p>During installation setup generates default <strong>/etc/jans/conf/jans-couchbase.properties</strong> and creates required buckets in DB with initial data set.</p>
+<p><img alt="" src="../../../../assets/database-cb-buckets.jpg" /></p>
+<h2 id="configuration-properties">Configuration properties<a class="headerlink" href="#configuration-properties" title="Permanent link">#</a></h2>
+<p>List of specific for Couchbase default setting from <code>jans-couchbase.properties</code>:</p>
+<div class="highlight"><pre><span></span><code>servers: localhost
 
-<h2 id="this-content-is-in-progress">This content is in progress<a class="headerlink" href="#this-content-is-in-progress" title="Permanent link">#</a></h2>
-<p>The Janssen Project documentation is currently in development. Topic pages are being created in order of broadest relevance, and this page is coming in the near future.</p>
-<h2 id="have-questions-in-the-meantime">Have questions in the meantime?<a class="headerlink" href="#have-questions-in-the-meantime" title="Permanent link">#</a></h2>
-<p>While this documentation is in progress, you can ask questions through <a href="https://github.com/JanssenProject/jans/discussion">GitHub Discussions</a> or the <a href="https://gitter.im/JanssenProject/Lobby">community chat on Gitter</a>. Any questions you have will help determine what information our documentation should cover.</p>
-<h2 id="want-to-contribute">Want to contribute?<a class="headerlink" href="#want-to-contribute" title="Permanent link">#</a></h2>
-<p>If you have content you'd like to contribute to this page in the meantime, you can get started with our <a href="https://docs.jans.io/head/CONTRIBUTING/">Contribution guide</a>.</p>
+# The connect timeout is used when a Bucket is opened.
+# If you feel the urge to change this value to something higher, there is a good chance that your network is not properly set up.
+# Connecting to the server should in practice not take longer than a second on a reasonably fast network.
+# Default SDK connectTimeout is 10s
+connection.connect-timeout: 10000
+
+# Enable/disable DNS SRV lookup for the bootstrap nodes
+# Default dnsSrvEnabled is true
+connection.dns.use-lookup: false
+
+# Key/value timeout
+# Default SDK kvTimeout is 2500ms
+connection.kv-timeout: 5000
+
+# Query timeout
+# Default SDK queryTimeout is 75s
+connection.query-timeout: 75000
+
+# Configures whether mutation tokens will be returned from the server for all mutation operations
+# Default mutationTokensEnabled is true
+# connection.mutation-tokens-enabled: false
+
+# At startup when connection error is occurred persistence layer can make another attempt to open buckets.
+# Before make next try it pause process for 5 second. If after that total connection time is less than specified
+# in property above new attempt will be executed
+connection.connection-max-wait-time: 20000
+
+# Default scan consistency. Possible values are: not_bounded, request_plus, statement_plus
+connection.scan-consistency: not_bounded
+
+# Disable scan consistency in queries. Default value: false
+# connection.ignore-attribute-scan-consistency: true
+
+# Try to execute query with scan consitency specified in connection.scan-consistency first.
+# On failure execute query again with scan consistency specified in attributes defintions. Default value: true
+# connection.attempt-without-attribute-scan-consistency: false
+
+# Enable scopes support. Default value: false
+# connection.enable-scope-support: true
+
+# Disable mapping to short attribute names. Default value: false
+# connection.disable-attribute-mapping: true
+
+# Credentials for access Couchbase DB
+auth.userName: admin
+auth.userPassword: encrypted_password
+
+# List of used buckets
+buckets: jans, jans_user, jans_site, jans_cache, jans_token, jans_session
+
+# Mapping entries to buckets
+bucket.default: jans
+bucket.jans_user.mapping: people, groups, authorizations
+bucket.jans_site.mapping: cache-refresh
+bucket.jans_cache.mapping: cache
+bucket.jans_token.mapping: tokens
+bucket.jans_session.mapping: sessions
+
+# User password hashing method
+password.encryption.method: SSHA-256
+
+# SSL connection trust store
+ssl.trustStore.enable: true
+ssl.trustStore.file: /etc/certs/couchbase.pkcs12
+ssl.trustStore.pin: encrypted_password
+ssl.trustStore.type: pkcs12
+
+tls.enable: false
+</code></pre></div>
+<p>The rest of properties are static for all other supported DB:</p>
+<div class="highlight"><pre><span></span><code>binaryAttributes=objectGUID
+certificateAttributes=userCertificate
+</code></pre></div>
+<h2 id="doc_id-building-rules"><code>doc_id</code> building rules<a class="headerlink" href="#doc_id-building-rules" title="Permanent link">#</a></h2>
+<p>In order to support transparency for end applications and allow data migration from one DB to another ORM requires <code>DN</code> attribute in each entry. This attribute it also uses to build <code>doc_id</code>. Here is example of this <code>DN</code> -&gt; <code>doc_id</code> conversion:</p>
+<p><img alt="" src="../../../../assets/database-cb-scope-1.jpg" /></p>
+<p>In order to build unique document identifier ORM uses another unique attribute <code>DN</code>. <code>doc_id</code> is concatenated RDN list in reversed order. To join them ORM uses <code>_</code> character. The root RDN is excluded.
+if entry has <code>DN</code> with only root RDN for it <code>doc_id</code> is <code>_</code>.</p>
+<h1 id="buckets-mapping">Buckets mapping<a class="headerlink" href="#buckets-mapping" title="Permanent link">#</a></h1>
+<p>Couchbase supports few buckets types. Also each bucket can be tuned for specific task. For example for token operations application need fast access to such entries.</p>
+<p><img alt="" src="../../../../assets/database-cb-bucket-settings.jpg" /></p>
+<p>ORM allows to split data by bucket with mapping specified in <code>bucket.&lt;bucket_name&gt;</code> properties. The list of allowed buckets which ORM can use should be specified in <code>buckets</code> property. Property <code>bucket.default</code> is mandatory because it's specify bucket which ORM should use if not mapping specified for entry.</p>
+<p>ORM uses next rule to determine in which bucket it should store entry:</p>
+<ol>
+<li>Get list of RDN from entry <code>DN</code>.</li>
+<li>Use second RDN from list in mapping rule.</li>
+<li>Iterate trough <code>bucket.&lt;bucket_name&gt;</code> property value and check if it in list</li>
+<li>If ORM not find <code>bucket_name</code> in previous step it uses bucket specified in <code>bucket.default</code> property value.</li>
+</ol>
+<h2 id="data-mapping-rules">Data mapping rules<a class="headerlink" href="#data-mapping-rules" title="Permanent link">#</a></h2>
+<p>ORM uses JSON types to store data in entries. Since there is no date time support in JSON it uses Couchbase compatible format ISO-8601. Example:</p>
+<p><img alt="" src="../../../../assets/database-cb-scope-2.jpg" /></p>
+<p>For user password field ORM on persist/update operations automatically create hash. On authentication ORM compares hashes.</p>
+<p><img alt="" src="../../../../assets/database-cb-person.jpg" /></p>
+<p>ORM also uses Couchbase sub-document API to store attributes defined in java beans with <code>@JsonObject</code> annotation.</p>
+<p><img alt="" src="../../../../assets/database-cb-configuration.jpg" /></p>
+<h1 id="java-examples">Java examples<a class="headerlink" href="#java-examples" title="Permanent link">#</a></h1>
+<p>This example shows how to use ORM. It opens connection to Couchbase DB and add user entry to it:</p>
+<div class="highlight"><pre><span></span><code>    public static void main(String[] args) {
+        // Create Couchbase entry manager
+        CouchbaseEntryManager couchbaseEntryManager = createCouchbaseEntryManager();
+
+        // Create and fill user bean
+        SimpleUser newUser = new SimpleUser();
+        newUser.setDn(String.format(&quot;inum=%s,ou=people,o=jans&quot;, System.currentTimeMillis()));
+        newUser.setUserId(&quot;sample_user_&quot; + System.currentTimeMillis());
+        newUser.setUserPassword(&quot;test&quot;);
+        newUser.getCustomAttributes().add(new CustomObjectAttribute(&quot;jansAddres&quot;, Arrays.asList(&quot;London&quot;, &quot;Texas&quot;, &quot;New York&quot;)));
+        newUser.getCustomAttributes().add(new CustomObjectAttribute(&quot;jansGuid&quot;, &quot;test_value&quot;));
+
+        // Call ORM API to store entry
+        couchbaseEntryManager.persist(newUser);
+
+        couchbaseEntryManager.destroy();
+    }
+
+    public static CouchbaseEntryManager createCouchbaseEntryManager() {
+        CouchbaseEntryManagerFactory couchbaseEntryManagerFactory = new CouchbaseEntryManagerFactory();
+        couchbaseEntryManagerFactory.create();
+        Properties connectionProperties = getSampleConnectionProperties();
+
+        CouchbaseEntryManager couchbaseEntryManager = couchbaseEntryManagerFactory.createEntryManager(connectionProperties);
+
+        return couchbaseEntryManager;
+    }
+
+    private static Properties getSampleConnectionProperties() {
+        Properties connectionProperties = new Properties();
+
+        connectionProperties.put(&quot;couchbase#servers&quot;, &quot;localhost&quot;);
+        connectionProperties.put(&quot;couchbase#auth.userName&quot;, &quot;admin&quot;);
+        connectionProperties.put(&quot;couchbase#auth.userPassword&quot;, &quot;secret&quot;);
+
+        connectionProperties.put(&quot;couchbase#connection.dns.use-lookup&quot;, &quot;false&quot;);
+
+        connectionProperties.put(&quot;couchbase#buckets&quot;, &quot;jans, jans_user, jans_site, jans_cache, jans_token, jans_session&quot;);
+
+        connectionProperties.put(&quot;couchbase#bucket.default&quot;, &quot;jans&quot;);
+        connectionProperties.put(&quot;couchbase#bucket.jans_user.mapping&quot;, &quot;people, groups, authorizations&quot;);
+        connectionProperties.put(&quot;couchbase#bucket.jans_site.mapping&quot;, &quot;cache-refresh&quot;);
+        connectionProperties.put(&quot;couchbase#bucket.jans_cache.mapping&quot;, &quot;cache&quot;);
+        connectionProperties.put(&quot;couchbase#bucket.jans_token.mapping&quot;, &quot;tokens&quot;);
+        connectionProperties.put(&quot;couchbase#bucket.jans_session.mapping&quot;, &quot;sessions&quot;);
+
+        connectionProperties.put(&quot;couchbase#password.encryption.method&quot;, &quot;SSHA-256&quot;);
+
+        connectionProperties.put(&quot;couchbase#binaryAttributes&quot;, &quot;objectGUID&quot;);
+        connectionProperties.put(&quot;couchbase#certificateAttributes&quot;, &quot;userCertificate&quot;);
+
+        return connectionProperties;
+    }
+</code></pre></div>
+<p>More Couchbase ORM examples is in <a href="https://github.com/JanssenProject/jans/tree/main/jans-orm/couchbase-sample/src/main/java/io/jans/orm/couchbase">this</a> sample module.</p>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2022-12-08T20:20:00+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2022-12-08</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-06-30T20:49:44+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-06-30</span>
       
         <br>
         Created:

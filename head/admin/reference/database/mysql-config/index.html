@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#mysql-as-choice-for-persistence" class="md-skip">
+        <a href="#mysql-orm-persistence-layer" class="md-skip">
           Skip to content
         </a>
       
@@ -2605,6 +2605,8 @@
       <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
       
       
+        
+      
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
           MySQL Configuration
@@ -2621,6 +2623,8 @@
   
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -2629,15 +2633,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#mysql-as-choice-for-persistence" class="md-nav__link">
-    MySQL as choice for Persistence
+  <a href="#configuration-properties" class="md-nav__link">
+    Configuration properties
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#database-configuration-file-name" class="md-nav__link">
-    Database configuration file name
+  <a href="#doc_id-building-rules" class="md-nav__link">
+    doc_id building rules
   </a>
   
 </li>
@@ -173063,6 +173067,8 @@
   
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -173071,15 +173077,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#mysql-as-choice-for-persistence" class="md-nav__link">
-    MySQL as choice for Persistence
+  <a href="#configuration-properties" class="md-nav__link">
+    Configuration properties
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#database-configuration-file-name" class="md-nav__link">
-    Database configuration file name
+  <a href="#doc_id-building-rules" class="md-nav__link">
+    doc_id building rules
   </a>
   
 </li>
@@ -173131,26 +173137,13 @@
   </a>
 
 
-  <h1>MySQL Configuration</h1>
-
-<h3 id="mysql-as-choice-for-persistence">MySQL as choice for Persistence<a class="headerlink" href="#mysql-as-choice-for-persistence" title="Permanent link">#</a></h3>
-<p>While installing the Jans Server, the administrator will be presented a menu of the possible choices for the persistence layer (LDAP, MySQL, Couchbase, Postgres etc). 
-MySQL database can be installed in 2 possible ways and the administrator will be prompted to make this choice during installation:
-1. <strong>Locally</strong> : 
-<br>The administrator can configure:
-*  RDBM username
-*  RDBM password
-*  RDBM database name
-2. <strong>Remotely</strong> :
-<br>The administrator will be prompted to configure:
-*  RDBM username
-*  RDBM password
-*  RDBM port
-*  RDBM database
-*  RDBM host</p>
-<h3 id="database-configuration-file-name">Database configuration file name<a class="headerlink" href="#database-configuration-file-name" title="Permanent link">#</a></h3>
-<p>The database configurations are stored in <code>/etc/gluu/conf/jans-sql.properties</code> and contain the following information: 
- <div class="highlight"><pre><span></span><code>db.schema.name=jansdb
+<h1 id="mysql-orm-persistence-layer">MySQL ORM persistence layer<a class="headerlink" href="#mysql-orm-persistence-layer" title="Permanent link">#</a></h1>
+<p>The recommended MySQL version is 8.x or newer. Before running installation the administrator can pre-install DB and provide credentials to access it or he can select option to install MySQL on same server during setup.</p>
+<p>During installation setup generates default <strong>/etc/jans/conf/jans-sql.properties</strong> and creates <strong>jansdb</strong> schema with tables and  initial data set.</p>
+<p><img alt="" src="../../../../assets/database-mysql-tables.jpg" /></p>
+<h2 id="configuration-properties">Configuration properties<a class="headerlink" href="#configuration-properties" title="Permanent link">#</a></h2>
+<p>List of specific for MySQL default setting from <code>jans-sql.properties</code>:</p>
+<div class="highlight"><pre><span></span><code>db.schema.name=jansdb
 
 connection.uri=jdbc:mysql://localhost:3306/jansdb?enabledTLSProtocols=TLSv1.2
 
@@ -173165,8 +173158,8 @@ connection.driver-property.metadataCacheSize=500
 #connection.driver-property.prepStmtCacheSize=500
 #connection.driver-property.prepStmtCacheSqlLimit=1024
 
-auth.userName=vi....bo
-auth.userPassword=qphWF1h....XmUAvn9g==
+auth.userName=jans
+auth.userPassword=CC0NHhtXW78=
 
 # Password hash method
 password.encryption.method=SSHA-256
@@ -173185,16 +173178,119 @@ connection.pool.max-wait-time-millis=20000
 # Allow to evict connection in pool after 30 minutes
 connection.pool.min-evictable-idle-time-millis=1800000
 
-binaryAttributes=objectGUID
+# Sets whether objects created for the pool will be validated before being returned from it
+#connection.pool.test-on-create=true
+
+# Sets whether objects borrowed from the pool will be validated when they are returned to the pool
+#connection.pool.test-on-return=true
+</code></pre></div>
+<p>The rest of properties are static for all other supported DB:</p>
+<div class="highlight"><pre><span></span><code>binaryAttributes=objectGUID
 certificateAttributes=userCertificate
-</code></pre></div></p>
+</code></pre></div>
+<h2 id="doc_id-building-rules"><code>doc_id</code> building rules<a class="headerlink" href="#doc_id-building-rules" title="Permanent link">#</a></h2>
+<p>In order to support transparency for end applications and allow data migration from one DB to another ORM requires <code>DN</code> attribute in each entry. This attribute it also uses to build <code>doc_id</code>. Here is example of this <code>DN</code> -&gt; <code>doc_id</code> conversion:</p>
+<p><img alt="" src="../../../../assets/database-mysql-scope-1.jpg" /></p>
+<p><code>doc_id</code> is primary key. In order to build unique document identifier ORM uses another unique attribute <code>DN</code>. <code>doc_id</code> is last <code>RDN</code> value.</p>
+<h1 id="generic-tables-structure">Generic tables structure<a class="headerlink" href="#generic-tables-structure" title="Permanent link">#</a></h1>
+<p>Each table in <strong>jansdb</strong> MySQL schema follow next rules:</p>
+<ol>
+<li>one table for every LDAP <strong>objectClass</strong></li>
+<li>has 2 mandatory column <code>DN</code> and <code>doc_id</code></li>
+<li>Index for primary key</li>
+</ol>
+<p><img alt="" src="../../../../assets/database-mysql-scope-index.jpg" /></p>
+<h2 id="data-mapping-rules">Data mapping rules<a class="headerlink" href="#data-mapping-rules" title="Permanent link">#</a></h2>
+<p>ORM uses <strong>VARCHAR / DATETIME(3) / INT / BINARY / SMALLINT / BLOB / JSON</strong> data types. <strong>SMALLINT</strong> represents boolean attribute type.</p>
+<p><img alt="" src="../../../../assets/database-mysql-scope-schema.jpg" /></p>
+<p><code>JSON</code> it uses to store multi-valued attribute values. The generic format of such values is:</p>
+<p><div class="highlight"><pre><span></span><code>{&quot;v&quot;: [&quot;value_1&quot;, &quot;value_2&quot;, ...]}
+</code></pre></div>
+ORM add <code>v</code> key on top level due to MySQL limitations of indexing JSON array if they are on to level. If it's specified in schema that application can do search in multi-valued attribute setup add next indexes for each column:</p>
+<p><div class="highlight"><pre><span></span><code>  KEY `jansExtUid_json_1` ((cast(json_extract(`jansExtUid`,_utf8mb4&#39;$.v&#39;) as char(128) array))),
+  KEY `jansExtUid_json_2` ((cast(json_extract(`jansExtUid`,_utf8mb4&#39;$.v[0]&#39;) as char(128) charset utf8mb4))),
+  KEY `jansExtUid_json_3` ((cast(json_extract(`jansExtUid`,_utf8mb4&#39;$.v[1]&#39;) as char(128) charset utf8mb4))),
+  KEY `jansExtUid_json_4` ((cast(json_extract(`jansExtUid`,_utf8mb4&#39;$.v[2]&#39;) as char(128) charset utf8mb4))),
+</code></pre></div>
+By default it creates indexes for first 3 values. Administrator should add more indexes to confrom maximum count of values.</p>
+<blockquote>
+<blockquote>
+<p>In future versions if top level JSON array indexing will work well we can review format to use simple JSON array.</p>
+</blockquote>
+</blockquote>
+<p>For user password field ORM on persist/update operations automatically create hash. On authentication ORM compares hashes.</p>
+<p><img alt="" src="../../../../assets/database-mysql-person.jpg" /></p>
+<p>To store attributes defined in java beans with <code>@JsonObject</code> annotation ORM uses <strong>TEXT</strong> column type.</p>
+<p><img alt="" src="../../../../assets/database-mysql-configuration.jpg" /></p>
+<h1 id="java-examples">Java examples<a class="headerlink" href="#java-examples" title="Permanent link">#</a></h1>
+<p>This example shows how to use ORM. It opens connection to MySQL DB and add user entry to it:</p>
+<div class="highlight"><pre><span></span><code>    public static void main(String[] args) {
+        // Create Sql entry manager
+        SqlEntryManager couchbaseEntryManager = createSqlEntryManager();
+
+        // Create and fill user bean
+        SimpleUser newUser = new SimpleUser();
+        newUser.setDn(String.format(&quot;inum=%s,ou=people,o=jans&quot;, System.currentTimeMillis()));
+        newUser.setUserId(&quot;sample_user_&quot; + System.currentTimeMillis());
+        newUser.setUserPassword(&quot;test&quot;);
+        newUser.getCustomAttributes().add(new CustomObjectAttribute(&quot;jansAddres&quot;, Arrays.asList(&quot;London&quot;, &quot;Texas&quot;, &quot;New York&quot;)));
+        newUser.getCustomAttributes().add(new CustomObjectAttribute(&quot;jansGuid&quot;, &quot;test_value&quot;));
+
+        // Call ORM API to store entry
+        couchbaseEntryManager.persist(newUser);
+
+        couchbaseEntryManager.destroy();
+    }
+
+    public static SqlEntryManager createSqlEntryManager() {
+        SqlEntryManagerFactory couchbaseEntryManagerFactory = new SqlEntryManagerFactory();
+        couchbaseEntryManagerFactory.create();
+        Properties connectionProperties = getSampleConnectionProperties();
+
+        SqlEntryManager couchbaseEntryManager = couchbaseEntryManagerFactory.createEntryManager(connectionProperties);
+
+        return couchbaseEntryManager;
+    }
+
+    private static Properties getSampleConnectionProperties() {
+        Properties connectionProperties = new Properties();
+
+        connectionProperties.put(&quot;sql#db.schema.name&quot;, &quot;jansdb&quot;);
+        connectionProperties.put(&quot;sql#connection.uri&quot;, &quot;jdbc:mysql://localhost:3306/jansdb?profileSQL=true&quot;);
+
+        connectionProperties.put(&quot;sql#connection.driver-property.serverTimezone&quot;, &quot;GMT+2&quot;);
+        connectionProperties.put(&quot;sql#connection.pool.max-total&quot;, &quot;300&quot;);
+        connectionProperties.put(&quot;sql#connection.pool.max-idle&quot;, &quot;300&quot;);
+
+        connectionProperties.put(&quot;sql#auth.userName&quot;, &quot;jans&quot;);
+        connectionProperties.put(&quot;sql#auth.userPassword&quot;, &quot;secret&quot;);
+
+        // Password hash method
+        connectionProperties.put(&quot;sql#password.encryption.method&quot;, &quot;SSHA-256&quot;);
+
+        // Max time needed to create connection pool in milliseconds
+        connectionProperties.put(&quot;sql#connection.pool.create-max-wait-time-millis&quot;, &quot;20000&quot;);
+
+        // Max wait 20 seconds
+        connectionProperties.put(&quot;sql#connection.pool.max-wait-time-millis&quot;, &quot;20000&quot;);
+
+        // Allow to evict connection in pool after 30 minutes
+        connectionProperties.put(&quot;sql#connection.pool.min-evictable-idle-time-millis&quot;, &quot;1800000&quot;);
+
+        connectionProperties.put(&quot;sql#binaryAttributes&quot;, &quot;objectGUID&quot;);
+        connectionProperties.put(&quot;sql#certificateAttributes&quot;, &quot;userCertificate&quot;);
+
+        return connectionProperties;
+    }
+</code></pre></div>
+<p>More MySQL ORM examples is in <a href="https://github.com/JanssenProject/jans/tree/main/jans-orm/sql-sample/src/main/java/io/jans/orm/sql">this</a> sample module.</p>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-05-12T16:09:59+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-05-12</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-06-30T20:49:44+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-06-30</span>
       
         <br>
         Created:
