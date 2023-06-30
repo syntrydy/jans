@@ -173055,8 +173055,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#new-db-support-and-integration" class="md-nav__link">
-    New DB support and integration
+  <a href="#new-db-support-and-integrations" class="md-nav__link">
+    New DB support and integrations
   </a>
   
 </li>
@@ -173111,35 +173111,39 @@
 
 
 <h1 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">#</a></h1>
-<p>Modern systems can work with different DB. Jans is also not exception from this rule. Currently it can work with different DB types and also can work in hybrid environment where application can use the strong power of each DB. This parts is based on <a href="https://github.com/JanssenProject/jans/tree/main/jans-orm">jans-orm</a> layer. It has pluggable architecture which allows to add support more DB in future.</p>
-<p>One of the main targets of ORM module is to provide simple lightweight layer to access DB. Also it provides abstractions which hide dependency to specific DB.</p>
+<p>Modern systems can work with different DB. Jans is also not exception from this rule. Currently it can work with different DB types and also can work in hybrid environment where application can use the strong power of each DB. This part is based on <a href="https://github.com/JanssenProject/jans/tree/main/jans-orm">jans-orm</a> layer. It has pluggable architecture which allows to add support for more DB in future.</p>
+<p>One of the main target of ORM module is to provide simple lightweight layer to access DB. Also it provides abstractions which hide dependency to specific DB.</p>
 <h2 id="supported-db">Supported DB<a class="headerlink" href="#supported-db" title="Permanent link">#</a></h2>
-<p>Jans has next persistence modules out-of-the-box:
--  <a href="ldap-config/">LDAP</a>
--  <a href="cb-config/">Couchbase</a>
--  <a href="spanner-config/">Spanner</a>
--  <a href="mysql-config/">MySQL</a>
--  <a href="postgres-config/">PostreSQL</a>
--  <a href="mariadb/">MariaDB</a>
--  <a href="postgres-config/">Hybrid</a>. This is virtual DB layer which allows to combine few DB types based on record type.</p>
+<p>Jans has next persistence modules out-of-the-box:</p>
+<ul>
+<li><a href="ldap-config/">LDAP</a></li>
+<li><a href="cb-config/">Couchbase</a></li>
+<li><a href="spanner-config/">Spanner</a></li>
+<li><a href="mysql-config/">MySQL</a></li>
+<li><a href="postgres-config/">PostreSQL</a></li>
+<li><a href="mariadb/">MariaDB</a></li>
+<li><a href="postgres-config/">Hybrid</a>. This is virtual DB layer which allows to combine few DB types based on record type.</li>
+</ul>
 <h2 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">#</a></h2>
 <p>Type of DB layer is specified in <em>/etc/jans/conf/</em>:</p>
 <div class="highlight"><pre><span></span><code>persistence.type=ldap
 </code></pre></div>
-<p>The list of allowed values is <em>ldap, couchbase, sql, spanner, hybrid</em>. It's defined in <a href="https://github.com/JanssenProject/jans/blob/main/jans-orm/core/src/main/java/io/jans/orm/PersistenceEntryManager.java#L48">list</a>.</p>
-<p>The corresponding list of configuration files for these persistence types are:
-- <em>jans-ldap.properties</em>
-- <em>jans-couchbase.properties</em>
-- <em>jans-spanner.properties</em>
-- <em>jans-sql.properties</em>
-- <em>jans-hybrid.properties</em></p>
+<p>The list of allowed property values is next: <strong>ldap, couchbase, sql, spanner, hybrid</strong>. It's defined in this <a href="https://github.com/JanssenProject/jans/blob/main/jans-orm/core/src/main/java/io/jans/orm/PersistenceEntryManager.java#L48">list</a>.</p>
+<p>The corresponding list of configuration files for these persistence types are:</p>
+<ul>
+<li><strong>jans-ldap.properties</strong></li>
+<li><strong>jans-couchbase.properties</strong></li>
+<li><strong>jans-spanner.properties</strong></li>
+<li><strong>jans-sql.properties</strong></li>
+<li><strong>jans-hybrid.properties</strong></li>
+</ul>
 <p>These files contains DB specific properties and format of them is specified in the relevant sections of this documentation.</p>
-<p>The applications reloads configuration from these files after start up on files date time modifications.</p>
+<p>The applications reloads configuration from these files after start up or on files date time modification after initialization.</p>
 <h2 id="architecture">Architecture<a class="headerlink" href="#architecture" title="Permanent link">#</a></h2>
 <p>Jans ORM has modular architecture. The are few layers in this implementation</p>
 <ol>
 <li>
-<p><em>jans-orm-core</em>: This is base layer with next functionality:</p>
+<p><strong>jans-orm-core</strong>: This is base layer with next functionality:</p>
 <ul>
 <li>
 <p>define API methods to work with DB without specific DB dependency</p>
@@ -173153,23 +173157,23 @@
 </ul>
 </li>
 <li>
-<p><em>jans-orm-annotation</em>: Define annotations which instruct ORM about how to wrok with beans and properties </p>
+<p><strong>jans-orm-annotation</strong>: Define annotations which instruct ORM about how to work with beans and properties </p>
 </li>
 <li>
-<p><em>jans-orm-filter</em>: This module provides Filter API. The syntax is very similar to LDAP filters. The ORM layer converts them at runtime to DB query syntax like: SQL/NoSQL/LDAP</p>
+<p><strong>jans-orm-filter</strong>: This module provides Filter API. The syntax is very similar to LDAP filters. The ORM layer converts them at runtime to DB query syntax: <em>SQL/NoSQL/LDAP</em></p>
 </li>
 <li>
-<p><em>jans-orm-cdi</em>: Provides reusable factory which can be used in CDI based projects</p>
+<p><strong>jans-orm-cdi</strong>: Provides reusable factory which can be used in CDI based projects</p>
 </li>
 <li>
-<p><em>jans-orm-standalone</em>: Provides reusable factory for non CDI based application</p>
+<p><strong>jans-orm-standalone</strong>: Provides reusable factory for non CDI based application</p>
 </li>
 <li>
-<p><em>jans-orm-ldap, jans-orm-couchbase, jans-orm-spanner, jans-orm-sql</em>: These are DB specific implementations.</p>
+<p><strong>jans-orm-ldap, jans-orm-couchbase, jans-orm-spanner, jans-orm-sql</strong>: These are DB specific implementations.</p>
 </li>
 </ol>
 <h2 id="sample-table-and-orm-api">Sample table and ORM API<a class="headerlink" href="#sample-table-and-orm-api" title="Permanent link">#</a></h2>
-<p>In order to work with DB ORM should know which data is needed for application. Most part of this information it takes from DB schema at startup but rest of it developer should define in java bean. Here is typical schema with comments:</p>
+<p>In order to work with DB ORM layer should know which data (attributes/columns) is needed for application. Most part of this information it takes from DB schema at startup but rest of it developer should define in java bean. Here is typical schema with comments:</p>
 <div class="highlight"><pre><span></span><code>// Specify that this is Table/objectClass structure
 @DataEntry
 // Table/objectClass name is `jansPerson`
@@ -173182,8 +173186,10 @@ public class SimpleUser implements Serializable {
     @DN
     private String dn;
 
-    // Define text attribute with name in DB `uid`. Consistency attribute specified to specify that ORM should send query to DB and
-    // specify that it should execute it after table index update. This is needed for DB like Couchbase
+    // Define text attribute with name in DB `uid`.
+    // Consistency attribute instruct ORM that it should send query to DB and
+    // specify that it should execute it after table index update.
+    // This is used with Couchbase DB
     @AttributeName(name = &quot;uid&quot;, consistency = true)
     private String userId;
 
@@ -173201,17 +173207,18 @@ public class SimpleUser implements Serializable {
 
 
     // All attributes which not defined above ORM should put into the List&lt;CustomObjectAttribute&gt;
-    // This is useful for custom attributes
+    // This is convenient for custom attributes
     @AttributesList(name = &quot;name&quot;, value = &quot;values&quot;, multiValued = &quot;multiValued&quot;, sortByName = true)
     protected List&lt;CustomObjectAttribute&gt; customAttributes = new ArrayList&lt;CustomObjectAttribute&gt;();
 
-    // Specify additional objeClass
+    // Specify additional objecClass
+    // This is needed for LDAP only
     @CustomObjectClass
     private String[] customObjectClasses;
 
     ...
 </code></pre></div>
-<p>Main <em>PersistenceEntryManager</em> API methods which applications can use:</p>
+<p>Main <strong>PersistenceEntryManager</strong> API methods which applications can use:</p>
 <div class="highlight"><pre><span></span><code>    &lt;T&gt; boolean authenticate(String primaryKey, Class&lt;T&gt; entryClass, String password);
     &lt;T&gt; boolean authenticate(String baseDN, Class&lt;T&gt; entryClass, String userName, String password);
 
@@ -173267,27 +173274,27 @@ public class SimpleUser implements Serializable {
 
     &lt;T&gt; void importEntry(String dn, Class&lt;T&gt; entryClass, List&lt;AttributeData&gt; data);
 </code></pre></div>
-<h2 id="new-db-support-and-integration">New DB support and integration<a class="headerlink" href="#new-db-support-and-integration" title="Permanent link">#</a></h2>
-<p>The ORM developed with perspective to simplify add new DB support. New ORM implementation requires only few classes and interfaces implementation.</p>
+<h2 id="new-db-support-and-integrations">New DB support and integrations<a class="headerlink" href="#new-db-support-and-integrations" title="Permanent link">#</a></h2>
+<p>The ORM developed with perspective to simplify to add new DB support. New ORM implementation requires only few classes/interfaces implementations.</p>
 <ol>
 <li>
-<p>Extend <code>public interface NewDbOperationService extends PersistenceOperationService</code> interface to define list of CRUD method which <code>DbEntryManager</code> can use.</p>
+<p>Extend <code>public interface DbOperationService extends PersistenceOperationService</code> interface to define list of CRUD method which <code>DbEntryManager</code> can use.</p>
 </li>
 <li>
-<p>Implement abstract methods <code>CouchbaseEntryManager extends BaseEntryManager&lt;CouchbaseOperationService&gt;</code>. This define DB specifc method to work with DB layer data.</p>
+<p>Implement abstract methods <code>DbEntryManager extends BaseEntryManager&lt;DbOperationService&gt;</code>. This define DB specific methods to work with DB low layer.</p>
 </li>
 <li>
-<p>Implement <code>public class DbEntryManagerFactory implements PersistenceEntryManagerFactory</code>. This CDI <code>@ApplicationScoped</code> neede to allow integrate new DB module into application.</p>
+<p>Implement <code>public class DbEntryManagerFactory implements PersistenceEntryManagerFactory</code>. This CDI <code>@ApplicationScoped</code> needed to allow integrate new DB module into application.</p>
 </li>
 <li>
 <p>Put into final jar file <code>/META-INF/beans.xml</code> to allow CDI framework automatically find <em>DbEntryManagerFactory</em> from previous point.</p>
 </li>
 </ol>
-<p>After this it's enough to put new ORM DB module into final war or follow customization sections to add jar file to custom jetty classpath.</p>
+<p>After this it's enough to put new ORM DB module into application war file or follow customization sections to add jar file to custom jetty classpath.</p>
 <h2 id="db-schema">DB Schema<a class="headerlink" href="#db-schema" title="Permanent link">#</a></h2>
 <p>The DB schema and beans definitions should match each other. During deployment setup generates schema and indexes based on rules in 
 schema <a href="https://github.com/JanssenProject/jans/blob/main/jans-linux-setup/jans_setup/schema/jans_schema.json">file</a>. The data types defined in it setup map to DB SQL types based on default <a href="https://github.com/JanssenProject/jans/blob/main/jans-linux-setup/jans_setup/static/rdbm/ldap_sql_data_type_mapping.json">rules</a>.</p>
-<p>It's possible to override default generation rules. For this case there is <a href="https://github.com/JanssenProject/jans/blob/main/jans-linux-setup/jans_setup/static/rdbm/sql_data_types.json">file</a>.</p>
+<p>It's possible to override default generation rules. For this case there is next <a href="https://github.com/JanssenProject/jans/blob/main/jans-linux-setup/jans_setup/static/rdbm/sql_data_types.json">file</a>.</p>
 <p>Default indexes defined in next files: <a href="https://github.com/JanssenProject/jans/blob/main/jans-linux-setup/jans_setup/static/couchbase/index.json">coubase_index.json</a>, <a href="https://github.com/JanssenProject/jans/blob/main/jans-linux-setup/jans_setup/static/rdbm/spanner_index.json">spanner_index.json</a>, <a href="https://github.com/JanssenProject/jans/blob/main/jans-linux-setup/jans_setup/static/rdbm/mysql_index.json">mysql_index.json</a>, <a href="https://github.com/JanssenProject/jans/blob/main/jans-linux-setup/jans_setup/static/rdbm/pgsql_index.json">pgsql_index.json</a> </p>
 
   <hr>
@@ -173295,7 +173302,7 @@ schema <a href="https://github.com/JanssenProject/jans/blob/main/jans-linux-setu
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-06-09T15:59:22+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-06-09</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-06-30T20:49:44+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-06-30</span>
       
         <br>
         Created:
