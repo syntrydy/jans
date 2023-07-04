@@ -173226,23 +173226,23 @@ needed for OpenID and FIDO.</li>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>unzip automation-jans-public-gpg.zip
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>rpm -import automation-jans-public-gpg.asc
+<div class="highlight"><pre><span></span><code>sudo rpm -import automation-jans-public-gpg.asc
 </code></pre></div>
 <ul>
 <li>Download the release package from the GitHub Janssen Project
   <a href="https://github.com/JanssenProject/jans/releases">Releases</a></li>
 </ul>
-<div class="highlight"><pre><span></span><code>wget https://github.com/JanssenProject/jans/releases/download/v1.0.15.nightly/jans-1.0.15.nightly-suse15.x86_64.rpm
+<div class="highlight"><pre><span></span><code>wget https://github.com/JanssenProject/jans/releases/download/vreplace-janssen-version/jans-replace-janssen-version-suse15.x86_64.rpm
 </code></pre></div>
 <ul>
 <li>Verify integrity of the downloaded package using published <code>sha256sum</code>.</li>
 </ul>
 <p>Download <code>sha256sum</code> file for the package</p>
-<div class="highlight"><pre><span></span><code>wget https://github.com/JanssenProject/jans/releases/download/v1.0.15.nightly/jans-1.0.15.nightly-suse15.x86_64.rpm.sha256sum
+<div class="highlight"><pre><span></span><code>wget https://github.com/JanssenProject/jans/releases/download/vreplace-janssen-version/jans-replace-janssen-version-suse15.x86_64.rpm.sha256sum
 </code></pre></div>
 <p>Check the hash if it is matching. You may need to change your working directory
 to where both the rpm and sha256sum file are located.</p>
-<div class="highlight"><pre><span></span><code>sha256sum -c jans-1.0.15.nightly-suse15.x86_64.rpm.sha256sum
+<div class="highlight"><pre><span></span><code>sha256sum -c jans-replace-janssen-version-suse15.x86_64.rpm.sha256sum
 </code></pre></div>
 <p>Output similar to below should confirm the integrity of the downloaded package.</p>
 <div class="highlight"><pre><span></span><code>&lt;package-name&gt;: OK
@@ -173250,13 +173250,13 @@ to where both the rpm and sha256sum file are located.</p>
 <ul>
 <li>Install the package</li>
 </ul>
-<div class="highlight"><pre><span></span><code>zypper install ~/jans-1.0.15.nightly-suse15.x86_64.rpm
+<div class="highlight"><pre><span></span><code>sudo zypper install ~/jans-replace-janssen-version-suse15.x86_64.rpm
 </code></pre></div>
 <h2 id="run-the-setup-script">Run the setup script<a class="headerlink" href="#run-the-setup-script" title="Permanent link">#</a></h2>
 <ul>
 <li>Run the setup script in interactive mode:</li>
 </ul>
-<div class="highlight"><pre><span></span><code>python3 /opt/jans/jans-setup/setup.py
+<div class="highlight"><pre><span></span><code>sudo python3 /opt/jans/jans-setup/setup.py
 </code></pre></div>
 <p>See more detailed <a href="../../setup/">instructions</a> on the setup script if you're
 confused how to answer any of the questions, for details about command line
@@ -173267,7 +173267,7 @@ interactive mode.</p>
 <a href="../../install-faq/#after-installation-how-do-i-verify-that-the-janssen-server-is-up-and-running">verify the system health</a>.</p>
 <h2 id="log-in-to-text-user-interface-tui">Log in to Text User Interface (TUI)<a class="headerlink" href="#log-in-to-text-user-interface-tui" title="Permanent link">#</a></h2>
 <p>Begin configuration by accessing the TUI with the following command:</p>
-<div class="highlight"><pre><span></span><code>/opt/jans/jans-cli/jans_cli_tui.py
+<div class="highlight"><pre><span></span><code>sudo /opt/jans/jans-cli/jans_cli_tui.py
 </code></pre></div>
 <p>Full TUI documentation can be found <a href="../../../config-guide/jans-tui/">here</a></p>
 <h2 id="uninstall">Uninstall<a class="headerlink" href="#uninstall" title="Permanent link">#</a></h2>
@@ -173279,7 +173279,7 @@ interactive mode.</p>
 <p>If you have not run the Jans setup script, you can skip step 1 and just remove
 the package.</p>
 <p>First, run command below to uninstall the Janssen server</p>
-<div class="highlight"><pre><span></span><code>python3 /opt/jans/jans-setup/install.py -uninstall
+<div class="highlight"><pre><span></span><code>sudo python3 /opt/jans/jans-setup/install.py -uninstall
 </code></pre></div>
 <p>You'll see the following confirmation:</p>
 <div class="highlight"><pre><span></span><code>This process is irreversible.
@@ -173324,7 +173324,7 @@ Removing /etc/apache2/sites-available/https_jans.conf
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-06-26T03:01:35+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-06-26</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-07-04T08:50:07+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-07-04</span>
       
         <br>
         Created:
