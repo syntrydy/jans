@@ -173605,7 +173605,7 @@ To Associate an Update Token script to a client (RP), execute the command below 
 <ol>
 <li>How can I add a <code>dict</code> type object as a claim value?</li>
 </ol>
-<div class="highlight"><pre><span></span><code>from io.jans.as.model.uti import JwtUtil
+<p><div class="highlight"><pre><span></span><code>from io.jans.as.model.uti import JwtUtil
 from org.json import JSONObject;
 
     def modifyIdToken(self, jsonWebResponse, context):
@@ -173616,13 +173616,19 @@ from org.json import JSONObject;
         print &quot;Update token script. Modify idToken: %s&quot; % jsonWebResponse
         return True
 </code></pre></div>
+2. How can I set integer value in id token claim?
+<div class="highlight"><pre><span></span><code>jsonWebResponse.getClaims().setClaim(&quot;claimY&quot;, Integer.valueOf(124456191))
+</code></pre></div>
+Get it as integer, via 
+<div class="highlight"><pre><span></span><code>getClaims().getClaimAsInteger(&quot;claimY&quot;)
+</code></pre></div></p>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-05-02T19:21:30+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-05-02</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-07-10T15:06:36+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-07-10</span>
       
         <br>
         Created:
