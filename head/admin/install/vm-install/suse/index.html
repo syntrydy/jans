@@ -173236,6 +173236,9 @@ needed for OpenID and FIDO.</li>
 <div class="highlight"><pre><span></span><code>firewall-cmd --reload
 </code></pre></div>
 <ul>
+<li>for SLES, we need to enable PackageHub as per OSversion and architecture
+<div class="highlight"><pre><span></span><code>sudo SUSEConnect -p PackageHub/15.4/x86_64
+</code></pre></div></li>
 <li>Download the GPG key zip file , unzip and import GPG key</li>
 </ul>
 <div class="highlight"><pre><span></span><code>wget https://github.com/JanssenProject/jans/files/11814522/automation-jans-public-gpg.zip
@@ -173340,7 +173343,7 @@ Removing /etc/apache2/sites-available/https_jans.conf
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-07-04T08:50:07+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-07-04</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-07-11T15:07:14+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-07-11</span>
       
         <br>
         Created:
