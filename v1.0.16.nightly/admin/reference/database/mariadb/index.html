@@ -19,7 +19,7 @@
     
     
       
-        <title>Mariadb - Janssen Documentation</title>
+        <title>MariaDB ORM persistence layer - Janssen Documentation</title>
       
     
     
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#this-content-is-in-progress" class="md-skip">
+        <a href="#mariadb-orm-persistence-layer" class="md-skip">
           Skip to content
         </a>
       
@@ -128,7 +128,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Mariadb
+              MariaDB ORM persistence layer
             
           </span>
         </div>
@@ -173027,35 +173027,8 @@
   
   
   
+    
   
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#this-content-is-in-progress" class="md-nav__link">
-    This content is in progress
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#have-questions-in-the-meantime" class="md-nav__link">
-    Have questions in the meantime?
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#want-to-contribute" class="md-nav__link">
-    Want to contribute?
-  </a>
-  
-</li>
-      
-    </ul>
   
 </nav>
                   </div>
@@ -173097,21 +173070,21 @@
   </a>
 
 
-  <h1>Mariadb</h1>
-
-<h2 id="this-content-is-in-progress">This content is in progress<a class="headerlink" href="#this-content-is-in-progress" title="Permanent link">#</a></h2>
-<p>The Janssen Project documentation is currently in development. Topic pages are being created in order of broadest relevance, and this page is coming in the near future.</p>
-<h2 id="have-questions-in-the-meantime">Have questions in the meantime?<a class="headerlink" href="#have-questions-in-the-meantime" title="Permanent link">#</a></h2>
-<p>While this documentation is in progress, you can ask questions through <a href="https://github.com/JanssenProject/jans/discussion">GitHub Discussions</a> or the <a href="https://gitter.im/JanssenProject/Lobby">community chat on Gitter</a>. Any questions you have will help determine what information our documentation should cover.</p>
-<h2 id="want-to-contribute">Want to contribute?<a class="headerlink" href="#want-to-contribute" title="Permanent link">#</a></h2>
-<p>If you have content you'd like to contribute to this page in the meantime, you can get started with our <a href="https://docs.jans.io/head/CONTRIBUTING/">Contribution guide</a>.</p>
+<h1 id="mariadb-orm-persistence-layer">MariaDB ORM persistence layer<a class="headerlink" href="#mariadb-orm-persistence-layer" title="Permanent link">#</a></h1>
+<p>The ORM module for MySQL and MariaDB is the same. There is only one difference related to JSON Attributes.
+MariaDB allows to use <strong>JSON</strong> keyword during table creation but it's return column type <strong>LONGTEXT</strong> when application request schema. To allow ORM scan schema at startup each <strong>JSON</strong> attribute should has specific <code>CONSTRAINT</code>. Example:</p>
+<div class="highlight"><pre><span></span><code>ALTER TABLE jansPerson
+ADD CONSTRAINT customJsonColumn CHECK(JSON_VALID(&quot;customJsonColumn&quot;));
+</code></pre></div>
+<p>If ORM find <code>JSON_VALID</code> in column definition it works with it as with <strong>JSON</strong> column.</p>
+<p>More details about this ORM is in <a href="../mysql-config/">MySQLthis</a> documentation.</p>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2022-12-08T20:20:00+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2022-12-08</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-07-13T19:08:36+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-07-13</span>
       
         <br>
         Created:
