@@ -173632,6 +173632,22 @@ parameters:</p>
 point to JWKS URI.</li>
 <li><code>dcrSignatureValidationSoftwareStatementJwksClaim</code> - specifies claim name inside software statement. Value of claim 
 should point to inlined JWKS.</li>
+<li><code>trustedSsaIssuers</code> - map of trusted SSA issuers with configuration (e.g. automatically granted scopes). When empty - no issuers validation is performed. When not empty - AS forces validation and each SSA must match at least one entry from list.</li>
+<li><code>automaticallyGrantedScopes</code> - automatically granted scopes for trusted issuer
+    <div class="highlight"><pre><span></span><code><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;https://trusted.as.com&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;automaticallyGrantedScopes&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;a&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;b&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="p">]</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;https://another-trusted.as.com&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;automaticallyGrantedScopes&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;d&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="p">]</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div></li>
 </ul>
 <p>Configure the AS using steps explained in the <a href="#curl-commands-to-configure-jans-auth-server">link</a></p>
 <h4 id="special-mention-about-fapi">Special mention about FAPI:<a class="headerlink" href="#special-mention-about-fapi" title="Permanent link">#</a></h4>
@@ -173922,9 +173938,24 @@ eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJJREFtYX...
 - <code>issuers</code> MUST have value which equals to <code>iss</code> claim in DCR.</p>
 <p><strong>Via other configuration properties</strong></p>
 <ul>
+<li><strong>trustedSsaIssuers</strong> - map of trusted SSA issuers with configuration (e.g. automatically granted scopes). When empty - no issuers validation is performed. When not empty - AS forces validation and each SSA must match at least one entry from list.</li>
+<li><strong>automaticallyGrantedScopes</strong> - automatically granted scopes for trusted issuer
+    <div class="highlight"><pre><span></span><code><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;https://trusted.as.com&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;automaticallyGrantedScopes&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;a&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;b&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="p">]</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;https://another-trusted.as.com&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;automaticallyGrantedScopes&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;d&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="p">]</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div></li>
 <li><strong>dcrSignatureValidationJwks</strong> - specifies JWKS for DCR's validations</li>
 <li><strong>dcrSignatureValidationJwksUri</strong> - specifies JWKS URI for  DCR's validations</li>
-<li><strong>trustedSsaIssuers</strong> - List of trusted SSA issuers. If MTLS private key is used to sign DCR JWT, certificate issuer is checked as well.</li>
 <li><strong>dcrSignatureValidationSharedSecret</strong> - if HMAC is used, this is the shared secret</li>
 <li><strong>dcrSignatureValidationEnabled</strong> - boolean value enables DCR signature validation. Default is false</li>
 <li><strong>dcrSignatureValidationSoftwareStatementJwksURIClaim</strong> - specifies claim name inside software statement. Value of claim should point to JWKS URI</li>
@@ -173977,7 +174008,7 @@ authorization server.</p>
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-06-09T05:41:11+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-06-09</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-07-14T10:17:57+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-07-14</span>
       
         <br>
         Created:
