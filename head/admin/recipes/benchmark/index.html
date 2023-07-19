@@ -172338,6 +172338,33 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#dcr-flow" class="md-nav__link">
+    DCR flow
+  </a>
+  
+    <nav class="md-nav" aria-label="DCR flow">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resources-needed-for-dcr-client-jmeter-test" class="md-nav__link">
+    Resources needed for DCR client jmeter test
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#setup-client_2" class="md-nav__link">
+    Setup Client
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -173334,6 +173361,33 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#dcr-flow" class="md-nav__link">
+    DCR flow
+  </a>
+  
+    <nav class="md-nav" aria-label="DCR flow">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resources-needed-for-dcr-client-jmeter-test" class="md-nav__link">
+    Resources needed for DCR client jmeter test
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#setup-client_2" class="md-nav__link">
+    Setup Client
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -173963,13 +174017,130 @@ cat <span class="s">&lt;&lt; EOF &gt; ropc_client.json</span>
     kubectl scale deploy load-testing-ropc -n load --replicas=20</code></p>
 </li>
 </ol>
+<h4 id="dcr-flow">DCR flow<a class="headerlink" href="#dcr-flow" title="Permanent link">#</a></h4>
+<h5 id="resources-needed-for-dcr-client-jmeter-test">Resources needed for DCR client jmeter test<a class="headerlink" href="#resources-needed-for-dcr-client-jmeter-test" title="Permanent link">#</a></h5>
+<p>The below resources were <a href="#kubernetes-cluster-load-test-resources">calculated</a> when creating the nodes above.</p>
+<table>
+<thead>
+<tr>
+<th>NAME</th>
+<th># of pods</th>
+<th>RAM(GiB)</th>
+<th>CPU</th>
+<th>Total RAM(GiB)</th>
+<th>Total CPU</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DCR test</td>
+<td>20</td>
+<td>8</td>
+<td>1.3</td>
+<td>190</td>
+<td>24</td>
+</tr>
+<tr>
+<td>Grand Total</td>
+<td></td>
+<td></td>
+<td></td>
+<td>190 GiB</td>
+<td>24</td>
+</tr>
+</tbody>
+</table>
+<h5 id="setup-client_2">Setup Client<a class="headerlink" href="#setup-client_2" title="Permanent link">#</a></h5>
+<p>Create the client needed to run the test by executing the following. Make sure to change the <code>FQDN</code>  :</p>
+<ol>
+<li>
+<p>Create a folder called <code>load_test</code>.</p>
+<div class="highlight"><pre><span></span><code>mkdir -p load_test <span class="o">&amp;&amp;</span> <span class="nb">cd</span> load_test
+</code></pre></div>
+</li>
+<li>
+<p>Create the client json file</p>
+<p><div class="highlight"><pre><span></span><code><span class="nv">FQDN</span><span class="o">=</span>example.gluu.info
+cat <span class="s">&lt;&lt; EOF &gt; dcr_client.json</span>
+<span class="s">{</span>
+<span class="s">    &quot;dn&quot;: null,</span>
+<span class="s">    &quot;inum&quot;: null,</span>
+<span class="s">    &quot;displayName&quot;: &quot;DCR Flow Load Test Client&quot;,</span>
+<span class="s">    &quot;redirectUris&quot;: [</span>
+<span class="s">      &quot;https://$FQDN&quot;</span>
+<span class="s">    ],</span>
+<span class="s">    &quot;responseTypes&quot;: [</span>
+<span class="s">      &quot;id_token&quot;,</span>
+<span class="s">      &quot;code&quot;</span>
+<span class="s">    ],</span>
+<span class="s">    &quot;grantTypes&quot;: [</span>
+<span class="s">      &quot;authorization_code&quot;,</span>
+<span class="s">      &quot;implicit&quot;,</span>
+<span class="s">      &quot;refresh_token&quot;,</span>
+<span class="s">      &quot;password&quot;</span>
+<span class="s">    ],</span>
+<span class="s">    &quot;tokenEndpointAuthMethod&quot;: &quot;client_secret_basic&quot;,</span>
+<span class="s">    &quot;scopes&quot;: [</span>
+<span class="s">      &quot;openid&quot;,</span>
+<span class="s">      &quot;profile&quot;,</span>
+<span class="s">      &quot;email&quot;,</span>
+<span class="s">      &quot;user_name&quot;</span>
+<span class="s">    ],</span>
+<span class="s">    &quot;trustedClient&quot;: true,</span>
+<span class="s">    &quot;includeClaimsInIdToken&quot;: false,</span>
+<span class="s">    &quot;accessTokenAsJwt&quot;: false,</span>
+<span class="s">    &quot;disabled&quot;: false,</span>
+<span class="s">    &quot;deletable&quot;: false,</span>
+<span class="s">    &quot;description&quot;: &quot;DCR Flow Load Testing Client&quot;</span>
+<span class="s">}</span>
+<span class="s">EOF</span>
+</code></pre></div>
+3. Copy the following <a href="https://github.com/JanssenProject/jans/blob/vreplace-janssen-version/demos/benchmarking/docker-jans-loadtesting-jmeter/yaml/load-test/load_test_dcr.yaml">yaml</a> into the folder.</p>
+</li>
+<li>
+<p>Download or build <a href="../../config-guide/jans-tui/">config-cli-tui</a> and run:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Notice the namespace is jans here . Change it if it was changed during installation of janssen previously</span>
+<span class="nv">TUI_CLIENT_ID</span><span class="o">=</span><span class="k">$(</span>kubectl get cm cn -o json -n jans <span class="p">|</span> grep <span class="s1">&#39;&quot;tui_client_id&quot;:&#39;</span> <span class="p">|</span> sed -e <span class="s1">&#39;s#.*:\(\)#\1#&#39;</span> <span class="p">|</span> tr -d <span class="s1">&#39;&quot;&#39;</span> <span class="p">|</span> tr -d <span class="s2">&quot;,&quot;</span> <span class="p">|</span> tr -d <span class="s1">&#39;[:space:]&#39;</span><span class="k">)</span>
+<span class="nv">TUI_CLIENT_SECRET</span><span class="o">=</span><span class="k">$(</span>kubectl get secret cn -o json -n jans <span class="p">|</span> grep <span class="s1">&#39;&quot;tui_client_pw&quot;:&#39;</span> <span class="p">|</span> sed -e <span class="s1">&#39;s#.*:\(\)#\1#&#39;</span> <span class="p">|</span> tr -d <span class="s1">&#39;&quot;&#39;</span> <span class="p">|</span> tr -d <span class="s2">&quot;,&quot;</span> <span class="p">|</span> tr -d <span class="s1">&#39;[:space:]&#39;</span> <span class="p">|</span> base64 -d<span class="k">)</span>
+<span class="c1"># add -noverify if your fqdn is not registered</span>
+./config-cli-tui.pyz --host <span class="nv">$FQDN</span> --client-id <span class="nv">$TUI_CLIENT_ID</span> --client-secret <span class="nv">$TUI_CLIENT_SECRET</span> --no-tui --operation-id<span class="o">=</span>post-oauth-openid-client --data<span class="o">=</span>ropc_client.json
+</code></pre></div>
+</li>
+<li>
+<p>You will need to load the sectorIdentifier into your persistence.For MySQL that statement would be the following taking into account the <code>FQDN</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">jansSectorIdentifier</span><span class="w"> </span><span class="p">(</span><span class="n">doc_id</span><span class="p">,</span><span class="w"> </span><span class="n">dn</span><span class="p">,</span><span class="w"> </span><span class="n">jansId</span><span class="p">,</span><span class="w"> </span><span class="n">jansRedirectURI</span><span class="p">,</span><span class="w"> </span><span class="n">objectClass</span><span class="p">)</span><span class="w"></span>
+<span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="w"></span>
+<span class="w">  </span><span class="s1">&#39;a55ede29-8f5a-461d-b06e-76caee8d40b5&#39;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="s1">&#39;jansId=a55ede29-8f5a-461d-b06e-76caee8d40b5,ou=sector_identifiers,o=jans&#39;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="s1">&#39;a55ede29-8f5a-461d-b06e-76caee8d40b5&#39;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="s1">&#39;{&quot;v&quot;: [&quot;https://www.jans.org&quot;, &quot;http://localhost:80/jans-auth-rp/home.htm&quot;, &quot;https://localhost:8443/jans-auth-rp/home.htm&quot;, &quot;https://$FQDN/jans-auth-rp/home.htm&quot;, &quot;https://$FQDN/jans-auth-client/test/resources/jwks.json&quot;, &quot;https://client.example.org/callback&quot;, &quot;https://client.example.org/callback2&quot;, &quot;https://client.other_company.example.net/callback&quot;, &quot;https://client.example.com/cb&quot;, &quot;https://client.example.com/cb1&quot;, &quot;https://client.example.com/cb2&quot;]}&#39;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="s1">&#39;jansSectorIdentifier&#39;</span><span class="w"></span>
+<span class="p">);</span><span class="w"></span>
+</code></pre></div>
+</li>
+<li>
+<p>Save the client id and secret from the response and enter them along with your FQDN in the yaml file <code>load_test_ropc.yaml</code>  under <code>DCR_CLIENT_ID</code>, <code>DCR_CLIENT_SECRET</code> and <code>FQDN</code> respectively then execute :</p>
+<div class="highlight"><pre><span></span><code>kubectl apply -f load_test_dcr.yaml
+</code></pre></div>
+</li>
+<li>
+<p>The janssen setup by default installs an HPA which will automatically scale your pods if the metrics server is installed according to traffic. To load it very quickly scale the auth-server manually:
+    <code>bash
+    kubectl scale deploy janssen-auth-server -n jans --replicas=40</code></p>
+</li>
+<li>
+<p>Finally, scale the load test. The replica number here should be manually controlled.
+    <code>bash
+    kubectl scale deploy load-testing-ropc -n load --replicas=20</code></p>
+</li>
+</ol>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-05-18T14:53:12+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-05-18</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-07-19T15:26:09+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-07-19</span>
       
         <br>
         Created:
