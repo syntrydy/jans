@@ -4971,6 +4971,19 @@
     Classpath
   </a>
   
+    <nav class="md-nav" aria-label="Classpath">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#limitations-of-code-added-on-the-fly" class="md-nav__link">
+    Limitations of code added "on the fly"
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -173298,6 +173311,19 @@
     Classpath
   </a>
   
+    <nav class="md-nav" aria-label="Classpath">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#limitations-of-code-added-on-the-fly" class="md-nav__link">
+    Limitations of code added "on the fly"
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -173807,12 +173833,20 @@ words = Call java.util.Collections#unmodifiableSet jStrArr
 <li><code>/opt/jans/jetty/jans-auth/custom/libs/*.jar</code> (may require edition of <code>jans-auth.xml</code> descriptor)   </li>
 </ul>
 <p>Additionally, it is possible to upload source code on the fly to augment the classpath. Any valid Java or Groovy file is accepted and must be located under <code>/opt/jans/jetty/jans-auth/agama/scripts</code>. A class named <code>com.acme.Person</code> for instance, must reside in <code>com/acme/Person</code> under the <code>scripts</code> directory.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
+<p>This provides "hot" reloading thus becoming a real time saver while developing flows because there is no need to restart the jans-auth webapp. Also, only the files that get modified are effectively re-compiled. These benefits come at a cost and this is explained in in the following.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
 <p>Only files with extensions <code>java</code> or <code>groovy</code> in the <code>scripts</code> directory are accounted by the engine</p>
 </div>
+<h4 id="limitations-of-code-added-on-the-fly">Limitations of code added "on the fly"<a class="headerlink" href="#limitations-of-code-added-on-the-fly" title="Permanent link">#</a></h4>
 <p>Note classes in <code>scripts</code> directory can only be accessed through <code>Call</code> directives. As an example suppose you added classes <code>A</code> and <code>B</code> to <code>scripts</code>, and <code>A</code> depends on <code>B</code>. <code>Call</code>s using class <code>A</code> will work and any change to files <code>A</code> and/or <code>B</code> will be picked automatically. On the contrary, trying to load this kind of classes using <code>Class.forName</code> either from a jar file in <code>custom/libs</code> or from Agama itself will degenerate in <code>ClassNotFoundException</code>. Note <code>A</code> and <code>B</code> can also depend on classes found in any of the three locations listed above.</p>
-<p>This "hot" reloading feature can be a big time saver while developing flows because there is no need to restart the jans-auth webapp. Also, only the files that get modified are effectively re-compiled.</p>
+<p>Provided Java source code (.java files) are actually interpreted as Groovy code. 99% of times this is not a concern since Groovy can be considered a super set of Java, however, there are a few minor discrepancies that may exhibit unexpected behaviors. These differences are described <a href="https://groovy-lang.org/differences.html">here</a>.</p>
+<p>We consider the following to be remarkable:</p>
+<ul>
+<li>Array literals in shorthand syntax not allowed, e.g. <code>int[] array = {1, 2, 3}</code>. Use <code>int[] array = new int[] {1, 2, 3}</code> instead</li>
+<li>String interpolation: <code>"hello $mark"</code> evaluates the value of variable <code>mark</code> and prepends <code>hello</code> to it!. To avoid this use a backslash, like in <code>"hello \$mark"</code>. Learn more about interpolation <a href="http://groovy-lang.org/syntax.html#_string_interpolation">here</a>. In general, prepend ocurrences of <code>$</code> in your string literals with a <code>\</code></li>
+<li>Usage of <code>==</code> operator actually calls the <code>equals</code> method. Most of times this is fine but can be a problem when you are overriding <code>equals</code> in your class and make use of <code>==</code>. This will introduce a recursive call in your implementation and may degenerate in a stack overflow. If possible, use the <code>===</code> operator or the <code>is</code> method in these cases</li>
+</ul>
 <h3 id="oop-prose-warning">OOP prose warning<a class="headerlink" href="#oop-prose-warning" title="Permanent link">#</a></h3>
 <p>See the recommended <a href="../recommended-practices/#oop-prose-warning">practices</a> to learn more about this topic.</p>
 
@@ -173821,7 +173855,7 @@ words = Call java.util.Collections#unmodifiableSet jStrArr
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-07-11T13:55:55+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-07-11</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-07-19T21:21:27+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-07-19</span>
       
         <br>
         Created:
