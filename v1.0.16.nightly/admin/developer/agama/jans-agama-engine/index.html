@@ -173832,15 +173832,15 @@ words = Call java.util.Collections#unmodifiableSet jStrArr
 <li><code>jans-auth.war &gt; WEB-INF/classes</code> or,</li>
 <li><code>/opt/jans/jetty/jans-auth/custom/libs/*.jar</code> (may require edition of <code>jans-auth.xml</code> descriptor)   </li>
 </ul>
-<p>Additionally, it is possible to upload source code on the fly to augment the classpath. Any valid Java or Groovy file is accepted and must be located under <code>/opt/jans/jetty/jans-auth/agama/scripts</code>. A class named <code>com.acme.Person</code> for instance, must reside in <code>com/acme/Person</code> under the <code>scripts</code> directory.</p>
-<p>This provides "hot" reloading thus becoming a real time saver while developing flows because there is no need to restart the jans-auth webapp. Also, only the files that get modified are effectively re-compiled. These benefits come at a cost and this is explained in in the following.</p>
+<p>Additionally, it is possible to upload source code on the fly to augment the classpath. Any valid Java or Groovy file is accepted and must be located under <code>/opt/jans/jetty/jans-auth/agama/scripts</code>. For instance, a class named <code>com.acme.Person</code> must reside in folder <code>/opt/jans/jetty/jans-auth/agama/scripts/com/acme</code>.</p>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
-<p>Only files with extensions <code>java</code> or <code>groovy</code> in the <code>scripts</code> directory are accounted by the engine</p>
+<p>Only files with extensions <code>.java</code> or <code>.groovy</code> are accounted</p>
 </div>
+<p>The <code>scripts</code> directory provides automatic "hot" reloading. This is a valuable time saver for developers because there is no need to restart the jans-auth webapp when sources are modified. This feature has some limitations which are explained in the following.</p>
 <h4 id="limitations-of-code-added-on-the-fly">Limitations of code added "on the fly"<a class="headerlink" href="#limitations-of-code-added-on-the-fly" title="Permanent link">#</a></h4>
-<p>Note classes in <code>scripts</code> directory can only be accessed through <code>Call</code> directives. As an example suppose you added classes <code>A</code> and <code>B</code> to <code>scripts</code>, and <code>A</code> depends on <code>B</code>. <code>Call</code>s using class <code>A</code> will work and any change to files <code>A</code> and/or <code>B</code> will be picked automatically. On the contrary, trying to load this kind of classes using <code>Class.forName</code> either from a jar file in <code>custom/libs</code> or from Agama itself will degenerate in <code>ClassNotFoundException</code>. Note <code>A</code> and <code>B</code> can also depend on classes found in any of the three locations listed above.</p>
-<p>Provided Java source code (.java files) are actually interpreted as Groovy code. 99% of times this is not a concern since Groovy can be considered a super set of Java, however, there are a few minor discrepancies that may exhibit unexpected behaviors. These differences are described <a href="https://groovy-lang.org/differences.html">here</a>.</p>
+<p>Classes in <code>scripts</code> directory can only be accessed through <code>Call</code> directives. As an example suppose you added classes <code>A</code> and <code>B</code> to <code>scripts</code>, and <code>A</code> depends on <code>B</code>. <code>Call</code>s using class <code>A</code> will work and any change to files <code>A</code> and/or <code>B</code> will be picked automatically. On the contrary, trying to load this kind of classes using <code>Class.forName</code> either from a jar file in <code>custom/libs</code> or from Agama itself will degenerate in <code>ClassNotFoundException</code>. Note <code>A</code> and <code>B</code> can also depend on classes found at any of the locations listed at the beginning of this section.</p>
+<p>Note Java sources are actually interpreted as Groovy code. 99% of times this is not a concern since Groovy can be considered a superset of Java, however, there are some minor discrepancies that may exhibit unexpected behaviors. These differences are described <a href="https://groovy-lang.org/differences.html">here</a>.</p>
 <p>We consider the following to be remarkable:</p>
 <ul>
 <li>Array literals in shorthand syntax not allowed, e.g. <code>int[] array = {1, 2, 3}</code>. Use <code>int[] array = new int[] {1, 2, 3}</code> instead</li>
@@ -173855,7 +173855,7 @@ words = Call java.util.Collections#unmodifiableSet jStrArr
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-07-19T21:21:27+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-07-19</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-07-20T13:21:39+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-07-20</span>
       
         <br>
         Created:

@@ -173577,13 +173577,13 @@ sudo snap <span class="nb">alias</span> microk8s.kubectl kubectl
 <p>Make sure <a href="https://helm.sh/docs/intro/install/">helm</a> is installed.</p>
 </li>
 <li>
-<p>Prepare your <a href="../../install/helm-install/">override.yaml</a>. Copy the below into a file named override.yaml. At the time of writing this we are using image tags <code>1.0.16.nightly_dev</code> which are the bleeding edge images for release <code>1.0.16.nightly</code>. Stable images such as <code>1.0.16.nightly-1</code> should be used.</p>
+<p>Prepare your <a href="../../install/helm-install/">override.yaml</a>. Copy the below into a file named override.yaml. At the time of writing this we are using image tags <code>replace-janssen-version_dev</code> which are the bleeding edge images for release <code>replace-janssen-version</code>. Stable images such as <code>replace-janssen-version-1</code> should be used.</p>
 </li>
 </ol>
 <div class="highlight"><pre><span></span><code><span class="nt">config</span><span class="p">:</span><span class="w"></span>
 <span class="w">   </span><span class="nt">image</span><span class="p">:</span><span class="w"></span>
 <span class="w">     </span><span class="nt">repository</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ghcr.io/janssenproject/jans/configurator</span><span class="w"></span>
-<span class="w">     </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.0.16.nightly_dev</span><span class="w"> </span>
+<span class="w">     </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">replace-janssen-version_dev</span><span class="w"> </span>
 <span class="w">   </span><span class="nt">countryCode</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">US</span><span class="w"></span>
 <span class="w">   </span><span class="nt">email</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">support@gluu.org</span><span class="w"></span>
 <span class="w">   </span><span class="nt">orgName</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Gluu</span><span class="w"></span>
@@ -173627,17 +173627,17 @@ sudo snap <span class="nb">alias</span> microk8s.kubectl kubectl
 <span class="w">  </span><span class="nt">image</span><span class="p">:</span><span class="w"></span>
 <span class="w">    </span><span class="nt">pullPolicy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">IfNotPresent</span><span class="w"></span>
 <span class="w">    </span><span class="nt">repository</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ghcr.io/janssenproject/jans/auth-server</span><span class="w"></span>
-<span class="w">    </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.0.16.nightly_dev</span><span class="w"></span>
+<span class="w">    </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">replace-janssen-version_dev</span><span class="w"></span>
 <span class="nt">config-api</span><span class="p">:</span><span class="w"></span>
 <span class="w">  </span><span class="nt">image</span><span class="p">:</span><span class="w"></span>
 <span class="w">    </span><span class="nt">pullPolicy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">IfNotPresent</span><span class="w"></span>
 <span class="w">    </span><span class="nt">repository</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ghcr.io/janssenproject/jans/config-api</span><span class="w"></span>
-<span class="w">    </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.0.16.nightly_dev</span><span class="w"></span>
+<span class="w">    </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">replace-janssen-version_dev</span><span class="w"></span>
 <span class="nt">persistence</span><span class="p">:</span><span class="w"></span>
 <span class="w">  </span><span class="nt">image</span><span class="p">:</span><span class="w"></span>
 <span class="w">    </span><span class="nt">pullPolicy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">IfNotPresent</span><span class="w"></span>
 <span class="w">    </span><span class="nt">repository</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ghcr.io/janssenproject/jans/persistence-loader</span><span class="w"></span>
-<span class="w">    </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.0.16.nightly_dev</span><span class="w"> </span>
+<span class="w">    </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">replace-janssen-version_dev</span><span class="w"> </span>
 <span class="nt">nginx-ingress</span><span class="p">:</span><span class="w"></span>
 <span class="w">  </span><span class="nt">ingress</span><span class="p">:</span><span class="w"></span>
 <span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/</span><span class="w"></span>
@@ -173667,7 +173667,7 @@ sudo snap <span class="nb">alias</span> microk8s.kubectl kubectl
 </code></pre></div>
 </li>
 <li>
-<p>Copy the following <a href="https://github.com/JanssenProject/jans/blob/v1.0.16.nightly/demos/benchmarking/docker-jans-loadtesting-jmeter/yaml/load-users/load_users_rdbms_job.yaml">yaml</a> into the folder under the name <code>load_users.yaml</code>.</p>
+<p>Copy the following <a href="https://github.com/JanssenProject/jans/blob/vreplace-janssen-version/demos/benchmarking/docker-jans-loadtesting-jmeter/yaml/load-users/load_users_rdbms_job.yaml">yaml</a> into the folder under the name <code>load_users.yaml</code>.</p>
 </li>
 <li>
 <p>Open the file and modify the required parameters. Note that the following environments can be used as configmaps data to configure the pod.</p>
@@ -173885,7 +173885,7 @@ cat <span class="s">&lt;&lt; EOF &gt; auth_code_client.json</span>
 <span class="s">}</span>
 <span class="s">EOF</span>
 </code></pre></div>
-3. Copy the following <a href="https://github.com/JanssenProject/jans/blob/v1.0.16.nightly/demos/benchmarking/docker-jans-loadtesting-jmeter/yaml/load-test/load_test_auth_code.yaml">yaml</a> into the folder.</p>
+3. Copy the following <a href="https://github.com/JanssenProject/jans/blob/vreplace-janssen-version/demos/benchmarking/docker-jans-loadtesting-jmeter/yaml/load-test/load_test_auth_code.yaml">yaml</a> into the folder.</p>
 </li>
 <li>
 <p>Download or build <a href="../../config-guide/jans-tui/">config-cli-tui</a> and run:</p>
@@ -173955,7 +173955,7 @@ cat <span class="s">&lt;&lt; EOF &gt; auth_code_client.json</span>
 </li>
 <li>
 <p>Create the client json file</p>
-<p><div class="highlight"><pre><span></span><code><span class="nv">FQDN</span><span class="o">=</span>example.gluu.info
+<div class="highlight"><pre><span></span><code><span class="nv">FQDN</span><span class="o">=</span>example.gluu.info
 cat <span class="s">&lt;&lt; EOF &gt; ropc_client.json</span>
 <span class="s">{</span>
 <span class="s">    &quot;dn&quot;: null,</span>
@@ -173990,7 +173990,9 @@ cat <span class="s">&lt;&lt; EOF &gt; ropc_client.json</span>
 <span class="s">}</span>
 <span class="s">EOF</span>
 </code></pre></div>
-3. Copy the following <a href="https://github.com/JanssenProject/jans/blob/v1.0.16.nightly/demos/benchmarking/docker-jans-loadtesting-jmeter/yaml/load-test/load_test_ropc.yaml">yaml</a> into the folder.</p>
+</li>
+<li>
+<p>Copy the following <a href="https://github.com/JanssenProject/jans/blob/vreplace-janssen-version/demos/benchmarking/docker-jans-loadtesting-jmeter/yaml/load-test/load_test_ropc.yaml">yaml</a> into the folder.</p>
 </li>
 <li>
 <p>Download or build <a href="../../config-guide/jans-tui/">config-cli-tui</a> and run:</p>
@@ -174060,7 +174062,7 @@ cat <span class="s">&lt;&lt; EOF &gt; ropc_client.json</span>
 </li>
 <li>
 <p>Create the client json file</p>
-<p><div class="highlight"><pre><span></span><code><span class="nv">FQDN</span><span class="o">=</span>example.gluu.info
+<div class="highlight"><pre><span></span><code><span class="nv">FQDN</span><span class="o">=</span>example.gluu.info
 cat <span class="s">&lt;&lt; EOF &gt; dcr_client.json</span>
 <span class="s">{</span>
 <span class="s">    &quot;dn&quot;: null,</span>
@@ -174095,7 +174097,9 @@ cat <span class="s">&lt;&lt; EOF &gt; dcr_client.json</span>
 <span class="s">}</span>
 <span class="s">EOF</span>
 </code></pre></div>
-3. Copy the following <a href="https://github.com/JanssenProject/jans/blob/v1.0.16.nightly/demos/benchmarking/docker-jans-loadtesting-jmeter/yaml/load-test/load_test_dcr.yaml">yaml</a> into the folder.</p>
+</li>
+<li>
+<p>Copy the following <a href="https://github.com/JanssenProject/jans/blob/vreplace-janssen-version/demos/benchmarking/docker-jans-loadtesting-jmeter/yaml/load-test/load_test_dcr.yaml">yaml</a> into the folder.</p>
 </li>
 <li>
 <p>Download or build <a href="../../config-guide/jans-tui/">config-cli-tui</a> and run:</p>
@@ -174103,7 +174107,7 @@ cat <span class="s">&lt;&lt; EOF &gt; dcr_client.json</span>
 <span class="nv">TUI_CLIENT_ID</span><span class="o">=</span><span class="k">$(</span>kubectl get cm cn -o json -n jans <span class="p">|</span> grep <span class="s1">&#39;&quot;tui_client_id&quot;:&#39;</span> <span class="p">|</span> sed -e <span class="s1">&#39;s#.*:\(\)#\1#&#39;</span> <span class="p">|</span> tr -d <span class="s1">&#39;&quot;&#39;</span> <span class="p">|</span> tr -d <span class="s2">&quot;,&quot;</span> <span class="p">|</span> tr -d <span class="s1">&#39;[:space:]&#39;</span><span class="k">)</span>
 <span class="nv">TUI_CLIENT_SECRET</span><span class="o">=</span><span class="k">$(</span>kubectl get secret cn -o json -n jans <span class="p">|</span> grep <span class="s1">&#39;&quot;tui_client_pw&quot;:&#39;</span> <span class="p">|</span> sed -e <span class="s1">&#39;s#.*:\(\)#\1#&#39;</span> <span class="p">|</span> tr -d <span class="s1">&#39;&quot;&#39;</span> <span class="p">|</span> tr -d <span class="s2">&quot;,&quot;</span> <span class="p">|</span> tr -d <span class="s1">&#39;[:space:]&#39;</span> <span class="p">|</span> base64 -d<span class="k">)</span>
 <span class="c1"># add -noverify if your fqdn is not registered</span>
-./config-cli-tui.pyz --host <span class="nv">$FQDN</span> --client-id <span class="nv">$TUI_CLIENT_ID</span> --client-secret <span class="nv">$TUI_CLIENT_SECRET</span> --no-tui --operation-id<span class="o">=</span>post-oauth-openid-client --data<span class="o">=</span>ropc_client.json
+./config-cli-tui.pyz --host <span class="nv">$FQDN</span> --client-id <span class="nv">$TUI_CLIENT_ID</span> --client-secret <span class="nv">$TUI_CLIENT_SECRET</span> --no-tui --operation-id<span class="o">=</span>post-oauth-openid-client --data<span class="o">=</span>dcr_client.json
 </code></pre></div>
 </li>
 <li>
@@ -174140,7 +174144,7 @@ cat <span class="s">&lt;&lt; EOF &gt; dcr_client.json</span>
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-07-19T15:26:09+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-07-19</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-07-20T11:05:29+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-07-20</span>
       
         <br>
         Created:
