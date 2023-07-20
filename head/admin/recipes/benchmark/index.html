@@ -173955,7 +173955,7 @@ cat <span class="s">&lt;&lt; EOF &gt; auth_code_client.json</span>
 </li>
 <li>
 <p>Create the client json file</p>
-<p><div class="highlight"><pre><span></span><code><span class="nv">FQDN</span><span class="o">=</span>example.gluu.info
+<div class="highlight"><pre><span></span><code><span class="nv">FQDN</span><span class="o">=</span>example.gluu.info
 cat <span class="s">&lt;&lt; EOF &gt; ropc_client.json</span>
 <span class="s">{</span>
 <span class="s">    &quot;dn&quot;: null,</span>
@@ -173990,7 +173990,9 @@ cat <span class="s">&lt;&lt; EOF &gt; ropc_client.json</span>
 <span class="s">}</span>
 <span class="s">EOF</span>
 </code></pre></div>
-3. Copy the following <a href="https://github.com/JanssenProject/jans/blob/vreplace-janssen-version/demos/benchmarking/docker-jans-loadtesting-jmeter/yaml/load-test/load_test_ropc.yaml">yaml</a> into the folder.</p>
+</li>
+<li>
+<p>Copy the following <a href="https://github.com/JanssenProject/jans/blob/vreplace-janssen-version/demos/benchmarking/docker-jans-loadtesting-jmeter/yaml/load-test/load_test_ropc.yaml">yaml</a> into the folder.</p>
 </li>
 <li>
 <p>Download or build <a href="../../config-guide/jans-tui/">config-cli-tui</a> and run:</p>
@@ -174060,7 +174062,7 @@ cat <span class="s">&lt;&lt; EOF &gt; ropc_client.json</span>
 </li>
 <li>
 <p>Create the client json file</p>
-<p><div class="highlight"><pre><span></span><code><span class="nv">FQDN</span><span class="o">=</span>example.gluu.info
+<div class="highlight"><pre><span></span><code><span class="nv">FQDN</span><span class="o">=</span>example.gluu.info
 cat <span class="s">&lt;&lt; EOF &gt; dcr_client.json</span>
 <span class="s">{</span>
 <span class="s">    &quot;dn&quot;: null,</span>
@@ -174095,7 +174097,9 @@ cat <span class="s">&lt;&lt; EOF &gt; dcr_client.json</span>
 <span class="s">}</span>
 <span class="s">EOF</span>
 </code></pre></div>
-3. Copy the following <a href="https://github.com/JanssenProject/jans/blob/vreplace-janssen-version/demos/benchmarking/docker-jans-loadtesting-jmeter/yaml/load-test/load_test_dcr.yaml">yaml</a> into the folder.</p>
+</li>
+<li>
+<p>Copy the following <a href="https://github.com/JanssenProject/jans/blob/vreplace-janssen-version/demos/benchmarking/docker-jans-loadtesting-jmeter/yaml/load-test/load_test_dcr.yaml">yaml</a> into the folder.</p>
 </li>
 <li>
 <p>Download or build <a href="../../config-guide/jans-tui/">config-cli-tui</a> and run:</p>
@@ -174103,7 +174107,7 @@ cat <span class="s">&lt;&lt; EOF &gt; dcr_client.json</span>
 <span class="nv">TUI_CLIENT_ID</span><span class="o">=</span><span class="k">$(</span>kubectl get cm cn -o json -n jans <span class="p">|</span> grep <span class="s1">&#39;&quot;tui_client_id&quot;:&#39;</span> <span class="p">|</span> sed -e <span class="s1">&#39;s#.*:\(\)#\1#&#39;</span> <span class="p">|</span> tr -d <span class="s1">&#39;&quot;&#39;</span> <span class="p">|</span> tr -d <span class="s2">&quot;,&quot;</span> <span class="p">|</span> tr -d <span class="s1">&#39;[:space:]&#39;</span><span class="k">)</span>
 <span class="nv">TUI_CLIENT_SECRET</span><span class="o">=</span><span class="k">$(</span>kubectl get secret cn -o json -n jans <span class="p">|</span> grep <span class="s1">&#39;&quot;tui_client_pw&quot;:&#39;</span> <span class="p">|</span> sed -e <span class="s1">&#39;s#.*:\(\)#\1#&#39;</span> <span class="p">|</span> tr -d <span class="s1">&#39;&quot;&#39;</span> <span class="p">|</span> tr -d <span class="s2">&quot;,&quot;</span> <span class="p">|</span> tr -d <span class="s1">&#39;[:space:]&#39;</span> <span class="p">|</span> base64 -d<span class="k">)</span>
 <span class="c1"># add -noverify if your fqdn is not registered</span>
-./config-cli-tui.pyz --host <span class="nv">$FQDN</span> --client-id <span class="nv">$TUI_CLIENT_ID</span> --client-secret <span class="nv">$TUI_CLIENT_SECRET</span> --no-tui --operation-id<span class="o">=</span>post-oauth-openid-client --data<span class="o">=</span>ropc_client.json
+./config-cli-tui.pyz --host <span class="nv">$FQDN</span> --client-id <span class="nv">$TUI_CLIENT_ID</span> --client-secret <span class="nv">$TUI_CLIENT_SECRET</span> --no-tui --operation-id<span class="o">=</span>post-oauth-openid-client --data<span class="o">=</span>dcr_client.json
 </code></pre></div>
 </li>
 <li>
@@ -174140,7 +174144,7 @@ cat <span class="s">&lt;&lt; EOF &gt; dcr_client.json</span>
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-07-19T15:26:09+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-07-19</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-07-20T11:05:29+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-07-20</span>
       
         <br>
         Created:
