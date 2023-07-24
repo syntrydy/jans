@@ -1505,6 +1505,8 @@
         
           
         
+          
+        
       
       
         
@@ -1525,6 +1527,20 @@
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../vm-ops/upgrade/" class="md-nav__link">
+        Upgrade
+      </a>
+    </li>
+  
+
             
           
             
@@ -173177,6 +173193,25 @@
 </li>
 <li>
 <p>Have a <code>client_id</code> and <code>client_secret</code> with sufficient scopes and permissions.</p>
+<ul>
+<li>
+<p><strong>VM:</strong> grab <code>client_id</code> and <code>client_pw</code> from <code>/opt/jans/jans-setup/setup.properties.last</code> file.</p>
+</li>
+<li>
+<p><strong>K8s:</strong> </p>
+<ol>
+<li>
+<p>client_id: <code>kubectl get cm cn -n &lt;namespace&gt; -o yaml | grep jca_client_id</code> </p>
+</li>
+<li>
+<p>Get client_secret: <code>kubectl get secret cn -n &lt;namespace&gt; -o yaml | grep jca_client_pw</code>. This client secret has to be decoded before use.</p>
+</li>
+<li>
+<p>Decode the client_secret: <code>echo "client_secret" | base64 -d</code></p>
+</li>
+</ol>
+</li>
+</ul>
 </li>
 <li>
 <p>In your <code>variables.tf</code> file, add your <code>client_id</code>, <code>client_secret</code> and <code>FQDN</code>
@@ -173273,7 +173308,7 @@ logging_level = &quot;TRACE&quot;
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-05-24T09:39:13+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-05-24</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-07-24T05:17:07+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-07-24</span>
       
         <br>
         Created:
