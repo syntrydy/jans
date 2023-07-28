@@ -172599,8 +172599,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../usermgmt/usermgmt-cache-refresh/" class="md-nav__link">
-        Cache Refresh
+      <a href="../../../usermgmt/usermgmt-jans-link/" class="md-nav__link">
+        Using jans-link
       </a>
     </li>
   
@@ -173436,8 +173436,12 @@
 </li>
 </ul>
 <h2 id="authentication-and-finish">Authentication and <code>Finish</code><a class="headerlink" href="#authentication-and-finish" title="Permanent link">#</a></h2>
-<p>When a top-level flow (i.e. one with no parents) finishes successfully, the selection of the user to authenticate is driven by the <code>userId</code> passed in <code>data</code>, as in <code>Finish { success: true, data: { userId: "john_doe", ... } }</code>.</p>
-<p>By default <code>userId</code> maps to the <code>uid</code> attribute that generally all user entries already have in the database of Jans Server, in other words, the "user name". This attribute is configurable though via property <code>finish_userid_db_attribute</code> of the <a href="../engine-bridge-config/#bridge-configuration">bridge script</a>. In some cases, you would like to change that to <code>mail</code> in order to do things like <code>Finish { success: true, data: { userId: "john_doe@jd.me" } }</code> for instance. </p>
+<p>When a top-level flow (i.e. one with no parents) finishes successfully, the selection of the user to authenticate is driven by the <code>userId</code> passed in <code>data</code>, as in</p>
+<div class="highlight"><pre><span></span><code>obj = { success: true, data: { userId: &quot;john_doe&quot; } }
+// map literals cannot be passed directly to Finish - a variable can be used instead
+Finish obj 
+</code></pre></div>
+<p>By default <code>userId</code> maps to the <code>uid</code> attribute that generally all user entries already have in the database of Jans Server, in other words, the "user name". This attribute is configurable though via property <code>finish_userid_db_attribute</code> of the <a href="../engine-bridge-config/#bridge-configuration">bridge script</a>. In some cases, you would like to change that to <code>mail</code> in order to pass things like <code>{ success: true, data: { userId: "john_doe@jd.me" } }</code> for instance. </p>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
 <p>If the database lookup does not produce exactly one user entry, this is treated as a failed authentication attempt by the authentication server.</p>
@@ -173871,7 +173875,7 @@ words = Call java.util.Collections#unmodifiableSet jStrArr
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-07-20T13:21:39+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-07-20</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-07-28T12:37:46+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-07-28</span>
       
         <br>
         Created:
