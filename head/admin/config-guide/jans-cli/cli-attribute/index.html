@@ -173131,10 +173131,10 @@ In return, we get a list of Operations ID as below:</p>
   fieldValuePair: Field and value pair for seraching [string]
 Operation ID: put-attributes
   Description: Updates an existing attribute
-  Schema: GluuAttribute
+  Schema: JansAttribute
 Operation ID: post-attributes
   Description: Adds a new attribute
-  Schema: GluuAttribute
+  Schema: JansAttribute
 Operation ID: get-attributes-by-inum
   Description: Gets an attribute based on inum
   Parameters:
@@ -173144,7 +173144,7 @@ Operation ID: delete-attributes-by-inum
   Parameters:
   inum: Attribute Id [string]
 Operation ID: patch-attributes-by-inum
-  Description: Partially modify a GluuAttribute
+  Description: Partially modify a JansAttribute
   Parameters:
   inum: Attribute Id [string]
   Schema: Array of PatchRequest
@@ -173313,10 +173313,10 @@ In return, we get a list of attribute that are matched with the given <code>patt
 <p>To create SSO for certain applications, you may need to add custom attributes to your Janssen Server. Custom attributes can be added by using this operation-ID. It has a schema file where it's defined: the properties it needs to be filled to create a new custom attribute.</p>
 <p><div class="highlight"><pre><span></span><code>Operation ID: post-attributes
   Description: Adds a new attribute
-  Schema: GluuAttribute
+  Schema: JansAttribute
 </code></pre></div>
 Before adding a new attribute, let's get sample <code>schema</code>:
-<div class="highlight"><pre><span></span><code>/opt/jans/jans-cli/config-cli.py --schema GluuAttribute &gt; /tmp/attribute.json
+<div class="highlight"><pre><span></span><code>/opt/jans/jans-cli/config-cli.py --schema JansAttribute &gt; /tmp/attribute.json
 </code></pre></div>
 It will return as below:</p>
 <p><div class="highlight"><pre><span></span><code><span class="p">{</span><span class="w"></span>
@@ -173419,7 +173419,7 @@ It will create a new attribute into the Attribute list with updated <code>inum &
 </code></pre></div>
 <h2 id="updating-an-attribute">Updating an Attribute<a class="headerlink" href="#updating-an-attribute" title="Permanent link">#</a></h2>
 <p>This operation-id can be used to update an existing attribute information. The Janssen Server administrator can make changes to attributes, such as changing their status to <code>active/inactive</code> by using this operation-ID. Let's look at the schema:</p>
-<div class="highlight"><pre><span></span><code>/opt/jans/jans-cli/config-cli.py --schema GluuAttribute &gt; /tmp/attrib.json
+<div class="highlight"><pre><span></span><code>/opt/jans/jans-cli/config-cli.py --schema JansAttribute &gt; /tmp/attrib.json
 </code></pre></div>
 <p>You must see the similar schema while performed in <code>post-attributes</code> operation.</p>
 <p>To update an existing attribute, we have to ensure following properties in the schema file.</p>
@@ -173535,7 +173535,7 @@ Getting access token for scope https://jans.io/oauth/config/attributes.readonly
 <h2 id="patch-attributes">Patch Attributes<a class="headerlink" href="#patch-attributes" title="Permanent link">#</a></h2>
 <p>This operation can also used for updating an existing attribute by using its <code>inum</code> value.</p>
 <div class="highlight"><pre><span></span><code>Operation ID: patch-attributes-by-inum
-  Description: Partially modify a GluuAttribute.
+  Description: Partially modify a JansAttribute.
   url-suffix: inum
   Schema: Array of PatchRequest
 </code></pre></div>
@@ -173642,7 +173642,7 @@ Server Response:
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-07-14T04:46:36+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-07-14</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-08-02T14:21:00+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-08-02</span>
       
         <br>
         Created:
