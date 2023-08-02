@@ -172890,20 +172890,6 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#profile-setup-for-client-and-server-modules" class="md-nav__link">
-    Profile setup for client and server modules
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#profile-setup-for-agama-sub-module" class="md-nav__link">
-    Profile setup for agama sub-module
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#running-the-tests" class="md-nav__link">
     Running The Tests
   </a>
@@ -172940,6 +172926,26 @@
   <a href="#configuring-the-agama-module" class="md-nav__link">
     Configuring the agama module
   </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuring-the-scim-module" class="md-nav__link">
+    Configuring the SCIM module
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuring the SCIM module">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#profile-setup-for-client-and-server-modules" class="md-nav__link">
+    Profile setup for client and server modules
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -173259,20 +173265,6 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#profile-setup-for-client-and-server-modules" class="md-nav__link">
-    Profile setup for client and server modules
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#profile-setup-for-agama-sub-module" class="md-nav__link">
-    Profile setup for agama sub-module
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#running-the-tests" class="md-nav__link">
     Running The Tests
   </a>
@@ -173309,6 +173301,26 @@
   <a href="#configuring-the-agama-module" class="md-nav__link">
     Configuring the agama module
   </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuring-the-scim-module" class="md-nav__link">
+    Configuring the SCIM module
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuring the SCIM module">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#profile-setup-for-client-and-server-modules" class="md-nav__link">
+    Profile setup for client and server modules
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -173398,22 +173410,25 @@ Initializing jdb ...
 against an installed Janssen Server.</p>
 <h3 id="component-setup">Component Setup<a class="headerlink" href="#component-setup" title="Permanent link">#</a></h3>
 <p>Instructions in this guide can be used if Janssen Server is installed on a VM. 
-Either locally on the developer workstation
-itself(as shown below) or on a remote cloud VM.</p>
+Developers can use a virtualization software (like VMWare) or use LxD containers to create VM on developer workstation or use a remote cloud VM.</p>
 <p><img alt="Component Diagram" src="../../assets/image-run-integration-test-from-workspace-06122022.png" /></p>
+<div class="admonition note">
+<p class="admonition-title">OS platform for Developer Workstation</p>
+<p>Steps in this guide are applicable to any OS platform a Developer workstation may have. Example commands given in this guide are for Ubuntu Linux based workstation.  </p>
+</div>
 <h3 id="install-janssen-server">Install Janssen Server<a class="headerlink" href="#install-janssen-server" title="Permanent link">#</a></h3>
-<p>Install the Janssen server using one of the methods described in the 
-installation guide. Note the points below when
+<p>Install the Janssen server using one of the methods described in the
+VM installation guide. Note the points below when
 following installation instructions.</p>
 <ul>
 <li>Make a note
   of the <code>host name</code> that you assign to the Janssen server during the 
-  installation. For this guide, the Janssen hostname would be <code>janssen2.op.io</code></li>
+  installation. For this guide, the Janssen hostname would be <code>janssen.op.io</code></li>
 <li>Choose to install with test data load. This can be achieved by using 
   the <code>-t</code> switch when invoking the setup script
   from installation instructions.</li>
 </ul>
-<p>Use the <a href="../../admin/install/vm-install/">VM installation guide</a> for a 
+<p>Use the <a href="../../admin/install/vm-install/">VM installation guide</a> for the 
 complete set of instructions.</p>
 <p>Once the installation is complete, check if the <code>.well-known</code> end-points of the
 Janssen server from the browser. A successful response will ascertain that the
@@ -173424,26 +173439,26 @@ from the developer's machine.</p>
 <p>Based on developer setup it may be necessary to add appropriate IP-HOST 
 mapping to the developer workstation. For instance, on a Linux-based 
 developer workstation, this means adding a mapping to <code>/etc/hosts</code> file. 
-Make sure that VM's IP is mapped to a FQDN like <code>janssen2.op.io</code>. Refering 
+Make sure that VM's IP is mapped to a FQDN like <code>janssen.op.io</code>. Refering 
 to VM with <code>localhost</code> or just IP will not work.</p>
 </div>
 <p>URI for OpenID configuration <code>.well-known</code> endpoint:</p>
-<div class="highlight"><pre><span></span><code>https://janssen2.op.io/jans-auth/.well-known/openid-configuration
+<div class="highlight"><pre><span></span><code>https://janssen.op.io/jans-auth/.well-known/openid-configuration
 </code></pre></div>
 <p>The response received should be JSON formatted Janssen configuration details, 
 similar to those below.</p>
 <div class="highlight"><pre><span></span><code>{
 &quot;request_parameter_supported&quot; : true,
-&quot;pushed_authorization_request_endpoint&quot; : &quot;https://janssen2.op.io/jans-auth/restv1/par&quot;,
-&quot;introspection_endpoint&quot; : &quot;https://janssen2.op.io/jans-auth/restv1/introspection&quot;,
+&quot;pushed_authorization_request_endpoint&quot; : &quot;https://janssen.op.io/jans-auth/restv1/par&quot;,
+&quot;introspection_endpoint&quot; : &quot;https://janssen.op.io/jans-auth/restv1/introspection&quot;,
 &quot;claims_parameter_supported&quot; : false,
-&quot;issuer&quot; : &quot;https://janssen2.op.io&quot;,
+&quot;issuer&quot; : &quot;https://janssen.op.io&quot;,
 &quot;userinfo_encryption_enc_values_supported&quot; : [ &quot;RSA1_5&quot;, &quot;RSA-OAEP&quot;, &quot;A128KW&quot;, &quot;A256KW&quot; ],
 &quot;id_token_encryption_enc_values_supported&quot; : [ &quot;A128CBC+HS256&quot;, &quot;A256CBC+HS512&quot;, &quot;A128GCM&quot;, &quot;A256GCM&quot; ],
-&quot;authorization_endpoint&quot; : &quot;https://janssen2.op.io/jans-auth/restv1/authorize&quot;,
+&quot;authorization_endpoint&quot; : &quot;https://janssen.op.io/jans-auth/restv1/authorize&quot;,
 &quot;service_documentation&quot; : &quot;http://jans.org/docs&quot;,
 &quot;authorization_encryption_alg_values_supported&quot; : [ &quot;RSA1_5&quot;, &quot;RSA-OAEP&quot;, &quot;A128KW&quot;, &quot;A256KW&quot; ],
-&quot;id_generation_endpoint&quot; : &quot;https://janssen2.op.io/jans-auth/restv1/id&quot;,
+&quot;id_generation_endpoint&quot; : &quot;https://janssen.op.io/jans-auth/restv1/id&quot;,
 &quot;claims_supported&quot; : [ &quot;street_address&quot;, &quot;country&quot;, &quot;zoneinfo&quot;, &quot;birthdate&quot;, &quot;role&quot;, &quot;gender&quot;, &quot;user_name&quot;, &quot;formatted&quot;, &quot;phone_mobile_number&quot;, &quot;preferred_username&quot;, &quot;inum&quot;, &quot;locale&quot;, &quot;updated_at&quot;, &quot;post_office_box&quot;, &quot;nickname&quot;, &quot;preferred_language&quot;, &quot;email&quot;, &quot;website&quot;, &quot;email_verified&quot;, &quot;profile&quot;, &quot;locality&quot;, &quot;room_number&quot;, &quot;phone_number_verified&quot;, &quot;given_name&quot;, &quot;middle_name&quot;, &quot;picture&quot;, &quot;name&quot;, &quot;phone_number&quot;, &quot;postal_code&quot;, &quot;region&quot;, &quot;family_name&quot;, &quot;jansAdminUIRole&quot; ],
 &quot;scope_to_claims_mapping&quot; : [ {
   &quot;user_name&quot; : [ &quot;user_name&quot; ]
@@ -173470,8 +173485,8 @@ needs to have the appropriate
 certificate installed. Update cacerts using the steps below:</p>
 <ul>
 <li>
-<p>extract certificate for Janssen server with name <code>janssen2.op.io</code>
-  <div class="highlight"><pre><span></span><code>openssl s_client -connect test.local.jans.io:443 2&gt;&amp;1 |sed -ne &#39;/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p&#39; &gt; /tmp/httpd.crt
+<p>extract certificate for Janssen server with name <code>janssen.op.io</code>
+  <div class="highlight"><span class="filename">On Developer Workstation</span><pre><span></span><code>openssl s_client -connect test.local.jans.io:443 <span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="p">|</span>sed -ne <span class="s1">&#39;/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p&#39;</span> &gt; /tmp/httpd.crt
 </code></pre></div>
   this command takes a few seconds to return.</p>
 </li>
@@ -173480,7 +173495,7 @@ certificate installed. Update cacerts using the steps below:</p>
 <code>/usr/lib/jvm/java-11-amazon-corretto</code>. When running the command below, it 
   will prompt for cert store password. Provide
   the correct password. The default password is <code>changeit</code>.
-  <div class="highlight"><pre><span></span><code>keytool -import -alias janssen2.op.io -keystore /usr/lib/jvm/java-11-amazon-corretto/lib/security/cacerts -file /tmp/httpd.crt
+  <div class="highlight"><pre><span></span><code>keytool -import -alias janssen.op.io -keystore /usr/lib/jvm/java-11-amazon-corretto/lib/security/cacerts -file /tmp/httpd.crt
 </code></pre></div></p>
 </li>
 </ul>
@@ -173489,51 +173504,69 @@ certificate installed. Update cacerts using the steps below:</p>
 developer workstation as well, we will
 create and configure the code base on the developer workspace to run integration
 tests.</p>
-<p>Get Janssen server code from <a href="https://github.com/JanssenProject/jans">Janssen GitHub repository</a>.</p>
-<p>Janssen Server is composed of multiple modules. Each module has its own set of 
+<p>Get Janssen server code from <a href="https://github.com/JanssenProject/jans">Janssen GitHub repository</a>. Note the path to this location, we will refer to it as <code>source-base</code>.</p>
+<p>Janssen Server is composed of multiple modules. For example <code>source-base/jans-auth-server</code>, <code>source-base/jans-link</code> etc. </p>
+<p>Each module has its own set of 
 tests.
 Below are the instructions for configuring each module for tests.</p>
+<div class="admonition info">
+<p class="admonition-title">What is a Profile directory?</p>
+<ul>
+<li>To run integration tests, the developer workspace needs to know details about he Janssen Server agaist which the tests are to be run. </li>
+<li>Janssen Server workspace holds this information in <code>source-base/module/sub-module/profiles</code> directory.</li>
+<li>The <code>profiles</code> directory can contain one or more sub-directories, each representing a profile(i.e a target Janssen Server). These profile directories are used to hold files that contain important information required to run tests. </li>
+<li>Developers can create one or more profiles and use them to run tests
+against different Janssen Servers. </li>
+<li>This guide uses Janssen Server hostname,
+ <code>janssen.op.io</code>, as profile name.</li>
+</ul>
+</div>
 <h4 id="configuring-the-jans-auth-server-module">Configuring the jans-auth-server module<a class="headerlink" href="#configuring-the-jans-auth-server-module" title="Permanent link">#</a></h4>
 <p>Configuring <code>jans-auth-server</code> module involves setting up profiles for <code>client</code>,
 <code>server</code> and <code>agama</code> sub-modules.</p>
-<h5 id="profile-setup-for-client-and-server-modules">Profile setup for client and server modules<a class="headerlink" href="#profile-setup-for-client-and-server-modules" title="Permanent link">#</a></h5>
-<p>Many Janssen Server modules and sub-modules use test configuration stored in a 
-directory named <code>profile</code>. The profile
-directory contains files that hold important information required to run tests. 
-Developers can create one or more
-profiles and use them to run tests against different Janssen Servers.</p>
-<p>Since Janssen Server has been installed with test data, the installer also 
-created the profile files required to run
-the test.
-These files are kept on the VM under 
-<code>/opt/jans/jans-setup/output/test/jans-auth</code> directory. Copy over this directory
-to any location on the developer workstation.</p>
-<p>Follow the steps below to configure the profile for the client module. The same 
-steps should be followed for
-setting up a profile for the server module.</p>
+<p>Follow the steps below to configure the profile for the client and server sub-modules.</p>
 <ol>
-<li>Under <code>jans-auth-server/client/profile</code> module, create a new directory and name it <code>janssen2.op.io</code></li>
-<li>Copy the contents of <code>jans-auth/client</code> directory into the newly created <code>janssen2.op.io</code> directory</li>
-<li>Copy keystore file <code>/client/profiles/default/client_keystore.p12</code> from <code>default</code> directory to
-   the <code>janssen2.op.io</code> directory</li>
+<li>Move to the module directory
+   <div class="highlight"><pre><span></span><code> <span class="nb">cd</span> source-base/jans-auth-server
+</code></pre></div></li>
+<li>
+<p>As a precautionary measure, let's first remove any old profile artifacts 
+from the <code>jans-auth-server</code> workspace.
+   <div class="highlight"><pre><span></span><code>rm -rf ./jans-auth
+rm -rf ./client/profiles/janssen.op.io
+rm -rf ./server/profiles/janssen.op.io
+rm -rf ./agama/engine/profiles/janssen.op.io
+</code></pre></div></p>
+</li>
+<li>
+<p>Since Janssen Server has been installed with test data, the installer also
+   created the profile files required to run
+   the test.
+   These files are kept on the VM under
+   <code>/opt/jans/jans-setup/output/test/jans-auth</code> directory. Copy over <code>jans-auth</code> directory from Janssen Server VM
+   to <code>source-base/jans-auth-server</code> on developer workstation.</p>
+</li>
+<li>Create new profile directories.
+   <div class="highlight"><pre><span></span><code>mkdir -p ./client/profiles/janssen.op.io
+mkdir -p ./server/profiles/janssen.op.io
+mkdir -p ./agama/engine/profiles/janssen.op.io
+</code></pre></div></li>
+<li>Copy the contents of <code>jans-auth</code> directory into the respective sub-module's <code>janssen.op.io</code> profile directory
+   <div class="highlight"><pre><span></span><code>cp ./jans-auth/client/* ./client/profiles/janssen.op.io
+cp ./jans-auth/server/* ./server/profiles/janssen.op.io
+cp ./jans-auth/config-agama-test.properties ./agama/engine/profiles/janssen.op.io/config-agama-test.properties
+</code></pre></div></li>
+<li>Copy keystore file <code>profiles/default/client_keystore.p12</code> from <code>default</code> profile directory to
+   the <code>janssen.op.io</code> profile directory
+   <div class="highlight"><pre><span></span><code>cp -f ./client/profiles/default/client_keystore.p12 ./client/profiles/janssen.op.io
+cp -f ./server/profiles/default/client_keystore.p12 ./server/profiles/janssen.op.io
+</code></pre></div></li>
 </ol>
-<h5 id="profile-setup-for-agama-sub-module">Profile setup for agama sub-module<a class="headerlink" href="#profile-setup-for-agama-sub-module" title="Permanent link">#</a></h5>
-<p>Agama module code resides under <code>jans/agama</code> directory.</p>
-<p>Follow the steps below from <code>agama</code> directory to configure the module to run the
-integration tests.</p>
-<ol>
-<li>Remove existing profile if any by deleting and recreating the directory 
-   <code>engine/profiles/janssen2.op.io</code></li>
-<li>Copy the file <code>jans-auth/config-agama-test.properties</code> to the 
-   <code>engine/profiles/janssen2.op.io/</code> directory</li>
-</ol>
-<p>Once the above steps have been followed, the local copy of <code>jans-auth</code> directory
-that was copied from <code>janssen2.op.io</code> can be deleted.</p>
 <h5 id="running-the-tests">Running The Tests<a class="headerlink" href="#running-the-tests" title="Permanent link">#</a></h5>
 <p>Each module in Janssen Server has its tests that have to be executed separately.
 For example, to run integration tests for <code>jans-auth-server</code> module, run the 
 following maven command at the directory level:</p>
-<div class="highlight"><pre><span></span><code>mvn -Dcfg=janssen2.op.io test
+<div class="highlight"><pre><span></span><code>mvn -Dcfg=janssen.op.io test
 </code></pre></div>
 <h4 id="configuring-the-jans-core-module">Configuring the jans-core module<a class="headerlink" href="#configuring-the-jans-core-module" title="Permanent link">#</a></h4>
 <p>This module does not require a profile setup. It can be built with below maven
@@ -173555,13 +173588,40 @@ maven command.</p>
 maven command.</p>
 <div class="highlight"><pre><span></span><code>mvn clean compile install
 </code></pre></div>
+<h4 id="configuring-the-scim-module">Configuring the SCIM module<a class="headerlink" href="#configuring-the-scim-module" title="Permanent link">#</a></h4>
+<p>This module does not require a profile setup. It can be built with the below
+maven command.</p>
+<h5 id="profile-setup-for-client-and-server-modules">Profile setup for client and server modules<a class="headerlink" href="#profile-setup-for-client-and-server-modules" title="Permanent link">#</a></h5>
+<p>Many Janssen Server modules and sub-modules use test configuration stored in a
+directory named <code>profile</code>. The profile
+directory contains files that hold important information required to run tests.
+Developers can create one or more
+profiles and use them to run tests against different Janssen Servers.</p>
+<p>Since Janssen Server has been installed with test data, the installer also
+created the profile files required to run
+the test.
+For SCIM/client module, these files are kept on the VM under
+<code>/opt/jans/jans-setup/output/test/scim-client</code> directory. Copy over this directory
+to any location on the developer workstation.</p>
+<p>Follow the steps below to configure the profile for the client module. The same
+steps should be followed for
+setting up a profile for the server module.</p>
+<ol>
+<li>Under <code>jans-scim/client/profiles</code> directory, create a new directory and name it <code>janssen.op.io</code></li>
+<li>Copy the contents of <code>scim-client/client</code> directory into the newly created <code>janssen.op.io</code> directory</li>
+</ol>
+<p>Post this, remove the <code>scim-client</code> directory.</p>
+<p>Now as the profile is setup, to build the <code>jans-scim</code> module and run tests, 
+use the command below:</p>
+<div class="highlight"><pre><span></span><code>mvn -Dcfg=janssen.op.io test
+</code></pre></div>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-07-28T11:56:56+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-07-28</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-08-02T15:49:07+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-08-02</span>
       
         <br>
         Created:
