@@ -43,6 +43,18 @@ public class SimpleUser implements Serializable {
     @AttributeName(name = "memberOf")
     private List<String> memberOf; 
 
+    @AttributeName(name = "custom_test1")
+    private String customTest1;
+
+    @AttributeName(name = "custom_test2")
+    private String customTest2;
+
+    @AttributeName(name = "custom_test3")
+    private String customTest3;
+
+    @AttributeName(name = "custom_test4")
+    private String customTest4;
+
     @AttributesList(name = "name", value = "values", multiValued = "multiValued", sortByName = true)
     private List<CustomObjectAttribute> customAttributes = new ArrayList<CustomObjectAttribute>();
 
@@ -87,6 +99,38 @@ public class SimpleUser implements Serializable {
 
 	public void setMemberOf(List<String> memberOf) {
 		this.memberOf = memberOf;
+	}
+
+	public String getCustomTest1() {
+		return customTest1;
+	}
+
+	public void setCustomTest1(String customTest1) {
+		this.customTest1 = customTest1;
+	}
+
+	public String getCustomTest2() {
+		return customTest2;
+	}
+
+	public void setCustomTest2(String customTest2) {
+		this.customTest2 = customTest2;
+	}
+
+	public String getCustomTest3() {
+		return customTest3;
+	}
+
+	public void setCustomTest3(String customTest3) {
+		this.customTest3 = customTest3;
+	}
+
+	public String getCustomTest4() {
+		return customTest4;
+	}
+
+	public void setCustomTest4(String customTest4) {
+		this.customTest4 = customTest4;
 	}
 
 	public List<CustomObjectAttribute> getCustomAttributes() {

@@ -14,9 +14,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Properties;
+import java.util.Set;
+import java.util.TreeSet;
 
 import org.apache.commons.dbcp2.ConnectionFactory;
 import org.apache.commons.dbcp2.DriverManagerConnectionFactory;
@@ -39,8 +43,8 @@ import io.jans.orm.exception.operation.ConfigurationException;
 import io.jans.orm.exception.operation.ConnectionException;
 import io.jans.orm.model.AttributeType;
 import io.jans.orm.operation.auth.PasswordEncryptionMethod;
-import io.jans.orm.sql.dsl.template.MySQLJsonTemplates;
 import io.jans.orm.sql.dsl.template.MariaDBJsonTemplates;
+import io.jans.orm.sql.dsl.template.MySQLJsonTemplates;
 import io.jans.orm.sql.dsl.template.PostgreSQLJsonTemplates;
 import io.jans.orm.sql.model.ResultCode;
 import io.jans.orm.sql.model.TableMapping;
@@ -89,8 +93,12 @@ public class SqlConnectionProvider {
 	private SQLQueryFactory sqlQueryFactory;
 
 	private Map<String, Map<String, AttributeType>> tableColumnsMap;
+	private Map<String, Set<String>> childTablesMap;
 	private Map<String, String> tableEnginesMap = new HashMap<>();
 	private Map<String, ArrayList<String>> tableJsonColumnsMap = new HashMap<>();
+
+	// Cache for table mappings
+	private final Map<String, TableMapping> tableMappingsMap = new HashMap<>();
 
 	protected SqlConnectionProvider() {
 	}
@@ -98,6 +106,7 @@ public class SqlConnectionProvider {
 	public SqlConnectionProvider(Properties props) {
 		this.props = props;
 		this.tableColumnsMap = new HashMap<>();
+		this.childTablesMap = new HashMap<>();
 	}
 
 	public void create() {
@@ -308,6 +317,27 @@ public class SqlConnectionProvider {
 				tableColumnsMap.put(StringHelper.toLowerCase(tableName), tableColumns);
 			}
 		}
+		
+		// Build child tables map
+		TreeSet<String> tableNamesSet = new TreeSet<>(tableColumnsMap.keySet());
+		for (String tableName : tableNamesSet) {
+			if (tableName.contains("_")) {
+				// Candidate to child table
+				String parentTableName = tableName.substring(0, tableName.indexOf("_"));
+				if (tableNamesSet.contains(parentTableName)) {
+					// Found parent table
+        			Set<String> childAttributes;
+	        		if (childTablesMap.containsKey(parentTableName)) {
+	        			childAttributes = childTablesMap.get(parentTableName);
+	        		} else {
+	        			childAttributes = new HashSet<>();
+	        			childTablesMap.put(parentTableName, childAttributes);
+	        		}
+	        		childAttributes.add(tableName);
+				}
+			}
+		}
+        LOG.debug("Build child tables map: '{}'.", childTablesMap);
 
 		takes = System.currentTimeMillis() - takes;
 		LOG.info("Metadata scan finisehd in {} milliseconds", takes);
@@ -474,9 +504,29 @@ public class SqlConnectionProvider {
 			throw new KeyConversionException("Failed to determine base key part!");
 		}
 
-		TableMapping tableMapping = new TableMapping(baseNameParts[0], tableName, objectClass, columTypes);
+		String compoundKey = objectClass + "_" + baseNameParts;
+		TableMapping tableMapping = tableMappingsMap.get(compoundKey);
+		if (tableMapping == null) {
+			tableMapping = new TableMapping(baseNameParts[0], tableName, objectClass, columTypes);
+			tableMappingsMap.put(compoundKey, tableMapping);
+		}
 
 		return tableMapping;
+	}
+
+	public List<TableMapping> getChildTablesMapping(String key, String objectClass) {
+		String tableName = objectClass;
+		Set<String> childTables = childTablesMap.get(StringHelper.toLowerCase(tableName));
+		if ((childTables == null) || (childTables.size() == 0)) {
+			return null;
+		}
+
+		ArrayList<TableMapping> result = new ArrayList<>(childTables.size());
+		for (String childTable : childTables) {
+			result.add(getTableMappingByKey(key, childTable));
+		}
+
+		return result;
 	}
 
 	public String getEngineType(String objectClass) {

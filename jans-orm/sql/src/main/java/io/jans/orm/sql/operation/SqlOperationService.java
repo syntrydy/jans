@@ -51,6 +51,7 @@ public interface SqlOperationService extends PersistenceOperationService {
     static String OBJECT_CLASS = "objectClass";
 
     static String DOC_ALIAS = "doc";
+    static String DOC_CHILD_ALIAS = "doc_child";
     static String DOC_INNER_ALIAS = "doc_inner";
     static String ID = "id";
     static String DOC_ID = "doc_id";

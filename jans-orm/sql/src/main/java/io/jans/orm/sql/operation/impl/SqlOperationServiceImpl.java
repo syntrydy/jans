@@ -20,6 +20,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -56,12 +57,12 @@ import io.jans.orm.exception.operation.SearchException;
 import io.jans.orm.extension.PersistenceExtension;
 import io.jans.orm.model.AttributeData;
 import io.jans.orm.model.AttributeDataModification;
+import io.jans.orm.model.AttributeDataModification.AttributeModificationType;
 import io.jans.orm.model.AttributeType;
 import io.jans.orm.model.BatchOperation;
 import io.jans.orm.model.EntryData;
 import io.jans.orm.model.PagedResult;
 import io.jans.orm.model.SearchScope;
-import io.jans.orm.model.AttributeDataModification.AttributeModificationType;
 import io.jans.orm.operation.auth.PasswordEncryptionHelper;
 import io.jans.orm.sql.impl.SqlBatchOperationWraper;
 import io.jans.orm.sql.model.ConvertedExpression;
@@ -100,6 +101,7 @@ public class SqlOperationServiceImpl implements SqlOperationService {
 	private String schemaName;
 
 	private Path<String> docAlias = ExpressionUtils.path(String.class, DOC_ALIAS);
+	private Path<Object> docAliasWithDocId = Expressions.path(String.class, docAlias, DOC_ID);
 	private Path<String> docInnerAlias = ExpressionUtils.path(String.class, DOC_INNER_ALIAS);
 
     @SuppressWarnings("unused")
@@ -174,7 +176,9 @@ public class SqlOperationServiceImpl implements SqlOperationService {
         Instant startTime = OperationDurationUtil.instance().now();
 
         TableMapping tableMapping = connectionProvider.getTableMappingByKey(key, objectClass);
-        boolean result = addEntryImpl(tableMapping, key, attributes);
+        List<TableMapping> childTablesMapping = connectionProvider.getChildTablesMapping(key, objectClass);
+
+        boolean result = addEntryImpl(tableMapping, childTablesMapping, key, attributes);
 
         Duration duration = OperationDurationUtil.instance().duration(startTime);
         OperationDurationUtil.instance().logDebug("SQL operation: add, duration: {}, table: {}, key: {}, attributes: {}", duration, tableMapping.getTableName(), key, attributes);
@@ -182,36 +186,98 @@ public class SqlOperationServiceImpl implements SqlOperationService {
         return result;
     }
 
-	private boolean addEntryImpl(TableMapping tableMapping, String key, Collection<AttributeData> attributes) throws PersistenceException {
+	private boolean addEntryImpl(TableMapping tableMapping, List<TableMapping> childTablesMapping, String key, Collection<AttributeData> attributes) throws PersistenceException {
 		try {
-			Map<String, AttributeType> columTypes = tableMapping.getColumTypes();
-
 			RelationalPathBase<Object> tableRelationalPath = buildTableRelationalPath(tableMapping);
 			SQLInsertClause sqlInsertQuery = this.sqlQueryFactory.insert(tableRelationalPath);
 
-			for (AttributeData attribute : attributes) {
-				AttributeType attributeType = getAttributeType(columTypes, attribute);
-				if (attributeType == null) {
-		            throw new PersistenceException(String.format("Failed to find attribute type for '%s'", attribute.getName()));
-				}
+			Collection<AttributeData> notAddedAttributes = buildSqlInsertQuery(tableMapping, attributes, sqlInsertQuery);
 
-				boolean multiValued = (attributeType != null) && isJsonColumn(tableMapping.getTableName(), attributeType.getType());
+			List<SQLInsertClause> childSqlInsertQueries = null;
+			if ((childTablesMapping != null) && (notAddedAttributes != null)) {
+				// Build prepared statements to insert into child tables
+				for (TableMapping childTableMapping : childTablesMapping) {
+					if (notAddedAttributes.size() == 0) {
+						break;
+					}
 
-				if (multiValued || Boolean.TRUE.equals(attribute.getMultiValued())) {
-					sqlInsertQuery.columns(Expressions.path(Object.class, attribute.getName()));
-					sqlInsertQuery.values(convertValueToDbJson(attribute.getValues()));
-				} else {
-					sqlInsertQuery.columns(Expressions.stringPath(attribute.getName()));
-					sqlInsertQuery.values(attribute.getValue());
+					int beforeCount = notAddedAttributes.size();
+					RelationalPathBase<Object> childTableRelationalPath = buildTableRelationalPath(childTableMapping);
+			        SQLInsertClause childSqlInsertQuery = this.sqlQueryFactory.insert(childTableRelationalPath);
+					notAddedAttributes = buildSqlInsertQuery(childTableMapping, notAddedAttributes, childSqlInsertQuery);
+					
+					// Store queries which set attributes only
+					if (notAddedAttributes.size() < beforeCount) {
+						if (childSqlInsertQueries == null) {
+							childSqlInsertQueries = new ArrayList<>();
+						}
+						childSqlInsertQuery.columns(Expressions.stringPath(SqlOperationService.DOC_ID));
+						childSqlInsertQuery.values(key);
+						childSqlInsertQueries.add(childSqlInsertQuery);
+					}
 				}
 			}
-			
+
+			// Check if all attributes were added
+			if (notAddedAttributes.size() > 0) {
+				StringBuilder sb = new StringBuilder("Failed to find attribute types for '");
+				int idx = 0;
+				for (AttributeData notAddedAttribute : notAddedAttributes) {
+					if (idx > 0) {
+						sb.append(", ");
+					}
+					sb.append(notAddedAttribute.getName());
+					idx++;
+				}
+				sb.append("'");
+		        throw new PersistenceException(sb.toString());
+			}
+
+			// TODO: Execute queries in one transaction
 			long rowInserted = sqlInsertQuery.execute();
+			if (childSqlInsertQueries != null) {
+				for (SQLInsertClause childSqlInsertQuery : childSqlInsertQueries) {
+					childSqlInsertQuery.execute();
+				}
+			}
 
 			return rowInserted == 1;
         } catch (QueryException ex) {
             throw new PersistenceException("Failed to add entry", ex);
         }
+	}
+
+	public Collection<AttributeData> buildSqlInsertQuery(TableMapping tableMapping, Collection<AttributeData> attributes, SQLInsertClause sqlInsertQuery) throws PersistenceException {
+		Map<String, AttributeType> columTypes = tableMapping.getColumTypes();
+		Collection<AttributeData> notAddedAttributes = null;
+
+		for (AttributeData attribute : attributes) {
+			AttributeType attributeType = getAttributeType(columTypes, attribute);
+			if (attributeType == null) {
+				if (notAddedAttributes == null) {
+					notAddedAttributes = new ArrayList<>();
+				}
+				
+				notAddedAttributes.add(attribute);
+				continue;
+			}
+
+			boolean multiValued = (attributeType != null) && isJsonColumn(tableMapping.getTableName(), attributeType.getType());
+
+			if (multiValued || Boolean.TRUE.equals(attribute.getMultiValued())) {
+				sqlInsertQuery.columns(Expressions.path(Object.class, attribute.getName()));
+				sqlInsertQuery.values(convertValueToDbJson(attribute.getValues()));
+			} else {
+				sqlInsertQuery.columns(Expressions.stringPath(attribute.getName()));
+				sqlInsertQuery.values(attribute.getValue());
+			}
+		}
+
+		if (notAddedAttributes == null) {
+			return Collections.emptyList();
+		}
+
+		return notAddedAttributes;
 	}
 
     @Override
@@ -373,8 +439,9 @@ public class SqlOperationServiceImpl implements SqlOperationService {
         Instant startTime = OperationDurationUtil.instance().now();
         
     	TableMapping tableMapping = connectionProvider.getTableMappingByKey(key, objectClass);
+        List<TableMapping> childTablesMapping = connectionProvider.getChildTablesMapping(key, objectClass);
 
-    	List<AttributeData> result = lookupImpl(tableMapping, key, attributes);
+        List<AttributeData> result = lookupImpl(tableMapping, childTablesMapping, key, attributes);
 
         Duration duration = OperationDurationUtil.instance().duration(startTime);
         OperationDurationUtil.instance().logDebug("SQL operation: lookup, duration: {}, table: {}, key: {}, attributes: {}", duration, tableMapping.getTableName(), key, attributes);
@@ -382,17 +449,26 @@ public class SqlOperationServiceImpl implements SqlOperationService {
         return result;
     }
 
-	private List<AttributeData> lookupImpl(TableMapping tableMapping, String key, String... attributes) throws SearchException, EntryConvertationException {
+	private List<AttributeData> lookupImpl(TableMapping tableMapping, List<TableMapping> childTablesMapping, String key, String... attributes) throws SearchException, EntryConvertationException {
 		try {
 			RelationalPathBase<Object> tableRelationalPath = buildTableRelationalPath(tableMapping);
 
-			Predicate whereExp = ExpressionUtils.eq(Expressions.stringPath(SqlOperationService.DOC_ID),
+			Predicate whereExp = ExpressionUtils.eq(docAliasWithDocId,
 					Expressions.constant(key));
 			Expression<?> attributesExp = buildSelectAttributes(attributes);
 
 			SQLQuery<?> sqlSelectQuery = sqlQueryFactory.select(attributesExp).from(tableRelationalPath)
 					.where(whereExp).limit(1);
-			
+
+			if (childTablesMapping != null) {
+				int idx = 0;
+				for (TableMapping childTableMapping : childTablesMapping) {
+			        RelationalPathBase<Object> childTableRelationalPath = buildChildTableRelationalPath(childTableMapping, idx++);
+			        sqlSelectQuery = sqlSelectQuery.leftJoin(childTableRelationalPath).on(ExpressionUtils.eq(docAliasWithDocId,
+			        		Expressions.path(Object.class, childTableRelationalPath, DOC_ID)));
+				}
+			}
+
 			try (ResultSet resultSet = sqlSelectQuery.getResults();) {
 				List<AttributeData> result = getAttributeDataList(tableMapping, resultSet, true);
 				if (result != null) {
@@ -412,8 +488,9 @@ public class SqlOperationServiceImpl implements SqlOperationService {
         Instant startTime = OperationDurationUtil.instance().now();
 
         TableMapping tableMapping = connectionProvider.getTableMappingByKey(key, objectClass);
+        List<TableMapping> childTablesMapping = connectionProvider.getChildTablesMapping(key, objectClass);
 
-        PagedResult<EntryData> result = searchImpl(tableMapping, key, expression, scope, attributes, orderBy, batchOperationWraper,
+        PagedResult<EntryData> result = searchImpl(tableMapping, childTablesMapping, key, expression, scope, attributes, orderBy, batchOperationWraper,
 						returnDataType, start, count, pageSize);
 
         Duration duration = OperationDurationUtil.instance().duration(startTime);
@@ -422,7 +499,7 @@ public class SqlOperationServiceImpl implements SqlOperationService {
         return result;
 	}
 
-	private <O> PagedResult<EntryData> searchImpl(TableMapping tableMapping, String key, ConvertedExpression expression, SearchScope scope, String[] attributes, OrderSpecifier<?>[] orderBy,
+	private <O> PagedResult<EntryData> searchImpl(TableMapping tableMapping, List<TableMapping> childTablesMapping, String key, ConvertedExpression expression, SearchScope scope, String[] attributes, OrderSpecifier<?>[] orderBy,
             SqlBatchOperationWraper<O> batchOperationWraper, SearchReturnDataType returnDataType, int start, int count, int pageSize) throws SearchException {
         BatchOperation<O> batchOperation = null;
         if (batchOperationWraper != null) {
@@ -439,6 +516,15 @@ public class SqlOperationServiceImpl implements SqlOperationService {
 		} else {
 			Predicate whereExp = (Predicate) expression.expression();
 			sqlSelectQuery = sqlQueryFactory.select(attributesExp).from(tableRelationalPath).where(whereExp);
+		}
+
+		if (childTablesMapping != null) {
+			int idx = 0;
+			for (TableMapping childTableMapping : childTablesMapping) {
+		        RelationalPathBase<Object> childTableRelationalPath = buildChildTableRelationalPath(childTableMapping, idx++);
+		        sqlSelectQuery = sqlSelectQuery.leftJoin(childTableRelationalPath).on(ExpressionUtils.eq(docAliasWithDocId,
+		        		Expressions.path(Object.class, childTableRelationalPath, DOC_ID)));
+			}
 		}
 
         SQLQuery<?> baseQuery = sqlSelectQuery;
@@ -763,7 +849,7 @@ public class SqlOperationServiceImpl implements SqlOperationService {
 
 	private Expression<?> buildSelectAttributes(String ... attributes) {
 		if (ArrayHelper.isEmpty(attributes)) {
-			return Expressions.list(Wildcard.all, Expressions.path(Object.class, docAlias, DOC_ID));
+			return Expressions.list(Wildcard.all, docAliasWithDocId);
 		} else if ((attributes.length == 1) && StringHelper.isEmpty(attributes[0])) {
         	// Compatibility with base persistence layer when application pass filter new String[] { "" }
 			return Expressions.list(Expressions.path(Object.class, docAlias, DN), Expressions.path(Object.class, docAlias, DOC_ID));
@@ -786,9 +872,66 @@ public class SqlOperationServiceImpl implements SqlOperationService {
 
 		return Expressions.list(expresisons.toArray(new Expression<?>[0]));
 	}
+/*
+	private Expression<?> buildSelectAttributeFromChildTables(String tableName, String ... attributes) {
+		if (ArrayHelper.isEmpty(attributes)) {
+			return Expressions.list(Wildcard.all, Expressions.path(Object.class, docAlias, DOC_ID));
+		}
+		List<SelectExpressionItem> selectChildColumns = new ArrayList<>();
+		Set<String> childAttributes = connectionProvider.getTableChildAttributes(tableName);
+		if (childAttributes != null) {
+			selectChildColumns = new ArrayList<>();
+			for (String childAttribute : childAttributes) {
+				SelectExpressionItem selectChildColumn = buildSelectAttributeFromChildTable(tableName, childAttribute);
+				selectChildColumns.add(selectChildColumn);
+			}
+		}
 
+		return selectChildColumns;
+	}
+
+	private SelectExpressionItem buildSelectAttributeFromChildTable(String tableName, String childAttribute) {
+		Function arrayFunction = new Function();
+		arrayFunction.setName("ARRAY");
+		arrayFunction.setAllColumns(false);
+
+		SelectExpressionItem arraySelectItem = new SelectExpressionItem(arrayFunction);
+		arraySelectItem.setAlias(new Alias(childAttribute, false));
+
+		PlainSelect attrSelect = new PlainSelect();
+
+		SubSelect attrSubSelect = new SubSelect();
+		attrSubSelect.setSelectBody(attrSelect);
+		attrSubSelect.withUseBrackets(false);
+		arrayFunction.setParameters(new ExpressionList(attrSubSelect));
+
+		Table attrTableSelect = new Table(tableName + "_" + childAttribute);
+		attrTableSelect.setAlias(new Alias("c", false));
+		attrSelect.setFromItem(attrTableSelect);
+		
+		Column attrSelectColumn = new Column(attrTableSelect, childAttribute);
+
+		attrSelect.addSelectItems(new SelectExpressionItem(attrSelectColumn));
+
+		Column attrLeftColumn = new Column(tableAlias, DOC_ID);
+
+		Column attrRightColumn = new Column(attrTableSelect, DOC_ID);
+
+		EqualsTo attrEquals = new EqualsTo(attrLeftColumn, attrRightColumn);
+
+		attrSelect.withWhere(attrEquals);
+
+		return arraySelectItem;
+	}
+*/
 	private RelationalPathBase<Object> buildTableRelationalPath(TableMapping tableMapping) {
 		RelationalPathBase<Object> tableRelationalPath = new RelationalPathBase<>(Object.class, DOC_ALIAS, this.schemaName, tableMapping.getTableName());
+
+		return tableRelationalPath;
+	}
+
+	private RelationalPathBase<Object> buildChildTableRelationalPath(TableMapping tableMapping, int index) {
+		RelationalPathBase<Object> tableRelationalPath = new RelationalPathBase<>(Object.class, DOC_CHILD_ALIAS + String.valueOf(index), this.schemaName, tableMapping.getTableName());
 
 		return tableRelationalPath;
 	}
