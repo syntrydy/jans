@@ -173122,6 +173122,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#selinux" class="md-nav__link">
+    SELinux
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -173194,13 +173201,20 @@ may need to tweak some of the configuration dials for your system or the
 database. If you intend to deploy a Janssen Server in production for high
 concurrency, make sure you benchmark the exact flows you expect to serve
 in production. </p>
+<h2 id="selinux">SELinux<a class="headerlink" href="#selinux" title="Permanent link">#</a></h2>
+<p>Janssen servers bind to localhost and apache web server forwards requests to 
+Janssen servers (reverse proxy). If you have SELinux enabled VM, apache can't
+forwards requests to Jansses server. Therefore setup script adds the following
+SELinux policy:</p>
+<div class="highlight"><pre><span></span><code>httpd_can_network_connect 1 -P
+</code></pre></div>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2022-12-05T18:37:22+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2022-12-05</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-08-07T09:10:03+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-08-07</span>
       
         <br>
         Created:
