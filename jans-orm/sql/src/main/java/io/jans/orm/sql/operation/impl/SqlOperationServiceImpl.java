@@ -220,17 +220,7 @@ public class SqlOperationServiceImpl implements SqlOperationService {
 
 			// Check if all attributes were added
 			if (notAddedAttributes.size() > 0) {
-				StringBuilder sb = new StringBuilder("Failed to find attribute types for '");
-				int idx = 0;
-				for (AttributeData notAddedAttribute : notAddedAttributes) {
-					if (idx > 0) {
-						sb.append(", ");
-					}
-					sb.append(notAddedAttribute.getName());
-					idx++;
-				}
-				sb.append("'");
-		        throw new PersistenceException(sb.toString());
+				throwFailedToDetermineType(notAddedAttributes);
 			}
 
 			// TODO: Execute queries in one transaction
@@ -247,9 +237,9 @@ public class SqlOperationServiceImpl implements SqlOperationService {
         }
 	}
 
-	public Collection<AttributeData> buildSqlInsertQuery(TableMapping tableMapping, Collection<AttributeData> attributes, SQLInsertClause sqlInsertQuery) throws PersistenceException {
+	public List<AttributeData> buildSqlInsertQuery(TableMapping tableMapping, Collection<AttributeData> attributes, SQLInsertClause sqlInsertQuery) throws PersistenceException {
 		Map<String, AttributeType> columTypes = tableMapping.getColumTypes();
-		Collection<AttributeData> notAddedAttributes = null;
+		List<AttributeData> notAddedAttributes = null;
 
 		for (AttributeData attribute : attributes) {
 			AttributeType attributeType = getAttributeType(columTypes, attribute);
@@ -283,9 +273,11 @@ public class SqlOperationServiceImpl implements SqlOperationService {
     @Override
     public boolean updateEntry(String key, String objectClass, List<AttributeDataModification> mods) throws UnsupportedOperationException, PersistenceException {
         Instant startTime = OperationDurationUtil.instance().now();
-        
+
         TableMapping tableMapping = connectionProvider.getTableMappingByKey(key, objectClass);
-        boolean result = updateEntryImpl(tableMapping, key, mods);
+        List<TableMapping> childTablesMapping = connectionProvider.getChildTablesMapping(key, objectClass);
+
+        boolean result = updateEntryImpl(tableMapping, childTablesMapping, key, mods);
 
         Duration duration = OperationDurationUtil.instance().duration(startTime);
         OperationDurationUtil.instance().logDebug("SQL operation: modify, duration: {}, table: {}, key: {}, mods: {}", duration, tableMapping.getTableName(), key, mods);
@@ -293,53 +285,106 @@ public class SqlOperationServiceImpl implements SqlOperationService {
         return result;
     }
 
-	private boolean updateEntryImpl(TableMapping tableMapping, String key, List<AttributeDataModification> mods) throws PersistenceException {
+	private boolean updateEntryImpl(TableMapping tableMapping, List<TableMapping> childTablesMapping, String key, List<AttributeDataModification> mods) throws PersistenceException {
 		try {
-			Map<String, AttributeType> columTypes = tableMapping.getColumTypes();
-
 			RelationalPathBase<Object> tableRelationalPath = buildTableRelationalPath(tableMapping);
 			SQLUpdateClause sqlUpdateQuery = this.sqlQueryFactory.update(tableRelationalPath);
 
-			for (AttributeDataModification attributeMod : mods) {
-				AttributeData attribute = attributeMod.getAttribute();
-				Path path = Expressions.stringPath(attribute.getName());
+			List<AttributeDataModification> notAppliedUpdateMods = buildSqlUpdateQuery(tableMapping, key, mods, sqlUpdateQuery);
 
-				AttributeType attributeType = getAttributeType(columTypes, attribute);
-				if (attributeType == null) {
-		            throw new PersistenceException(String.format("Failed to find attribute type for '%s'", attribute.getName()));
+			List<SQLUpdateClause> childSqlUpdateQueries = null;
+			if ((childTablesMapping != null) && (notAppliedUpdateMods != null)) {
+				// Build prepared statements to update in child tables
+				for (TableMapping childTableMapping : childTablesMapping) {
+					if (notAppliedUpdateMods.size() == 0) {
+						break;
+					}
+
+					int beforeCount = notAppliedUpdateMods.size();
+					RelationalPathBase<Object> childTableRelationalPath = buildTableRelationalPath(childTableMapping);
+			        SQLUpdateClause childSqlUpdateQuery = this.sqlQueryFactory.update(childTableRelationalPath);
+			        notAppliedUpdateMods = buildSqlUpdateQuery(childTableMapping, key, notAppliedUpdateMods, childSqlUpdateQuery);
+					
+					// Store queries which set attributes only
+					if (notAppliedUpdateMods.size() < beforeCount) {
+						if (childSqlUpdateQueries == null) {
+							childSqlUpdateQueries = new ArrayList<>();
+						}
+						childSqlUpdateQueries.add(childSqlUpdateQuery);
+					}
 				}
-
-				boolean multiValued = (attributeType != null) && isJsonColumn(tableMapping.getTableName(), attributeType.getType());
-				
-				AttributeModificationType type = attributeMod.getModificationType();
-                if ((AttributeModificationType.ADD == type) || (AttributeModificationType.FORCE_UPDATE == type)) {
-					if (multiValued || Boolean.TRUE.equals(attribute.getMultiValued())) {
-    					sqlUpdateQuery.set(path, convertValueToDbJson(attribute.getValues()));
-    				} else {
-    					sqlUpdateQuery.set(path, attribute.getValue());
-    				}
-                } else if (AttributeModificationType.REPLACE == type) {
-					if (multiValued || Boolean.TRUE.equals(attribute.getMultiValued())) {
-    					sqlUpdateQuery.set(path, convertValueToDbJson(attribute.getValues()));
-    				} else {
-    					sqlUpdateQuery.set(path, attribute.getValue());
-    				}
-                } else if (AttributeModificationType.REMOVE == type) {
-    				sqlUpdateQuery.setNull(path);
-                } else {
-                    throw new UnsupportedOperationException("Operation type '" + type + "' is not implemented");
-                }
 			}
 
-			Predicate whereExp = ExpressionUtils.eq(Expressions.stringPath(SqlOperationService.DOC_ID),
-					Expressions.constant(key));
+			// Check if all attributes were added
+			if (notAppliedUpdateMods.size() > 0) {
+				throwFailedToDetermineType(notAppliedUpdateMods);
+			}
 
-			long rowInserted = sqlUpdateQuery.where(whereExp).execute();
+			// TODO: Execute queries in one transaction
+			long rowUpdateed = sqlUpdateQuery.execute();
+			if (childSqlUpdateQueries != null) {
+				for (SQLUpdateClause childSqlUpdateQuery : childSqlUpdateQueries) {
+					childSqlUpdateQuery.execute();
+				}
+			}
 
-			return rowInserted == 1;
+			return rowUpdateed == 1;
         } catch (QueryException ex) {
             throw new PersistenceException("Failed to update entry", ex);
         }
+	}
+
+	public List<AttributeDataModification> buildSqlUpdateQuery(TableMapping tableMapping, String key, List<AttributeDataModification> mods,
+			SQLUpdateClause sqlUpdateQuery) throws PersistenceException {
+		Map<String, AttributeType> columTypes = tableMapping.getColumTypes();
+		List<AttributeDataModification> notAppliedUpdateMods = null;
+
+		for (AttributeDataModification attributeMod : mods) {
+			AttributeData attribute = attributeMod.getAttribute();
+			Path path = Expressions.stringPath(attribute.getName());
+
+			AttributeType attributeType = getAttributeType(columTypes, attribute);
+			if (attributeType == null) {
+				if (notAppliedUpdateMods == null) {
+					notAppliedUpdateMods = new ArrayList<>();
+				}
+				
+				notAppliedUpdateMods.add(attributeMod);
+				continue;
+			}
+
+			boolean multiValued = (attributeType != null) && isJsonColumn(tableMapping.getTableName(), attributeType.getType());
+			
+			AttributeModificationType type = attributeMod.getModificationType();
+		    if ((AttributeModificationType.ADD == type) || (AttributeModificationType.FORCE_UPDATE == type)) {
+				if (multiValued || Boolean.TRUE.equals(attribute.getMultiValued())) {
+					sqlUpdateQuery.set(path, convertValueToDbJson(attribute.getValues()));
+				} else {
+					sqlUpdateQuery.set(path, attribute.getValue());
+				}
+		    } else if (AttributeModificationType.REPLACE == type) {
+				if (multiValued || Boolean.TRUE.equals(attribute.getMultiValued())) {
+					sqlUpdateQuery.set(path, convertValueToDbJson(attribute.getValues()));
+				} else {
+					sqlUpdateQuery.set(path, attribute.getValue());
+				}
+		    } else if (AttributeModificationType.REMOVE == type) {
+				sqlUpdateQuery.setNull(path);
+		    } else {
+		        throw new UnsupportedOperationException("Operation type '" + type + "' is not implemented");
+		    }
+		}
+
+		Predicate whereExp = ExpressionUtils.eq(Expressions.stringPath(SqlOperationService.DOC_ID),
+				Expressions.constant(key));
+		
+		sqlUpdateQuery.where(whereExp);
+
+		if (notAppliedUpdateMods == null) {
+			return Collections.emptyList();
+		}
+
+		return notAppliedUpdateMods;
 	}
 
     @Override
@@ -347,7 +392,9 @@ public class SqlOperationServiceImpl implements SqlOperationService {
         Instant startTime = OperationDurationUtil.instance().now();
 
         TableMapping tableMapping = connectionProvider.getTableMappingByKey(key, objectClass);
-        boolean result = deleteImpl(tableMapping, key);
+        List<TableMapping> childTablesMapping = connectionProvider.getChildTablesMapping(key, objectClass);
+
+        boolean result = deleteImpl(tableMapping, childTablesMapping, key);
 
         Duration duration = OperationDurationUtil.instance().duration(startTime);
         OperationDurationUtil.instance().logDebug("SQL operation: delete, duration: {}, table: {}, key: {}", duration, tableMapping.getTableName(), key);
@@ -355,7 +402,7 @@ public class SqlOperationServiceImpl implements SqlOperationService {
         return result;
     }
 
-	private boolean deleteImpl(TableMapping tableMapping, String key) throws EntryNotFoundException {
+	private boolean deleteImpl(TableMapping tableMapping, List<TableMapping> childTablesMapping, String key) throws EntryNotFoundException {
 		try {
 			RelationalPathBase<Object> tableRelationalPath = buildTableRelationalPath(tableMapping);
 			SQLDeleteClause sqlDeleteQuery = this.sqlQueryFactory.delete(tableRelationalPath);
@@ -376,8 +423,9 @@ public class SqlOperationServiceImpl implements SqlOperationService {
         Instant startTime = OperationDurationUtil.instance().now();
 
         TableMapping tableMapping = connectionProvider.getTableMappingByKey(key, objectClass);
+        List<TableMapping> childTablesMapping = connectionProvider.getChildTablesMapping(key, objectClass);
 
-    	long result = deleteImpl(tableMapping, expression, count);
+    	long result = deleteImpl(tableMapping, childTablesMapping, expression, count);
 
         Duration duration = OperationDurationUtil.instance().duration(startTime);
         OperationDurationUtil.instance().logDebug("SQL operation: delete_search, duration: {}, table: {}, key: {}, expression: {}, count: {}", duration, tableMapping.getTableName(), key, expression, count);
@@ -385,7 +433,7 @@ public class SqlOperationServiceImpl implements SqlOperationService {
         return result;
     }
 
-    private long deleteImpl(TableMapping tableMapping, ConvertedExpression expression, int count) throws DeleteException {
+    private long deleteImpl(TableMapping tableMapping, List<TableMapping> childTablesMapping, ConvertedExpression expression, int count) throws DeleteException {
 		try {
 			Predicate exp = (Predicate) expression.expression();
 			SQLDeleteClause sqlDeleteQuery;
@@ -421,7 +469,9 @@ public class SqlOperationServiceImpl implements SqlOperationService {
         Instant startTime = OperationDurationUtil.instance().now();
 
         TableMapping tableMapping = connectionProvider.getTableMappingByKey(key, objectClass);
-        boolean result = deleteRecursivelyImpl(tableMapping, key);
+        List<TableMapping> childTablesMapping = connectionProvider.getChildTablesMapping(key, objectClass);
+
+        boolean result = deleteRecursivelyImpl(tableMapping, childTablesMapping, key);
 
         Duration duration = OperationDurationUtil.instance().duration(startTime);
         OperationDurationUtil.instance().logDebug("SQL operation: delete_tree, duration: {}, table: {}, key: {}", duration, tableMapping.getTableName(), key);
@@ -429,9 +479,9 @@ public class SqlOperationServiceImpl implements SqlOperationService {
         return result;
     }
 
-	private boolean deleteRecursivelyImpl(TableMapping tableMapping, String key) throws SearchException, EntryNotFoundException {
+	private boolean deleteRecursivelyImpl(TableMapping tableMapping, List<TableMapping> childTablesMapping, String key) throws SearchException, EntryNotFoundException {
     	LOG.warn("Removing only base key without sub-tree. Table: {}, Key: {}", tableMapping.getTableName(), key);
-    	return deleteImpl(tableMapping, key);
+    	return deleteImpl(tableMapping, childTablesMapping, key);
 	}
 
     @Override
@@ -1134,6 +1184,29 @@ public class SqlOperationServiceImpl implements SqlOperationService {
 
 	private AttributeType getAttributeType(Map<String, AttributeType> columTypes, AttributeData attribute) {
 		return columTypes.get(attribute.getName().toLowerCase());
+	}
+
+	public void throwFailedToDetermineType(List<AttributeDataModification> notAppliedUpdateMods) throws PersistenceException {
+		Collection<AttributeData> notUpdatedAttributes = new ArrayList<>();
+		for (AttributeDataModification notAppliedUpdateMod : notAppliedUpdateMods) {
+			notUpdatedAttributes.add(notAppliedUpdateMod.getAttribute());
+		}
+		
+		throwFailedToDetermineType(notUpdatedAttributes);
+	}
+
+	public void throwFailedToDetermineType(Collection<AttributeData> notAddedAttributes) throws PersistenceException {
+		StringBuilder sb = new StringBuilder("Failed to find attribute types for '");
+		int idx = 0;
+		for (AttributeData notAddedAttribute : notAddedAttributes) {
+			if (idx > 0) {
+				sb.append(", ");
+			}
+			sb.append(notAddedAttribute.getName());
+			idx++;
+		}
+		sb.append("'");
+		throw new PersistenceException(sb.toString());
 	}
 
 }
