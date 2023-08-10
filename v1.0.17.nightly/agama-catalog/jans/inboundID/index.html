@@ -173371,7 +173371,7 @@
 <li>Restart the server, e.g. <code>systemctl restart jans-auth</code></li>
 </ul>
 <h3 id="make-a-gama-archive">Make a <code>gama</code> archive<a class="headerlink" href="#make-a-gama-archive" title="Permanent link">#</a></h3>
-<p><a href="https://docs.jans.io/head/agama/gama-format/">gama files</a> are deployable units in the Agama engine. To create one, simply zip the contents of <a href="./project">project</a> subdirectory. The resulting archive must have two folders at top-level: <code>web</code> and <code>code</code>. The file extension does not matter in the end.</p>
+<p><a href="https://docs.jans.io/head/agama/gama-format/">gama files</a> are deployable units in the Agama engine. To create one, simply zip the contents of <a href="./project">project</a> subdirectory. The resulting archive must have three folders at top-level: <code>web</code>, <code>lib</code>, and <code>code</code>. The file extension does not matter in the end.</p>
 <p>To quickly collect the contents of <em>project</em>, you can download the whole Jans repository or make a shallow clone of main branch using <code>git</code>. Using <code>git</code> is probably a faster way.</p>
 <h3 id="deploy-the-archive">Deploy the archive<a class="headerlink" href="#deploy-the-archive" title="Permanent link">#</a></h3>
 <p>Transfer the archive to your server, and then run <code>/opt/jans/jans-cli/jans_cli_tui.py</code>. Follow the prompts and then enter the Agama menu (<code>Alt + m</code>). Using you keyboard TAB key, highlight the button "Upload", and press ENTER. Browse and select the file. </p>
@@ -173441,7 +173441,7 @@
 </table>
 <p>Edit the file with the properties you consider relevant for every provider. Generally, the first six are the only needed.</p>
 <h3 id="supply-the-main-flow-configurations">Supply the main flow configurations<a class="headerlink" href="#supply-the-main-flow-configurations" title="Permanent link">#</a></h3>
-<p>The main flow (<code>io.jans.inbound.ExternalSiteLogin</code>) has to be parameterized as well. The configuration is held in a JSON object whose keys are the identifiers of the existing identity providers. The associated value for a key is a JSON object itself and follows the structure represented by <a href="https://github.com/JanssenProject/jans/blob/v1.0.17.nightly/jans-auth-server/agama/inboundID/src/main/java/io/jans/inbound/Provider.java">this</a> Java class.</p>
+<p>The main flow (<code>io.jans.inbound.ExternalSiteLogin</code>) has to be parameterized as well. The configuration is held in a JSON object whose keys are the identifiers of the existing identity providers. The associated value for a key is a JSON object itself and follows the structure represented by <a href="https://github.com/JanssenProject/jans/blob/vreplace-janssen-version/jans-auth-server/agama/inboundID/src/main/java/io/jans/inbound/Provider.java">this</a> Java class.</p>
 <p>This is an example of a configuration for a couple of identity providers:</p>
 <div class="highlight"><pre><span></span><code>{
 
@@ -173636,7 +173636,7 @@
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-06-08T19:20:14+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-06-08</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-08-10T14:04:19+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-08-10</span>
       
         <br>
         Created:

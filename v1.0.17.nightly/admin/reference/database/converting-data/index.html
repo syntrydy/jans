@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#this-content-is-in-progress" class="md-skip">
+        <a href="#data-conversion" class="md-skip">
           Skip to content
         </a>
       
@@ -2915,6 +2915,8 @@
       <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
       
       
+        
+      
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
           Converting Data
@@ -2931,6 +2933,8 @@
   
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -2939,22 +2943,8 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#this-content-is-in-progress" class="md-nav__link">
-    This content is in progress
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#have-questions-in-the-meantime" class="md-nav__link">
-    Have questions in the meantime?
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#want-to-contribute" class="md-nav__link">
-    Want to contribute?
+  <a href="#ldap-to-mysql-migration-script" class="md-nav__link">
+    LDAP to MySQL Migration Script
   </a>
   
 </li>
@@ -173150,6 +173140,8 @@
   
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -173158,22 +173150,8 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#this-content-is-in-progress" class="md-nav__link">
-    This content is in progress
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#have-questions-in-the-meantime" class="md-nav__link">
-    Have questions in the meantime?
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#want-to-contribute" class="md-nav__link">
-    Want to contribute?
+  <a href="#ldap-to-mysql-migration-script" class="md-nav__link">
+    LDAP to MySQL Migration Script
   </a>
   
 </li>
@@ -173210,6 +173188,11 @@
         <span class="md-tag">database</span>
       
     
+      
+      
+        <span class="md-tag">migration</span>
+      
+    
   </nav>
 
 
@@ -173220,21 +173203,44 @@
   </a>
 
 
-  <h1>Converting Data</h1>
-
-<h2 id="this-content-is-in-progress">This content is in progress<a class="headerlink" href="#this-content-is-in-progress" title="Permanent link">#</a></h2>
-<p>The Janssen Project documentation is currently in development. Topic pages are being created in order of broadest relevance, and this page is coming in the near future.</p>
-<h2 id="have-questions-in-the-meantime">Have questions in the meantime?<a class="headerlink" href="#have-questions-in-the-meantime" title="Permanent link">#</a></h2>
-<p>While this documentation is in progress, you can ask questions through <a href="https://github.com/JanssenProject/jans/discussion">GitHub Discussions</a> or the <a href="https://gitter.im/JanssenProject/Lobby">community chat on Gitter</a>. Any questions you have will help determine what information our documentation should cover.</p>
-<h2 id="want-to-contribute">Want to contribute?<a class="headerlink" href="#want-to-contribute" title="Permanent link">#</a></h2>
-<p>If you have content you'd like to contribute to this page in the meantime, you can get started with our <a href="https://docs.jans.io/head/CONTRIBUTING/">Contribution guide</a>.</p>
+<h1 id="data-conversion">Data Conversion<a class="headerlink" href="#data-conversion" title="Permanent link">#</a></h1>
+<p>This document lists the steps required to move data from LDAP to various other 
+persistence mechanisms supported by Janssen Server.</p>
+<h2 id="ldap-to-mysql-migration-script">LDAP to MySQL Migration Script<a class="headerlink" href="#ldap-to-mysql-migration-script" title="Permanent link">#</a></h2>
+<p>This script migrates data from LDAP to MySQL on Ubuntu Linux platform.</p>
+<ol>
+<li>To use this script, firt install <strong>python3-ldap</strong> module</li>
+</ol>
+<div class="highlight"><pre><span></span><code>apt install python3-ldap
+</code></pre></div>
+<ol>
+<li>
+<p>Install MySQL Server, create a database (namely <strong>jansdb</strong>), add a user (namely <strong>jans</strong>) and
+   give grant previlages to user <strong>jans</strong> on <strong>jansdb</strong></p>
+</li>
+<li>
+<p>Download script to <code>/opt/jans/jans-setup</code>
+  <div class="highlight"><pre><span></span><code>wget https://raw.githubusercontent.com/JanssenProject/jans/jans-linux-setup-ldap2mysql/jans-linux-setup/tools/ldap2mysql/ldap2mysql.py -O /opt/jans/jans-setup/ldap2mysql.py
+</code></pre></div></p>
+</li>
+<li>
+<p>Execute
+  <div class="highlight"><pre><span></span><code><span class="nb">cd</span> /opt/jans/jans-setup<span class="sb">`</span>
+python3 ldap2mysql.py -remote-rdbm<span class="o">=</span>mysql -rdbm-user<span class="o">=</span>jans -rdbm-password<span class="o">=</span>&lt;password&gt; -rdbm-db<span class="o">=</span>jansdb -rdbm-host<span class="o">=</span>&lt;rdbm_host&gt;
+</code></pre></div></p>
+</li>
+</ol>
+<div class="admonition contribute">
+<p class="admonition-title">Contribute</p>
+</div>
+<p>If you’d like to contribute to this document, get started with the <a href="https://docs.jans.io/head/CONTRIBUTING/#contributing-to-the-documentation">Contribution Guide</a></p>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2022-12-08T20:20:00+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2022-12-08</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-08-10T08:52:39+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-08-10</span>
       
         <br>
         Created:

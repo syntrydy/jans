@@ -173274,35 +173274,18 @@ ALTER TABLE jansdb.jansPerson ADD INDEX `jansPerson_CustomIdx2` ((lower(`mail`))
 </code></pre></div>
 * c. Ensure you restart services after DB schema modification</p>
 <h3 id="ldap-to-mysql-migration-script">LDAP to MySQL Migration Script<a class="headerlink" href="#ldap-to-mysql-migration-script" title="Permanent link">#</a></h3>
-<p>This script migrates data from ldap to MySQL.</p>
-<ol>
-<li>
-<p>To use this script, firt install <strong>python3-ldap</strong> module
-  <code>apt install python3-ldap</code></p>
-</li>
-<li>
-<p>Install MySQL Server, create a database (namely <strong>jansdb</strong>), add a user (namely <strong>jans</strong>) and
-give grant previlages to user <strong>jans</strong> on <strong>jansdb</strong></p>
-</li>
-<li>
-<p>Download script to <code>/opt/jans/jans-setup</code>
-  <div class="highlight"><pre><span></span><code>wget https://raw.githubusercontent.com/JanssenProject/jans/jans-linux-setup-ldap2mysql/jans-linux-setup/tools/ldap2mysql/ldap2mysql.py -O /opt/jans/jans-setup/ldap2mysql.py
-</code></pre></div></p>
-</li>
-<li>
-<p>Execute
-  <div class="highlight"><pre><span></span><code>cd /opt/jans/jans-setup`
-python3 ldap2mysql.py -remote-rdbm=mysql -rdbm-user=jans -rdbm-password=&lt;password&gt; -rdbm-db=jansdb -rdbm-host=&lt;rdbm_host&gt;
-</code></pre></div></p>
-</li>
-</ol>
+<p>Please refer to <a href="../converting-data/#ldap-to-mysql-migration-script">these steps</a>.</p>
+<div class="admonition contribute">
+<p class="admonition-title">Contribute</p>
+</div>
+<p>If you’d like to contribute to this document, get started with the <a href="https://docs.jans.io/head/CONTRIBUTING/#contributing-to-the-documentation">Contribution Guide</a></p>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-05-12T16:12:58+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-05-12</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-08-10T08:52:39+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-08-10</span>
       
         <br>
         Created:
