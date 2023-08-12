@@ -173193,7 +173193,7 @@
 
   <h1>Persistence</h1>
 
-<p>By overriding the interface methods in <a href="https://github.com/JanssenProject/jans/blob/vreplace-janssen-version/jans-core/script/src/main/java/io/jans/model/custom/script/type/persistence/PersistenceType.java">PersistenceType</a> inside a custom script you can</p>
+<p>By overriding the interface methods in <a href="https://github.com/JanssenProject/jans/blob/v1.0.17.nightly/jans-core/script/src/main/java/io/jans/model/custom/script/type/persistence/PersistenceType.java">PersistenceType</a> inside a custom script you can</p>
 <ol>
 <li>Load initialization data from DB or initialize services after the creation of Entry Manager. </li>
 <li>Release resources, terminate services etc. after the destruction of Entry Manager.</li>
@@ -173206,7 +173206,7 @@ The Janssen server's Peristence Layer can be any one of LDAP, MySQL database, Po
 Information about an entity (person, session, client, scripts etc) constitutes an Entry.
 The Entry Manager (CRUD operations) implementation for each type of Persistence is available in the Janssen server and the relevant Entry Manager ( LDAPEntryManager, SQLEntryManager, etc.) is created when the server starts up. </p>
 <h3 id="usage">Usage:<a class="headerlink" href="#usage" title="Permanent link">#</a></h3>
-<p>The Jans-Auth server contains a <a href="https://github.com/JanssenProject/jans/blob/vreplace-janssen-version/docs/script-catalog/persistence_extension/PersistenceExtension.py"><code>PeristenceType</code></a> script.</p>
+<p>The Jans-Auth server contains a <a href="https://github.com/JanssenProject/jans/blob/v1.0.17.nightly/docs/script-catalog/persistence_extension/PersistenceExtension.py"><code>PeristenceType</code></a> script.</p>
 <h3 id="hashed-passwords">Hashed Passwords<a class="headerlink" href="#hashed-passwords" title="Permanent link">#</a></h3>
 <p>Hashed passwords can be created using any method from this <a href="https://github.com/JanssenProject/jans/blob/main/jans-orm/core/src/main/java/io/jans/orm/operation/auth/PasswordEncryptionMethod.java">enum</a>, instead of the native/default SSHA256.
 The ORM module of the Janssen server does the following: 
