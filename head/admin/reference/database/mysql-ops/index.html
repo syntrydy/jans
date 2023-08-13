@@ -2727,6 +2727,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#search-user" class="md-nav__link">
+    Search user :
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#ldap-to-mysql-migration-script" class="md-nav__link">
     LDAP to MySQL Migration Script
   </a>
@@ -173156,6 +173163,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#search-user" class="md-nav__link">
+    Search user :
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#ldap-to-mysql-migration-script" class="md-nav__link">
     LDAP to MySQL Migration Script
   </a>
@@ -173221,6 +173235,7 @@
 
   <h1>MySQL Operation</h1>
 
+<p>Below operations require to log into mysql workspace first with command: <code>mysql</code></p>
 <h3 id="change-password-for-user-jans"><strong>Change password for user <code>jans</code></strong> :<a class="headerlink" href="#change-password-for-user-jans" title="Permanent link">#</a></h3>
 <ul>
 <li><code>ALTER USER 'jans'@'localhost' IDENTIFIED BY 'TopSecret';</code></li>
@@ -173241,6 +173256,10 @@
 ALTER TABLE jansdb.jansPerson ADD INDEX `jansPerson_CustomIdx2` ((lower(`mail`)));
 </code></pre></div>
 * c. Ensure you restart services after DB schema modification</p>
+<h3 id="search-user"><strong>Search user</strong> :<a class="headerlink" href="#search-user" title="Permanent link">#</a></h3>
+<ul>
+<li><code>use jansdb; select * from jansPerson where uid='admin'\G;</code></li>
+</ul>
 <h3 id="ldap-to-mysql-migration-script">LDAP to MySQL Migration Script<a class="headerlink" href="#ldap-to-mysql-migration-script" title="Permanent link">#</a></h3>
 <p>Please refer to <a href="../converting-data/#ldap-to-mysql-migration-script">these steps</a>.</p>
 <div class="admonition contribute">
@@ -173253,7 +173272,7 @@ ALTER TABLE jansdb.jansPerson ADD INDEX `jansPerson_CustomIdx2` ((lower(`mail`))
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-08-10T08:52:39+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-08-10</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-08-13T03:56:40+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-08-13</span>
       
         <br>
         Created:
