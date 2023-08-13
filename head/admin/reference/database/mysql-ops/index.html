@@ -2734,6 +2734,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#add-custom-attribute" class="md-nav__link">
+    Add custom attribute
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#ldap-to-mysql-migration-script" class="md-nav__link">
     LDAP to MySQL Migration Script
   </a>
@@ -173170,6 +173177,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#add-custom-attribute" class="md-nav__link">
+    Add custom attribute
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#ldap-to-mysql-migration-script" class="md-nav__link">
     LDAP to MySQL Migration Script
   </a>
@@ -173260,6 +173274,12 @@ ALTER TABLE jansdb.jansPerson ADD INDEX `jansPerson_CustomIdx2` ((lower(`mail`))
 <ul>
 <li><code>use jansdb; select * from jansPerson where uid='admin'\G;</code></li>
 </ul>
+<h3 id="add-custom-attribute">Add custom attribute<a class="headerlink" href="#add-custom-attribute" title="Permanent link">#</a></h3>
+<p>There are two steps here: </p>
+<ul>
+<li>Create attribute in MySQL database: <code>ALTER TABLE</code>jansdb<code>.</code>jansPerson<code>ADD COLUMN</code>cmdAttr<code>VARCHAR(64) NULL;</code> </li>
+<li>Create attribute from TUI: <img alt="tui_custom_attribute" src="../../assets/TUI_CustomAttribute.png" /></li>
+</ul>
 <h3 id="ldap-to-mysql-migration-script">LDAP to MySQL Migration Script<a class="headerlink" href="#ldap-to-mysql-migration-script" title="Permanent link">#</a></h3>
 <p>Please refer to <a href="../converting-data/#ldap-to-mysql-migration-script">these steps</a>.</p>
 <div class="admonition contribute">
@@ -173272,7 +173292,7 @@ ALTER TABLE jansdb.jansPerson ADD INDEX `jansPerson_CustomIdx2` ((lower(`mail`))
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-08-13T03:56:40+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-08-13</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-08-13T09:27:42+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-08-13</span>
       
         <br>
         Created:
