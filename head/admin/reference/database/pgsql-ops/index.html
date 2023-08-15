@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#this-content-is-in-progress" class="md-skip">
+        <a href="#search-user" class="md-skip">
           Skip to content
         </a>
       
@@ -2886,6 +2886,62 @@
       Table of contents
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#search-user" class="md-nav__link">
+    Search user
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#change-password-for-user-jans" class="md-nav__link">
+    Change password for user jans
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#add-user-in-group" class="md-nav__link">
+    Add user in Group
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#list-users-with-specific-filter" class="md-nav__link">
+    List users with specific filter
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#modify-column-size-of-jansperson" class="md-nav__link">
+    Modify column size of jansPerson
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#add-custom-attribute" class="md-nav__link">
+    Add custom attribute
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#output-column-data-into-txt" class="md-nav__link">
+    Output column data into txt
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dump-table" class="md-nav__link">
+    Dump table
+  </a>
+  
+</li>
       
         <li class="md-nav__item">
   <a href="#this-content-is-in-progress" class="md-nav__link">
@@ -173049,6 +173105,62 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#search-user" class="md-nav__link">
+    Search user
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#change-password-for-user-jans" class="md-nav__link">
+    Change password for user jans
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#add-user-in-group" class="md-nav__link">
+    Add user in Group
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#list-users-with-specific-filter" class="md-nav__link">
+    List users with specific filter
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#modify-column-size-of-jansperson" class="md-nav__link">
+    Modify column size of jansPerson
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#add-custom-attribute" class="md-nav__link">
+    Add custom attribute
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#output-column-data-into-txt" class="md-nav__link">
+    Output column data into txt
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dump-table" class="md-nav__link">
+    Dump table
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#this-content-is-in-progress" class="md-nav__link">
     This content is in progress
   </a>
@@ -173114,6 +173226,30 @@
   <h1>PostgreSQL Operation</h1>
 
 <p>Connect to PostgreSql workspace: <code>sudo -u postgres psql</code> </p>
+<h2 id="search-user">Search user<a class="headerlink" href="#search-user" title="Permanent link">#</a></h2>
+<ul>
+<li>Change database: <code>\c jansdb</code></li>
+<li>Search for user <code>testUser</code>: <code>select * from "jansPerson" where uid = 'testuser';</code></li>
+<li>If you want pretty output, enable display mode with <code>\x</code> </li>
+<li>Re-run search query. </li>
+</ul>
+<h2 id="change-password-for-user-jans">Change password for user jans<a class="headerlink" href="#change-password-for-user-jans" title="Permanent link">#</a></h2>
+<ul>
+<li>Changing user 'jans' password to "secret": <code>alter user jans with password 'secret';</code> </li>
+</ul>
+<h2 id="add-user-in-group">Add user in Group<a class="headerlink" href="#add-user-in-group" title="Permanent link">#</a></h2>
+<ul>
+<li>Get DN of target user. i.e. we are searching for DN of user 'testUser' with: <code>select * from "jansPerson" where uid = 'testuser';</code></li>
+<li>Get DN of Jans Admin Group. i.e.<code>select * from "jansGrp";</code></li>
+<li>Add ( actually append ) new user in <code>member</code> of this group: 
+<div class="highlight"><pre><span></span><code>update &quot;jansGrp&quot; set member = &#39;[&quot;inum=45eefa31-f535-4a97-b1a1-09556b7e8de8,ou=people,o=jans&quot;, &quot;inum=9b4eedd0-7e8c-4afc-a7e3-b142ac5f7d8f,ou=people,o=jans&quot;]&#39;;
+</code></pre></div></li>
+</ul>
+<h2 id="list-users-with-specific-filter">List users with specific filter<a class="headerlink" href="#list-users-with-specific-filter" title="Permanent link">#</a></h2>
+<h2 id="modify-column-size-of-jansperson">Modify column size of jansPerson<a class="headerlink" href="#modify-column-size-of-jansperson" title="Permanent link">#</a></h2>
+<h2 id="add-custom-attribute">Add custom attribute<a class="headerlink" href="#add-custom-attribute" title="Permanent link">#</a></h2>
+<h2 id="output-column-data-into-txt">Output column data into txt<a class="headerlink" href="#output-column-data-into-txt" title="Permanent link">#</a></h2>
+<h2 id="dump-table">Dump table<a class="headerlink" href="#dump-table" title="Permanent link">#</a></h2>
 <h2 id="this-content-is-in-progress">This content is in progress<a class="headerlink" href="#this-content-is-in-progress" title="Permanent link">#</a></h2>
 <p>The Janssen Project documentation is currently in development. Topic pages are being created in order of broadest relevance, and this page is coming in the near future.</p>
 <h2 id="have-questions-in-the-meantime">Have questions in the meantime?<a class="headerlink" href="#have-questions-in-the-meantime" title="Permanent link">#</a></h2>
@@ -173126,7 +173262,7 @@
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-08-13T16:36:10+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-08-13</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-08-15T18:53:39+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-08-15</span>
       
         <br>
         Created:
