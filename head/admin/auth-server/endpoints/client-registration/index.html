@@ -173994,8 +173994,8 @@ eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJJREFtYX...
 <p>Janssen's allows developers to register a client with the Authorization Server (AS) without any intervention by the administrator. By default, all clients are given the same default scopes and attributes. Through the use of an interception script, this behavior can be modified. These scripts can be used to analyze the registration request and apply customizations to the registered client. For example, a client can be given specific scopes by analyzing the <a href="https://www.rfc-editor.org/rfc/rfc7591.html#section-2.3">Software Statement</a> that is sent with the registration request.</p>
 <p>Further reading <a href="../../../developer/scripts/client-registration/">here</a></p>
 <h3 id="the-use-of-attestation-in-dynamic-client-registration">The Use of Attestation in Dynamic Client Registration<a class="headerlink" href="#the-use-of-attestation-in-dynamic-client-registration" title="Permanent link">#</a></h3>
-<p>AS supports "The Use of Attestation in OAuth 2.0 Dynamic Client Registration" <a href="https://www.ietf.org/id/draft-tschofenig-oauth-attested-dclient-reg-00.html">specification</a>.</p>
-<p>Specification does not define exact attestation request/response formats. 
+<p>AS supports "The Use of Attestation in OAuth 2.0 Dynamic Client Registration" <a href="https://www.ietf.org/id/draft-tschofenig-oauth-attested-dclient-reg-00.html">specification draft</a>.</p>
+<p>Specification draft does not define exact attestation request/response formats. 
 Thus AS supports Attestation calls to Verifier via <code>ClientRegistrationType</code> custom script type.</p>
 <p>Use <code>createClient</code> method of <code>ClientRegistrationType</code> to prevent client creation if attestation result does not satisfy expectation.</p>
 <div class="highlight"><pre><span></span><code>    <span class="k">def</span> <span class="nf">createClient</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
@@ -174085,7 +174085,7 @@ authorization server.</p>
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-08-16T11:14:47+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-08-16</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-08-16T14:56:10+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-08-16</span>
       
         <br>
         Created:
