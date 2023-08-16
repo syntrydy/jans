@@ -3451,6 +3451,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#the-use-of-attestation-in-dynamic-client-registration" class="md-nav__link">
+    The Use of Attestation in Dynamic Client Registration
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#dynamic-registration-custom-attributes" class="md-nav__link">
     Dynamic registration custom attributes
   </a>
@@ -5470,7 +5477,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../developer/scripts/openid-config/" class="md-nav__link">
+      <a href="../../../developer/scripts/openid-config.md" class="md-nav__link">
         OpenID Configuration
       </a>
     </li>
@@ -173350,6 +173357,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#the-use-of-attestation-in-dynamic-client-registration" class="md-nav__link">
+    The Use of Attestation in Dynamic Client Registration
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#dynamic-registration-custom-attributes" class="md-nav__link">
     Dynamic registration custom attributes
   </a>
@@ -173931,6 +173945,66 @@ eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJJREFtYX...
 <h3 id="customizing-the-behavior-of-the-as-using-interception-script">Customizing the behavior of the AS using Interception script<a class="headerlink" href="#customizing-the-behavior-of-the-as-using-interception-script" title="Permanent link">#</a></h3>
 <p>Janssen's allows developers to register a client with the Authorization Server (AS) without any intervention by the administrator. By default, all clients are given the same default scopes and attributes. Through the use of an interception script, this behavior can be modified. These scripts can be used to analyze the registration request and apply customizations to the registered client. For example, a client can be given specific scopes by analyzing the <a href="https://www.rfc-editor.org/rfc/rfc7591.html#section-2.3">Software Statement</a> that is sent with the registration request.</p>
 <p>Further reading <a href="../../../developer/scripts/client-registration/">here</a></p>
+<h3 id="the-use-of-attestation-in-dynamic-client-registration">The Use of Attestation in Dynamic Client Registration<a class="headerlink" href="#the-use-of-attestation-in-dynamic-client-registration" title="Permanent link">#</a></h3>
+<p>AS supports "The Use of Attestation in OAuth 2.0 Dynamic Client Registration" <a href="https://www.ietf.org/id/draft-tschofenig-oauth-attested-dclient-reg-00.html">specification</a>.</p>
+<p>Specification does not define exact attestation request/response formats. 
+Thus AS supports Attestation calls to Verifier via <code>ClientRegistrationType</code> custom script type.</p>
+<p>Use <code>createClient</code> method of <code>ClientRegistrationType</code> to prevent client creation if attestation result does not satisfy expectation.</p>
+<div class="highlight"><pre><span></span><code>    <span class="k">def</span> <span class="nf">createClient</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
+        <span class="nb">print</span> <span class="s2">&quot;Client registration. CreateClient method&quot;</span>
+        <span class="n">registerRequest</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">getRegisterRequest</span><span class="p">()</span>
+        <span class="n">configurationAttributes</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">getConfigurationAttibutes</span><span class="p">()</span>
+        <span class="n">client</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">getClient</span><span class="p">()</span>
+
+        <span class="c1"># getting evidence as string or as JWT</span>
+        <span class="n">evidenceAsString</span> <span class="o">=</span> <span class="n">registerRequest</span><span class="o">.</span><span class="n">getEvidence</span><span class="p">()</span>
+        <span class="n">evidenceAsJwt</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">getEvidence</span><span class="p">()</span>
+
+        <span class="c1"># following code depends on attestation client used to make calls to Verifier</span>
+        <span class="n">attestationResult</span> <span class="o">=</span> <span class="n">attestationClient</span><span class="o">.</span><span class="n">attestation</span><span class="p">(</span><span class="n">evidence</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">attestationResult</span><span class="o">.</span><span class="n">isFail</span><span class="p">:</span>
+            <span class="nb">print</span> <span class="s2">&quot;Attestation result forbids client creation&quot;</span>
+            <span class="k">return</span> <span class="kc">False</span>
+
+        <span class="nb">print</span> <span class="s2">&quot;Attestation result is OK&quot;</span>
+        <span class="k">return</span> <span class="kc">True</span>            
+</code></pre></div>
+<p><strong>Configuration options</strong>
+- <code>dcrAttestationEvidenceRequired</code> - Boolean value indicating if DCR attestation evidence is required. Default value is <code>false</code>.</p>
+<p>If <code>evidence</code> request parameter is not present and <code>dcrAttestationEvidenceRequired</code> is <code>true</code> AS returns <code>stale_evidence</code> error:</p>
+<div class="highlight"><pre><span></span><code>HTTP/1.1 400 Bad Request
+Content-Type: application/json
+Cache-Control: no-store
+Pragma: no-cache
+
+{
+  &quot;error&quot;: &quot;stale_evidence&quot;,
+  &quot;error_description&quot;: &quot;The provided evidence is not current.&quot;,
+  &quot;nonce&quot;: &quot;lBjvTtuPbpzIaqyiAOOkrIol3WmflPUUepzUXNDFuUgMKUL&quot;
+}
+</code></pre></div>
+<p>It is common to get <code>nonce</code> value from Attestation Server. In this case set <code>dcrAttestationEvidenceRequired=false</code>
+and throw error from custom script.</p>
+<div class="highlight"><pre><span></span><code>    <span class="k">def</span> <span class="nf">createClient</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
+        <span class="n">evidenceAsString</span> <span class="o">=</span> <span class="n">registerRequest</span><span class="o">.</span><span class="n">getEvidence</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">StringHelper</span><span class="o">.</span><span class="n">isEmpty</span><span class="p">(</span><span class="n">evidenceAsString</span><span class="p">)</span>
+            <span class="n">nonceFromVerifier</span> <span class="o">=</span> <span class="n">attestationClient</span><span class="o">.</span><span class="n">requestNonce</span><span class="p">()</span>
+            <span class="n">context</span><span class="o">.</span><span class="n">createStaleEvidenceWebApplicationException</span><span class="p">(</span><span class="n">nonceFromVerifier</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">False</span>
+
+        <span class="o">...</span>
+
+        <span class="nb">print</span> <span class="s2">&quot;Attestation result is OK&quot;</span>
+        <span class="k">return</span> <span class="kc">True</span>            
+</code></pre></div>
+<p><code>context.createStaleEvidenceWebApplicationException(nonceFromVerifier)</code> leads to <code>stale_evidence</code> error creation, 
+see example above (<code>nonceFromVerifier</code> must be string value).</p>
+<p>In case goal is to create own custom error, please use standard <code>context.createWebApplicationException</code> methods and return <code>False</code> from script to prevent client creation.</p>
+<p>Example
+<div class="highlight"><pre><span></span><code>    <span class="n">entity</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">construct</span> <span class="n">error</span> <span class="n">message</span><span class="o">&gt;</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">createWebApplicationException</span><span class="p">(</span><span class="mi">400</span><span class="p">,</span> <span class="n">entity</span><span class="p">)</span>
+</code></pre></div></p>
 <h3 id="dynamic-registration-custom-attributes">Dynamic registration custom attributes<a class="headerlink" href="#dynamic-registration-custom-attributes" title="Permanent link">#</a></h3>
 <h3 id="crud-operations">CRUD Operations<a class="headerlink" href="#crud-operations" title="Permanent link">#</a></h3>
 <p>Janssen Server allows client management through client configuration endpoint 
@@ -173963,7 +174037,7 @@ authorization server.</p>
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-07-14T10:17:57+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-07-14</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-08-16T11:14:47+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-08-16</span>
       
         <br>
         Created:
