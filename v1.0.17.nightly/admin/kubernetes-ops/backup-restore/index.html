@@ -3304,6 +3304,10 @@
         
           
         
+          
+        
+          
+        
       
       
         
@@ -3362,6 +3366,20 @@
     <li class="md-nav__item">
       <a href="../../auth-server/endpoints/authorization/" class="md-nav__link">
         Authorization
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../auth-server/endpoints/authorization-challenge/" class="md-nav__link">
+        Authorization Challenge
       </a>
     </li>
   
@@ -3460,6 +3478,20 @@
     <li class="md-nav__item">
       <a href="../../auth-server/endpoints/clientinfo/" class="md-nav__link">
         Clientinfo
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../auth-server/endpoints/jwks-uri/" class="md-nav__link">
+        JWKS URI
       </a>
     </li>
   
@@ -5205,6 +5237,8 @@
         
           
         
+          
+        
       
       
         
@@ -5317,7 +5351,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../developer/scripts/openid-config/" class="md-nav__link">
+      <a href="../../developer/scripts/discovery/" class="md-nav__link">
         OpenID Configuration
       </a>
     </li>
@@ -5529,6 +5563,20 @@
     <li class="md-nav__item">
       <a href="../../developer/scripts/config-api/" class="md-nav__link">
         Config API
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../developer/scripts/authorization-challenge/" class="md-nav__link">
+        Authorization Challenge
       </a>
     </li>
   
@@ -173175,7 +173223,7 @@
 </code></pre></div></p>
 </li>
 </ol>
-<p>Keep note of the chart version. For example: <code>1.0.17.nightly</code></p>
+<p>Keep note of the chart version. For example: <code>replace-janssen-version</code></p>
 <h3 id="manual-restore">Manual Restore<a class="headerlink" href="#manual-restore" title="Permanent link">#</a></h3>
 <ol>
 <li>
@@ -173197,7 +173245,7 @@
 <p>Insall jans using the override or user supplied values with the same chart version:</p>
 </li>
 </ol>
-<div class="highlight"><pre><span></span><code>helm install &lt;release-name&gt; janssen/janssen -f values.yaml --version<span class="o">=</span>&lt;1.0.17.nightly&gt; -n &lt;namespace&gt;
+<div class="highlight"><pre><span></span><code>helm install &lt;release-name&gt; janssen/janssen -f values.yaml --version<span class="o">=</span>&lt;replace-janssen-version&gt; -n &lt;namespace&gt;
 </code></pre></div>
 <h2 id="automatic-backup-and-restore">Automatic Backup and Restore<a class="headerlink" href="#automatic-backup-and-restore" title="Permanent link">#</a></h2>
 <p>There are several tools that helps in automatic backups and restore, like <a href="https://www.kasten.io/kubernetes/use-cases/backup-restore">Kasten K10</a>.</p>

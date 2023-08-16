@@ -3243,6 +3243,10 @@
         
           
         
+          
+        
+          
+        
       
       
         
@@ -3301,6 +3305,20 @@
     <li class="md-nav__item">
       <a href="../../auth-server/endpoints/authorization/" class="md-nav__link">
         Authorization
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../auth-server/endpoints/authorization-challenge/" class="md-nav__link">
+        Authorization Challenge
       </a>
     </li>
   
@@ -3399,6 +3417,20 @@
     <li class="md-nav__item">
       <a href="../../auth-server/endpoints/clientinfo/" class="md-nav__link">
         Clientinfo
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../auth-server/endpoints/jwks-uri/" class="md-nav__link">
+        JWKS URI
       </a>
     </li>
   
@@ -5144,6 +5176,8 @@
         
           
         
+          
+        
       
       
         
@@ -5256,7 +5290,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../developer/scripts/openid-config/" class="md-nav__link">
+      <a href="../../developer/scripts/discovery/" class="md-nav__link">
         OpenID Configuration
       </a>
     </li>
@@ -5468,6 +5502,20 @@
     <li class="md-nav__item">
       <a href="../../developer/scripts/config-api/" class="md-nav__link">
         Config API
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../developer/scripts/authorization-challenge/" class="md-nav__link">
+        Authorization Challenge
       </a>
     </li>
   
@@ -173047,26 +173095,26 @@ Uninstalling and re-installing with newer binaries is the only option that requi
 Though this is made easy using <a href="../../terraform/">Terraform</a>. 
 We recommend using Kubernetes installations over VM, to avail smooth upgrades and better HA support.</p>
 </div>
-<p>Let's assume we are upgrading Jans VM installation from <code>current version</code> to <code>v1.0.17.nightly</code></p>
+<p>Let's assume we are upgrading Jans VM installation from <code>current version</code> to <code>vreplace-janssen-version</code></p>
 <ol>
 <li>
 <p>Keep the old VM installation running.</p>
 </li>
 <li>
-<p><a href="../../install/vm-install/">Install</a> on a separate VM the target new Jans installation, i.e. <code>v1.0.17.nightly</code>.</p>
+<p><a href="../../install/vm-install/">Install</a> on a separate VM the target new Jans installation, i.e. <code>vreplace-janssen-version</code>.</p>
 <p>You can install with a test client. For example:</p>
 <p><code>sudo python3 /opt/jans/jans-setup/setup.py -test-client-id 6382c9da-f25d-435f-ac63-6acde36f4859 -test-client-pw secret1172023</code></p>
 <p>This <code>client-id</code> and <code>client-pw</code> will then be used to import Terraform configurations</p>
 </li>
 <li>
-<p>Use our Terraform <a href="../../terraform/">docs</a> on the new installation, i.e. <code>v1.0.17.nightly</code> to:</p>
+<p>Use our Terraform <a href="../../terraform/">docs</a> on the new installation, i.e. <code>vreplace-janssen-version</code> to:</p>
 <ul>
 <li>import all the global configurations from the new installation using <code>terraform import</code></li>
 <li>define all the custom IDP configurations and apply them using <code>terraform apply</code></li>
 </ul>
 </li>
 <li>
-<p>At this point there should be two versions up, <code>old version</code> and <code>v1.0.17.nightly</code>.</p>
+<p>At this point there should be two versions up, <code>old version</code> and <code>vreplace-janssen-version</code>.</p>
 </li>
 <li>
 <p>Traffic should be switched gradually from the old setup to the new setup.
