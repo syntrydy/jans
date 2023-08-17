@@ -4776,10 +4776,6 @@
         
           
         
-          
-        
-          
-        
       
       
         
@@ -4971,34 +4967,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../../developer/interception-scripts/" class="md-nav__link">
-        Interception Script Overview
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../developer/interception-scripts-debug/" class="md-nav__link">
-        Script Debugging
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../../developer/external-libraries/" class="md-nav__link">
         External Libraries
       </a>
@@ -5044,7 +5012,7 @@
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_10_8" type="checkbox" id="__nav_1_10_8" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_10_6" type="checkbox" id="__nav_1_10_6" >
       
       
       
@@ -5064,14 +5032,14 @@
         <div class="md-nav__link md-nav__link--index ">
           <a href="../../developer/customization/">Customization</a>
           
-            <label for="__nav_1_10_8">
+            <label for="__nav_1_10_6">
               <span class="md-nav__icon md-icon"></span>
             </label>
           
         </div>
       
       <nav class="md-nav" aria-label="Customization" data-md-level="3">
-        <label class="md-nav__title" for="__nav_1_10_8">
+        <label class="md-nav__title" for="__nav_1_10_6">
           <span class="md-nav__icon md-icon"></span>
           Customization
         </label>
@@ -5123,7 +5091,7 @@
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_10_9" type="checkbox" id="__nav_1_10_9" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_10_7" type="checkbox" id="__nav_1_10_7" >
       
       
       
@@ -5178,26 +5146,42 @@
         
           
         
+          
+        
       
       
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../developer/scripts/">Scripts</a>
+          <a href="../../developer/scripts/">Interception Scripts</a>
           
-            <label for="__nav_1_10_9">
+            <label for="__nav_1_10_7">
               <span class="md-nav__icon md-icon"></span>
             </label>
           
         </div>
       
-      <nav class="md-nav" aria-label="Scripts" data-md-level="3">
-        <label class="md-nav__title" for="__nav_1_10_9">
+      <nav class="md-nav" aria-label="Interception Scripts" data-md-level="3">
+        <label class="md-nav__title" for="__nav_1_10_7">
           <span class="md-nav__icon md-icon"></span>
-          Scripts
+          Interception Scripts
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../developer/scripts/interception-scripts-debug/" class="md-nav__link">
+        Script Debugging
+      </a>
+    </li>
+  
+
             
           
             
@@ -173095,26 +173079,26 @@ Uninstalling and re-installing with newer binaries is the only option that requi
 Though this is made easy using <a href="../../terraform/">Terraform</a>. 
 We recommend using Kubernetes installations over VM, to avail smooth upgrades and better HA support.</p>
 </div>
-<p>Let's assume we are upgrading Jans VM installation from <code>current version</code> to <code>v1.0.17.nightly</code></p>
+<p>Let's assume we are upgrading Jans VM installation from <code>current version</code> to <code>vreplace-janssen-version</code></p>
 <ol>
 <li>
 <p>Keep the old VM installation running.</p>
 </li>
 <li>
-<p><a href="../../install/vm-install/">Install</a> on a separate VM the target new Jans installation, i.e. <code>v1.0.17.nightly</code>.</p>
+<p><a href="../../install/vm-install/">Install</a> on a separate VM the target new Jans installation, i.e. <code>vreplace-janssen-version</code>.</p>
 <p>You can install with a test client. For example:</p>
 <p><code>sudo python3 /opt/jans/jans-setup/setup.py -test-client-id 6382c9da-f25d-435f-ac63-6acde36f4859 -test-client-pw secret1172023</code></p>
 <p>This <code>client-id</code> and <code>client-pw</code> will then be used to import Terraform configurations</p>
 </li>
 <li>
-<p>Use our Terraform <a href="../../terraform/">docs</a> on the new installation, i.e. <code>v1.0.17.nightly</code> to:</p>
+<p>Use our Terraform <a href="../../terraform/">docs</a> on the new installation, i.e. <code>vreplace-janssen-version</code> to:</p>
 <ul>
 <li>import all the global configurations from the new installation using <code>terraform import</code></li>
 <li>define all the custom IDP configurations and apply them using <code>terraform apply</code></li>
 </ul>
 </li>
 <li>
-<p>At this point there should be two versions up, <code>old version</code> and <code>v1.0.17.nightly</code>.</p>
+<p>At this point there should be two versions up, <code>old version</code> and <code>vreplace-janssen-version</code>.</p>
 </li>
 <li>
 <p>Traffic should be switched gradually from the old setup to the new setup.

@@ -4823,10 +4823,6 @@
         
           
         
-          
-        
-          
-        
       
       
         
@@ -5018,34 +5014,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../developer/interception-scripts/" class="md-nav__link">
-        Interception Script Overview
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../developer/interception-scripts-debug/" class="md-nav__link">
-        Script Debugging
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../../../developer/external-libraries/" class="md-nav__link">
         External Libraries
       </a>
@@ -5091,7 +5059,7 @@
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_10_8" type="checkbox" id="__nav_1_10_8" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_10_6" type="checkbox" id="__nav_1_10_6" >
       
       
       
@@ -5111,14 +5079,14 @@
         <div class="md-nav__link md-nav__link--index ">
           <a href="../../../developer/customization/">Customization</a>
           
-            <label for="__nav_1_10_8">
+            <label for="__nav_1_10_6">
               <span class="md-nav__icon md-icon"></span>
             </label>
           
         </div>
       
       <nav class="md-nav" aria-label="Customization" data-md-level="3">
-        <label class="md-nav__title" for="__nav_1_10_8">
+        <label class="md-nav__title" for="__nav_1_10_6">
           <span class="md-nav__icon md-icon"></span>
           Customization
         </label>
@@ -5170,7 +5138,7 @@
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_10_9" type="checkbox" id="__nav_1_10_9" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_10_7" type="checkbox" id="__nav_1_10_7" >
       
       
       
@@ -5225,26 +5193,42 @@
         
           
         
+          
+        
       
       
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../../developer/scripts/">Scripts</a>
+          <a href="../../../developer/scripts/">Interception Scripts</a>
           
-            <label for="__nav_1_10_9">
+            <label for="__nav_1_10_7">
               <span class="md-nav__icon md-icon"></span>
             </label>
           
         </div>
       
-      <nav class="md-nav" aria-label="Scripts" data-md-level="3">
-        <label class="md-nav__title" for="__nav_1_10_9">
+      <nav class="md-nav" aria-label="Interception Scripts" data-md-level="3">
+        <label class="md-nav__title" for="__nav_1_10_7">
           <span class="md-nav__icon md-icon"></span>
-          Scripts
+          Interception Scripts
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../developer/scripts/interception-scripts-debug/" class="md-nav__link">
+        Script Debugging
+      </a>
+    </li>
+  
+
             
           
             
@@ -173251,7 +173235,7 @@
 <p>Start a fresh ubuntu <code>18.04</code> or <code>20.04</code> 4 CPU, 16 GB RAM, and 50GB SSD VM with ports <code>443</code> and <code>80</code> open. Then execute the following</p>
 <p><div class="highlight"><pre><span></span><code>sudo su -
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>wget https://raw.githubusercontent.com/JanssenProject/jans/v1.0.17.nightly/automation/startjanssendemo.sh <span class="o">&amp;&amp;</span> chmod u+x startjanssendemo.sh <span class="o">&amp;&amp;</span> ./startjanssendemo.sh
+<div class="highlight"><pre><span></span><code>wget https://raw.githubusercontent.com/JanssenProject/jans/vreplace-janssen-version/automation/startjanssendemo.sh <span class="o">&amp;&amp;</span> chmod u+x startjanssendemo.sh <span class="o">&amp;&amp;</span> ./startjanssendemo.sh
 </code></pre></div></p>
 <p>This will install docker, microk8s, helm and Janssen with the default settings that can be found inside <a href="https://github.com/JanssenProject/jans/blob/main/charts/janssen/values.yaml">values.yaml</a>.  </p>
 <p>The installer will automatically add a record to your hosts record in the VM but if you want access the endpoints outside the VM you must  map the <code>ip</code> of the instance running ubuntu to the FQDN you provided and then access the endpoints at your browser such in the example in the table below.</p>
