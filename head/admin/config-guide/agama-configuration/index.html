@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#agama-developer-studio" class="md-skip">
+        <a href="#agama" class="md-skip">
           Skip to content
         </a>
       
@@ -2102,15 +2102,56 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#view-agama-developer-studio-project" class="md-nav__link">
-    View Agama Developer Studio Project
+  <a href="#list-of-deployed-projects" class="md-nav__link">
+    List of Deployed Projects
+  </a>
+  
+    <nav class="md-nav" aria-label="List of Deployed Projects">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#endpoint-arguments" class="md-nav__link">
+    Endpoint Arguments
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#view-agama-project-by-name" class="md-nav__link">
+    View Agama Project By Name
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#post-agama-developer-studio-project-in-janssen" class="md-nav__link">
-    Post Agama Developer Studio Project in Janssen
+  <a href="#post-agama-project-in-janssen" class="md-nav__link">
+    Post Agama Project in Janssen
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#retrieve-agama-project-configuration" class="md-nav__link">
+    Retrieve Agama Project Configuration
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#update-agama-project" class="md-nav__link">
+    Update Agama Project
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#delete-agama-project" class="md-nav__link">
+    Delete Agama Project
   </a>
   
 </li>
@@ -173096,15 +173137,56 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#view-agama-developer-studio-project" class="md-nav__link">
-    View Agama Developer Studio Project
+  <a href="#list-of-deployed-projects" class="md-nav__link">
+    List of Deployed Projects
+  </a>
+  
+    <nav class="md-nav" aria-label="List of Deployed Projects">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#endpoint-arguments" class="md-nav__link">
+    Endpoint Arguments
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#view-agama-project-by-name" class="md-nav__link">
+    View Agama Project By Name
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#post-agama-developer-studio-project-in-janssen" class="md-nav__link">
-    Post Agama Developer Studio Project in Janssen
+  <a href="#post-agama-project-in-janssen" class="md-nav__link">
+    Post Agama Project in Janssen
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#retrieve-agama-project-configuration" class="md-nav__link">
+    Retrieve Agama Project Configuration
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#update-agama-project" class="md-nav__link">
+    Update Agama Project
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#delete-agama-project" class="md-nav__link">
+    Delete Agama Project
   </a>
   
 </li>
@@ -173154,17 +173236,127 @@
 <blockquote>
 <p>Prerequisite: Know how to use the Janssen CLI in <a href="../config-tools/jans-cli/">command-line mode</a></p>
 </blockquote>
-<h1 id="agama-developer-studio">Agama Developer Studio<a class="headerlink" href="#agama-developer-studio" title="Permanent link">#</a></h1>
-<p>In Janssen, You can deploy and customize agama project using commandline. To get the details of Janssen commandline feature of Agama Developer Studio, you can run this command as below:</p>
-<div class="highlight"><pre><span></span><code>/opt/jans/jans-cli/config-cli.py --info AgamaDeveloperStudio
+<h1 id="agama">Agama<a class="headerlink" href="#agama" title="Permanent link">#</a></h1>
+<p>In Janssen, You can deploy and customize agama project using commandline. To get the details of Janssen commandline feature of Agama, you can run this command as below:</p>
+<div class="highlight"><pre><span></span><code>/opt/jans/jans-cli/config-cli.py --info Agama
 </code></pre></div>
-<p>It will show you the details of available operation-id for Agama developer studio.</p>
-<h2 id="view-agama-developer-studio-project">View Agama Developer Studio Project<a class="headerlink" href="#view-agama-developer-studio-project" title="Permanent link">#</a></h2>
+<p>It will show you the details of available operation-id for Agama.</p>
+<div class="highlight"><pre><span></span><code>Operation ID: get-agama-prj-by-name
+  Description: Fetches deployed Agama project based on name.
+  Parameters:
+  name: Agama project name [string]
+Operation ID: post-agama-prj
+  Description: Deploy an Agama project.
+  Parameters:
+  name: Agama project name [string]
+Operation ID: delete-agama-prj
+  Description: Delete a deployed Agama project.
+  Parameters:
+  name: Agama project name [string]
+Operation ID: get-agama-prj-configs
+  Description: Retrieve the list of configs based on name.
+  Parameters:
+  name: Agama project name [string]
+Operation ID: put-agama-prj
+  Description: Update an Agama project.
+  Parameters:
+  name: Agama project name [string]
+  Parameters:
+    type: Description not found for this property
+    additionalProperties: Description not found for this property
+Operation ID: get-agama-prj
+  Description: Retrieve the list of projects deployed currently.
+  Parameters:
+  start: No description is provided for this parameter [integer]
+  count: No description is provided for this parameter [integer]
+</code></pre></div>
+<!-- Table to be added later
+
+|Operation-id       | url-suffix    |  endpoint-args    |  Description  | Example   |
+|---    |---    |---    |---    |---    |
+| `get-agama-prj`   | NA    |  `start`,`count`  |       |       |
+|   `post-agama-prj`    |  `name`   |  NA   |       |       |
+|       |       |       |       |       |
+
+-->
+
+<h2 id="list-of-deployed-projects">List of Deployed Projects<a class="headerlink" href="#list-of-deployed-projects" title="Permanent link">#</a></h2>
+<p>To retrieve the list of deployed agama projects:</p>
+<div class="highlight"><pre><span></span><code>/opt/jans/jans-cli/config-cli.py --operation-id get-agama-prj
+</code></pre></div>
+<p>To get details of all the agama flows:</p>
+<div class="highlight"><pre><span></span><code>/opt/jans/jans-cli/config-cli.py --operation-id get-agama-prj
+Please wait while retrieving data ...
+{
+  &quot;start&quot;: 0,
+  &quot;totalEntriesCount&quot;: 1,
+  &quot;entriesCount&quot;: 1,
+  &quot;entries&quot;: [
+    {
+      &quot;dn&quot;: &quot;jansId=46546e9a-fed6-34d0-ba63-b615233b2115,ou=deployments,ou=agama,o=jans&quot;,
+      &quot;id&quot;: &quot;46546e9a-fed6-34d0-ba63-b615233b2115&quot;,
+      &quot;createdAt&quot;: &quot;2023-08-13T14:45:27&quot;,
+      &quot;taskActive&quot;: false,
+      &quot;finishedAt&quot;: &quot;2023-08-13T14:45:43&quot;,
+      &quot;details&quot;: {
+        &quot;error&quot;: &quot;There were problems processing one or more flows&quot;,
+        &quot;flowsError&quot;: {
+          &quot;mmrraju.np.test.me&quot;: null,
+          &quot;mmrraju.test2.agama&quot;: null,
+          &quot;mmrraju.u2f.me&quot;: &quot;Syntax error: mismatched input &#39;&lt;EOF&gt;&#39; expecting {&#39;|&#39;, &#39;Log&#39;, &#39;Trigger&#39;, &#39;Call&#39;, &#39;RRF&#39;, &#39;When&#39;, &#39;Repeat&#39;, &#39;Iterate over&#39;, &#39;Match&#39;, &#39;Finish&#39;, &#39;RFAC&#39;, ALPHANUM, QNAME, DOTEXPR, DOTIDXEXPR, WS}\nSymbol: [@9,43:42=&#39;&lt;EOF&gt;&#39;,&lt;-1&gt;,2:23]\nLine: 2\nColumn: 24&quot;
+        },
+        &quot;projectMetadata&quot;: {
+          &quot;projectName&quot;: &quot;user_pass_auth&quot;,
+          &quot;author&quot;: &quot;mmrraju&quot;,
+          &quot;type&quot;: &quot;community&quot;,
+          &quot;description&quot;: &quot;This is password based authentication&quot;,
+          &quot;version&quot;: &quot;1.0.34&quot;,
+          &quot;configs&quot;: null
+        }
+      },
+      &quot;baseDn&quot;: &quot;jansId=46546e9a-fed6-34d0-ba63-b615233b2115,ou=deployments,ou=agama,o=jans&quot;
+    }
+  ]
+}
+</code></pre></div>
+<p>It will display the total number of agama flows that are enabled and their list. You can get modified list using supported parameters. </p>
+<h3 id="endpoint-arguments">Endpoint Arguments<a class="headerlink" href="#endpoint-arguments" title="Permanent link">#</a></h3>
+<p><code>start</code>: Should be an integer value. It's an index value of starting point of the list.</p>
+<p><code>count</code>: Should be an integer value. Total entries number you want to display. </p>
+<p><strong>Example:</strong></p>
+<div class="highlight"><pre><span></span><code>/opt/jans/jans-cli/config-cli.py --operation-id get-agama-prj --endpoint-args start:1,count:1
+
+Please wait while retrieving data ...
+{
+  &quot;start&quot;: 1,
+  &quot;totalEntriesCount&quot;: 3,
+  &quot;entriesCount&quot;: 1,
+  &quot;entries&quot;: [
+    {
+      &quot;dn&quot;: &quot;jansId=3a0e91a4-b79b-37c2-9df7-122247e8ed9c,ou=deployments,ou=agama,o=jans&quot;,
+      &quot;id&quot;: &quot;3a0e91a4-b79b-37c2-9df7-122247e8ed9c&quot;,
+      &quot;createdAt&quot;: &quot;2023-08-15T05:56:19&quot;,
+      &quot;taskActive&quot;: false,
+      &quot;finishedAt&quot;: &quot;2023-08-15T05:56:42&quot;,
+      &quot;details&quot;: {
+        &quot;error&quot;: &quot;Archive missing web and/or code subdirectories&quot;,
+        &quot;flowsError&quot;: null,
+        &quot;projectMetadata&quot;: {
+          &quot;projectName&quot;: &quot;testAuth&quot;,
+          &quot;configs&quot;: null
+        }
+      },
+      &quot;baseDn&quot;: &quot;jansId=3a0e91a4-b79b-37c2-9df7-122247e8ed9c,ou=deployments,ou=agama,o=jans&quot;
+    }
+  ]
+}
+</code></pre></div>
+<h2 id="view-agama-project-by-name">View Agama Project By Name<a class="headerlink" href="#view-agama-project-by-name" title="Permanent link">#</a></h2>
 <p>You can get the details of an Agama project deployed in Janssen by the project name. Commandline for this operation as below:</p>
-<div class="highlight"><pre><span></span><code>/opt/jans/jans-cli/config-cli.py --operation-id get-agama-dev-studio-prj-by-name --url-suffix name:&quot;agama-project-name&quot;
+<div class="highlight"><pre><span></span><code>/opt/jans/jans-cli/config-cli.py --operation-id get-agama-prj-by-name --endpoint-args name:&quot;agama-project-name&quot;
 </code></pre></div>
 <p><strong>Example:</strong>
-<div class="highlight"><pre><span></span><code>/opt/jans/jans-cli/config-cli.py --operation-id get-agama-dev-studio-prj-by-name --url-suffix name:testAuth
+<div class="highlight"><pre><span></span><code>/opt/jans/jans-cli/config-cli.py --operation-id get-agama-prj-by-name --endpoint-args name:testAuth
 Please wait while retrieving data ...
 {
   &quot;dn&quot;: &quot;jansId=3a0e91a4-b79b-37c2-9df7-122247e8ed9c,ou=deployments,ou=agama,o=jans&quot;,
@@ -173192,156 +173384,54 @@ Please wait while retrieving data ...
   &quot;baseDn&quot;: &quot;jansId=3a0e91a4-b79b-37c2-9df7-122247e8ed9c,ou=deployments,ou=agama,o=jans&quot;
 }
 </code></pre></div></p>
-<h2 id="post-agama-developer-studio-project-in-janssen">Post Agama Developer Studio Project in Janssen<a class="headerlink" href="#post-agama-developer-studio-project-in-janssen" title="Permanent link">#</a></h2>
+<h2 id="post-agama-project-in-janssen">Post Agama Project in Janssen<a class="headerlink" href="#post-agama-project-in-janssen" title="Permanent link">#</a></h2>
 <p>Also, You can deploy agama project in Janssen through commandline.</p>
-<div class="highlight"><pre><span></span><code>/opt/jans/jans-cli/config-cli.py --operation-id post-agama-dev-studio-prj --url-suffix name:&quot;agama-project-name&quot;
+<div class="highlight"><pre><span></span><code>/opt/jans/jans-cli/config-cli.py --operation-id post-agama-prj --endpoint-args name:agama-project-name
 </code></pre></div>
+<h2 id="retrieve-agama-project-configuration">Retrieve Agama Project Configuration<a class="headerlink" href="#retrieve-agama-project-configuration" title="Permanent link">#</a></h2>
+<p>To retrieve agama project configuration:</p>
+<div class="highlight"><pre><span></span><code>/opt/jans/jans-cli/config-cli.py --operation-id get-agama-prj-configs --endpoint-args name:agama-project-name
+</code></pre></div>
+<h2 id="update-agama-project">Update Agama Project<a class="headerlink" href="#update-agama-project" title="Permanent link">#</a></h2>
+<p>To update existing agama project:
+<div class="highlight"><pre><span></span><code>/optjans/jans-cli/config-cli.py --operation-id put-agama-prj --endpoint-args name:agama-project-name
+</code></pre></div></p>
+<h2 id="delete-agama-project">Delete Agama Project<a class="headerlink" href="#delete-agama-project" title="Permanent link">#</a></h2>
+<p>To delete agama project by its name:
+<div class="highlight"><pre><span></span><code>/opt/jans/jans-cli/config-cli.py --operation-id delete-agama-prj --endpoint-args name:agama-project-name
+</code></pre></div></p>
 <h1 id="agama-flow-configuration">Agama Flow Configuration<a class="headerlink" href="#agama-flow-configuration" title="Permanent link">#</a></h1>
-<p>If you already deployed agama projects successfully in your janssen server through <a href="#agama-developer-studio">above</a> operations, you can check those agama flow status with these below operations:</p>
+<p>If you already deployed agama projects successfully in your janssen server through <a href="#agama">above</a> operations, you can check those agama flow status with these below operations:</p>
 <div class="highlight"><pre><span></span><code>/opt/jans/jans-cli/config-cli.py --info AgamaConfiguration
 
-Operation ID: get-agama-flows
-  Description: Fetches all agama flow.
-  Parameters:
-  pattern: Search pattern [string]
-  limit: Search size - max size of the results to return [integer]
-  startIndex: The 1-based index of the first query result [integer]
-  sortBy: Attribute whose value will be used to order the returned response [string]
-  sortOrder: Order in which the sortBy param is applied. Allowed values are &quot;ascending&quot; and &quot;descending&quot; [string]
-  includeSource: Boolean flag to indicate agama source is to be included [boolean]
-Operation ID: post-agama-flow
-  Description: Create a new agama flow
-  Schema: Flow
-Operation ID: get-agama-flow
-  Description: Gets an agama flow based on Qname.
-  Parameters:
-  qname: Agama Flow name [string]
-  includeSource: Boolean flag to indicate agama source is to be included [boolean]
-Operation ID: post-agama-flow-from-source
-  Description: Create a new agama flow from source.
+Operation ID: agama-syntax-check
+  Description: Determine if the text passed is valid Agama code
   Parameters:
   qname: Agama Flow name [string]
 </code></pre></div>
-<h2 id="get-agama-flow">Get Agama Flow<a class="headerlink" href="#get-agama-flow" title="Permanent link">#</a></h2>
-<p>To get details of all the agama flows:</p>
-<div class="highlight"><pre><span></span><code>/opt/jans/jans-cli/config-cli.py --operation-id get-agama-flows
-Please wait while retrieving data ...
-{
-  &quot;start&quot;: 0,
-  &quot;totalEntriesCount&quot;: 2,
-  &quot;entriesCount&quot;: 2,
-  &quot;entries&quot;: [
-    {
-      &quot;dn&quot;: &quot;agFlowQname=imShakil.co.basicAuth,ou=flows,ou=agama,o=jans&quot;,
-      &quot;qname&quot;: &quot;imShakil.co.basicAuth&quot;,
-      &quot;revision&quot;: 0,
-      &quot;enabled&quot;: true,
-      &quot;metadata&quot;: {
-        &quot;funcName&quot;: &quot;_imShakil_co_basicAuth&quot;,
-        &quot;author&quot;: &quot;imShakil&quot;,
-        &quot;timestamp&quot;: 1688453467147
-      },
-      &quot;baseDn&quot;: &quot;agFlowQname=imShakil.co.basicAuth,ou=flows,ou=agama,o=jans&quot;
-    },
-    {
-      &quot;dn&quot;: &quot;agFlowQname=mmrraju.test2.agama,ou=flows,ou=agama,o=jans&quot;,
-      &quot;qname&quot;: &quot;mmrraju.test2.agama&quot;,
-      &quot;revision&quot;: 0,
-      &quot;enabled&quot;: true,
-      &quot;metadata&quot;: {
-        &quot;funcName&quot;: &quot;_mmrraju_test2_agama&quot;,
-        &quot;author&quot;: &quot;mmrraju&quot;,
-        &quot;timestamp&quot;: 1688451217241
-      },
-      &quot;baseDn&quot;: &quot;agFlowQname=mmrraju.test2.agama,ou=flows,ou=agama,o=jans&quot;
-    }
-  ]
-}
+<h2 id="agama-flow-syntax">Agama Flow Syntax<a class="headerlink" href="#agama-flow-syntax" title="Permanent link">#</a></h2>
+<div class="highlight"><pre><span></span><code>/opt/jans/jans-cli/config-cli.py --operation-id agama-syntax-check --url-suffix qname:
 </code></pre></div>
-<p>It will display the total number of agama flows that are enabled and their list. You can get detail of an enabled agama flow by its <code>qname</code>.</p>
-<p>To get details through the <code>qname</code> of a agama flow:</p>
-<p><div class="highlight"><pre><span></span><code>/opt/jans/jans-cli/config-cli.py --operation-id get-agama-flow --url-suffix qname:&quot;name&quot;
-</code></pre></div>
-<code>qname</code> stands for Qualified Name. You can grab that from above operation. In my case, qname for the first one of the above list is: <code>imShakil.co.basicAuth</code></p>
-<p><strong>Example</strong>:
-<div class="highlight"><pre><span></span><code>/opt/jans/jans-cli/config-cli.py --operation-id get-agama-flow --url-suffix qname:&quot;imShakil.co.basicAuth&quot;
+<p>You can do some syntax check with this operation-id. It will help to find out syntax error in agama low code projects. </p>
+<p><strong><em>Example</em></strong>:
+<div class="highlight"><pre><span></span><code>/opt/jans/jans-cli/config-cli.py --operation-id agama-syntax-check --url-suffix qname:&quot;imShakil.co.test&quot;
 
-Please wait while retrieving data ...
+Server Response:
 {
-  &quot;dn&quot;: &quot;agFlowQname=imShakil.co.basicAuth,ou=flows,ou=agama,o=jans&quot;,
-  &quot;qname&quot;: &quot;imShakil.co.basicAuth&quot;,
-  &quot;revision&quot;: 0,
-  &quot;enabled&quot;: true,
-  &quot;metadata&quot;: {
-    &quot;funcName&quot;: &quot;_imShakil_co_basicAuth&quot;,
-    &quot;author&quot;: &quot;imShakil&quot;,
-    &quot;timestamp&quot;: 1688453467147
-  },
-  &quot;baseDn&quot;: &quot;agFlowQname=imShakil.co.basicAuth,ou=flows,ou=agama,o=jans&quot;
+  &quot;error&quot;: &quot;mismatched input &#39;newline&#39; expecting &#39;Flow&#39;&quot;,
+  &quot;symbol&quot;: &quot;[@0,0:-1=&#39;newline&#39;,&lt;9&gt;,1:0]&quot;,
+  &quot;line&quot;: 1,
+  &quot;column&quot;: 0,
+  &quot;message&quot;: &quot;Syntax error: mismatched input &#39;newline&#39; expecting &#39;Flow&#39;\nSymbol: [@0,0:-1=&#39;newline&#39;,&lt;9&gt;,1:0]\nLine: 1\nColumn: 1&quot;
 }
 </code></pre></div></p>
-<h2 id="create-agama-flow">Create Agama Flow<a class="headerlink" href="#create-agama-flow" title="Permanent link">#</a></h2>
-<p>To create an agama flow in janssen server, let's get the schema first as below:</p>
-<div class="highlight"><pre><span></span><code>/opt/jans/jans-cli/config-cli.py --schema Flow &gt; /tmp/flow.json
-</code></pre></div>
-<p>Schema should be look like this:</p>
-<div class="highlight"><pre><span></span><code>{
-  &quot;dn&quot;: &quot;string&quot;,
-  &quot;qname&quot;: &quot;string&quot;,
-  &quot;transHash&quot;: &quot;string&quot;,
-  &quot;revision&quot;: 133,
-  &quot;enabled&quot;: true,
-  &quot;metadata&quot;: {
-    &quot;funcName&quot;: {
-      &quot;type&quot;: &quot;string&quot;
-    },
-    &quot;inputs&quot;: {
-      &quot;type&quot;: &quot;array&quot;,
-      &quot;items&quot;: {
-        &quot;type&quot;: &quot;string&quot;
-      }
-    },
-    &quot;timeout&quot;: {
-      &quot;type&quot;: &quot;integer&quot;,
-      &quot;format&quot;: &quot;int32&quot;
-    },
-    &quot;displayName&quot;: {
-      &quot;type&quot;: &quot;string&quot;
-    },
-    &quot;author&quot;: {
-      &quot;type&quot;: &quot;string&quot;
-    },
-    &quot;timestamp&quot;: {
-      &quot;type&quot;: &quot;integer&quot;,
-      &quot;format&quot;: &quot;int64&quot;
-    },
-    &quot;description&quot;: {
-      &quot;type&quot;: &quot;string&quot;
-    },
-    &quot;properties&quot;: {
-      &quot;type&quot;: &quot;object&quot;,
-      &quot;additionalProperties&quot;: {
-        &quot;type&quot;: &quot;object&quot;
-      }
-    }
-  },
-  &quot;source&quot;: &quot;string&quot;,
-  &quot;transpiled&quot;: &quot;string&quot;,
-  &quot;codeError&quot;: &quot;string&quot;,
-  &quot;baseDn&quot;: &quot;string&quot;
-}
-</code></pre></div>
-<p>To post agama flow after modification, run this below commandline:</p>
-<div class="highlight"><pre><span></span><code>/opt/jans/jans-cli/config-cli.py --operation-id post-agama-flow --data /tmp/flow.json 
-</code></pre></div>
-<p>It will display the server response.</p>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-08-03T16:21:13+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-08-03</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-08-17T05:07:14+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-08-17</span>
       
         <br>
         Created:
