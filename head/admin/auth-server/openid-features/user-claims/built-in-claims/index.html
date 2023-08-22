@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#this-content-is-in-progress" class="md-skip">
+        <a href="#built-in-claims" class="md-skip">
           Skip to content
         </a>
       
@@ -3871,8 +3871,6 @@
         
           
         
-          
-        
       
       
         
@@ -3907,53 +3905,12 @@
       <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
       
       
+        
       
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          Built-in Claims
-          <span class="md-nav__icon md-icon"></span>
-        </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
         Built-in Claims
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#this-content-is-in-progress" class="md-nav__link">
-    This content is in progress
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#have-questions-in-the-meantime" class="md-nav__link">
-    Have questions in the meantime?
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#want-to-contribute" class="md-nav__link">
-    Want to contribute?
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
       
     </li>
   
@@ -3968,20 +3925,6 @@
     <li class="md-nav__item">
       <a href="../custom-claims/" class="md-nav__link">
         Adding Custom Claims
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../claim-uniqueness-validation/" class="md-nav__link">
-        Claim Uniqueness/Validation
       </a>
     </li>
   
@@ -173075,35 +173018,8 @@
   
   
   
+    
   
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#this-content-is-in-progress" class="md-nav__link">
-    This content is in progress
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#have-questions-in-the-meantime" class="md-nav__link">
-    Have questions in the meantime?
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#want-to-contribute" class="md-nav__link">
-    Want to contribute?
-  </a>
-  
-</li>
-      
-    </ul>
   
 </nav>
                   </div>
@@ -173145,6 +173061,11 @@
         <span class="md-tag">claims</span>
       
     
+      
+      
+        <span class="md-tag">built-in-claims</span>
+      
+    
   </nav>
 
 
@@ -173155,21 +173076,187 @@
   </a>
 
 
-  <h1>Built-in Claims</h1>
-
-<h2 id="this-content-is-in-progress">This content is in progress<a class="headerlink" href="#this-content-is-in-progress" title="Permanent link">#</a></h2>
-<p>The Janssen Project documentation is currently in development. Topic pages are being created in order of broadest relevance, and this page is coming in the near future.</p>
-<h2 id="have-questions-in-the-meantime">Have questions in the meantime?<a class="headerlink" href="#have-questions-in-the-meantime" title="Permanent link">#</a></h2>
-<p>While this documentation is in progress, you can ask questions through <a href="https://github.com/JanssenProject/jans/discussion">GitHub Discussions</a> or the <a href="https://gitter.im/JanssenProject/Lobby">community chat on Gitter</a>. Any questions you have will help determine what information our documentation should cover.</p>
-<h2 id="want-to-contribute">Want to contribute?<a class="headerlink" href="#want-to-contribute" title="Permanent link">#</a></h2>
-<p>If you have content you'd like to contribute to this page in the meantime, you can get started with our <a href="https://docs.jans.io/head/CONTRIBUTING/">Contribution guide</a>.</p>
+<h1 id="built-in-claims">Built-in Claims<a class="headerlink" href="#built-in-claims" title="Permanent link">#</a></h1>
+<p>The Janssen Server persistence includes all standard claims defined in <a href="https://openid.net/specs/openid-connect-core-1_0.html#StandardClaims">OpenID Connect specifications</a>. Built-in claims defines a standard set of pre-defined claims available to use after installation for sharing of user attributes between identity providers and relying parties. </p>
+<p>The built-in user claims in Janssen in below table</p>
+<table>
+<thead>
+<tr>
+<th>Display Name</th>
+<th>Claim Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Username</td>
+<td>user_name</td>
+<td>...</td>
+</tr>
+<tr>
+<td>Password</td>
+<td>user_password</td>
+<td>...</td>
+</tr>
+<tr>
+<td>First Name</td>
+<td>given_name</td>
+<td>First name of user</td>
+</tr>
+<tr>
+<td>Middle Name</td>
+<td>middle_name</td>
+<td>Middle name of user</td>
+</tr>
+<tr>
+<td>Last Name</td>
+<td>family_name</td>
+<td>Last name of user</td>
+</tr>
+<tr>
+<td>Display Name</td>
+<td>name</td>
+<td>...</td>
+</tr>
+<tr>
+<td>Email</td>
+<td>email</td>
+<td>...</td>
+</tr>
+<tr>
+<td>Nickname</td>
+<td>nickname</td>
+<td>...</td>
+</tr>
+<tr>
+<td>CIBA Device Registration Token</td>
+<td>jans_backchannel_device_registration_tkn</td>
+<td>...</td>
+</tr>
+<tr>
+<td>CIBA User code</td>
+<td>jans_backchannel_usr_code</td>
+<td>...</td>
+</tr>
+<tr>
+<td>Locale</td>
+<td>locale</td>
+<td>...</td>
+</tr>
+<tr>
+<td>Website URL</td>
+<td>website</td>
+<td>...</td>
+</tr>
+<tr>
+<td>IMAP Data</td>
+<td>imap_data</td>
+<td>...</td>
+</tr>
+<tr>
+<td>jansAdminUIRole</td>
+<td>jansAdminUIRole</td>
+<td>...</td>
+</tr>
+<tr>
+<td>Enrollment code</td>
+<td>jans_enrollment_code</td>
+<td>...</td>
+</tr>
+<tr>
+<td>User Permission</td>
+<td>user_permission</td>
+<td>...</td>
+</tr>
+<tr>
+<td>Preferred Language</td>
+<td>preferred_language</td>
+<td>...</td>
+</tr>
+<tr>
+<td>Profile URL</td>
+<td>profile</td>
+<td>...</td>
+</tr>
+<tr>
+<td>Secret Question</td>
+<td>secret_question</td>
+<td>...</td>
+</tr>
+<tr>
+<td>Email Verified</td>
+<td>email_verified</td>
+<td>...</td>
+</tr>
+<tr>
+<td>Birthdate</td>
+<td>birthdate</td>
+<td>...</td>
+</tr>
+<tr>
+<td>Time zone info</td>
+<td>zoneinfo</td>
+<td>...</td>
+</tr>
+<tr>
+<td>Phone Number verified</td>
+<td>phone_number_verified</td>
+<td>...</td>
+</tr>
+<tr>
+<td>Preferred Username</td>
+<td>preferred_username</td>
+<td>...</td>
+</tr>
+<tr>
+<td>TransientId</td>
+<td>transient_id</td>
+<td>...</td>
+</tr>
+<tr>
+<td>PersistentId</td>
+<td>persistent_id</td>
+<td>...</td>
+</tr>
+<tr>
+<td>Country</td>
+<td>country</td>
+<td>...</td>
+</tr>
+<tr>
+<td>Secret Answer</td>
+<td>secret_answer</td>
+<td>...</td>
+</tr>
+<tr>
+<td>OpenID Connect JSON formatted address</td>
+<td>address</td>
+<td>...</td>
+</tr>
+<tr>
+<td>User certificate</td>
+<td>user_certificate</td>
+<td>...</td>
+</tr>
+<tr>
+<td>Organization</td>
+<td>o</td>
+<td>...</td>
+</tr>
+<tr>
+<td>Picture URL</td>
+<td>picture</td>
+<td>...</td>
+</tr>
+</tbody>
+</table>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2022-12-08T20:20:00+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2022-12-08</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-08-22T08:56:15+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-08-22</span>
       
         <br>
         Created:
@@ -173198,7 +173285,7 @@
     <nav class="md-footer__inner md-grid" aria-label="Footer" >
       
         
-        <a href="../" class="md-footer__link md-footer__link--prev" aria-label="Previous: Overview" rel="prev">
+        <a href="../" class="md-footer__link md-footer__link--prev" aria-label="Previous: User Claims" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
           </div>
@@ -173207,7 +173294,7 @@
               <span class="md-footer__direction">
                 Previous
               </span>
-              Overview
+              User Claims
             </div>
           </div>
         </a>

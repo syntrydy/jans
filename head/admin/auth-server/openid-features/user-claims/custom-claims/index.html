@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#this-content-is-in-progress" class="md-skip">
+        <a href="#custom-claims" class="md-skip">
           Skip to content
         </a>
       
@@ -3871,8 +3871,6 @@
         
           
         
-          
-        
       
       
         
@@ -3921,6 +3919,8 @@
       <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
       
       
+        
+      
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
           Adding Custom Claims
@@ -3937,6 +3937,8 @@
   
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -3945,22 +3947,8 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#this-content-is-in-progress" class="md-nav__link">
-    This content is in progress
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#have-questions-in-the-meantime" class="md-nav__link">
-    Have questions in the meantime?
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#want-to-contribute" class="md-nav__link">
-    Want to contribute?
+  <a href="#adding-a-new-custom-user-claim" class="md-nav__link">
+    Adding a new custom user claim
   </a>
   
 </li>
@@ -3969,20 +3957,6 @@
   
 </nav>
       
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../claim-uniqueness-validation/" class="md-nav__link">
-        Claim Uniqueness/Validation
-      </a>
     </li>
   
 
@@ -173075,6 +173049,8 @@
   
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -173083,22 +173059,8 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#this-content-is-in-progress" class="md-nav__link">
-    This content is in progress
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#have-questions-in-the-meantime" class="md-nav__link">
-    Have questions in the meantime?
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#want-to-contribute" class="md-nav__link">
-    Want to contribute?
+  <a href="#adding-a-new-custom-user-claim" class="md-nav__link">
+    Adding a new custom user claim
   </a>
   
 </li>
@@ -173145,6 +173107,11 @@
         <span class="md-tag">claims</span>
       
     
+      
+      
+        <span class="md-tag">custom-claims</span>
+      
+    
   </nav>
 
 
@@ -173155,21 +173122,119 @@
   </a>
 
 
-  <h1>Adding Custom Claims</h1>
+<h1 id="custom-claims">Custom Claims<a class="headerlink" href="#custom-claims" title="Permanent link">#</a></h1>
+<p>Custom claims provide the flexibility to include application-specific or user-specific information in the authentication process.Custom claims serve to enrich the information available to the relying party (RP), which is the application or service that relies on the identity provided by the OIDC provider. While standard claims provide basic user information, custom claims allow for the inclusion of domain-specific attributes or application-specific data that might be required for user personalization, authorization, or other business logic. User claims should be unique and non-null or empty.</p>
+<h2 id="adding-a-new-custom-user-claim">Adding a new custom user claim<a class="headerlink" href="#adding-a-new-custom-user-claim" title="Permanent link">#</a></h2>
+<div markdown>
+=== "LDAP persistence"
 
-<h2 id="this-content-is-in-progress">This content is in progress<a class="headerlink" href="#this-content-is-in-progress" title="Permanent link">#</a></h2>
-<p>The Janssen Project documentation is currently in development. Topic pages are being created in order of broadest relevance, and this page is coming in the near future.</p>
-<h2 id="have-questions-in-the-meantime">Have questions in the meantime?<a class="headerlink" href="#have-questions-in-the-meantime" title="Permanent link">#</a></h2>
-<p>While this documentation is in progress, you can ask questions through <a href="https://github.com/JanssenProject/jans/discussion">GitHub Discussions</a> or the <a href="https://gitter.im/JanssenProject/Lobby">community chat on Gitter</a>. Any questions you have will help determine what information our documentation should cover.</p>
-<h2 id="want-to-contribute">Want to contribute?<a class="headerlink" href="#want-to-contribute" title="Permanent link">#</a></h2>
-<p>If you have content you'd like to contribute to this page in the meantime, you can get started with our <a href="https://docs.jans.io/head/CONTRIBUTING/">Contribution guide</a>.</p>
+### Step 1: Create a custom attribute
+
+Create a new custom attribute using [Test User Interface](../../../admin/config-guide/config-tools/jans-tui) or [CURL commands](../../../admin/config-guide/jans-cli/cli-attribute/#creating-an-attribute), superb tools provided in Janssen. The attribute name should be the claim name.
+
+![](../../../../assets/image-tui-add-attribute.png)
+
+### Step 2: Make entry of the claim in OpenDJ Schema 
+
+- In OpenDJ, add custom attributes in `/opt/opendj/config/schema/77-customAttributes.ldif`. In the below example, `newClaim` is our custom attribute.
+
+  <div class="highlight"><pre><span></span><code>  dn: cn=schema
+  objectClass: top
+  objectClass: ldapSubentry
+  objectClass: subschema
+  cn: schema
+  attributeTypes: ( 1.3.6.1.4.1.48710.1.3.297 NAME &#39;newClaim&#39;
+  DESC &#39;New claim&#39;
+  EQUALITY caseIgnoreMatch
+  SUBSTR caseIgnoreSubstringsMatch
+  SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+  X-ORIGIN &#39;Jans created attribute&#39; )
+</code></pre></div>
+
+- Add custom attribute to the jansCustomPerson objectClasses.
+
+  <div class="highlight"><pre><span></span><code>objectClasses: ( 1.3.6.1.4.1.48710.1.4.101 NAME &#39;jansCustomPerson&#39;
+SUP ( top )
+AUXILIARY
+MAY ( newClaim $ telephoneNumber $ mobile $ carLicense $ facsimileTelephoneNumber $ departmentNumber $ employeeType $ cn $ sn $ st $ uid $ givenName $ middleName $ nickname $ manager $ street $ postOfficeBox $ employeeNumber $ preferredDeliveryMethod $ roomNumber $ secretary $ userPassword $ homePostalAddress $ l $ postalCode $ description $ title $ jansStatus $ memberOf $ displayName $ mail $ emailVerified $ jansAdminUIRole )
+X-ORIGIN &#39;Jans - Custom persom objectclass&#39; )
+</code></pre></div>
+
+The complete 77-customAttributes.ldif will look like this:
+
+  <div class="highlight"><pre><span></span><code>dn: cn=schema
+objectClass: top
+objectClass: ldapSubentry
+objectClass: subschema
+cn: schema
+attributeTypes: ( 1.3.6.1.4.1.48710.1.3.297 NAME &#39;newClaim&#39;
+  DESC &#39;New claim&#39;
+  EQUALITY caseIgnoreMatch
+  SUBSTR caseIgnoreSubstringsMatch
+  SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+  X-ORIGIN &#39;Jans created attribute&#39; )
+objectClasses: ( 1.3.6.1.4.1.48710.1.4.101 NAME &#39;jansCustomPerson&#39;
+  SUP ( top )
+  AUXILIARY
+  MAY ( newClaim $ telephoneNumber $ mobile $ carLicense $ facsimileTelephoneNumber $ departmentNumber $ employeeType $ cn $ sn $ st $ uid $ givenName $ middleName $ nickname $ manager $ street $ postOfficeBox $ employeeNumber $ preferredDeliveryMethod $ roomNumber $ secretary $ userPassword $ homePostalAddress $ l $ postalCode $ description $ title $ jansStatus $ memberOf $ displayName $ mail $ emailVerified $ jansAdminUIRole )
+  X-ORIGIN &#39;Jans - Custom persom objectclass&#39; )
+</code></pre></div>
+
+!!!warning
+    Spacing is extremely important in the customs attributes file above. There must be 2 spaces before and 1 after every entry (i.e. DESC), or your custom schema will fail to load properly because of a validation error. You cannot have line spaces between `attributeTypes:` or `objectClasses:`. This will cause failure in schema. Please check the error logs in /opt/opendj/logs/errors if you are experiencing issues with adding custom schema. This will help guide you on where there may be syntax errors.
+
+### Step 3: Restart `opendj` service.
+
+[Restart](../../../../admin/vm-ops/restarting-services/#reload) the `opendj` service.
+
+That will create the custom user claim in the local LDAP server.
+
+=== "MySQL persistence"
+
+### Step 1: Create a custom attribute
+
+Create a new custom attribute using [Test User Interface](../../../admin/config-guide/config-tools/jans-tui) or [CURL commands](../../../admin/config-guide/jans-cli/cli-attribute/#creating-an-attribute), superb tools provided in Janssen. The attribute-name should be the claim-name.
+
+![](../../../../assets/image-tui-add-attribute.png)
+
+### Step 2: Make entry of the claim in MySQL Schema
+
+- Add a column to table `jansPerson` in MySQL. Command will be `ALTER TABLE jansPerson ADD COLUMN <claimName> <dataType>`;
+
+**Example**
+<div class="highlight"><pre><span></span><code>mysql&gt; ALTER TABLE jansPerson ADD COLUMN newClaim VARCHAR(100);
+</code></pre></div>
+
+**Choose dataType according to the following table**
+
+|TUI dataType|SQL dataType|
+|---|---|
+|Text|VARCHAR() string value to be kept, SIZE is an integer for max string size|
+|Numeric|INT|
+|Boolean|SMALLINT|
+|Binary|BINARY|
+|Certificate|TEXT|
+|Date|DATETIME(3)|
+|Numeric|INT|
+|Multivalued|JSON|
+
+![](../../../../assets/image-tui-attribute-datatype.png)
+
+!!!warning 
+    If the attribute is Multivalued, dataType should be JSON regardless of what you will choose for Type in Janssen TUI.
+
+The above steps will create the custom user claim in the MySQL persistence.
+</div>
+
+<p>Once the user claim is added, it can be used in user management.</p>
+<p><img alt="" src="../../../../../assets/image-tui-user-claim.png" /></p>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2022-12-08T20:20:00+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2022-12-08</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-08-22T08:56:15+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-08-22</span>
       
         <br>
         Created:
@@ -173214,13 +173279,13 @@
       
       
         
-        <a href="../claim-uniqueness-validation/" class="md-footer__link md-footer__link--next" aria-label="Next: Claim Uniqueness/Validation" rel="next">
+        <a href="../../logout/" class="md-footer__link md-footer__link--next" aria-label="Next: Logout" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              Claim Uniqueness/Validation
+              Logout
             </div>
           </div>
           <div class="md-footer__button md-icon">
