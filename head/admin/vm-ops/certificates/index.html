@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#web-server-certificate" class="md-skip">
+        <a href="#janssen-certificates" class="md-skip">
           Skip to content
         </a>
       
@@ -1669,28 +1669,8 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#certificates-in-janssen" class="md-nav__link">
-    Certificates in Janssen
-  </a>
-  
-    <nav class="md-nav" aria-label="Certificates in Janssen">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
   <a href="#custom-script-json-files" class="md-nav__link">
     Custom Script JSON Files
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#web-server-certificate-installation" class="md-nav__link">
-    Web server certificate installation
   </a>
   
 </li>
@@ -173075,28 +173055,8 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#certificates-in-janssen" class="md-nav__link">
-    Certificates in Janssen
-  </a>
-  
-    <nav class="md-nav" aria-label="Certificates in Janssen">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
   <a href="#custom-script-json-files" class="md-nav__link">
     Custom Script JSON Files
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#web-server-certificate-installation" class="md-nav__link">
-    Web server certificate installation
   </a>
   
 </li>
@@ -173148,8 +173108,7 @@
   </a>
 
 
-<h1 id="web-server-certificate">Web server certificate<a class="headerlink" href="#web-server-certificate" title="Permanent link">#</a></h1>
-<h2 id="certificates-in-janssen">Certificates in Janssen<a class="headerlink" href="#certificates-in-janssen" title="Permanent link">#</a></h2>
+<h1 id="janssen-certificates">Janssen Certificates<a class="headerlink" href="#janssen-certificates" title="Permanent link">#</a></h1>
 <p>Janssen components have cryptographic keys and X.509 certificates that are stored on the filesystem at the time of installation. Details for certificates associated with each component are provided below. The following certificates are available in the <code>/etc/certs</code> folder.</p>
 <table>
 <thead>
@@ -173182,7 +173141,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="custom-script-json-files">Custom Script JSON Files<a class="headerlink" href="#custom-script-json-files" title="Permanent link">#</a></h3>
+<h2 id="custom-script-json-files">Custom Script JSON Files<a class="headerlink" href="#custom-script-json-files" title="Permanent link">#</a></h2>
 <p>Additionally the following json files are available which are used in different custom scripts for multi-factor authentication.</p>
 <ul>
 <li><code>cert_creds.json</code></li>
@@ -173192,8 +173151,8 @@
 <li><code>super_gluu_creds.json</code></li>
 <li><code>vericloud_jans_creds.json</code></li>
 </ul>
-<h2 id="web-server-certificate-installation">Web server certificate installation<a class="headerlink" href="#web-server-certificate-installation" title="Permanent link">#</a></h2>
-<p>We are using <a href="https://certbot.eff.org">certbot</a> using <a href="https://letsencrypt.org/">Let's Encrypt</a> certificates to write this documentation. Certbot recommends using <code>snap</code> to install certbot and obtain certificates. The following instructions are for Ubuntu 20; however, any platform supporting <code>snap</code> should work.</p>
+<h1 id="updating-certificates">Updating certificates<a class="headerlink" href="#updating-certificates" title="Permanent link">#</a></h1>
+<p>On a fresh VM installation, Janssen generates self signed certificates. You will want to change these to real certificates. For this documentation we will use <a href="https://certbot.eff.org">certbot</a> using <a href="https://letsencrypt.org/">Let's Encrypt</a> certificates. Certbot recommends using <code>snap</code> to install certbot and obtain certificates. The following instructions are for Ubuntu 20; however, any platform supporting <code>snap</code> should work.</p>
 <ul>
 <li>Backup the <code>/etc/certs</code> folder on your server</li>
 <li>Install snap: <code>sudo snap install core; sudo snap refresh core</code> </li>
@@ -173204,13 +173163,20 @@
 <li>Move the cert and key to <code>/etc/certs</code> and name them <code>httpd.crt</code> and <code>httpd.key</code> respectively.</li>
 <li>Reboot your server</li>
 </ul>
+<h1 id="installing-intermediate-certificates">Installing intermediate certificates<a class="headerlink" href="#installing-intermediate-certificates" title="Permanent link">#</a></h1>
+<p>Please follow these steps to install intermediate certificates:</p>
+<ul>
+<li>Place your intermediate certificate file in <code>/etc/certs</code></li>
+<li>Modify <code>/etc/apache2/sites-available/https_jans.conf</code> and add <code>SSLCertificateChainFile /etc/certs/name_of_your_interm_root_cert.crt</code> under the line containing <code>SSLCertificateKeyFile</code></li>
+<li><a href="../restarting-services.md">Restart</a> the <code>httpd/apache2</code> service</li>
+</ul>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-04-11T07:54:01+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-04-11</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-08-22T11:20:30+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-08-22</span>
       
         <br>
         Created:

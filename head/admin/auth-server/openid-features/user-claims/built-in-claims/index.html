@@ -173077,8 +173077,8 @@
 
 
 <h1 id="built-in-claims">Built-in Claims<a class="headerlink" href="#built-in-claims" title="Permanent link">#</a></h1>
-<p>The Janssen Server persistence includes all standard claims defined in <a href="https://openid.net/specs/openid-connect-core-1_0.html#StandardClaims">OpenID Connect specifications</a>. Built-in claims defines a standard set of pre-defined claims available to use after installation for sharing of user attributes between identity providers and relying parties. </p>
-<p>The built-in user claims in Janssen in below table</p>
+<p>The Janssen Server includes all standard claims defined in <a href="https://openid.net/specs/openid-connect-core-1_0.html#StandardClaims">OpenID Connect specifications</a>. Built-in claims defines a standard set of pre-defined claims available to use after installation for sharing of user attributes between identity providers and relying parties. </p>
+<p>The built-in user claims in Janssen are listed in below table</p>
 <table>
 <thead>
 <tr>
@@ -173091,12 +173091,12 @@
 <tr>
 <td>Username</td>
 <td>user_name</td>
-<td>...</td>
+<td>Username of user</td>
 </tr>
 <tr>
 <td>Password</td>
 <td>user_password</td>
-<td>...</td>
+<td>Password of user</td>
 </tr>
 <tr>
 <td>First Name</td>
@@ -173116,97 +173116,97 @@
 <tr>
 <td>Display Name</td>
 <td>name</td>
-<td>...</td>
+<td>Display name of user</td>
 </tr>
 <tr>
 <td>Email</td>
 <td>email</td>
-<td>...</td>
+<td>Email address of user</td>
 </tr>
 <tr>
 <td>Nickname</td>
 <td>nickname</td>
-<td>...</td>
+<td>Nickname used for user</td>
 </tr>
 <tr>
 <td>CIBA Device Registration Token</td>
 <td>jans_backchannel_device_registration_tkn</td>
-<td>...</td>
+<td>CIBA Device Registration Token</td>
 </tr>
 <tr>
 <td>CIBA User code</td>
 <td>jans_backchannel_usr_code</td>
-<td>...</td>
+<td>CIBA User code</td>
 </tr>
 <tr>
 <td>Locale</td>
 <td>locale</td>
-<td>...</td>
+<td>End-User's locale, represented as a BCP47 (RFC5646) language tag</td>
 </tr>
 <tr>
 <td>Website URL</td>
 <td>website</td>
-<td>...</td>
+<td>URL of the End-User's Web page or blog</td>
 </tr>
 <tr>
 <td>IMAP Data</td>
 <td>imap_data</td>
-<td>...</td>
+<td>IMAP data</td>
 </tr>
 <tr>
 <td>jansAdminUIRole</td>
 <td>jansAdminUIRole</td>
-<td>...</td>
+<td>Gluu Flex Admin UI role</td>
 </tr>
 <tr>
 <td>Enrollment code</td>
 <td>jans_enrollment_code</td>
-<td>...</td>
+<td>Enrollment code</td>
 </tr>
 <tr>
 <td>User Permission</td>
 <td>user_permission</td>
-<td>...</td>
+<td>User permission</td>
 </tr>
 <tr>
 <td>Preferred Language</td>
 <td>preferred_language</td>
-<td>...</td>
+<td>Preferred language</td>
 </tr>
 <tr>
 <td>Profile URL</td>
 <td>profile</td>
-<td>...</td>
+<td>Profile URL</td>
 </tr>
 <tr>
 <td>Secret Question</td>
 <td>secret_question</td>
-<td>...</td>
+<td>Secret question used to verify user identity</td>
 </tr>
 <tr>
 <td>Email Verified</td>
 <td>email_verified</td>
-<td>...</td>
+<td>Is user's email verified?</td>
 </tr>
 <tr>
 <td>Birthdate</td>
 <td>birthdate</td>
-<td>...</td>
+<td>Baithdate of user</td>
 </tr>
 <tr>
 <td>Time zone info</td>
 <td>zoneinfo</td>
-<td>...</td>
+<td>The End-User's time zone</td>
 </tr>
 <tr>
 <td>Phone Number verified</td>
 <td>phone_number_verified</td>
-<td>...</td>
+<td>Is user's phone number verified?</td>
 </tr>
 <tr>
 <td>Preferred Username</td>
 <td>preferred_username</td>
-<td>...</td>
+<td>A domain issued and managed identifier for the person</td>
 </tr>
 <tr>
 <td>TransientId</td>
@@ -173221,32 +173221,32 @@
 <tr>
 <td>Country</td>
 <td>country</td>
-<td>...</td>
+<td>User's country</td>
 </tr>
 <tr>
 <td>Secret Answer</td>
 <td>secret_answer</td>
-<td>...</td>
+<td>Secret answer used to verify user identity</td>
 </tr>
 <tr>
 <td>OpenID Connect JSON formatted address</td>
 <td>address</td>
-<td>...</td>
+<td>End-User's preferred postal address. The value of the address member is a JSON structure containing some or all of the members defined in OpenID Connect 1.0 Core Standard Section 5.1.1</td>
 </tr>
 <tr>
 <td>User certificate</td>
 <td>user_certificate</td>
-<td>...</td>
+<td>User certificate</td>
 </tr>
 <tr>
 <td>Organization</td>
 <td>o</td>
-<td>...</td>
+<td>Organization</td>
 </tr>
 <tr>
 <td>Picture URL</td>
 <td>picture</td>
-<td>...</td>
+<td>User's picture url</td>
 </tr>
 </tbody>
 </table>
@@ -173256,7 +173256,7 @@
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-08-22T08:56:15+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-08-22</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-08-22T11:07:47+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-08-22</span>
       
         <br>
         Created:

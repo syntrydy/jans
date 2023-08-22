@@ -3951,6 +3951,47 @@
     Adding a new custom user claim
   </a>
   
+    <nav class="md-nav" aria-label="Adding a new custom user claim">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1-create-a-custom-attribute" class="md-nav__link">
+    Step 1: Create a custom attribute
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-make-entry-of-the-claim-in-opendj-schema" class="md-nav__link">
+    Step 2: Make entry of the claim in OpenDJ Schema
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3-restart-opendj-service" class="md-nav__link">
+    Step 3: Restart opendj service.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-1-create-a-custom-attribute_1" class="md-nav__link">
+    Step 1: Create a custom attribute
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-make-entry-of-the-claim-in-mysql-schema" class="md-nav__link">
+    Step 2: Make entry of the claim in MySQL Schema
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
     </ul>
@@ -173063,6 +173104,47 @@
     Adding a new custom user claim
   </a>
   
+    <nav class="md-nav" aria-label="Adding a new custom user claim">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1-create-a-custom-attribute" class="md-nav__link">
+    Step 1: Create a custom attribute
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-make-entry-of-the-claim-in-opendj-schema" class="md-nav__link">
+    Step 2: Make entry of the claim in OpenDJ Schema
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3-restart-opendj-service" class="md-nav__link">
+    Step 3: Restart opendj service.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-1-create-a-custom-attribute_1" class="md-nav__link">
+    Step 1: Create a custom attribute
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-make-entry-of-the-claim-in-mysql-schema" class="md-nav__link">
+    Step 2: Make entry of the claim in MySQL Schema
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
     </ul>
@@ -173125,20 +173207,16 @@
 <h1 id="custom-claims">Custom Claims<a class="headerlink" href="#custom-claims" title="Permanent link">#</a></h1>
 <p>Custom claims provide the flexibility to include application-specific or user-specific information in the authentication process.Custom claims serve to enrich the information available to the relying party (RP), which is the application or service that relies on the identity provided by the OIDC provider. While standard claims provide basic user information, custom claims allow for the inclusion of domain-specific attributes or application-specific data that might be required for user personalization, authorization, or other business logic. User claims should be unique and non-null or empty.</p>
 <h2 id="adding-a-new-custom-user-claim">Adding a new custom user claim<a class="headerlink" href="#adding-a-new-custom-user-claim" title="Permanent link">#</a></h2>
-<div markdown>
-=== "LDAP persistence"
-
-### Step 1: Create a custom attribute
-
-Create a new custom attribute using [Test User Interface](../../../admin/config-guide/config-tools/jans-tui) or [CURL commands](../../../admin/config-guide/jans-cli/cli-attribute/#creating-an-attribute), superb tools provided in Janssen. The attribute name should be the claim name.
-
-![](../../../../assets/image-tui-add-attribute.png)
-
-### Step 2: Make entry of the claim in OpenDJ Schema 
-
-- In OpenDJ, add custom attributes in `/opt/opendj/config/schema/77-customAttributes.ldif`. In the below example, `newClaim` is our custom attribute.
-
-  <div class="highlight"><pre><span></span><code>  dn: cn=schema
+<div class="tabbed-set" data-tabs="1:1"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">LDAP persistence</label><div class="tabbed-content"></div>
+</div>
+<h3 id="step-1-create-a-custom-attribute">Step 1: Create a custom attribute<a class="headerlink" href="#step-1-create-a-custom-attribute" title="Permanent link">#</a></h3>
+<p>Create a new custom attribute using <a href="../../../admin/config-guide/config-tools/jans-tui">Test User Interface</a> or <a href="../../../admin/config-guide/jans-cli/cli-attribute/#creating-an-attribute">CURL commands</a>, superb tools provided in Janssen. The attribute name should be the claim name.</p>
+<p><img alt="" src="../../../../../assets/image-tui-add-attribute.png" /></p>
+<h3 id="step-2-make-entry-of-the-claim-in-opendj-schema">Step 2: Make entry of the claim in OpenDJ Schema<a class="headerlink" href="#step-2-make-entry-of-the-claim-in-opendj-schema" title="Permanent link">#</a></h3>
+<ul>
+<li>In OpenDJ, add custom attributes in <code>/opt/opendj/config/schema/77-customAttributes.ldif</code>. In the below example, <code>newClaim</code> is our custom attribute.</li>
+</ul>
+<div class="highlight"><pre><span></span><code>  dn: cn=schema
   objectClass: top
   objectClass: ldapSubentry
   objectClass: subschema
@@ -173150,19 +173228,17 @@ Create a new custom attribute using [Test User Interface](../../../admin/config-
   SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
   X-ORIGIN &#39;Jans created attribute&#39; )
 </code></pre></div>
-
-- Add custom attribute to the jansCustomPerson objectClasses.
-
-  <div class="highlight"><pre><span></span><code>objectClasses: ( 1.3.6.1.4.1.48710.1.4.101 NAME &#39;jansCustomPerson&#39;
+<ul>
+<li>Add custom attribute to the jansCustomPerson objectClasses.</li>
+</ul>
+<div class="highlight"><pre><span></span><code>objectClasses: ( 1.3.6.1.4.1.48710.1.4.101 NAME &#39;jansCustomPerson&#39;
 SUP ( top )
 AUXILIARY
 MAY ( newClaim $ telephoneNumber $ mobile $ carLicense $ facsimileTelephoneNumber $ departmentNumber $ employeeType $ cn $ sn $ st $ uid $ givenName $ middleName $ nickname $ manager $ street $ postOfficeBox $ employeeNumber $ preferredDeliveryMethod $ roomNumber $ secretary $ userPassword $ homePostalAddress $ l $ postalCode $ description $ title $ jansStatus $ memberOf $ displayName $ mail $ emailVerified $ jansAdminUIRole )
 X-ORIGIN &#39;Jans - Custom persom objectclass&#39; )
 </code></pre></div>
-
-The complete 77-customAttributes.ldif will look like this:
-
-  <div class="highlight"><pre><span></span><code>dn: cn=schema
+<p>The complete 77-customAttributes.ldif will look like this:</p>
+<div class="highlight"><pre><span></span><code>dn: cn=schema
 objectClass: top
 objectClass: ldapSubentry
 objectClass: subschema
@@ -173179,53 +173255,76 @@ objectClasses: ( 1.3.6.1.4.1.48710.1.4.101 NAME &#39;jansCustomPerson&#39;
   MAY ( newClaim $ telephoneNumber $ mobile $ carLicense $ facsimileTelephoneNumber $ departmentNumber $ employeeType $ cn $ sn $ st $ uid $ givenName $ middleName $ nickname $ manager $ street $ postOfficeBox $ employeeNumber $ preferredDeliveryMethod $ roomNumber $ secretary $ userPassword $ homePostalAddress $ l $ postalCode $ description $ title $ jansStatus $ memberOf $ displayName $ mail $ emailVerified $ jansAdminUIRole )
   X-ORIGIN &#39;Jans - Custom persom objectclass&#39; )
 </code></pre></div>
-
-!!!warning
-    Spacing is extremely important in the customs attributes file above. There must be 2 spaces before and 1 after every entry (i.e. DESC), or your custom schema will fail to load properly because of a validation error. You cannot have line spaces between `attributeTypes:` or `objectClasses:`. This will cause failure in schema. Please check the error logs in /opt/opendj/logs/errors if you are experiencing issues with adding custom schema. This will help guide you on where there may be syntax errors.
-
-### Step 3: Restart `opendj` service.
-
-[Restart](../../../../admin/vm-ops/restarting-services/#reload) the `opendj` service.
-
-That will create the custom user claim in the local LDAP server.
-
-=== "MySQL persistence"
-
-### Step 1: Create a custom attribute
-
-Create a new custom attribute using [Test User Interface](../../../admin/config-guide/config-tools/jans-tui) or [CURL commands](../../../admin/config-guide/jans-cli/cli-attribute/#creating-an-attribute), superb tools provided in Janssen. The attribute-name should be the claim-name.
-
-![](../../../../assets/image-tui-add-attribute.png)
-
-### Step 2: Make entry of the claim in MySQL Schema
-
-- Add a column to table `jansPerson` in MySQL. Command will be `ALTER TABLE jansPerson ADD COLUMN <claimName> <dataType>`;
-
-**Example**
-<div class="highlight"><pre><span></span><code>mysql&gt; ALTER TABLE jansPerson ADD COLUMN newClaim VARCHAR(100);
-</code></pre></div>
-
-**Choose dataType according to the following table**
-
-|TUI dataType|SQL dataType|
-|---|---|
-|Text|VARCHAR() string value to be kept, SIZE is an integer for max string size|
-|Numeric|INT|
-|Boolean|SMALLINT|
-|Binary|BINARY|
-|Certificate|TEXT|
-|Date|DATETIME(3)|
-|Numeric|INT|
-|Multivalued|JSON|
-
-![](../../../../assets/image-tui-attribute-datatype.png)
-
-!!!warning 
-    If the attribute is Multivalued, dataType should be JSON regardless of what you will choose for Type in Janssen TUI.
-
-The above steps will create the custom user claim in the MySQL persistence.
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Spacing is extremely important in the customs attributes file above. There must be 2 spaces before and 1 after every entry (i.e. DESC), or your custom schema will fail to load properly because of a validation error. You cannot have line spaces between <code>attributeTypes:</code> or <code>objectClasses:</code>. This will cause failure in schema. Please check the error logs in /opt/opendj/logs/errors if you are experiencing issues with adding custom schema. This will help guide you on where there may be syntax errors.</p>
 </div>
-
+<h3 id="step-3-restart-opendj-service">Step 3: Restart <code>opendj</code> service.<a class="headerlink" href="#step-3-restart-opendj-service" title="Permanent link">#</a></h3>
+<p><a href="../../../../admin/vm-ops/restarting-services/#reload">Restart</a> the <code>opendj</code> service.</p>
+<p>That will create the custom user claim in the local LDAP server.</p>
+<p>Once the user claim is added, it can be used in user management.</p>
+<p><img alt="" src="../../../../../assets/image-tui-user-claim.png" /></p>
+<div class="tabbed-set" data-tabs="2:1"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><label for="__tabbed_2_1">MySQL persistence</label><div class="tabbed-content"></div>
+</div>
+<h3 id="step-1-create-a-custom-attribute_1">Step 1: Create a custom attribute<a class="headerlink" href="#step-1-create-a-custom-attribute_1" title="Permanent link">#</a></h3>
+<p>Create a new custom attribute using <a href="../../../admin/config-guide/config-tools/jans-tui">Test User Interface</a> or <a href="../../../admin/config-guide/jans-cli/cli-attribute/#creating-an-attribute">CURL commands</a>, superb tools provided in Janssen. The attribute-name should be the claim-name.</p>
+<p><img alt="" src="../../../../../assets/image-tui-add-attribute.png" /></p>
+<h3 id="step-2-make-entry-of-the-claim-in-mysql-schema">Step 2: Make entry of the claim in MySQL Schema<a class="headerlink" href="#step-2-make-entry-of-the-claim-in-mysql-schema" title="Permanent link">#</a></h3>
+<ul>
+<li>Add a column to table <code>jansPerson</code> in MySQL. Command will be <code>ALTER TABLE jansPerson ADD COLUMN &lt;claimName&gt; &lt;dataType&gt;</code>;</li>
+</ul>
+<p><strong>Example</strong>
+<div class="highlight"><pre><span></span><code>mysql&gt; ALTER TABLE jansPerson ADD COLUMN newClaim VARCHAR(100);
+</code></pre></div></p>
+<p><strong>Choose dataType according to the following table</strong></p>
+<table>
+<thead>
+<tr>
+<th>TUI dataType</th>
+<th>SQL dataType</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Text</td>
+<td>VARCHAR() string value to be kept, SIZE is an integer for max string size</td>
+</tr>
+<tr>
+<td>Numeric</td>
+<td>INT</td>
+</tr>
+<tr>
+<td>Boolean</td>
+<td>SMALLINT</td>
+</tr>
+<tr>
+<td>Binary</td>
+<td>BINARY</td>
+</tr>
+<tr>
+<td>Certificate</td>
+<td>TEXT</td>
+</tr>
+<tr>
+<td>Date</td>
+<td>DATETIME(3)</td>
+</tr>
+<tr>
+<td>Numeric</td>
+<td>INT</td>
+</tr>
+<tr>
+<td>Multivalued</td>
+<td>JSON</td>
+</tr>
+</tbody>
+</table>
+<p><img alt="" src="../../../../../assets/image-tui-attribute-datatype.png" /></p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If the attribute is Multivalued, dataType should be JSON regardless of what you will choose for Type in Janssen TUI.</p>
+</div>
+<p>The above steps will create the custom user claim in the MySQL persistence.</p>
 <p>Once the user claim is added, it can be used in user management.</p>
 <p><img alt="" src="../../../../../assets/image-tui-user-claim.png" /></p>
 
@@ -173234,7 +173333,7 @@ The above steps will create the custom user claim in the MySQL persistence.
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-08-22T08:56:15+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-08-22</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-08-22T11:07:47+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-08-22</span>
       
         <br>
         Created:
