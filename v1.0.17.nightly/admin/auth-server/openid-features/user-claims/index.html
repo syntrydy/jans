@@ -19,7 +19,7 @@
     
     
       
-        <title>Overview - Janssen Documentation</title>
+        <title>User Claims - Janssen Documentation</title>
       
     
     
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#overview" class="md-skip">
+        <a href="#user-claims" class="md-skip">
           Skip to content
         </a>
       
@@ -128,7 +128,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Overview
+              User Claims
             
           </span>
         </div>
@@ -3871,8 +3871,6 @@
         
           
         
-          
-        
       
       
         
@@ -3917,20 +3915,6 @@
     <li class="md-nav__item">
       <a href="custom-claims/" class="md-nav__link">
         Adding Custom Claims
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="claim-uniqueness-validation/" class="md-nav__link">
-        Claim Uniqueness/Validation
       </a>
     </li>
   
@@ -173027,6 +173011,41 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#types-of-user-claims" class="md-nav__link">
+    Types of User Claims
+  </a>
+  
+    <nav class="md-nav" aria-label="Types of User Claims">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#standard-claims" class="md-nav__link">
+    Standard Claims
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#custom-claims" class="md-nav__link">
+    Custom Claims
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -173077,19 +173096,28 @@
   </a>
 
 
-<h1 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">#</a></h1>
-<p>Please use the left navigation menu to browse the content of this section while we are still working on developing content for <code>Overview</code> page.</p>
-<div class="admonition contribute">
-<p class="admonition-title">Contribute</p>
-</div>
-<p>If you’d like to contribute to this document, get started with the <a href="https://docs.jans.io/head/CONTRIBUTING/#contributing-to-the-documentation">Contribution Guide</a></p>
+<h1 id="user-claims">User Claims<a class="headerlink" href="#user-claims" title="Permanent link">#</a></h1>
+<p>Claim is a piece of information asserted about an Entity. User claims refer to pieces of information about the authenticated user, such as their name, email address, date of birth, and more. These claims provide the RP with specific attributes or characteristics associated with the user. The claims are issued by the IDP after successful authentication and are included in the ID Token (which is a JSON Web Token (JWT) that contains user-related information) and are also available through the
+<code>/userinfo</code> endpoint. </p>
+<h2 id="types-of-user-claims">Types of User Claims<a class="headerlink" href="#types-of-user-claims" title="Permanent link">#</a></h2>
+<h3 id="standard-claims">Standard Claims<a class="headerlink" href="#standard-claims" title="Permanent link">#</a></h3>
+<p>These are predefined and standardized claims that provide basic user information. Some examples of standard claims include:</p>
+<ul>
+<li><code>sub</code>: Subject identifier, a unique ID for the user.</li>
+<li><code>name</code>: User's full name.</li>
+<li><code>email</code>: User's email address.</li>
+<li><code>birthdate</code>: User's date of birth.</li>
+<li><code>preferred_username</code>: User's preferred username or nickname.</li>
+</ul>
+<h3 id="custom-claims">Custom Claims<a class="headerlink" href="#custom-claims" title="Permanent link">#</a></h3>
+<p>In addition to standard claims, custom claims are also allowed to be defined by the IDP. These claims provide flexibility to include application-specific user attributes that are not covered by the standard claims. Custom claims can provide additional context or information needed by the RP.</p>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2022-09-27T03:54:33+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2022-09-27</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-08-22T08:56:15+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-08-22</span>
       
         <br>
         Created:
