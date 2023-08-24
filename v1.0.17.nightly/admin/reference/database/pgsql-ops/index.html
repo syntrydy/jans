@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#search-user" class="md-skip">
+        <a href="#postgresql-operations" class="md-skip">
           Skip to content
         </a>
       
@@ -2864,6 +2864,8 @@
       <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
       
       
+        
+      
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
           PostgreSQL Operation
@@ -2880,12 +2882,21 @@
   
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
       Table of contents
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#establish-connection-to-jans-postgresql-server" class="md-nav__link">
+    Establish Connection to Jans PostgreSQL Server
+  </a>
+  
+</li>
       
         <li class="md-nav__item">
   <a href="#search-user" class="md-nav__link">
@@ -2902,8 +2913,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#add-user-in-group" class="md-nav__link">
-    Add user in Group
+  <a href="#add-user-in-jans-group" class="md-nav__link">
+    Add user in Jans Group
   </a>
   
 </li>
@@ -2916,8 +2927,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#modify-column-size-of-jansperson" class="md-nav__link">
-    Modify column size of jansPerson
+  <a href="#modify-column-size-of-jans-postgresql" class="md-nav__link">
+    Modify column size of Jans postgresql
   </a>
   
 </li>
@@ -2937,23 +2948,29 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#dump-table" class="md-nav__link">
-    Dump table
+  <a href="#back-up-and-re-store" class="md-nav__link">
+    Back-up and re-store
+  </a>
+  
+    <nav class="md-nav" aria-label="Back-up and re-store">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#back-up" class="md-nav__link">
+    Back-up
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#this-content-is-in-progress" class="md-nav__link">
-    This content is in progress
+        
+          <li class="md-nav__item">
+  <a href="#re-store" class="md-nav__link">
+    Re-store
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#have-questions-in-the-meantime" class="md-nav__link">
-    Have questions in the meantime?
-  </a>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -173113,12 +173130,21 @@
   
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
       Table of contents
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#establish-connection-to-jans-postgresql-server" class="md-nav__link">
+    Establish Connection to Jans PostgreSQL Server
+  </a>
+  
+</li>
       
         <li class="md-nav__item">
   <a href="#search-user" class="md-nav__link">
@@ -173135,8 +173161,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#add-user-in-group" class="md-nav__link">
-    Add user in Group
+  <a href="#add-user-in-jans-group" class="md-nav__link">
+    Add user in Jans Group
   </a>
   
 </li>
@@ -173149,8 +173175,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#modify-column-size-of-jansperson" class="md-nav__link">
-    Modify column size of jansPerson
+  <a href="#modify-column-size-of-jans-postgresql" class="md-nav__link">
+    Modify column size of Jans postgresql
   </a>
   
 </li>
@@ -173170,23 +173196,29 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#dump-table" class="md-nav__link">
-    Dump table
+  <a href="#back-up-and-re-store" class="md-nav__link">
+    Back-up and re-store
+  </a>
+  
+    <nav class="md-nav" aria-label="Back-up and re-store">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#back-up" class="md-nav__link">
+    Back-up
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#this-content-is-in-progress" class="md-nav__link">
-    This content is in progress
+        
+          <li class="md-nav__item">
+  <a href="#re-store" class="md-nav__link">
+    Re-store
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#have-questions-in-the-meantime" class="md-nav__link">
-    Have questions in the meantime?
-  </a>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -173239,37 +173271,70 @@
   </a>
 
 
-  <h1>PostgreSQL Operation</h1>
-
+<h1 id="postgresql-operations">PostgreSQL Operations<a class="headerlink" href="#postgresql-operations" title="Permanent link">#</a></h1>
+<p>PostgreSQL is a versatile and reliable database management system that empowers developers and organizations to build robust 
+and efficient applications.</p>
+<h2 id="establish-connection-to-jans-postgresql-server">Establish Connection to Jans PostgreSQL Server<a class="headerlink" href="#establish-connection-to-jans-postgresql-server" title="Permanent link">#</a></h2>
 <p>Connect to PostgreSql workspace: <code>sudo -u postgres psql</code> </p>
+<p>Show all Database list : <code>\list</code> or <code>\l</code></p>
+<p>You will see <code>jansdb</code> in the list of database.</p>
+<p>Let's make a connection with <code>jansdb</code> : <code>\c jansdb</code></p>
 <h2 id="search-user">Search user<a class="headerlink" href="#search-user" title="Permanent link">#</a></h2>
 <ul>
 <li>Change database: <code>\c jansdb</code></li>
-<li>Search for user <code>testUser</code>: <code>select * from "jansPerson" where uid = 'testuser';</code></li>
+<li>Search for user <code>testUser</code>: <code>SELECT * FROM "jansPerson" WHERE uid = 'testuser';</code></li>
 <li>If you want pretty output, enable display mode with <code>\x</code> </li>
 <li>Re-run search query. </li>
 </ul>
 <h2 id="change-password-for-user-jans">Change password for user jans<a class="headerlink" href="#change-password-for-user-jans" title="Permanent link">#</a></h2>
 <ul>
-<li>Changing user 'jans' password to "secret": <code>alter user jans with password 'secret';</code> </li>
+<li>Changing user 'jans' password to "secret": <code>ALTER USER jans WITH PASSWORD 'secret';</code> </li>
 </ul>
-<h2 id="add-user-in-group">Add user in Group<a class="headerlink" href="#add-user-in-group" title="Permanent link">#</a></h2>
+<h2 id="add-user-in-jans-group">Add user in Jans Group<a class="headerlink" href="#add-user-in-jans-group" title="Permanent link">#</a></h2>
 <ul>
-<li>Get DN of target user. i.e. we are searching for DN of user 'testUser' with: <code>select * from "jansPerson" where uid = 'testuser';</code></li>
-<li>Get DN of Jans Admin Group. i.e.<code>select * from "jansGrp";</code></li>
+<li>Get DN of target user. i.e. we are searching for DN of user 'testUser' with: <code>SELECT * FROM "jansPerson" WHERE uid = 'testuser';</code></li>
+<li>Get DN of Jans Admin Group. i.e. <code>SELECT * FROM "jansGrp";</code></li>
 <li>Add ( actually append ) new user in <code>member</code> of this group: 
-<div class="highlight"><pre><span></span><code>update &quot;jansGrp&quot; set member = &#39;[&quot;inum=45eefa31-f535-4a97-b1a1-09556b7e8de8,ou=people,o=jans&quot;, &quot;inum=9b4eedd0-7e8c-4afc-a7e3-b142ac5f7d8f,ou=people,o=jans&quot;]&#39;;
+<div class="highlight"><pre><span></span><code>UPDATE &quot;jansGrp&quot; SET member = &#39;[&quot;inum=d33a2ce9-e9de-4f74-8a7d-2519f73635b7,ou=people,o=jans&quot;, &quot;inum=618d7792-caca-4915-8b92-9955bf94affb,ou=people,o=jans&quot;]&#39;;
 </code></pre></div></li>
 </ul>
 <h2 id="list-users-with-specific-filter">List users with specific filter<a class="headerlink" href="#list-users-with-specific-filter" title="Permanent link">#</a></h2>
-<h2 id="modify-column-size-of-jansperson">Modify column size of jansPerson<a class="headerlink" href="#modify-column-size-of-jansperson" title="Permanent link">#</a></h2>
+<p>To search for users with a filter using PostgreSQL's command-line tool psql, you can use the <code>SELECT</code> statement with the <code>WHERE</code> clause to apply filters to the query. Here's the query to find specific user:</p>
+<div class="highlight"><pre><span></span><code>SELECT * FROM &quot;jansPerson&quot; WHERE uid= &#39;&lt;uid&gt;&#39;;
+</code></pre></div>
+<h2 id="modify-column-size-of-jans-postgresql">Modify column size of Jans postgresql<a class="headerlink" href="#modify-column-size-of-jans-postgresql" title="Permanent link">#</a></h2>
+<p>The psql command-line tool, you can use the <code>\d+</code> command to display detailed information about a table, including its columns. Lets see the details of <code>jansPerson</code> table:</p>
+<div class="highlight"><pre><span></span><code>\d+ &quot;jansPerson&quot;;
+</code></pre></div>
+<p>To modify the size of a column in a PostgreSQL table, you will need to use the <code>ALTER TABLE</code> statement along with the <code>ALTER COLUMN</code> clause. Here's how you can modify the size of a column:</p>
+<div class="highlight"><pre><span></span><code>ALTER TABLE &quot;jansPerson&quot; 
+ALTER COLUMN mail TYPE VARCHAR(100);
+</code></pre></div>
 <h2 id="add-custom-attribute">Add custom attribute<a class="headerlink" href="#add-custom-attribute" title="Permanent link">#</a></h2>
+<p>To add a custom attribute to an existing PostgreSQL table, you can use the <code>ALTER TABLE</code> statement with the <code>ADD COLUMN</code> clause. Here's how you can add a custom attribute in <code>jansPerson</code> table:</p>
+<p><div class="highlight"><pre><span></span><code>ALTER TABLE &quot;jansPerson&quot;
+ADD COLUMN membership_level VARCHAR(50);
+</code></pre></div>
+You can also specify additional constraints, defaults, or other attributes for the new column as needed. Here's an example with a <code>default</code> value:</p>
+<div class="highlight"><pre><span></span><code>ALTER TABLE &quot;jansPerson&quot;
+ADD COLUMN membership_level VARCHAR DEFAULT &#39;Basic&#39;;
+</code></pre></div>
 <h2 id="output-column-data-into-txt">Output column data into txt<a class="headerlink" href="#output-column-data-into-txt" title="Permanent link">#</a></h2>
-<h2 id="dump-table">Dump table<a class="headerlink" href="#dump-table" title="Permanent link">#</a></h2>
-<h2 id="this-content-is-in-progress">This content is in progress<a class="headerlink" href="#this-content-is-in-progress" title="Permanent link">#</a></h2>
-<p>The Janssen Project documentation is currently in development. Topic pages are being created in order of broadest relevance, and this page is coming in the near future.</p>
-<h2 id="have-questions-in-the-meantime">Have questions in the meantime?<a class="headerlink" href="#have-questions-in-the-meantime" title="Permanent link">#</a></h2>
-<p>While this documentation is in progress, you can ask questions through <a href="https://github.com/JanssenProject/jans/discussion">GitHub Discussions</a> or the <a href="https://gitter.im/JanssenProject/Lobby">community chat on Gitter</a>. Any questions you have will help determine what information our documentation should cover.</p>
+<p>If you want to output the data from a PostgreSQL table's column into a text file, you can use the <code>COPY</code> command. This command allows you to copy the contents of a table or query result into an external file. Here's how you can do it:</p>
+<div class="highlight"><pre><span></span><code>COPY (SELECT * FROM &quot;jansPerson&quot;) TO &#39;/tmp/output.txt&#39;;
+</code></pre></div>
+<p>After executing the command, the data from the specified column will be copied into the specified text file.</p>
+<h2 id="back-up-and-re-store">Back-up and re-store<a class="headerlink" href="#back-up-and-re-store" title="Permanent link">#</a></h2>
+<p>PostgreSQL is a popular open-source relational database management system used for web applications, business intelligence, and other data-intensive applications. A critical aspect of managing a PostgreSQL database is ensuring data protection by having a backup and restore strategy in place.</p>
+<h3 id="back-up">Back-up<a class="headerlink" href="#back-up" title="Permanent link">#</a></h3>
+<p>To <code>dump</code> the PostgreSQL database, you can use the <code>pg_dump</code> command-line utility.
+To back-up your database </p>
+<div class="highlight"><pre><span></span><code>pg_dump -h localhost -U &quot;&lt;user&gt;&quot; &quot;&lt;dbName&gt;&quot; -Fc &gt; /tmp/back-up.sql
+</code></pre></div>
+<h3 id="re-store">Re-store<a class="headerlink" href="#re-store" title="Permanent link">#</a></h3>
+<p>To restore the backup file you need to use <code>pg_restore</code>.</p>
+<div class="highlight"><pre><span></span><code>pg_restore -h localhost -U &quot;&lt;user&gt;&quot; -d &lt;db_name&gt; &lt;back-up.sql&gt;
+</code></pre></div>
 <h2 id="want-to-contribute">Want to contribute?<a class="headerlink" href="#want-to-contribute" title="Permanent link">#</a></h2>
 <p>If you have content you'd like to contribute to this page in the meantime, you can get started with our <a href="https://docs.jans.io/head/CONTRIBUTING/">Contribution guide</a>.</p>
 
@@ -173278,7 +173343,7 @@
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-08-15T18:53:39+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-08-15</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-08-24T18:33:12+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-08-24</span>
       
         <br>
         Created:
