@@ -5348,8 +5348,15 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#methods" class="md-nav__link">
-    Methods
+  <a href="#inherited-methods" class="md-nav__link">
+    Inherited Methods
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#new-methods" class="md-nav__link">
+    New methods
   </a>
   
 </li>
@@ -5370,6 +5377,19 @@
   <a href="#common-use-cases" class="md-nav__link">
     Common Use Cases
   </a>
+  
+    <nav class="md-nav" aria-label="Common Use Cases">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#script-type-python" class="md-nav__link">
+    Script type: Python
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -173106,8 +173126,15 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#methods" class="md-nav__link">
-    Methods
+  <a href="#inherited-methods" class="md-nav__link">
+    Inherited Methods
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#new-methods" class="md-nav__link">
+    New methods
   </a>
   
 </li>
@@ -173128,6 +173155,19 @@
   <a href="#common-use-cases" class="md-nav__link">
     Common Use Cases
   </a>
+  
+    <nav class="md-nav" aria-label="Common Use Cases">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#script-type-python" class="md-nav__link">
+    Script type: Python
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -173175,21 +173215,200 @@
 
 <h1 id="application-session-script-guide">Application Session Script Guide<a class="headerlink" href="#application-session-script-guide" title="Permanent link">#</a></h1>
 <h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">#</a></h2>
-<p>This is an introduction to the script and what it's used  for.</p>
+<p>The <strong>Jans-Auth</strong> server allows you to modify the session flow through this script.</p>
 <h2 id="interface">Interface<a class="headerlink" href="#interface" title="Permanent link">#</a></h2>
-<h3 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link">#</a></h3>
-<p>A definition of each method used in the script</p>
+<p>The Application Session script implement
+the <a href="https://github.com/JanssenProject/jans/blob/main/jans-core/script/src/main/java/io/jans/model/custom/script/type/session/ApplicationSessionType.java">ApplicationSessionType</a>
+interface. This extends methods form the base script type in addition to adding new methods:</p>
+<h3 id="inherited-methods">Inherited Methods<a class="headerlink" href="#inherited-methods" title="Permanent link">#</a></h3>
+<table>
+<thead>
+<tr>
+<th align="left">Method header</th>
+<th align="left">Method description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>def init(self, customScript, configurationAttributes)</code></td>
+<td align="left">This method is only called once during the script initialization. It can be used for global script initialization, initiate objects etc</td>
+</tr>
+<tr>
+<td align="left"><code>def destroy(self, configurationAttributes)</code></td>
+<td align="left">This method is called once to destroy events. It can be used to free resource and objects created in the <code>init()</code> method</td>
+</tr>
+<tr>
+<td align="left"><code>def getApiVersion(self, configurationAttributes, customScript)</code></td>
+<td align="left">The getApiVersion method allows API changes in order to do transparent migration from an old script to a new API. Only include the customScript variable if the value for getApiVersion is greater than 10</td>
+</tr>
+</tbody>
+</table>
+<h3 id="new-methods">New methods<a class="headerlink" href="#new-methods" title="Permanent link">#</a></h3>
+<table>
+<thead>
+<tr>
+<th align="left">Method header</th>
+<th>Method description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>def startSession(self, httpRequest, sessionId, configurationAttributes)</code></td>
+<td>Called when a session is started.</td>
+</tr>
+<tr>
+<td align="left"><code>def endSession(self, httpRequest, sessionId, configurationAttributes)</code></td>
+<td>Called when a session is ended.</td>
+</tr>
+<tr>
+<td align="left"><code>def onEvent(self, event)</code></td>
+<td>Called when a specific session event occurs..</td>
+</tr>
+<tr>
+<td align="left"><code>def modifyActiveSessionsResponse(self, jsonArray, context)</code></td>
+<td>Called it during /session/active endpoint call to modify response if needed.</td>
+</tr>
+</tbody>
+</table>
+<p>All methods return <code>true</code>/<code>false</code>, the server issues an error if this response is <code>false</code>.</p>
+<p>If parameters is not present then error has to be created and <code>false</code> returned. If all is good script has to
+return <code>true</code>.</p>
 <h3 id="objects">Objects<a class="headerlink" href="#objects" title="Permanent link">#</a></h3>
-<p>Definitions of all objects used in the script</p>
+<table>
+<thead>
+<tr>
+<th align="left">Object name</th>
+<th align="left">Object description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>customScript</code></td>
+<td align="left"><a href="https://github.com/JanssenProject/jans/blob/main/jans-core/script/src/main/java/io/jans/model/custom/script/model/CustomScript.java">io.jans.model.custom.script.model.CustomScript</a></td>
+</tr>
+<tr>
+<td align="left"><code>context</code></td>
+<td align="left"><a href="https://github.com/JanssenProject/jans/blob/main/jans-auth-server/server/src/main/java/io/jans/as/server/service/external/context/ExternalScriptContext.java">io.jans.as.server.service.external.context.ExternalScriptContext</a></td>
+</tr>
+<tr>
+<td align="left"><code>sessionId</code></td>
+<td align="left"><a href="https://github.com/JanssenProject/jans/blob/main/jans-auth-server/common/src/main/java/io/jans/as/common/model/session/SessionId.java">io.jans.as.common.model.session.SessionId</a></td>
+</tr>
+<tr>
+<td align="left"><code>event</code></td>
+<td align="left"><a href="https://github.com/JanssenProject/jans/blob/main/jans-auth-server/server/src/main/java/io/jans/as/server/service/external/session/SessionEvent.java">io.jans.as.server.service.external.session.SessionEvent</a></td>
+</tr>
+<tr>
+<td align="left"><code>httpRequest</code></td>
+<td align="left">jakarta.servlet.http.HttpServletRequest</td>
+</tr>
+<tr>
+<td align="left"><code>jsonArray</code></td>
+<td align="left">org.json.JSONArray</td>
+</tr>
+<tr>
+<td align="left"><code>configurationAttributes</code></td>
+<td align="left">java.util.Map<String, <a href="https://github.com/JanssenProject/jans/blob/main/jans-core/util/src/main/java/io/jans/model/SimpleCustomProperty.java">SimpleCustomProperty</a>></td>
+</tr>
+</tbody>
+</table>
 <h2 id="common-use-cases">Common Use Cases<a class="headerlink" href="#common-use-cases" title="Permanent link">#</a></h2>
-<p>Descriptions of common use cases for this script, including a code snippet for each</p>
+<ul>
+<li><code>startSession</code>: Validate first session</li>
+<li><code>endSession</code>: Print logs</li>
+<li><code>onEvent</code>: If event type is AUTHENTICATED, print sessionId in logs</li>
+<li><code>modifyActiveSessionsResponse</code>: Print logs</li>
+</ul>
+<h3 id="script-type-python">Script type: Python<a class="headerlink" href="#script-type-python" title="Permanent link">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">io.jans.model.custom.script.type.session</span> <span class="kn">import</span> <span class="n">ApplicationSessionType</span>
+<span class="kn">from</span> <span class="nn">io.jans.service.cdi.util</span> <span class="kn">import</span> <span class="n">CdiUtil</span>
+<span class="kn">from</span> <span class="nn">io.jans.orm</span> <span class="kn">import</span> <span class="n">PersistenceEntryManager</span>
+<span class="kn">from</span> <span class="nn">io.jans.as.model.config</span> <span class="kn">import</span> <span class="n">StaticConfiguration</span>
+<span class="kn">from</span> <span class="nn">io.jans.as.server.model.ldap</span> <span class="kn">import</span> <span class="n">TokenEntity</span>
+<span class="kn">from</span> <span class="nn">jakarta.faces.application</span> <span class="kn">import</span> <span class="n">FacesMessage</span>
+<span class="kn">from</span> <span class="nn">io.jans.jsf2.message</span> <span class="kn">import</span> <span class="n">FacesMessages</span>
+<span class="kn">from</span> <span class="nn">io.jans.util</span> <span class="kn">import</span> <span class="n">StringHelper</span><span class="p">,</span> <span class="n">ArrayHelper</span>
+<span class="kn">from</span> <span class="nn">io.jans.as.server.model.config</span> <span class="kn">import</span> <span class="n">Constants</span>
+<span class="kn">from</span> <span class="nn">java.util</span> <span class="kn">import</span> <span class="n">Arrays</span><span class="p">,</span> <span class="n">ArrayList</span>
+<span class="kn">from</span> <span class="nn">io.jans.as.server.service.external.session</span> <span class="kn">import</span> <span class="n">SessionEventType</span>
+
+<span class="kn">import</span> <span class="nn">java</span>
+
+<span class="k">class</span> <span class="nc">ApplicationSession</span><span class="p">(</span><span class="n">ApplicationSessionType</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">currentTimeMillis</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">currentTimeMillis</span> <span class="o">=</span> <span class="n">currentTimeMillis</span>
+
+    <span class="k">def</span> <span class="nf">init</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">customScript</span><span class="p">,</span> <span class="n">configurationAttributes</span><span class="p">):</span>
+        <span class="nb">print</span> <span class="s2">&quot;Application session. Initialization&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">entryManager</span> <span class="o">=</span> <span class="n">CdiUtil</span><span class="o">.</span><span class="n">bean</span><span class="p">(</span><span class="n">PersistenceEntryManager</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">staticConfiguration</span> <span class="o">=</span> <span class="n">CdiUtil</span><span class="o">.</span><span class="n">bean</span><span class="p">(</span><span class="n">StaticConfiguration</span><span class="p">)</span>
+
+        <span class="nb">print</span> <span class="s2">&quot;Application session. Initialized successfully&quot;</span>
+
+        <span class="k">return</span> <span class="kc">True</span>   
+
+    <span class="k">def</span> <span class="nf">destroy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">configurationAttributes</span><span class="p">):</span>
+        <span class="nb">print</span> <span class="s2">&quot;Application session. Destroy&quot;</span>
+        <span class="nb">print</span> <span class="s2">&quot;Application session. Destroyed successfully&quot;</span>
+        <span class="k">return</span> <span class="kc">True</span>   
+
+    <span class="k">def</span> <span class="nf">getApiVersion</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="mi">11</span>
+
+    <span class="k">def</span> <span class="nf">onEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">getType</span><span class="p">()</span> <span class="o">==</span> <span class="n">SessionEventType</span><span class="o">.</span><span class="n">AUTHENTICATED</span><span class="p">:</span>
+            <span class="nb">print</span> <span class="s2">&quot;Session is authenticated, session: &quot;</span> <span class="o">+</span> <span class="n">event</span><span class="o">.</span><span class="n">getSessionId</span><span class="p">()</span><span class="o">.</span><span class="n">getId</span><span class="p">()</span>
+        <span class="k">return</span>
+
+    <span class="k">def</span> <span class="nf">startSession</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">httpRequest</span><span class="p">,</span> <span class="n">sessionId</span><span class="p">,</span> <span class="n">configurationAttributes</span><span class="p">):</span>
+        <span class="nb">print</span> <span class="s2">&quot;Application session. Starting external session&quot;</span>
+
+        <span class="n">user_name</span> <span class="o">=</span> <span class="n">sessionId</span><span class="o">.</span><span class="n">getSessionAttributes</span><span class="p">()</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">Constants</span><span class="o">.</span><span class="n">AUTHENTICATED_USER</span><span class="p">)</span>
+
+        <span class="n">first_session</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">isFirstSession</span><span class="p">(</span><span class="n">user_name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">first_session</span><span class="p">:</span>
+            <span class="n">facesMessages</span> <span class="o">=</span> <span class="n">CdiUtil</span><span class="o">.</span><span class="n">bean</span><span class="p">(</span><span class="n">FacesMessages</span><span class="p">)</span>
+            <span class="n">facesMessages</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">FacesMessage</span><span class="o">.</span><span class="n">SEVERITY_ERROR</span><span class="p">,</span> <span class="s2">&quot;Please, end active session first!&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">False</span>
+
+        <span class="nb">print</span> <span class="s2">&quot;Application session. External session started successfully&quot;</span>
+        <span class="k">return</span> <span class="kc">True</span>
+
+    <span class="k">def</span> <span class="nf">endSession</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">httpRequest</span><span class="p">,</span> <span class="n">sessionId</span><span class="p">,</span> <span class="n">configurationAttributes</span><span class="p">):</span>
+        <span class="nb">print</span> <span class="s2">&quot;Application session. Starting external session end&quot;</span>
+
+        <span class="nb">print</span> <span class="s2">&quot;Application session. External session ended successfully&quot;</span>
+        <span class="k">return</span> <span class="kc">True</span>
+
+    <span class="k">def</span> <span class="nf">modifyActiveSessionsResponse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">jsonArray</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
+        <span class="nb">print</span> <span class="s2">&quot;Application session. Starting external modify active session&quot;</span>
+
+        <span class="nb">print</span> <span class="s2">&quot;Application session. External modify active session successfully&quot;</span>
+        <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="k">def</span> <span class="nf">isFirstSession</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user_name</span><span class="p">):</span>
+        <span class="n">tokenLdap</span> <span class="o">=</span> <span class="n">TokenEntity</span><span class="p">()</span>
+        <span class="n">tokenLdap</span><span class="o">.</span><span class="n">setDn</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">staticConfiguration</span><span class="o">.</span><span class="n">getBaseDn</span><span class="p">()</span><span class="o">.</span><span class="n">getClients</span><span class="p">())</span>
+        <span class="n">tokenLdap</span><span class="o">.</span><span class="n">setUserId</span><span class="p">(</span><span class="n">user_name</span><span class="p">)</span>
+
+        <span class="n">tokenLdapList</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">entryManager</span><span class="o">.</span><span class="n">findEntries</span><span class="p">(</span><span class="n">tokenLdap</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="nb">print</span> <span class="s2">&quot;Application session. isFirstSession. Get result: &#39;</span><span class="si">%s</span><span class="s2">&#39;&quot;</span> <span class="o">%</span> <span class="n">tokenLdapList</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">tokenLdapList</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">tokenLdapList</span><span class="o">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">):</span>
+            <span class="nb">print</span> <span class="s2">&quot;Application session. isFirstSession: False&quot;</span>
+            <span class="k">return</span> <span class="kc">False</span>
+
+        <span class="nb">print</span> <span class="s2">&quot;Application session. isFirstSession: True&quot;</span>
+        <span class="k">return</span> <span class="kc">True</span>
+</code></pre></div>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2022-09-27T11:17:38+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2022-09-27</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-08-29T10:25:09+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-08-29</span>
       
         <br>
         Created:
