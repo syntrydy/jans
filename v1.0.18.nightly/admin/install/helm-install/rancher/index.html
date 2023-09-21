@@ -173134,21 +173134,26 @@
 </div>
 <h2 id="installation-steps">Installation Steps<a class="headerlink" href="#installation-steps" title="Permanent link">#</a></h2>
 <ol>
-<li>Provision a Linux 4 CPU, 16 GB RAM, and 50GB SSD VM with ports <code>443</code> and <code>80</code> open. Save the VM IP address. For development environments, the VM can be set up using VMWare Workstation Player or VirtualBox with Ubuntu 20.0.4 operating system running on VM.</li>
+<li>Provision a Linux 4 CPU, 16 GB RAM, and 50GB SSD VM with ports <code>443</code> and <code>80</code> open. Save the VM IP address. For development environments, the VM can be set up using VMWare Workstation Player or VirtualBox with an Ubuntu 20.04 operating system running on a VM.</li>
 <li>Install <a href="https://docs.docker.com/engine/install/">Docker</a>.</li>
 <li>Execute
     <div class="highlight"><pre><span></span><code>docker run -d --restart<span class="o">=</span>unless-stopped -p <span class="m">80</span>:80 -p <span class="m">443</span>:443 --privileged rancher/rancher:latest
 </code></pre></div>
    The final line of the returned text is the <code>container-id</code>, which you'll need for the next step.</li>
-<li>Execute the following command to get the <a href="https://rancher.com/docs/rancher/v2.6/en/installation/resources/bootstrap-password/#specifying-the-bootstrap-password-in-docker-installs">boostrap password</a> for login.
+<li>Execute the following command to get the <a href="https://rancher.com/docs/rancher/v2.6/en/installation/resources/bootstrap-password/#specifying-the-bootstrap-password-in-docker-installs">bootstrap password</a> for login.
     <div class="highlight"><pre><span></span><code>docker logs  &lt;container-id&gt;  <span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="p">|</span> grep <span class="s2">&quot;Bootstrap Password:&quot;</span>
 </code></pre></div></li>
 <li>Head to <code>https://&lt;VM-IP-ADDRESS-FROM-FIRST-STEP&gt;</code> and log in with the username <code>admin</code> and the password from the previous step. If you are logging into Rancher for the first time, you'll need to enter just the password, and on the next step, Rancher will ask you to reset your current password.</li>
-<li>Next you'll see the Rancher home page with a list of existing clusters. By default, the name of the newly created cluster would be <code>local</code>. Click on the cluster name to go to the dashboard.</li>
+<li>
+<p>Next, you'll see the Rancher home page with a list of existing clusters. By default, the name of the newly created cluster would be <code>local</code>. Click on the cluster name to go to the dashboard.</p>
+</li>
+<li>
+<p>Add Janssen repository: From the top-left menu expand <code>Apps</code> &gt; <code>Repositories</code> &gt; <code>Create</code> &gt; Add a repo name and the Index URL <code>https://docs.jans.io/charts</code> &gt; <code>Create</code></p>
+</li>
 <li>From the top-left menu expand <code>Apps</code> and click <code>Charts</code>.</li>
-<li>Search for <code>Gluu</code> and begin your installation.</li>
-<li>During Step 1 of installation, be sure to select the <code>Customize Helm options before install</code> options.</li>
-<li>In Step 2, customize the settings for the Janssen installation. Specifically <code>Optional Services</code> from where you can enable Janssen modules.</li>
+<li>Search for <code>Janssen</code> and begin your installation.</li>
+<li>During Step 1 of installation, be sure to select the <code>Customize Helm options before install</code> option.</li>
+<li>In Step 2, customize the settings for the Janssen installation.</li>
 <li>In Step 3, unselect the <code>Wait</code> option and start the installation.</li>
 </ol>
 
@@ -173157,7 +173162,7 @@
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-05-24T09:31:04+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-05-24</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-09-21T11:22:57+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-09-21</span>
       
         <br>
         Created:
