@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#this-content-is-in-progress" class="md-skip">
+        <a href="#native-single-sign-on" class="md-skip">
           Skip to content
         </a>
       
@@ -3861,6 +3861,8 @@
       <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
       
       
+        
+      
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
           Native SSO
@@ -3877,6 +3879,8 @@
   
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -3885,15 +3889,22 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#this-content-is-in-progress" class="md-nav__link">
-    This content is in progress
+  <a href="#scope-support" class="md-nav__link">
+    Scope Support
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#have-questions-in-the-meantime" class="md-nav__link">
-    Have questions in the meantime?
+  <a href="#device-secret" class="md-nav__link">
+    Device Secret
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#processing-token-exchange-request" class="md-nav__link">
+    Processing Token Exchange Request
   </a>
   
 </li>
@@ -173073,6 +173084,8 @@
   
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -173081,15 +173094,22 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#this-content-is-in-progress" class="md-nav__link">
-    This content is in progress
+  <a href="#scope-support" class="md-nav__link">
+    Scope Support
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#have-questions-in-the-meantime" class="md-nav__link">
-    Have questions in the meantime?
+  <a href="#device-secret" class="md-nav__link">
+    Device Secret
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#processing-token-exchange-request" class="md-nav__link">
+    Processing Token Exchange Request
   </a>
   
 </li>
@@ -173138,6 +173158,21 @@
         <span class="md-tag">feature</span>
       
     
+      
+      
+        <span class="md-tag">native sso</span>
+      
+    
+      
+      
+        <span class="md-tag">mobile</span>
+      
+    
+      
+      
+        <span class="md-tag">single sign-on</span>
+      
+    
   </nav>
 
 
@@ -173148,12 +173183,38 @@
   </a>
 
 
-  <h1>Native SSO</h1>
-
-<h2 id="this-content-is-in-progress">This content is in progress<a class="headerlink" href="#this-content-is-in-progress" title="Permanent link">#</a></h2>
-<p>The Janssen Project documentation is currently in development. Topic pages are being created in order of broadest relevance, and this page is coming in the near future.</p>
-<h2 id="have-questions-in-the-meantime">Have questions in the meantime?<a class="headerlink" href="#have-questions-in-the-meantime" title="Permanent link">#</a></h2>
-<p>While this documentation is in progress, you can ask questions through <a href="https://github.com/JanssenProject/jans/discussion">GitHub Discussions</a> or the <a href="https://gitter.im/JanssenProject/Lobby">community chat on Gitter</a>. Any questions you have will help determine what information our documentation should cover.</p>
+<h1 id="native-single-sign-on">Native Single Sign-On<a class="headerlink" href="#native-single-sign-on" title="Permanent link">#</a></h1>
+<p>An increasing number of mobile phone users are using multiple mobile applications
+from the same software vendor. For instance, it is fairly common to see people
+using multiple mobile apps from software vendors like Google and Microsoft, etc.</p>
+<p>Software vendors need a way to allow users to sign-in to one of the apps
+provided by the software vendor and users should be able to use all other apps from
+the same vendor without having to sign-in again. In short, <strong>single sign-on</strong> for
+applications belonging to the same vendor.</p>
+<p>Janssen Server supports <a href="https://openid.net/specs/openid-connect-native-sso-1_0.html">OpenID Connect native SSO mechanism</a>
+to enable SSO for mobile applications.</p>
+<h2 id="scope-support">Scope Support<a class="headerlink" href="#scope-support" title="Permanent link">#</a></h2>
+<p>Janssen Server supports the <code>device_sso</code> scope as defined by the specification.
+Software vendor wanting to leverage native SSO feature should build the apps
+so during initial user authentication, the app would send <code>device_sso</code>
+scope in the authorization request.</p>
+<p>The presence of the <code>device_sso</code> scope in the authorization request would enable AS to
+return <code>device_secret</code> in the token response from the token endpoint.</p>
+<h2 id="device-secret">Device Secret<a class="headerlink" href="#device-secret" title="Permanent link">#</a></h2>
+<p><code>device_secret</code> is an opaque value returned to the application from the token
+endpoint as a response to a token exchange request. Janssen Server will return
+<code>device_secret</code> only if the code provided by the application in token exchange
+request has <code>device_sso</code> scope.</p>
+<p>Janssen Server also checks if the client has the token exchange grant type
+enabled. To enable the grant type, use <a href="../../../config-guide/config-tools/jans-tui/">Janssen Text-based UI(TUI)</a>
+and enable token exchange grant
+(<code>urn:ietf:params:oauth:grant-type:token-exchange</code>).</p>
+<p>The <code>device_token</code> claim in the returned token response contains the device secret.
+Janssen Server stores the device secretes issued to a client in the corresponding
+session-id.</p>
+<h2 id="processing-token-exchange-request">Processing Token Exchange Request<a class="headerlink" href="#processing-token-exchange-request" title="Permanent link">#</a></h2>
+<p>Janssen Server carries out the processing of token requests as per rules and
+checks defined <a href="https://openid.net/specs/openid-connect-native-sso-1_0.html#name-native-sso-processing-rules">in the specification</a>.</p>
 <h2 id="want-to-contribute">Want to contribute?<a class="headerlink" href="#want-to-contribute" title="Permanent link">#</a></h2>
 <p>If you have content you'd like to contribute to this page in the meantime, you can get started with our <a href="https://docs.jans.io/head/CONTRIBUTING/">Contribution guide</a>.</p>
 
@@ -173162,7 +173223,7 @@
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2022-12-08T20:20:00+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2022-12-08</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-09-26T13:15:09+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-09-26</span>
       
         <br>
         Created:
