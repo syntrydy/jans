@@ -173330,6 +173330,10 @@
 </table>
 <h2 id="use-case-basic-ropc-authentication-script">Use case: Basic ROPC authentication script<a class="headerlink" href="#use-case-basic-ropc-authentication-script" title="Permanent link">#</a></h2>
 <p>This script has been adapted from the Gluu Server <a href="https://github.com/GluuFederation/community-edition-setup/blob/version_4.4.0/static/extension/resource_owner_password_credentials/resource_owner_password_credentials.py">sample ROPC script</a></p>
+<p>Main usage of script is at Token Endpoint.</p>
+<p>However sometimes it can be useful to use ROPC custom script at Authorization Endpoint to avoid redirects and pages. 
+By default it is not enabled but it can be enabled if set <code>forceRopcInAuthorizationEndpoint</code> AS configuration property to <code>true</code>.</p>
+<p>Also it is required to set <code>user</code> in context in custom script (<code>context.setUser(&lt;user&gt;)</code>). Without it authorization will go on in normal way (with pages and redirects).</p>
 <h3 id="script-type-python">Script Type: Python<a class="headerlink" href="#script-type-python" title="Permanent link">#</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">io.jans.model.custom.script.type.owner</span> <span class="kn">import</span> <span class="n">ResourceOwnerPasswordCredentialsType</span>
 <span class="kn">from</span> <span class="nn">io.jans.as.server.service</span> <span class="kn">import</span> <span class="n">AuthenticationService</span>
@@ -173474,7 +173478,7 @@
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-01-13T08:34:37+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-01-13</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-09-27T13:08:59+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-09-27</span>
       
         <br>
         Created:
