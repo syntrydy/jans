@@ -171636,6 +171636,8 @@
         
           
         
+          
+        
       
       
         <label class="md-nav__link" for="__nav_1_11_4_4">
@@ -171658,6 +171660,20 @@
     <li class="md-nav__item">
       <a href="../../admin/reference/kubernetes/docker-jans-auth-server/" class="md-nav__link">
         Auth Server
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../admin/reference/kubernetes/docker-jans-casa/" class="md-nav__link">
+        Casa
       </a>
     </li>
   
@@ -173619,7 +173635,7 @@ log_dir = /opt/jans
 </div>
 <p>This installation uses Gluu Testing certificate.</p>
 <h3 id="download-installer">Download Installer<a class="headerlink" href="#download-installer" title="Permanent link">#</a></h3>
-<div class="highlight"><pre><span></span><code>wget https://raw.githubusercontent.com/JanssenProject/jans/v1.0.19.nightly/jans-linux-setup/jans_setup/install.py -O install.py
+<div class="highlight"><pre><span></span><code>wget https://raw.githubusercontent.com/JanssenProject/jans/vreplace-janssen-version/jans-linux-setup/jans_setup/install.py -O install.py
 </code></pre></div>
 <h3 id="execute-installer">Execute Installer<a class="headerlink" href="#execute-installer" title="Permanent link">#</a></h3>
 <div class="highlight"><pre><span></span><code>python3 install.py --profile=openbanking --args=&quot;-ob-key-fn=/opt/jans/jans-setup/openbanking/static/ob-gluu-test.key -static-kid=ob-gluu-test -jwks-uri=https://ox.gluu.org/icrby8xcvbcv/ob/ob-gluu-test.jwks --disable-ob-auth-script -ob-alias=ob-gluu-test&quot;
