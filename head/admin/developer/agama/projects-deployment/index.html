@@ -173532,10 +173532,10 @@
 <li>Poll (via GET) the status of the deployment. When the archive has been effectively deployed a status of 200 should be obtained. It may take up to 30 seconds for the process to complete once the archive is sent. This time may extend if there is another deployment in course</li>
 <li>Optionally supply configuration properties for flows if needed. This is done via PUT to the <code>/configs</code> endpoint. The response of the previous step may contain descriptive/sample configurations that can be used as a guide</li>
 <li>Test the deployed flows and adjust the archive for any changes required</li>
-<li>Go to point 1 if needed</li>
+<li>Go to point 1 if needed. If configuration properties were previously set and no changes are required in this regard, step 3 can be skipped </li>
 <li>If desired, a request can be sent to undeploy the flows (via DELETE)</li>
 </ol>
-<p>The following tables summarize the available endpoints. All URLs are relative to <code>/jans-config-api/api/v1</code>. An OpenAPI document is also available <a href="https://github.com/JanssenProject/jans/blob/main/jans-config-api/docs/jans-config-api-swagger.yaml#L110-L254">here</a>.</p>
+<p>The following tables summarize the available endpoints. All URLs are relative to <code>/jans-config-api/api/v1</code>. An OpenAPI document is also available <a href="https://github.com/JanssenProject/jans/blob/main/jans-config-api/docs/jans-config-api-swagger.yaml#L177">here</a>.</p>
 <table>
 <thead>
 <tr>
@@ -173697,6 +173697,10 @@
 <td>The binary contents of a <code>.gama</code> file; example <a href="#sample-file">here</a>. Ensure to use header <code>Content-Type: application/zip</code></td>
 </tr>
 <tr>
+<td>Query params</td>
+<td><code>autoconfigure</code> - passing <code>true</code> will make this project be configured with the sample configurations found in the provided binary archive (<code>configs</code> section of <a href="../../../../agama/gama-format/#metadata">project.json</a>). This param should rarely be passed: use only in controlled environments where the archive is not shared with third parties</td>
+</tr>
+<tr>
 <td>Output</td>
 <td>Textual explanation, e.g. <code>A deployment task for project XXX has been queued. Use the GET endpoint to poll status</code></td>
 </tr>
@@ -173834,7 +173838,7 @@
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-08-25T12:55:57+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-08-25</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-10-09T13:16:53+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-10-09</span>
       
         <br>
         Created:
