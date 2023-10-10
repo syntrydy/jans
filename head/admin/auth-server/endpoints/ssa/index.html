@@ -174121,6 +174121,11 @@ parameters as described below:</p>
 <td>TODO - Will be used to rotate expiration of the SSA, currently is only saved as part of the SSA. <code>(Default value: true)</code></td>
 <td>true</td>
 </tr>
+<tr>
+<td>lifetime</td>
+<td>SSA Lifetime in milliseconds</td>
+<td>true</td>
+</tr>
 </tbody>
 </table>
 <p><strong>Note:</strong> You can add more <code>custom attributes</code> in the request, (you must have previously configured in the SSA global
@@ -174129,13 +174134,10 @@ It should be clarified that these values are persisted in the database and are n
 <p>Example:</p>
 <div class="highlight"><pre><span></span><code>{
   &quot;org_id&quot;: &quot;your-org-id&quot;,
-  &quot;description&quot;: &quot;your description&quot;
-  ...
-
-  org_id: &quot;Your org_id&quot;,
+  &quot;description&quot;: &quot;your description&quot;,
+  ...,
   &quot;myCustomAttr1&quot;: &quot;Your value custom attr 1&quot;, 
-  &quot;myCustomAttr2&quot;: &quot;Your value custom attr 2&quot;,
-  ...
+  &quot;myCustomAttr2&quot;: &quot;Your value custom attr 2&quot;
 } 
 </code></pre></div>
 <h3 id="response-description">Response description<a class="headerlink" href="#response-description" title="Permanent link">#</a></h3>
@@ -174159,6 +174161,7 @@ It should be clarified that these values are persisted in the database and are n
 <li><code>org_id</code> — The "org_id" is used for organization identification.</li>
 <li><code>software_roles</code> — List of string values, fixed value <code>["password", "notify"]</code>.</li>
 <li><code>grant_types</code> — Fixed value <code>["client_credentials"]</code>.</li>
+<li><code>lifetime</code> — SSA lifetime in milliseconds.</li>
 <li><code>exp</code> — Expiration Time.</li>
 <li><code>myCustom1, myCustom2, ...</code>: if you have custom attributes, they will be displayed here.</li>
 </ul>
@@ -174169,22 +174172,23 @@ Content-Type: application/json
 Authorization: Bearer {{your-token}}
 
 {
-    &quot;description&quot;: &quot;test&quot;,
+    &quot;org_id&quot;: &quot;your-org-id&quot;,
+    &quot;description&quot;: &quot;This is test description&quot;,
     &quot;software_id&quot;: &quot;gluu-scan-api&quot;,
     &quot;software_roles&quot;: [
-        &quot;password&quot;
+        &quot;passwurd&quot;
     ],
     &quot;grant_types&quot;: [
         &quot;client_credentials&quot;
     ],
-    &quot;expiration&quot;: 1668609005,
-    &quot;one_time_use&quot;: true,
-    &quot;rotate_ssa&quot;: true
+    &quot;expiration&quot;: &quot;1696799089&quot;,
+    &quot;one_time_use&quot;: false,
+    &quot;rotate_ssa&quot;: false,
+    &quot;lifetime&quot;: 86400
 }
 </code></pre></div>
 <p><strong>Response:</strong></p>
 <div class="highlight"><pre><span></span><code>HTTP/1.1 201 Created
-Date: Wed, 16 Nov 2022 23:39:27 GMT
 Server: Apache/2.4.52 (Ubuntu)
 X-Xss-Protection: 1; mode=block
 X-Content-Type-Options: nosniff
@@ -174197,7 +174201,7 @@ Keep-Alive: timeout=5, max=100
 Connection: Keep-Alive
 
 {
-    &quot;ssa&quot;: &quot;eyJraWQiOiI1NTk3MGFkZS00M2MwLTQ4YWMtODEyZi0yZTY1MzhjMTEyN2Zfc2lnX3JzNTEyIiwidHlwIjoiand0IiwiYWxnIjoiUlM1MTIifQ.eyJzb2Z0d2FyZV9pZCI6ImdsdXUtc2Nhbi1hcGkiLCJncmFudF90eXBlcyI6WyJjbGllbnRfY3JlZGVudGlhbHMiXSwib3JnX2lkIjoxLCJpc3MiOiJodHRwczovL2phbnMubG9jYWxob3N0Iiwic29mdHdhcmVfcm9sZXMiOlsicGFzc3d1cmQiXSwiZXhwIjoxNjY4NjA5MDA1LCJpYXQiOjE2Njg2NDE5NjcsImp0aSI6ImU4OWVjYTQxLTM0ODUtNDUxNi1hMTYyLWZiODYyNjJhYmFjMyJ9.jRgh8_aiwMTJxeT9cwfup9QP9LBc6gQstvabCzUOJvELnzosxiNJHeU2mrvavaNK6BGvs_lbNjODVDeetGCD48_F2ay9r8qmo-f3GPzdzcJozKgfzonSkAE5Ran9LKcQQJpVc1rDYcV2xYiJLJ6FSuvnoClkDEE1tXysxshLPs-GXOZE7rD8XUXzezuxZWUE1jXwA-EFajoat8CP6QulHGxlcn_sKIhawhGODxJPz4Pf3jgeZVLG_7HfRJgxNiKcdzQIxnkbdpuS-0Q4-oc5yntsXhFhn31Pa3vGsiPPH9f3ndL2ZZKk3xCgyImLDJuGaxXg-qEVoIG4zNWNHMUNUQ&quot;
+    &quot;ssa&quot;: &quot;eyJraWQiOiJzc2FfNjY1MTQ5ODMtNzI0YS00OGQ2LWIzYzItODEyMGM1OTgyOGU2X3NpZ19yczI1NiIsInR5cCI6Imp3dCIsImFsZyI6IlJTMjU2In0.eyJzb2Z0d2FyZV9pZCI6ImdsdXUtc2Nhbi1hcGkiLCJncmFudF90eXBlcyI6WyJjbGllbnRfY3JlZGVudGlhbHMiXSwib3JnX2lkIjoieW91ci1vcmctaWQiLCJpc3MiOiJodHRwczovL2phbnMubG9jYWwuaW8iLCJsaWZldGltZSI6ODY0MDAsInNvZnR3YXJlX3JvbGVzIjpbInBhc3N3dXJkIl0sImV4cCI6MTY5Njc5OTA4OSwiaWF0IjoxNjk2NzEyNjg5LCJqdGkiOiJmNTRiYWFmZC02M2JmLTQ2NGEtYmJkZS00OTM3MDQ3NTBiMzUifQ.XTHzRrvrzQ5S_zEXjAWkXLegVIGK47zOa3eZuECO8xXQ2kOh0KXYGQ4TT3tPTFX19XQv30CLKqH97UPm-hkAMVL10NGUw_ernfoX1Z9-lTEdECPaqZ6UCiG1X8WRgJ0s4nUgE_PP9Isoyxnfk5bYlQwotf50KreTwDYUbwHRJZGdVPRjnLGeJpWhFblF4J5HNj_vU7wk7bdkaIDRArqK753mlCejXlkqTF97NzaL0bhP0yaoNK5jlscVPALQr2-FcoUl9rTfArSYXF1GuP3fhDN2BLrnB51M_8v7r0YkPF5B73ag82Aa8HSgYE6bmAB6D_M8W4v85idcyp0xQRPcIg&quot;
 }
 </code></pre></div>
 <h2 id="get-ssa">Get SSA<a class="headerlink" href="#get-ssa" title="Permanent link">#</a></h2>
@@ -174211,7 +174215,7 @@ Connection: Keep-Alive
 <div class="highlight"><pre><span></span><code>[
     {
         &quot;ssa&quot;: {
-            &quot;jti&quot;: &quot;c3eb1c16-be9b-4e96-974e-aea5e3cf95b0&quot;
+            &quot;jti&quot;: &quot;c3eb1c16-be9b-4e96-974e-aea5e3cf95b0&quot;,
             &quot;org_id&quot;: 1,
             &quot;software_id&quot;: &quot;gluu-scan-api&quot;,
             &quot;software_roles&quot;: [
@@ -174225,7 +174229,8 @@ Connection: Keep-Alive
             &quot;iat&quot;: 1668608851,
             &quot;description: &quot;test description&quot;,
             &quot;one_time_use&quot;: true,
-            &quot;rotate_ssa&quot;: false
+            &quot;rotate_ssa&quot;: false,
+            &quot;lifetime&quot;: 86400
         },
         &quot;iss&quot;: &quot;ed4d5f74-ce41-4180-aed4-54cffa974630&quot;,
         &quot;created_at&quot;: 1668608851,
@@ -174247,6 +174252,7 @@ Connection: Keep-Alive
 <li><code>description</code> — Describe SSA.</li>
 <li><code>one_time_use</code> — Defined whether the SSA will be used only once or can be used multiple times.</li>
 <li><code>rotate_ssa</code> — TODO - Will be used to rotate expiration of the SSA, currently is only saved as part of the SSA.</li>
+<li><code>lifetime</code> — SSA lifetime in milliseconds.</li>
 <li><code>myCustom1, myCustom2, ...</code> — if you have custom attributes, they will be displayed here.</li>
 </ul>
 </li>
@@ -174269,7 +174275,6 @@ Authorization: Bearer {{your-token}}
 </code></pre></div>
 <p><strong>Response:</strong></p>
 <div class="highlight"><pre><span></span><code>HTTP/1.1 200 OK
-Date: Wed, 16 Nov 2022 15:27:35 GMT
 Server: Apache/2.4.52 (Ubuntu)
 X-Xss-Protection: 1; mode=block
 X-Content-Type-Options: nosniff
@@ -174316,7 +174321,7 @@ Connection: Keep-Alive
 <h3 id="response-description_2">Response description<a class="headerlink" href="#response-description_2" title="Permanent link">#</a></h3>
 <p>Returned SSA is a JWT, containing the following structure:</p>
 <div class="highlight"><pre><span></span><code>{
-    &quot;ssa&quot;: &quot;eyJraWQiOiI1NTk3MGFkZS00M2MwLTQ4YWMtODEyZi0yZTY1MzhjMTEyN2Zfc2lnX3JzNTEyIiwidHlwIjoiand0IiwiYWxnIjoiUlM1MTIifQ.eyJzb2Z0d2FyZV9pZCI6ImdsdXUtc2Nhbi1hcGkiLCJncmFudF90eXBlcyI6WyJjbGllbnRfY3JlZGVudGlhbHMiXSwib3JnX2lkIjoxLCJpc3MiOiJodHRwczovL2phbnMubG9jYWxob3N0Iiwic29mdHdhcmVfcm9sZXMiOlsicGFzc3d1cmQiXSwiZXhwIjoxNjY4NjA5MDA1LCJpYXQiOjE2Njg2NDE5NjcsImp0aSI6ImU4OWVjYTQxLTM0ODUtNDUxNi1hMTYyLWZiODYyNjJhYmFjMyJ9.jRgh8_aiwMTJxeT9cwfup9QP9LBc6gQstvabCzUOJvELnzosxiNJHeU2mrvavaNK6BGvs_lbNjODVDeetGCD48_F2ay9r8qmo-f3GPzdzcJozKgfzonSkAE5Ran9LKcQQJpVc1rDYcV2xYiJLJ6FSuvnoClkDEE1tXysxshLPs-GXOZE7rD8XUXzezuxZWUE1jXwA-EFajoat8CP6QulHGxlcn_sKIhawhGODxJPz4Pf3jgeZVLG_7HfRJgxNiKcdzQIxnkbdpuS-0Q4-oc5yntsXhFhn31Pa3vGsiPPH9f3ndL2ZZKk3xCgyImLDJuGaxXg-qEVoIG4zNWNHMUNUQ&quot;
+    &quot;ssa&quot;: &quot;eyJraWQiOiJzc2FfNjY1MTQ5ODMtNzI0YS00OGQ2LWIzYzItODEyMGM1OTgyOGU2X3NpZ19yczI1NiIsInR5cCI6Imp3dCIsImFsZyI6IlJTMjU2In0.eyJzb2Z0d2FyZV9pZCI6ImdsdXUtc2Nhbi1hcGkiLCJncmFudF90eXBlcyI6WyJjbGllbnRfY3JlZGVudGlhbHMiXSwib3JnX2lkIjoieW91ci1vcmctaWQiLCJpc3MiOiJodHRwczovL2phbnMubG9jYWwuaW8iLCJsaWZldGltZSI6ODY0MDAsInNvZnR3YXJlX3JvbGVzIjpbInBhc3N3dXJkIl0sImV4cCI6MTY5Njc5OTA4OSwiaWF0IjoxNjk2NzEyNjg5LCJqdGkiOiJmNTRiYWFmZC02M2JmLTQ2NGEtYmJkZS00OTM3MDQ3NTBiMzUifQ.XTHzRrvrzQ5S_zEXjAWkXLegVIGK47zOa3eZuECO8xXQ2kOh0KXYGQ4TT3tPTFX19XQv30CLKqH97UPm-hkAMVL10NGUw_ernfoX1Z9-lTEdECPaqZ6UCiG1X8WRgJ0s4nUgE_PP9Isoyxnfk5bYlQwotf50KreTwDYUbwHRJZGdVPRjnLGeJpWhFblF4J5HNj_vU7wk7bdkaIDRArqK753mlCejXlkqTF97NzaL0bhP0yaoNK5jlscVPALQr2-FcoUl9rTfArSYXF1GuP3fhDN2BLrnB51M_8v7r0YkPF5B73ag82Aa8HSgYE6bmAB6D_M8W4v85idcyp0xQRPcIg&quot;
 }
 </code></pre></div>
 <p><strong>Header</strong></p>
@@ -174345,7 +174350,6 @@ Authorization: Bearer {{your-token}}
 </code></pre></div>
 <p><strong>Response:</strong></p>
 <div class="highlight"><pre><span></span><code>HTTP/1.1 201 Created
-Date: Wed, 16 Nov 2022 23:39:27 GMT
 Server: Apache/2.4.52 (Ubuntu)
 X-Xss-Protection: 1; mode=block
 X-Content-Type-Options: nosniff
@@ -174358,7 +174362,7 @@ Keep-Alive: timeout=5, max=100
 Connection: Keep-Alive
 
 {
-    &quot;ssa&quot;: &quot;eyJraWQiOiI1NTk3MGFkZS00M2MwLTQ4YWMtODEyZi0yZTY1MzhjMTEyN2Zfc2lnX3JzNTEyIiwidHlwIjoiand0IiwiYWxnIjoiUlM1MTIifQ.eyJzb2Z0d2FyZV9pZCI6ImdsdXUtc2Nhbi1hcGkiLCJncmFudF90eXBlcyI6WyJjbGllbnRfY3JlZGVudGlhbHMiXSwib3JnX2lkIjoxLCJpc3MiOiJodHRwczovL2phbnMubG9jYWxob3N0Iiwic29mdHdhcmVfcm9sZXMiOlsicGFzc3d1cmQiXSwiZXhwIjoxNjY4NjA5MDA1LCJpYXQiOjE2Njg2NDE5NjcsImp0aSI6ImU4OWVjYTQxLTM0ODUtNDUxNi1hMTYyLWZiODYyNjJhYmFjMyJ9.jRgh8_aiwMTJxeT9cwfup9QP9LBc6gQstvabCzUOJvELnzosxiNJHeU2mrvavaNK6BGvs_lbNjODVDeetGCD48_F2ay9r8qmo-f3GPzdzcJozKgfzonSkAE5Ran9LKcQQJpVc1rDYcV2xYiJLJ6FSuvnoClkDEE1tXysxshLPs-GXOZE7rD8XUXzezuxZWUE1jXwA-EFajoat8CP6QulHGxlcn_sKIhawhGODxJPz4Pf3jgeZVLG_7HfRJgxNiKcdzQIxnkbdpuS-0Q4-oc5yntsXhFhn31Pa3vGsiPPH9f3ndL2ZZKk3xCgyImLDJuGaxXg-qEVoIG4zNWNHMUNUQ&quot;
+    &quot;ssa&quot;: &quot;eyJraWQiOiJzc2FfNjY1MTQ5ODMtNzI0YS00OGQ2LWIzYzItODEyMGM1OTgyOGU2X3NpZ19yczI1NiIsInR5cCI6Imp3dCIsImFsZyI6IlJTMjU2In0.eyJzb2Z0d2FyZV9pZCI6ImdsdXUtc2Nhbi1hcGkiLCJncmFudF90eXBlcyI6WyJjbGllbnRfY3JlZGVudGlhbHMiXSwib3JnX2lkIjoieW91ci1vcmctaWQiLCJpc3MiOiJodHRwczovL2phbnMubG9jYWwuaW8iLCJsaWZldGltZSI6ODY0MDAsInNvZnR3YXJlX3JvbGVzIjpbInBhc3N3dXJkIl0sImV4cCI6MTY5Njc5OTA4OSwiaWF0IjoxNjk2NzEyNjg5LCJqdGkiOiJmNTRiYWFmZC02M2JmLTQ2NGEtYmJkZS00OTM3MDQ3NTBiMzUifQ.XTHzRrvrzQ5S_zEXjAWkXLegVIGK47zOa3eZuECO8xXQ2kOh0KXYGQ4TT3tPTFX19XQv30CLKqH97UPm-hkAMVL10NGUw_ernfoX1Z9-lTEdECPaqZ6UCiG1X8WRgJ0s4nUgE_PP9Isoyxnfk5bYlQwotf50KreTwDYUbwHRJZGdVPRjnLGeJpWhFblF4J5HNj_vU7wk7bdkaIDRArqK753mlCejXlkqTF97NzaL0bhP0yaoNK5jlscVPALQr2-FcoUl9rTfArSYXF1GuP3fhDN2BLrnB51M_8v7r0YkPF5B73ag82Aa8HSgYE6bmAB6D_M8W4v85idcyp0xQRPcIg&quot;
 }
 </code></pre></div>
 <h2 id="validate-ssa">Validate SSA<a class="headerlink" href="#validate-ssa" title="Permanent link">#</a></h2>
@@ -174374,7 +174378,6 @@ Connection: Keep-Alive
 jti: {{your-jti}}
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>HTTP/1.1 200 OK
-Date: Wed, 16 Nov 2022 21:49:11 GMT
 Server: Apache/2.4.52 (Ubuntu)
 X-Xss-Protection: 1; mode=block
 X-Content-Type-Options: nosniff
@@ -174408,7 +174411,6 @@ Authorization: Bearer {{your-token}}
 </code></pre></div>
 <p><strong>Response:</strong></p>
 <div class="highlight"><pre><span></span><code>HTTP/1.1 200 OK
-Date: Wed, 16 Nov 2022 23:15:56 GMT
 Server: Apache/2.4.52 (Ubuntu)
 X-Xss-Protection: 1; mode=block
 X-Content-Type-Options: nosniff
@@ -174482,6 +174484,7 @@ Connection: Keep-Alive
 <li><code>ttl</code> type <code>Integer</code> — SSA lifetime in milliseconds.</li>
 <li><code>atributes</code> type class <code>SsaAtributes</code><ul>
 <li><code>oneTimeUse</code> type <code>Boolean</code> — Whether the SSA will be single use.</li>
+<li><code>lifetime</code> type <code>Integer</code> — SSA lifetime in milliseconds.</li>
 <li><code>rotateSsa</code> type <code>Boolean</code> — TODO - Will be used to rotate expiration of the SSA, currently is only saved as part
   of the SSA.</li>
 <li><code>clientDn</code> type <code>String</code> — Client's DN.</li>
@@ -174499,7 +174502,7 @@ Connection: Keep-Alive
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-08-03T16:21:13+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-08-03</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-10-10T04:32:49+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-10-10</span>
       
         <br>
         Created:
