@@ -5301,15 +5301,35 @@
   
 </li>
         
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#multi-step-authorization-by-username-and-otp" class="md-nav__link">
+    Multi-step authorization by username and OTP
+  </a>
+  
+    <nav class="md-nav" aria-label="Multi-step authorization by username and OTP">
+      <ul class="md-nav__list">
+        
           <li class="md-nav__item">
-  <a href="#sample-scripts" class="md-nav__link">
-    Sample Scripts
+  <a href="#script-type-java_1" class="md-nav__link">
+    Script Type: Java
   </a>
   
 </li>
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sample-scripts" class="md-nav__link">
+    Sample Scripts
+  </a>
   
 </li>
       
@@ -173565,15 +173585,35 @@
   
 </li>
         
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#multi-step-authorization-by-username-and-otp" class="md-nav__link">
+    Multi-step authorization by username and OTP
+  </a>
+  
+    <nav class="md-nav" aria-label="Multi-step authorization by username and OTP">
+      <ul class="md-nav__list">
+        
           <li class="md-nav__item">
-  <a href="#sample-scripts" class="md-nav__link">
-    Sample Scripts
+  <a href="#script-type-java_1" class="md-nav__link">
+    Script Type: Java
   </a>
   
 </li>
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sample-scripts" class="md-nav__link">
+    Sample Scripts
+  </a>
   
 </li>
       
@@ -173875,9 +173915,199 @@ If all is good script has to return <code>true</code> and it's strongly recommen
 <span class="w">    </span><span class="p">}</span><span class="w"></span>
 <span class="p">}</span><span class="w"></span>
 </code></pre></div>
-<h3 id="sample-scripts">Sample Scripts<a class="headerlink" href="#sample-scripts" title="Permanent link">#</a></h3>
+<h2 id="multi-step-authorization-by-username-and-otp">Multi-step authorization by username and OTP<a class="headerlink" href="#multi-step-authorization-by-username-and-otp" title="Permanent link">#</a></h2>
+<h3 id="script-type-java_1">Script Type: Java<a class="headerlink" href="#script-type-java_1" title="Permanent link">#</a></h3>
+<div class="highlight"><pre><span></span><code>import io.jans.as.common.model.common.User;
+import io.jans.as.common.model.session.DeviceSession;
+import io.jans.as.server.authorize.ws.rs.DeviceSessionService;
+import io.jans.as.server.service.UserService;
+import io.jans.as.server.service.external.context.ExternalScriptContext;
+import io.jans.model.SimpleCustomProperty;
+import io.jans.model.custom.script.model.CustomScript;
+import io.jans.model.custom.script.type.authzchallenge.AuthorizationChallengeType;
+import io.jans.orm.PersistenceEntryManager;
+import io.jans.service.cdi.util.CdiUtil;
+import io.jans.service.custom.script.CustomScriptManager;
+import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.Map;
+import java.util.UUID;
+
+/**
+ * Script is to demo 2 steps flow:
+ * 1) First step -&gt; send username
+ * 2) Second step -&gt; send OTP
+ *
+ * AS tracks data by &#39;device_session&#39;. See &quot;prepareDeviceSession()&quot; method implemention for details.
+ *
+ * @author Yuriy Z
+ */
+public class AuthorizationChallenge implements AuthorizationChallengeType {
+
+    public static final String USERNAME_PARAMETER = &quot;username&quot;;
+    public static final String OTP_PARAMETER = &quot;otp&quot;;
+
+    private static final Logger log = LoggerFactory.getLogger(AuthorizationChallenge.class);
+    private static final Logger scriptLogger = LoggerFactory.getLogger(CustomScriptManager.class);
+
+    /**
+     * Return true if Authorization Challenge Endpoint should return code successfully or otherwise false if error should be returned.
+     * &lt;p&gt;
+     * Implementation of this method should consist of 3 main parts:
+     * 1. validate all parameters are present and if not -&gt; set error and return false
+     * 2. main authorization logic, if ok -&gt; set authorized user into &quot;context.getExecutionContext().setUser(user);&quot; and return true
+     * 3. if not ok -&gt; set error which explains what is wrong and return false
+     *
+     * @param scriptContext ExternalScriptContext, see https://github.com/JanssenProject/jans/blob/main/jans-auth-server/server/src/main/java/io/jans/as/server/service/external/context/ExternalScriptContext.java
+     * @return true if Authorization Challenge Endpoint should return code successfully or otherwise false if error should be returned.
+     */
+    @Override
+    public boolean authorize(Object scriptContext) {
+        ExternalScriptContext context = (ExternalScriptContext) scriptContext;
+
+        // 1. As first step we get username
+        final String username = getParameterOrCreateError(context, USERNAME_PARAMETER);
+        if (StringUtils.isBlank(username)) {
+            return false;
+        }
+
+        // 2. During first execution OTP is not present, so error will be returned with device_session (which has saved username)
+        //    Note: prepareDeviceSession method implemention
+        final String otp = getParameterOrCreateError(context, OTP_PARAMETER);
+        if (StringUtils.isBlank(otp)) {
+            return false;
+        }
+
+        scriptLogger.trace(&quot;All required parameters are present&quot;);
+
+        // 2. main authorization logic, if ok -&gt; set authorized user into &quot;context.getExecutionContext().setUser(user);&quot; and return true
+        UserService userService = CdiUtil.bean(UserService.class);
+        PersistenceEntryManager entryManager = CdiUtil.bean(PersistenceEntryManager.class);
+
+        final User user = userService.getUser(username);
+        if (user == null) {
+            scriptLogger.trace(&quot;User is not found by username {}&quot;, username);
+            createError(context, &quot;username_invalid&quot;);
+            return false;
+        }
+
+        // for simplicity OTP is here just username password but in real world scenario real OTP validation is needed.
+        final boolean ok = entryManager.authenticate(user.getDn(), User.class, otp);
+        if (ok) {
+            context.getExecutionContext().setUser(user); // &lt;- IMPORTANT : without user set, user relation will not be associated with token
+            scriptLogger.trace(&quot;User {} is authenticated successfully.&quot;, username);
+            return true;
+        }
+
+        // 3. not ok -&gt; set error which explains what is wrong and return false
+        scriptLogger.trace(&quot;Failed to authenticate user {}. Please check username and OTP.&quot;, username);
+        createError(context, &quot;username_or_otp_invalid&quot;);
+        return false;
+    }
+
+    private String getParameterOrCreateError(ExternalScriptContext context, String parameterName) {
+        String value = context.getHttpRequest().getParameter(parameterName);
+
+        if (StringUtils.isBlank(value)) {
+            scriptLogger.trace(&quot;No &#39;{}&#39; parameter in request&quot;, parameterName);
+            value = getParameterFromDeviceSession(context, parameterName);
+        }
+
+        if (StringUtils.isBlank(value)) {
+            scriptLogger.trace(&quot;{} is not provided&quot;, parameterName);
+            createError(context, String.format(&quot;%s_required&quot;, parameterName));
+            return null;
+        }
+
+        return value;
+    }
+
+    private void createError(ExternalScriptContext context, String errorCode) {
+        String deviceSessionPart = prepareDeviceSessionSubJson(context);
+
+        final String entity = String.format(&quot;{\&quot;error\&quot;: \&quot;%s\&quot;%s}&quot;, errorCode, deviceSessionPart);
+        context.createWebApplicationException(401, entity);
+    }
+
+    private String prepareDeviceSessionSubJson(ExternalScriptContext context) {
+        DeviceSession deviceSessionObject = context.getAuthzRequest().getDeviceSessionObject();
+        if (deviceSessionObject != null) {
+            prepareDeviceSession(context, deviceSessionObject);
+            return String.format(&quot;,\&quot;device_session\&quot;:\&quot;%s\&quot;&quot;, deviceSessionObject.getId());
+        } else if (context.getAuthzRequest().isUseDeviceSession()) {
+            deviceSessionObject = prepareDeviceSession(context, null);
+            return String.format(&quot;,\&quot;device_session\&quot;:\&quot;%s\&quot;&quot;, deviceSessionObject.getId());
+        }
+        return &quot;&quot;;
+    }
+
+    private DeviceSession prepareDeviceSession(ExternalScriptContext context, DeviceSession deviceSessionObject) {
+        DeviceSessionService deviceSessionService = CdiUtil.bean(DeviceSessionService.class);
+        boolean newSave = deviceSessionObject == null;
+        if (newSave) {
+            final String id = UUID.randomUUID().toString();
+            deviceSessionObject = new DeviceSession();
+            deviceSessionObject.setId(id);
+            deviceSessionObject.setDn(deviceSessionService.buildDn(id));
+        }
+
+        String username = context.getHttpRequest().getParameter(USERNAME_PARAMETER);
+        if (StringUtils.isNotBlank(username)) {
+            deviceSessionObject.getAttributes().getAttributes().put(USERNAME_PARAMETER, username);
+        }
+
+        String otp = context.getHttpRequest().getParameter(OTP_PARAMETER);
+        if (StringUtils.isNotBlank(otp)) {
+            deviceSessionObject.getAttributes().getAttributes().put(OTP_PARAMETER, otp);
+        }
+
+        if (newSave) {
+            deviceSessionService.persist(deviceSessionObject);
+        } else {
+            deviceSessionService.merge(deviceSessionObject);
+        }
+
+        return deviceSessionObject;
+    }
+
+    private String getParameterFromDeviceSession(ExternalScriptContext context, String parameterName) {
+        final DeviceSession deviceSessionObject = context.getAuthzRequest().getDeviceSessionObject();
+        if (deviceSessionObject != null) {
+            return deviceSessionObject.getAttributes().getAttributes().get(parameterName);
+        }
+        return null;
+    }
+
+    @Override
+    public boolean init(Map&lt;String, SimpleCustomProperty&gt; configurationAttributes) {
+        scriptLogger.info(&quot;Initialized Default AuthorizationChallenge Java custom script.&quot;);
+        return true;
+    }
+
+    @Override
+    public boolean init(CustomScript customScript, Map&lt;String, SimpleCustomProperty&gt; configurationAttributes) {
+        scriptLogger.info(&quot;Initialized Default AuthorizationChallenge Java custom script.&quot;);
+        return true;
+    }
+
+    @Override
+    public boolean destroy(Map&lt;String, SimpleCustomProperty&gt; configurationAttributes) {
+        scriptLogger.info(&quot;Destroyed Default AuthorizationChallenge Java custom script.&quot;);
+        return true;
+    }
+
+    @Override
+    public int getApiVersion() {
+        return 11;
+    }
+}
+</code></pre></div>
+<h2 id="sample-scripts">Sample Scripts<a class="headerlink" href="#sample-scripts" title="Permanent link">#</a></h2>
 <ul>
 <li><a href="../../../../script-catalog/authorization_challenge/AuthorizationChallenge.java">AuthorizationChallenge</a></li>
+<li><a href="../../../../script-catalog/authorization_challenge/multi_step/AuthorizationChallenge.java">Multi-step AuthorizationChallenge</a></li>
 </ul>
 
   <hr>
@@ -173885,7 +174115,7 @@ If all is good script has to return <code>true</code> and it's strongly recommen
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-08-11T12:07:59+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-08-11</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-10-12T14:22:14+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-10-12</span>
       
         <br>
         Created:

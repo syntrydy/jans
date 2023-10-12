@@ -3403,6 +3403,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#multi-step-example" class="md-nav__link">
+    Multi-step example
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#full-successful-authorization-challenge-flow-sample" class="md-nav__link">
     Full successful Authorization Challenge Flow sample
   </a>
@@ -173484,6 +173491,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#multi-step-example" class="md-nav__link">
+    Multi-step example
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#full-successful-authorization-challenge-flow-sample" class="md-nav__link">
     Full successful Authorization Challenge Flow sample
   </a>
@@ -173647,6 +173661,86 @@ If all is good script has to return <code>true</code> and it's strongly recommen
 <h2 id="device-session">Device session<a class="headerlink" href="#device-session" title="Permanent link">#</a></h2>
 <p>Device session is optional. AS does not return it by default. 
 It's possible to pass in request <code>use_device_session=true</code> which makes AS return it in error response.</p>
+<h2 id="multi-step-example">Multi-step example<a class="headerlink" href="#multi-step-example" title="Permanent link">#</a></h2>
+<p>Sometimes it's required to send data sequentially. Step by step. Calls to Authorization Challenge Endpoint must have 
+<code>use_device_session=true</code> parameter to force tracking data between request. </p>
+<p>Lets consider example when RP first sends <code>username</code> and then in next request <code>OTP</code>.</p>
+<div class="highlight"><pre><span></span><code>POST /jans-auth/restv1/authorization_challenge HTTP/1.1
+Host: server.example.com
+Content-Type: application/x-www-form-urlencoded
+
+username=alice
+&amp;scope=photos
+&amp;client_id=bb16c14c73415
+</code></pre></div>
+<p>AS accepts <code>username</code> and returns back error with <code>device_session</code>.</p>
+<div class="highlight"><pre><span></span><code>HTTP/1.1 401 Unauthorized
+Content-Type: application/json
+Cache-Control: no-store
+
+{
+  &quot;error&quot;: &quot;otp_required&quot;,
+  &quot;device_session&quot;: &quot;ce6772f5e07bc8361572f&quot;
+}
+</code></pre></div>
+<p>In next call RP can send OTP and <code>device_session</code> (AS matches user from <code>device_session</code>)</p>
+<div class="highlight"><pre><span></span><code>POST /jans-auth/restv1/authorization_challenge HTTP/1.1
+Host: server.example.com
+Content-Type: application/x-www-form-urlencoded
+
+otp=ccnnju667d&amp;device_session=ce6772f5e07bc8361572f
+</code></pre></div>
+<p>In custom script it's easy to code what data has to be kept in <code>device_session</code>.</p>
+<div class="highlight"><pre><span></span><code>    private void createError(ExternalScriptContext context, String errorCode) {
+        String deviceSessionPart = prepareDeviceSessionSubJson(context);
+
+        final String entity = String.format(&quot;{\&quot;error\&quot;: \&quot;%s\&quot;%s}&quot;, errorCode, deviceSessionPart);
+        context.createWebApplicationException(401, entity);
+    }
+
+    private String prepareDeviceSessionSubJson(ExternalScriptContext context) {
+        DeviceSession deviceSessionObject = context.getAuthzRequest().getDeviceSessionObject();
+        if (deviceSessionObject != null) {
+            prepareDeviceSession(context, deviceSessionObject);
+            return String.format(&quot;,\&quot;device_session\&quot;:\&quot;%s\&quot;&quot;, deviceSessionObject.getId());
+        } else if (context.getAuthzRequest().isUseDeviceSession()) {
+            deviceSessionObject = prepareDeviceSession(context, null);
+            return String.format(&quot;,\&quot;device_session\&quot;:\&quot;%s\&quot;&quot;, deviceSessionObject.getId());
+        }
+        return &quot;&quot;;
+    }
+
+    private DeviceSession prepareDeviceSession(ExternalScriptContext context, DeviceSession deviceSessionObject) {
+        DeviceSessionService deviceSessionService = CdiUtil.bean(DeviceSessionService.class);
+        boolean newSave = deviceSessionObject == null;
+        if (newSave) {
+            final String id = UUID.randomUUID().toString();
+            deviceSessionObject = new DeviceSession();
+            deviceSessionObject.setId(id);
+            deviceSessionObject.setDn(deviceSessionService.buildDn(id));
+        }
+
+        String username = context.getHttpRequest().getParameter(USERNAME_PARAMETER);
+        if (StringUtils.isNotBlank(username)) {
+            deviceSessionObject.getAttributes().getAttributes().put(USERNAME_PARAMETER, username);
+        }
+
+        String otp = context.getHttpRequest().getParameter(OTP_PARAMETER);
+        if (StringUtils.isNotBlank(otp)) {
+            deviceSessionObject.getAttributes().getAttributes().put(OTP_PARAMETER, otp);
+        }
+
+        if (newSave) {
+            deviceSessionService.persist(deviceSessionObject);
+        } else {
+            deviceSessionService.merge(deviceSessionObject);
+        }
+
+        return deviceSessionObject;
+    }
+</code></pre></div>
+<p>More details in <a href="../../../developer/scripts/authorization-challenge/">Authorization Challenge Custom Script Page</a>.</p>
+<p>Full multi-step sample script can be found <a href="../../../../script-catalog/authorization_challenge/multi_step/AuthorizationChallenge.java">here</a></p>
 <h2 id="full-successful-authorization-challenge-flow-sample">Full successful Authorization Challenge Flow sample<a class="headerlink" href="#full-successful-authorization-challenge-flow-sample" title="Permanent link">#</a></h2>
 <div class="highlight"><pre><span></span><code>OpenID Connect Configuration
 -------------------------------------------------------
@@ -174143,7 +174237,7 @@ X-Xss-Protection: 1; mode=block
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-10-10T09:42:49+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-10-10</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-10-12T14:22:14+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-10-12</span>
       
         <br>
         Created:
