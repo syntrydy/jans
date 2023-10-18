@@ -19,7 +19,7 @@
     
     
       
-        <title>Gluu Casa Documentation - Janssen Documentation</title>
+        <title>Jans Casa Documentation - Janssen Documentation</title>
       
     
     
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#gluu-casa-documentation" class="md-skip">
+        <a href="#jans-casa-documentation" class="md-skip">
           Skip to content
         </a>
       
@@ -128,7 +128,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Gluu Casa Documentation
+              Jans Casa Documentation
             
           </span>
         </div>
@@ -173291,8 +173291,6 @@
         
           
         
-          
-        
       
       
         
@@ -173334,30 +173332,20 @@
   
   
   
-    <li class="md-nav__item">
-      <a href="administration/installation/" class="md-nav__link">
-        Installation
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
     
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_4" type="checkbox" id="__nav_5_4" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_3" type="checkbox" id="__nav_5_3" >
       
       
       
         
           
+            
+          
+        
+          
         
           
         
@@ -173375,17 +173363,25 @@
         
       
       
-        <label class="md-nav__link" for="__nav_5_4">
-          Administration Guide
-          <span class="md-nav__icon md-icon"></span>
-        </label>
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="administration/">Administration Guide</a>
+          
+            <label for="__nav_5_3">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
       
       <nav class="md-nav" aria-label="Administration Guide" data-md-level="2">
-        <label class="md-nav__title" for="__nav_5_4">
+        <label class="md-nav__title" for="__nav_5_3">
           <span class="md-nav__icon md-icon"></span>
           Administration Guide
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
+          
+            
           
             
               
@@ -173480,7 +173476,7 @@
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_4_7" type="checkbox" id="__nav_5_4_7" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_3_8" type="checkbox" id="__nav_5_3_8" >
       
       
       
@@ -173493,13 +173489,13 @@
         
       
       
-        <label class="md-nav__link" for="__nav_5_4_7">
+        <label class="md-nav__link" for="__nav_5_3_8">
           Plugins
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" aria-label="Plugins" data-md-level="3">
-        <label class="md-nav__title" for="__nav_5_4_7">
+        <label class="md-nav__title" for="__nav_5_3_8">
           <span class="md-nav__icon md-icon"></span>
           Plugins
         </label>
@@ -173664,8 +173660,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#gluu-flex-server-integration" class="md-nav__link">
-    Gluu Flex Server integration
+  <a href="#janssen-server-integration" class="md-nav__link">
+    Janssen Server integration
   </a>
   
 </li>
@@ -173701,13 +173697,6 @@
         
       </ul>
     </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#license" class="md-nav__link">
-    License
-  </a>
   
 </li>
       
@@ -173748,9 +173737,9 @@
   </a>
 
 
-<h1 id="gluu-casa-documentation">Gluu Casa Documentation<a class="headerlink" href="#gluu-casa-documentation" title="Permanent link">#</a></h1>
+<h1 id="jans-casa-documentation">Jans Casa Documentation<a class="headerlink" href="#jans-casa-documentation" title="Permanent link">#</a></h1>
 <h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">#</a></h2>
-<p>Gluu Casa ("Casa") is a self-service web portal for end-users to manage authentication and authorization preferences for their account in a <a href="https://docs.gluu.org/">Gluu Flex Server</a>. </p>
+<p>Jans Casa ("Casa") is a self-service web portal for end-users to manage authentication and authorization preferences for their account in a Janssen Server. </p>
 <p>For example, as people interact with an organization's digital services, they may need to:</p>
 <ul>
 <li>Enroll, delete and manage two-factor authentication (2FA) credentials for their account (e.g. FIDO security keys, mobile apps, phone numbers, etc.)</li>
@@ -173768,7 +173757,7 @@
 <li>OTP hardware cards like <a href="https://www.ftsafe.com/Products/Power_Card/Standard">these</a> or dongles like <a href="https://www.ftsafe.com/Products/OTP/Single_Button_OTP">these</a>      </li>
 <li>OTP mobile apps like Google Authenticator, FreeOTP, etc.       </li>
 <li>Mobile phone numbers able to receive OTPs via SMS   </li>
-<li>Passwords (if stored in the corresponding Gluu Flex Server's local database, i.e. not a backend LDAP like AD)      </li>
+<li>Passwords (if stored in the corresponding Janssen Server's local database, i.e. not a backend LDAP like AD)      </li>
 </ul>
 <p>Additional authenticators and use cases can be supported via <a href="#plugin-oriented">custom plugins</a>. </p>
 <h2 id="2fa-enrollment-apis">2FA enrollment APIs<a class="headerlink" href="#2fa-enrollment-apis" title="Permanent link">#</a></h2>
@@ -173776,7 +173765,7 @@
 <ul>
 <li>Phone numbers for SMS OTP   </li>
 <li>OTP apps, cards or dongles        </li>
-<li>Super Gluu Android and iOS devices  </li>
+<li><a href="https://super.gluu.org">Super Gluu</a> Android and iOS devices  </li>
 <li>FIDO2 security keys</li>
 </ul>
 <h2 id="configuration-via-apis">Configuration via APIs<a class="headerlink" href="#configuration-via-apis" title="Permanent link">#</a></h2>
@@ -173789,18 +173778,19 @@
 <li><a href="plugins/consent-management/">Consent management</a> </li>
 <li><a href="plugins/custom-branding/">Custom branding</a>  </li>
 <li><a href="plugins/2fa-settings/">2FA settings</a></li>
-<li><a href="plugins/bioid/">BioID authentication</a></li>
 </ul>
-<h2 id="gluu-flex-server-integration">Gluu Flex Server integration<a class="headerlink" href="#gluu-flex-server-integration" title="Permanent link">#</a></h2>
-<p>Gluu Flex Server relies on "interception scripts" to implement user authentication. Casa itself has an interception script which defines authentication logic and routes authentications to specific 2FA mechanisms which also have their own scripts. All scripts must be enabled in the Gluu Flex Server.        </p>
+<!-- - [BioID authentication](./plugins/bioid.md) -->
+
+<h2 id="janssen-server-integration">Janssen Server integration<a class="headerlink" href="#janssen-server-integration" title="Permanent link">#</a></h2>
+<p>Janssen Server relies on "interception scripts" to implement user authentication. Casa itself has an interception script which defines authentication logic and routes authentications to specific 2FA mechanisms which also have their own scripts. All scripts must be enabled in the Janssen Server.        </p>
 <h2 id="user-roles">User roles<a class="headerlink" href="#user-roles" title="Permanent link">#</a></h2>
-<p>There are two types of users in Gluu Casa:</p>
+<p>There are two types of users in Jans Casa:</p>
 <ul>
 <li>
-<p><strong>Admin users</strong>: Any user in the <code>Managers Group</code> in the Gluu Flex Server   </p>
+<p><strong>Admin users</strong>: Any user in the <code>Managers Group</code> in the Janssen Server</p>
 </li>
 <li>
-<p><strong>Regular users</strong>: Any user in the Gluu Flex Server  </p>
+<p><strong>Regular users</strong>: Any user in the Janssen Server  </p>
 </li>
 </ul>
 <p>Admin users have access to the Casa <a href="administration/admin-console/">admin console</a>. All users can manage their 2FA credentials, as outlined in the <a href="user-guide/">user guide</a>.  </p>
@@ -173808,7 +173798,7 @@
 <p>Use the following links to get started with Casa:  </p>
 <h3 id="admin-guide">Admin Guide<a class="headerlink" href="#admin-guide" title="Permanent link">#</a></h3>
 <ul>
-<li><a href="administration/installation/">Installation</a></li>
+<li><a href="administration/">Administration</a></li>
 <li><a href="administration/admin-console/">Admin console</a></li>
 <li><a href="administration/credentials-stored/">Credentials storage</a>        </li>
 <li><a href="administration/custom-branding/">Custom branding</a>        </li>
@@ -173818,15 +173808,13 @@
 <ul>
 <li><a href="user-guide/">Home</a></li>
 </ul>
-<h2 id="license">License<a class="headerlink" href="#license" title="Permanent link">#</a></h2>
-<p>Gluu Casa is made available under <a href="https://www.apache.org/licenses/LICENSE-2.0.html">Apache License 2.0</a>.</p>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-10-05T08:36:47+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-10-05</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-10-18T15:16:29+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-10-18</span>
       
         <br>
         Created:

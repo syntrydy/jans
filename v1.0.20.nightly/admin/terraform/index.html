@@ -173293,8 +173293,6 @@
         
           
         
-          
-        
       
       
         
@@ -173336,30 +173334,20 @@
   
   
   
-    <li class="md-nav__item">
-      <a href="../../casa/administration/installation/" class="md-nav__link">
-        Installation
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
     
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_4" type="checkbox" id="__nav_5_4" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_3" type="checkbox" id="__nav_5_3" >
       
       
       
         
           
+            
+          
+        
+          
         
           
         
@@ -173377,17 +173365,25 @@
         
       
       
-        <label class="md-nav__link" for="__nav_5_4">
-          Administration Guide
-          <span class="md-nav__icon md-icon"></span>
-        </label>
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../casa/administration/">Administration Guide</a>
+          
+            <label for="__nav_5_3">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
       
       <nav class="md-nav" aria-label="Administration Guide" data-md-level="2">
-        <label class="md-nav__title" for="__nav_5_4">
+        <label class="md-nav__title" for="__nav_5_3">
           <span class="md-nav__icon md-icon"></span>
           Administration Guide
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
+          
+            
           
             
               
@@ -173482,7 +173478,7 @@
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_4_7" type="checkbox" id="__nav_5_4_7" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_3_8" type="checkbox" id="__nav_5_3_8" >
       
       
       
@@ -173495,13 +173491,13 @@
         
       
       
-        <label class="md-nav__link" for="__nav_5_4_7">
+        <label class="md-nav__link" for="__nav_5_3_8">
           Plugins
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" aria-label="Plugins" data-md-level="3">
-        <label class="md-nav__title" for="__nav_5_4_7">
+        <label class="md-nav__title" for="__nav_5_3_8">
           <span class="md-nav__icon md-icon"></span>
           Plugins
         </label>
@@ -173766,13 +173762,10 @@
 <p><strong>K8s:</strong> </p>
 <ol>
 <li>
-<p>client_id: <code>kubectl get cm cn -n &lt;namespace&gt; -o yaml | grep test_client_id</code> </p>
+<p>client_id: <code>kubectl get cm cn -n &lt;namespace&gt;  --template={{.data.test_client_id}}</code> </p>
 </li>
 <li>
-<p>Get client_secret: <code>kubectl get secret cn -n &lt;namespace&gt; -o yaml | grep test_client_pw</code>. This client secret has to be decoded before use.</p>
-</li>
-<li>
-<p>Decode the client_secret: <code>echo "client_secret" | base64 -d</code></p>
+<p>client_secret: <code>kubectl get secret cn -n &lt;namespace&gt; --template={{.data.test_client_pw}} | base64 -d</code></p>
 </li>
 </ol>
 </li>
@@ -173810,7 +173803,7 @@
 </code></pre></div>
 </li>
 <li>
-<p>Before importing, we have to define an empty <code>resource</code> in <code>configurations.tf</code>:</p>
+<p>Before importing, we have to define a <code>resource</code> configuration in <code>configurations.tf</code>:</p>
 <div class="highlight"><pre><span></span><code>resource &quot;jans_logging_configuration&quot; &quot;global&quot; {
 
 }
@@ -173819,7 +173812,7 @@
 <li>
 <p>Import:
    <code>terraform import jans_logging_configuration.global global</code></p>
-<p>Now after importing, the logging configuration is in Terraform state file, i.e. terraform.tfstate, and it's under Terraform management.</p>
+<p>Now after importing, the logging configuration is in the Terraform state file, i.e. terraform.tfstate, and it's under Terraform management.</p>
 <p><code>terraform state list</code> will output:
 <div class="highlight"><pre><span></span><code>jans_logging_configuration.global
 </code></pre></div></p>
@@ -173873,7 +173866,7 @@ logging_level = &quot;TRACE&quot;
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-09-12T10:31:23+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-09-12</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-10-18T09:53:02+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-10-18</span>
       
         <br>
         Created:

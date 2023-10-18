@@ -173291,8 +173291,6 @@
         
           
         
-          
-        
       
       
         
@@ -173333,20 +173331,6 @@
               
   
   
-  
-    <li class="md-nav__item">
-      <a href="../installation/" class="md-nav__link">
-        Installation
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
     
   
   
@@ -173354,12 +173338,16 @@
     <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_4" type="checkbox" id="__nav_5_4" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_3" type="checkbox" id="__nav_5_3" checked>
       
       
       
         
           
+            
+          
+        
+          
         
           
         
@@ -173377,17 +173365,25 @@
         
       
       
-        <label class="md-nav__link" for="__nav_5_4">
-          Administration Guide
-          <span class="md-nav__icon md-icon"></span>
-        </label>
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../">Administration Guide</a>
+          
+            <label for="__nav_5_3">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
       
       <nav class="md-nav" aria-label="Administration Guide" data-md-level="2">
-        <label class="md-nav__title" for="__nav_5_4">
+        <label class="md-nav__title" for="__nav_5_3">
           <span class="md-nav__icon md-icon"></span>
           Administration Guide
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
+          
+            
           
             
               
@@ -173551,7 +173547,7 @@
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_4_7" type="checkbox" id="__nav_5_4_7" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_3_8" type="checkbox" id="__nav_5_3_8" >
       
       
       
@@ -173564,13 +173560,13 @@
         
       
       
-        <label class="md-nav__link" for="__nav_5_4_7">
+        <label class="md-nav__link" for="__nav_5_3_8">
           Plugins
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" aria-label="Plugins" data-md-level="3">
-        <label class="md-nav__title" for="__nav_5_4_7">
+        <label class="md-nav__title" for="__nav_5_3_8">
           <span class="md-nav__icon md-icon"></span>
           Plugins
         </label>
@@ -173797,16 +173793,16 @@
 <h2 id="adding-internationalization-labels">Adding internationalization labels<a class="headerlink" href="#adding-internationalization-labels" title="Permanent link">#</a></h2>
 <p>To supply labels in a particular language (or even if you want to override the English translation provided), do the following:</p>
 <ol>
-<li>Log in to the Chroot</li>
-<li>Extract the Casa default labels: <code>/opt/jre/bin/jar -xf /opt/jans/jetty/casa/webapps/casa.war WEB-INF/classes/labels</code></li>
+<li>Log in to the Janssen Server using SSH</li>
+<li>Extract the Casa default labels: <code>/opt/jre/bin/jar -xf /opt/jans/jetty/jans-casa/webapps/casa.war WEB-INF/classes/labels</code></li>
 <li>Run <code>cp WEB-INF/classes/labels/*.properties .</code> and delete WEB-INF dir: <code>rm -R WEB-INF/</code></li>
 <li>Add the appropriate suffix to the properties files found in the current directory, ie. <code>_de</code> for German, <code>_es</code> for Spanish, <code>_ja</code> for Japanese, etc.</li>
 <li>Edit the contents of files accordingly. Use UTF-8 encoding for opening and saving</li>
-<li><code>cd</code> to <code>/opt/jans/jetty/casa/static</code></li>
+<li><code>cd</code> to <code>/opt/jans/jetty/jans-casa/static</code></li>
 <li>Create directory <code>i18n</code> if it does not exist: <code>mkdir i18n</code></li>
 <li>Transfer the properties files to the <code>i18n</code> folder</li>
 <li>Ensure <code>jetty</code> user has permission for reading the files</li>
-<li><a href="https://gluu.org/docs/ce/4.4/operation/services/#restart">Restart</a> casa</li>
+<li><a href="../../../admin/vm-ops/restarting-services/">Restart</a> casa</li>
 </ol>
 <p>Log in to the application and review your work. Make necessary edits and repeat the process.</p>
 <h2 id="how-are-labels-picked">How are labels picked?<a class="headerlink" href="#how-are-labels-picked" title="Permanent link">#</a></h2>
@@ -173822,16 +173818,16 @@
 <li><code>cd</code> to <code>labels</code> folder</li>
 <li>Add the appropriate suffix to the properties file, ie. <code>_de</code> for German, <code>_es</code> for Spanish, <code>_ja</code> for Japanese, etc.</li>
 <li>Edit the contents accordingly. Use UTF-8 encoding for opening and saving</li>
-<li>Connect to your Gluu Casa Server/VM and log into chroot</li>
-<li><code>cd</code> to <code>/opt/jans/jetty/casa/static</code></li>
+<li>Connect to your Janssen Server using SSH</li>
+<li><code>cd</code> to <code>/opt/jans/jetty/jans-casa/static</code></li>
 <li>Create directory <code>i18n</code> if it does not exist: <code>mkdir i18n</code></li>
 <li>Transfer the properties file to the <code>i18n</code> folder</li>
 <li>Ensure <code>jetty</code> user has permission for reading</li>
-<li><a href="https://gluu.org/docs/ce/4.4/operation/services/#restart">Restart</a> casa</li>
+<li><a href="../../../admin/vm-ops/restarting-services/">Restart</a> casa</li>
 </ol>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Since most Gluu Inc. plugins have a <code>zk-label.properties</code>, you can accumulate all plugin texts into a single file, or you can use a different filename for each plugin.</p>
+<p>If your plugins have a <code>zk-label.properties</code>, you can accumulate all plugin texts into a single file, or you can use a different filename for each plugin.</p>
 </div>
 <h2 id="properties-file-syntax">Properties file syntax<a class="headerlink" href="#properties-file-syntax" title="Permanent link">#</a></h2>
 <p>Administrators acquainted with the format used for properties files in Java will find Casa resource bundle files familiar. The format used in Casa differs slightly, but it is more powerful. To learn more about this topic, visit this <a href="https://www.zkoss.org/wiki/ZK%20Developer's%20Reference/Internationalization/Labels/The%20Format%20of%20Properties%20Files">page</a>.</p>
@@ -173853,7 +173849,7 @@
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-10-05T08:36:47+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-10-05</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-10-18T15:16:29+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-10-18</span>
       
         <br>
         Created:
