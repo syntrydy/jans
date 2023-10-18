@@ -173375,8 +173375,6 @@
         
           
         
-          
-        
       
       
         
@@ -173418,30 +173416,20 @@
   
   
   
-    <li class="md-nav__item">
-      <a href="../../../../casa/administration/installation/" class="md-nav__link">
-        Installation
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
     
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_4" type="checkbox" id="__nav_5_4" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_3" type="checkbox" id="__nav_5_3" >
       
       
       
         
           
+            
+          
+        
+          
         
           
         
@@ -173459,17 +173447,25 @@
         
       
       
-        <label class="md-nav__link" for="__nav_5_4">
-          Administration Guide
-          <span class="md-nav__icon md-icon"></span>
-        </label>
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../../casa/administration/">Administration Guide</a>
+          
+            <label for="__nav_5_3">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
       
       <nav class="md-nav" aria-label="Administration Guide" data-md-level="2">
-        <label class="md-nav__title" for="__nav_5_4">
+        <label class="md-nav__title" for="__nav_5_3">
           <span class="md-nav__icon md-icon"></span>
           Administration Guide
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
+          
+            
           
             
               
@@ -173564,7 +173560,7 @@
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_4_7" type="checkbox" id="__nav_5_4_7" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_3_8" type="checkbox" id="__nav_5_3_8" >
       
       
       
@@ -173577,13 +173573,13 @@
         
       
       
-        <label class="md-nav__link" for="__nav_5_4_7">
+        <label class="md-nav__link" for="__nav_5_3_8">
           Plugins
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" aria-label="Plugins" data-md-level="3">
-        <label class="md-nav__title" for="__nav_5_4_7">
+        <label class="md-nav__title" for="__nav_5_3_8">
           <span class="md-nav__icon md-icon"></span>
           Plugins
         </label>
@@ -173876,7 +173872,7 @@ For bleeding-edge/unstable version, use <code>gluufederation/casa:5.0.0_dev</cod
 <li><code>CN_GOOGLE_SECRET_NAME_PREFIX</code>: Prefix for Janssen secret in Google Secret Manager. Defaults to <code>jans</code>. If left <code>jans-secret</code> secret will be created.</li>
 <li><code>CN_GOOGLE_SECRET_MANAGER_PASSPHRASE</code>: Passphrase for Janssen secret in Google Secret Manager. This is recommended to be changed and defaults to <code>secret</code>.</li>
 <li><code>GLUU_CASA_APP_LOGGERS</code>: Custom logging configuration in JSON-string format with hash type (see <a href="#configure-app-loggers">Configure app loggers</a> section for details).</li>
-<li><code>GLUU_CASA_ADMIN_LOCK_FILE</code>: Path to lock file to enable/disable administration feature (default to <code>/opt/jans/jetty/casa/resources/.administrable</code>). If file is not exist, the feature is disabled.</li>
+<li><code>CN_CASA_ADMIN_LOCK_FILE</code>: Path to lock file to enable/disable administration feature (default to <code>/opt/jans/jetty/jans-casa/.administrable</code>). If file is not exist, the feature is disabled.</li>
 <li><code>CN_PROMETHEUS_PORT</code>: Port used by Prometheus JMX agent (default to empty string). To enable Prometheus JMX agent, set the value to a number. See <a href="#exposing-metrics">Exposing metrics</a> for details.</li>
 </ul>
 <h3 id="configure-app-loggers">Configure app loggers<a class="headerlink" href="#configure-app-loggers" title="Permanent link">#</a></h3>
@@ -173949,7 +173945,7 @@ To customize the config, mount custom config file to <code>/opt/prometheus/prome
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-10-06T12:39:52+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-10-06</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-10-18T15:16:29+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-10-18</span>
       
         <br>
         Created:

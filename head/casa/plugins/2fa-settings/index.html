@@ -173291,8 +173291,6 @@
         
           
         
-          
-        
       
       
         
@@ -173333,20 +173331,6 @@
               
   
   
-  
-    <li class="md-nav__item">
-      <a href="../../administration/installation/" class="md-nav__link">
-        Installation
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
     
   
   
@@ -173354,12 +173338,16 @@
     <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_4" type="checkbox" id="__nav_5_4" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_3" type="checkbox" id="__nav_5_3" checked>
       
       
       
         
           
+            
+          
+        
+          
         
           
         
@@ -173377,17 +173365,25 @@
         
       
       
-        <label class="md-nav__link" for="__nav_5_4">
-          Administration Guide
-          <span class="md-nav__icon md-icon"></span>
-        </label>
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../administration/">Administration Guide</a>
+          
+            <label for="__nav_5_3">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
       
       <nav class="md-nav" aria-label="Administration Guide" data-md-level="2">
-        <label class="md-nav__title" for="__nav_5_4">
+        <label class="md-nav__title" for="__nav_5_3">
           <span class="md-nav__icon md-icon"></span>
           Administration Guide
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
+          
+            
           
             
               
@@ -173484,7 +173480,7 @@
     <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_4_7" type="checkbox" id="__nav_5_4_7" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_3_8" type="checkbox" id="__nav_5_3_8" checked>
       
       
       
@@ -173497,13 +173493,13 @@
         
       
       
-        <label class="md-nav__link" for="__nav_5_4_7">
+        <label class="md-nav__link" for="__nav_5_3_8">
           Plugins
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" aria-label="Plugins" data-md-level="3">
-        <label class="md-nav__title" for="__nav_5_4_7">
+        <label class="md-nav__title" for="__nav_5_3_8">
           <span class="md-nav__icon md-icon"></span>
           Plugins
         </label>
@@ -173794,12 +173790,12 @@
 <p>A device/location is considered trustworthy when the user has presented a strong credential in order to login to Casa in such device/location. Subsequent login attempts from trustworthy (recognized) device/locations will not require them to present a second factor.</p>
 <h2 id="requirements">Requirements<a class="headerlink" href="#requirements" title="Permanent link">#</a></h2>
 <ul>
-<li>The plugin jar file must match the version of your Casa (and Gluu Flex Server) installation.</li>
+<li>The plugin jar file must match the version of your Janssen Server installation.</li>
 </ul>
 <h2 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">#</a></h2>
 <ol>
 <li>
-<p><a href="https://maven.gluu.org/maven/org/gluu/casa/plugins/strong-authn-settings/5.0.0-16/strong-authn-settings-5.0.0-16-jar-with-dependencies.jar">Download the plugin</a></p>
+<p><a href="https://maven.jans.io/maven/io/jans/casa/plugins/strong-authn-settings/replace-janssen-version/strong-authn-settings-replace-janssen-version-jar-with-dependencies.jar">Download the plugin</a></p>
 </li>
 <li>
 <p>Log in to Casa using an administrator account</p>
@@ -173821,14 +173817,14 @@
 <p>For regular users, proper details appear in the widget where 2FA is turned on.</p>
 <p><img alt="2fa-settings" src="../../../assets/casa/admin-console/2fa_user_policy.png" /></p>
 <h2 id="api">API<a class="headerlink" href="#api" title="Permanent link">#</a></h2>
-<p>Configurations provided by this plugin can also be applied by means of the API exposed for this purpose. A formal description of the API can be found in this <a href="https://github.com/GluuFederation/flex/raw/main/casa/plugins/strong-authn-settings/src/main/resources/assets/2fa-admin-api.yaml">swagger</a> file. Note all endpoints are protected by tokens which must have the <code>https://jans.io/casa.config</code> OAuth scope.</p>
+<p>Configurations provided by this plugin can also be applied by means of the API exposed for this purpose. A formal description of the API can be found in this <a href="https://raw.githubusercontent.com/JanssenProject/jans/main/jans-casa/plugins/strong-authn-settings/src/main/resources/assets/2fa-admin-api.yaml">swagger</a> file. Note all endpoints are protected by tokens which must have the <code>https://jans.io/casa.config</code> OAuth scope.</p>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-10-05T08:36:47+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-10-05</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-10-18T15:16:29+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-10-18</span>
       
         <br>
         Created:

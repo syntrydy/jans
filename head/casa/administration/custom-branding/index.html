@@ -173291,8 +173291,6 @@
         
           
         
-          
-        
       
       
         
@@ -173333,20 +173331,6 @@
               
   
   
-  
-    <li class="md-nav__item">
-      <a href="../installation/" class="md-nav__link">
-        Installation
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
     
   
   
@@ -173354,12 +173338,16 @@
     <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_4" type="checkbox" id="__nav_5_4" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_3" type="checkbox" id="__nav_5_3" checked>
       
       
       
         
           
+            
+          
+        
+          
         
           
         
@@ -173377,17 +173365,25 @@
         
       
       
-        <label class="md-nav__link" for="__nav_5_4">
-          Administration Guide
-          <span class="md-nav__icon md-icon"></span>
-        </label>
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../">Administration Guide</a>
+          
+            <label for="__nav_5_3">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
       
       <nav class="md-nav" aria-label="Administration Guide" data-md-level="2">
-        <label class="md-nav__title" for="__nav_5_4">
+        <label class="md-nav__title" for="__nav_5_3">
           <span class="md-nav__icon md-icon"></span>
           Administration Guide
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
+          
+            
           
             
               
@@ -173605,7 +173601,7 @@
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_4_7" type="checkbox" id="__nav_5_4_7" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_3_8" type="checkbox" id="__nav_5_3_8" >
       
       
       
@@ -173618,13 +173614,13 @@
         
       
       
-        <label class="md-nav__link" for="__nav_5_4_7">
+        <label class="md-nav__link" for="__nav_5_3_8">
           Plugins
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" aria-label="Plugins" data-md-level="3">
-        <label class="md-nav__title" for="__nav_5_4_7">
+        <label class="md-nav__title" for="__nav_5_3_8">
           <span class="md-nav__icon md-icon"></span>
           Plugins
         </label>
@@ -173900,7 +173896,7 @@
 <p><img alt="quick design glance" src="../../../assets/casa/admin-console/custom-branding.png" /></p>
 <p>Once you supply your files, color values, and footer text, click on <code>Save</code> and see the changes take immediately by navigating to a different page or opening a new browser tab. Repeat the process till you get the combination that best matches your organization's look and feel.</p>
 <p>With "Primary buttons" we refer to the vast majority of buttons that trigger some action such as saving, updating or accepting - whether in the user pages or the admin UI itself. "Cancel" covers undo, close or cancel, while "Misc" is for anything not fitting any of the previous usages.</p>
-<p>You can choose "Use defaults" if you feel comfortable with the <a href="https://getbootstrap.com/docs/4.4/components/buttons/">Bootstrap-like</a> colors offered in Gluu Casa.</p>
+<p>You can choose "Use defaults" if you feel comfortable with the <a href="https://getbootstrap.com/docs/4.4/components/buttons/">Bootstrap-like</a> colors offered in Jans Casa.</p>
 <h2 id="using-the-external-assets-directory">Using the external assets directory<a class="headerlink" href="#using-the-external-assets-directory" title="Permanent link">#</a></h2>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -173917,13 +173913,13 @@
 <p>Particularly, ZK's default theme CSS file was disabled to offer a higher degree of flexibility in design. This enables Bootstrap and Tachyons to claim control over style rules applied to HTML markup.</p>
 <h3 id="external-assets-directory">External assets directory<a class="headerlink" href="#external-assets-directory" title="Permanent link">#</a></h3>
 <p>In the <code>/opt/jans/jetty/casa/static</code> folder, you can place your own version of the main stylesheet and images Casa uses. No other stylesheet should be overriden.</p>
-<p>To start, log in to the chroot and do the following:</p>
-<div class="highlight"><pre><span></span><code>cd /opt/jans/jetty/casa/static
-jar -xf ../webapps/casa.war images styles/gluu/style.css  
+<p>To start, log in to the Janssen Server and do the following:</p>
+<div class="highlight"><pre><span></span><code>cd /opt/jans/jetty/jans-casa/static
+jar -xf ../webapps/jans-casa.war images styles/gluu/style.css  
 </code></pre></div>
 <p>This will copy the files you can edit later (these are the original versions provided out of the box in Casa).</p>
 <p>If you place additional files in this directory, ensure ownership is set to recursive. For instance, you can:</p>
-<div class="highlight"><pre><span></span><code>$ chown -R jetty:jetty /opt/jans/jetty/casa/static/
+<div class="highlight"><pre><span></span><code>$ chown -R jetty:jetty /opt/jans/jetty/jans-casa/static/
 </code></pre></div>
 <h3 id="enable-and-apply-your-customizations">Enable and apply your customizations<a class="headerlink" href="#enable-and-apply-your-customizations" title="Permanent link">#</a></h3>
 <p>In the admin console, navigate to <code>Custom branding</code> &gt; <code>Use Casa external assets directory</code>. From that point on, your installation is reading relevant files from the <code>static</code> directory.</p>
@@ -173931,7 +173927,7 @@ jar -xf ../webapps/casa.war images styles/gluu/style.css
 <p class="admonition-title">Note</p>
 <p>In CSS, the rules' order of appearance is important. Keep in mind that for all Casa pages, Bootstrap is loaded first, then style.css, and finally tachyons.css. This means rules for Tachyons have higher priority overall unless <code>!important</code> is used.  </p>
 </div>
-<p>The main stylesheet (<code>style.css</code>) is located at <code>/opt/jans/jetty/casa/static/styles/gluu</code> if you have followed the instructions above.</p>
+<p>The main stylesheet (<code>style.css</code>) is located at <code>/opt/jans/jetty/jans-casa/static/styles/gluu</code> if you have followed the instructions above.</p>
 <p>Here are some tips for applying your customizations:</p>
 <ul>
 <li>
@@ -173987,7 +173983,7 @@ jar -xf ../webapps/casa.war images styles/gluu/style.css
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-10-05T08:36:47+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-10-05</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-10-18T15:16:29+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-10-18</span>
       
         <br>
         Created:

@@ -173291,8 +173291,6 @@
         
           
         
-          
-        
       
       
         
@@ -173333,20 +173331,6 @@
               
   
   
-  
-    <li class="md-nav__item">
-      <a href="../installation/" class="md-nav__link">
-        Installation
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
     
   
   
@@ -173354,12 +173338,16 @@
     <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_4" type="checkbox" id="__nav_5_4" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_3" type="checkbox" id="__nav_5_3" checked>
       
       
       
         
           
+            
+          
+        
+          
         
           
         
@@ -173377,17 +173365,25 @@
         
       
       
-        <label class="md-nav__link" for="__nav_5_4">
-          Administration Guide
-          <span class="md-nav__icon md-icon"></span>
-        </label>
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../">Administration Guide</a>
+          
+            <label for="__nav_5_3">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
       
       <nav class="md-nav" aria-label="Administration Guide" data-md-level="2">
-        <label class="md-nav__title" for="__nav_5_4">
+        <label class="md-nav__title" for="__nav_5_3">
           <span class="md-nav__icon md-icon"></span>
           Administration Guide
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
+          
+            
           
             
               
@@ -173482,7 +173478,7 @@
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_4_7" type="checkbox" id="__nav_5_4_7" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_3_8" type="checkbox" id="__nav_5_3_8" >
       
       
       
@@ -173495,13 +173491,13 @@
         
       
       
-        <label class="md-nav__link" for="__nav_5_4_7">
+        <label class="md-nav__link" for="__nav_5_3_8">
           Plugins
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" aria-label="Plugins" data-md-level="3">
-        <label class="md-nav__title" for="__nav_5_4_7">
+        <label class="md-nav__title" for="__nav_5_3_8">
           <span class="md-nav__icon md-icon"></span>
           Plugins
         </label>
@@ -174020,21 +174016,7 @@
 
 <h2 id="common-administrative-tasks">Common administrative tasks<a class="headerlink" href="#common-administrative-tasks" title="Permanent link">#</a></h2>
 <h3 id="where-are-the-logs">Where are the logs?<a class="headerlink" href="#where-are-the-logs" title="Permanent link">#</a></h3>
-<p>The application logs are located at <code>/opt/jans/jetty/casa/logs</code>. By default, Casa uses the INFO level for messages. You can change the log level at will using the app's admin UI.</p>
-<!--
-**Note: check the logs**
-
-To work properly, Casa requires stable dependent components (filesystem, database, oxd, oxauth, servlet container, etc). Thus, it's important to determine if all expected services are working properly. 
-
-At startup, the app gathers a good amount of information from its environment. If something is missing or went wrong, messages will be shown in the log. Some messages may warn you about parameters not supplied that were simply inferred for you. 
-
-During normal use, the app will show feedback to users if operations were successful or failed. In the latter case, the log is also worth to look at to diagnose the anomalies.
-
-### How do I restart the application?
-
-Just [restart](https://gluu.org/docs/ce/4.4/operation/services/#restart) casa service.
--->
-
+<p>The application logs are located at <code>/opt/jans/jetty/jans-casa/logs</code>. By default, Casa uses the INFO level for messages. You can change the log level at will using the app's admin UI.</p>
 <h3 id="how-do-i-custom-brand-casa">How do I custom brand Casa?<a class="headerlink" href="#how-do-i-custom-brand-casa" title="Permanent link">#</a></h3>
 <p>We have a dedicated page covering the topic of custom branding <a href="../custom-branding/">here</a>.</p>
 <h3 id="what-ports-are-used-by-the-application">What ports are used by the application?<a class="headerlink" href="#what-ports-are-used-by-the-application" title="Permanent link">#</a></h3>
@@ -174043,13 +174025,13 @@ Just [restart](https://gluu.org/docs/ce/4.4/operation/services/#restart) casa se
 <p>If a user has been locked out for any reason (e.g. lost devices), you can reset his "authentication method" to password by accessing the admin console and choosing the menu item labelled "Reset users preference". Type the username (or part of) in the text field and then press search. Once you locate the user in the result grid, click the corresponding row and then hit "Change to password". The row will become disabled, and you'll see a success message.</p>
 <p>If you've followed the steps as described above, next time he attempts to log in, he won't be asked to present any credentials other than password to enter.</p>
 <h3 id="how-to-adjust-the-issuer-for-otp-tokens">How to adjust the issuer for OTP tokens<a class="headerlink" href="#how-to-adjust-the-issuer-for-otp-tokens" title="Permanent link">#</a></h3>
-<p>When people add OTP mobile apps, the enrollment appears in the device associated with an "issuer", so it is easy to recognize where the OTPs generated can be used. To keep track of which OTPs are valid for which IDPs, the issuer property can be adjusted in the Gluu Flex Server OTP script. For example, you might want to set the <code>issuer</code> property to <code>ACME Dev</code> on your dev server, and <code>ACME, Inc.</code> on your production server. </p>
+<p>When people add OTP mobile apps, the enrollment appears in the device associated with an "issuer", so it is easy to recognize where the OTPs generated can be used. To keep track of which OTPs are valid for which IDPs, the issuer property can be adjusted in the Janssen Server OTP script. For example, you might want to set the <code>issuer</code> property to <code>ACME Dev</code> on your dev server, and <code>ACME, Inc.</code> on your production server. </p>
 <h2 id="errors-shown-in-the-ui">Errors shown in the UI<a class="headerlink" href="#errors-shown-in-the-ui" title="Permanent link">#</a></h2>
 <h3 id="a-page-with-a-service-temporarily-unavailable-message-appears-when-accessing-the-application">A page with a "Service Temporarily Unavailable" message appears when accessing the application<a class="headerlink" href="#a-page-with-a-service-temporarily-unavailable-message-appears-when-accessing-the-application" title="Permanent link">#</a></h3>
 <p>This is the 503 HTTP error. There is an Apache server in front of the application and this means the reverse proxy couldn't establish a communication internally with the app. This usually happens when Casa hasn't started completely, so it's usually a matter of waiting a few seconds.</p>
 <h3 id="an-incorrect-email-or-password-error-is-shown-when-pressing-the-login-button-in-the-sso-form">An "incorrect email or password" error is shown when pressing the login button in the SSO form<a class="headerlink" href="#an-incorrect-email-or-password-error-is-shown-when-pressing-the-login-button-in-the-sso-form" title="Permanent link">#</a></h3>
 <p>This reveals a problem in execution of <em>casa</em> custom script. Check if <code>jans-auth_script.log</code> is showing an error related to the authentication method in question.</p>
-<p>If you cannot diagnose the issue, please use the <a href="https://support.gluu.org">support forum</a> to ask for help. </p>
+<p>If you cannot diagnose the issue, please use the <a href="https://github.com/JanssenProject/jans/discussions">Janssen Server discussions</a> to ask for help. </p>
 <h3 id="an-unauthorized-access-error-is-shown-when-accessing-the-application">An "Unauthorized access" error is shown when accessing the application<a class="headerlink" href="#an-unauthorized-access-error-is-shown-when-accessing-the-application" title="Permanent link">#</a></h3>
 <p>This is caused by an unauthorized access attempt (e.g. users requesting URLs without ever logging in or after session has expired).</p>
 <h3 id="an-error-occurred-casa-did-not-start-properly-is-shown-when-accessing-the-application">"An error occurred: Casa did not start properly" is shown when accessing the application<a class="headerlink" href="#an-error-occurred-casa-did-not-start-properly-is-shown-when-accessing-the-application" title="Permanent link">#</a></h3>
@@ -174057,7 +174039,7 @@ Just [restart](https://gluu.org/docs/ce/4.4/operation/services/#restart) casa se
 <p>Once fixed, please restart the application. You will have to see a "WEBAPP INITIALIZED SUCCESSFULLY" message to know that it's working.</p>
 <h2 id="miscellanenous">Miscellanenous<a class="headerlink" href="#miscellanenous" title="Permanent link">#</a></h2>
 <h3 id="admin-console-is-not-shown">Admin console is not shown<a class="headerlink" href="#admin-console-is-not-shown" title="Permanent link">#</a></h3>
-<p>If you have logged in using an administrative account and cannot find any admin features in the UI ensure you have performed this <a href="../installation/#unlocking-admin-features">step</a>.</p>
+<p>If you have logged in using an administrative account and cannot find any admin features in the UI ensure you have performed this <a href="../#unlocking-admin-features">step</a>.</p>
 <h3 id="a-previously-enabled-method-is-not-available-anymore">A previously enabled method is not available anymore<a class="headerlink" href="#a-previously-enabled-method-is-not-available-anymore" title="Permanent link">#</a></h3>
 <p>If for some reason you disabled the custom script of an authentication method used by Casa, such method will not be available for enrollment or authentication until you enable both the custom script and the method (in Casa admin dashboard).</p>
 <h3 id="what-kind-of-totphotp-devices-are-supported">What kind of TOTP/HOTP devices are supported?<a class="headerlink" href="#what-kind-of-totphotp-devices-are-supported" title="Permanent link">#</a></h3>
@@ -174082,14 +174064,14 @@ Just [restart](https://gluu.org/docs/ce/4.4/operation/services/#restart) casa se
 <h3 id="the-log-shows-an-error-related-to-obtaining-acr_values_supported-from-server">The log shows an error related to <em>Obtaining "acr_values_supported" from server</em><a class="headerlink" href="#the-log-shows-an-error-related-to-obtaining-acr_values_supported-from-server" title="Permanent link">#</a></h3>
 <p>Upon startup, the application needs to query the OpenID metadata URL of oxAuth to build the list of available authentication mechanisms.  This warning is shown when the URL is not yet accessible or the list hasn't loaded fully. However, the application does several (around 15) evenly timed attempts in order to gather the required info. These messages are not a sign of a malfunction.</p>
 <h2 id="my-problem-is-not-listed-here">My problem is not listed here<a class="headerlink" href="#my-problem-is-not-listed-here" title="Permanent link">#</a></h2>
-<p>Feel free to open a <a href="https://support.gluu.org">support</a> ticket.</p>
+<p>Feel free to <a href="https://github.com/JanssenProject/jans/discussions">ask Janssen Server community</a>.</p>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-10-05T08:36:47+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-10-05</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-10-18T15:16:29+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-10-18</span>
       
         <br>
         Created:

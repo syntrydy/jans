@@ -173291,8 +173291,6 @@
         
           
         
-          
-        
       
       
         
@@ -173333,20 +173331,6 @@
               
   
   
-  
-    <li class="md-nav__item">
-      <a href="../installation/" class="md-nav__link">
-        Installation
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
     
   
   
@@ -173354,12 +173338,16 @@
     <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_4" type="checkbox" id="__nav_5_4" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_3" type="checkbox" id="__nav_5_3" checked>
       
       
       
         
           
+            
+          
+        
+          
         
           
         
@@ -173377,17 +173365,25 @@
         
       
       
-        <label class="md-nav__link" for="__nav_5_4">
-          Administration Guide
-          <span class="md-nav__icon md-icon"></span>
-        </label>
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../">Administration Guide</a>
+          
+            <label for="__nav_5_3">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
       
       <nav class="md-nav" aria-label="Administration Guide" data-md-level="2">
-        <label class="md-nav__title" for="__nav_5_4">
+        <label class="md-nav__title" for="__nav_5_3">
           <span class="md-nav__icon md-icon"></span>
           Administration Guide
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
+          
+            
           
             
               
@@ -173492,7 +173488,7 @@
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_4_7" type="checkbox" id="__nav_5_4_7" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_3_8" type="checkbox" id="__nav_5_3_8" >
       
       
       
@@ -173505,13 +173501,13 @@
         
       
       
-        <label class="md-nav__link" for="__nav_5_4_7">
+        <label class="md-nav__link" for="__nav_5_3_8">
           Plugins
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" aria-label="Plugins" data-md-level="3">
-        <label class="md-nav__title" for="__nav_5_4_7">
+        <label class="md-nav__title" for="__nav_5_3_8">
           <span class="md-nav__icon md-icon"></span>
           Plugins
         </label>
@@ -173671,21 +173667,25 @@
 <p>To publish the application at a location other than <code>/casa</code>, do the following:</p>
 <ol>
 <li>
-<p>Log into the Gluu Flex Server chroot (e.g. <code># gluu-serverd login</code>)       </p>
+<p>Log into Janssen Server using SSH       </p>
 </li>
 <li>
-<p>Edit tag <code>&lt;Set name="contextPath"&gt;</code> in file <code>/opt/gluu/jetty/casa/webapps/casa.xml</code> with the new path you want to use. For example, if you chose <code>/creds</code>, you would do the following:    </p>
+<p>Edit tag <code>&lt;Set name="contextPath"&gt;</code> in file 
+   <code>/opt/jans/jetty/jans-casa/webapps/jans-casa.xml</code> with the new path you want 
+   to use. For example, if you chose <code>/creds</code>, you would do the following:    </p>
 <div class="highlight"><pre><span></span><code>  &lt;Set name=&quot;contextPath&quot;&gt;/creds&lt;/Set&gt;     
 </code></pre></div>
 </li>
 <li>
-<p>Edit tag <code>&lt;Set name="contextPath"&gt;</code> in file <code>/opt/gluu/jetty/casa/webapps/casa_web_resources.xml</code> appropriately with the new path you want to use.</p>
+<p>Edit tag <code>&lt;Set name="contextPath"&gt;</code> in file 
+   <code>/opt/jans/jetty/jans-casa/webapps/jans-casa_web_resources.xml</code> 
+   appropriately with the new path you want to use.</p>
 </li>
 <li>
 <p>Adjust Apache's .conf file:    </p>
 <ul>
 <li>
-<p>Locate the <code>https_gluu.conf</code> file. The exact location will vary depending on your distribution. In Ubuntu, for example, you can find it at <code>/etc/apache2/sites-available</code></p>
+<p>Locate the <code>https_jans.conf</code> file. The exact location will vary depending on your distribution. In Ubuntu, for example, you can find it at <code>/etc/apache2/sites-available</code></p>
 </li>
 <li>
 <p>Find the section starting with <code>&lt;Location /casa&gt;</code> and replace the 2 occurrences of <code>casa</code> with the path of your choice. Do not use trailing slashes   </p>
@@ -173699,7 +173699,7 @@
 <p>Adjust custom script settings: adjust the "supergluu_app_id" property of the <code>casa</code> custom script accordingly</p>
 </li>
 <li>
-<p>Wait for around 1 minute (so the server picks the script changes), then restart Casa and Apache services. Use this <a href="https://gluu.org/docs/gluu-server/4.4/operation/services/#restart">page</a> as a guide</p>
+<p>Wait for around 1 minute (so the server picks the script changes), then restart Casa and Apache services. Use this <a href="../../../admin/vm-ops/restarting-services/">page</a> as a guide</p>
 </li>
 <li>
 <p>The application should be accessible now at the new URL.</p>
@@ -173711,7 +173711,7 @@
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-10-05T08:36:47+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-10-05</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-10-18T15:16:29+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-10-18</span>
       
         <br>
         Created:
