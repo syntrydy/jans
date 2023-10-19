@@ -173923,20 +173923,27 @@ helm install nginx ingress-nginx/ingress-nginx
 <div class="highlight"><pre><span></span><code><span class="nt">global</span><span class="p">:</span><span class="w"></span>
 <span class="w">    </span><span class="nt">lbIp</span><span class="p">:</span><span class="w"> </span><span class="c1">#Add the LoadBalancer IP from the previous command</span><span class="w"></span>
 <span class="w">    </span><span class="nt">isFqdnRegistered</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
-<span class="w">    </span><span class="nt">fqdn</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">demoexample.jans.org</span><span class="w"> </span><span class="c1">#CHANGE-THIS to the FQDN used for Jans</span><span class="w"></span>
+<span class="w">    </span><span class="nt">fqdn</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">demoexample.jans.io</span><span class="w"> </span><span class="c1">#CHANGE-THIS to the FQDN used for Jans</span><span class="w"></span>
 <span class="nt">nginx-ingress</span><span class="p">:</span><span class="w"></span>
 <span class="w">  </span><span class="nt">ingress</span><span class="p">:</span><span class="w"></span>
 <span class="w">      </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/</span><span class="w"></span>
 <span class="w">      </span><span class="nt">hosts</span><span class="p">:</span><span class="w"></span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">demoexample.jans.org</span><span class="w"> </span><span class="c1">#CHANGE-THIS to the FQDN used for Jans</span><span class="w"></span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">demoexample.jans.io</span><span class="w"> </span><span class="c1">#CHANGE-THIS to the FQDN used for Jans</span><span class="w"></span>
 <span class="w">      </span><span class="nt">tls</span><span class="p">:</span><span class="w"></span>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">secretName</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tls-certificate</span><span class="w"></span>
 <span class="w">        </span><span class="nt">hosts</span><span class="p">:</span><span class="w"></span>
-<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">demoexample.jans.org</span><span class="w"> </span><span class="c1">#CHANGE-THIS to the FQDN used for Jans</span><span class="w"></span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">demoexample.jans.io</span><span class="w"> </span><span class="c1">#CHANGE-THIS to the FQDN used for Jans</span><span class="w"></span>
 </code></pre></div>
 </li>
 <li>
 <p>LDAP/Opendj for persistence storage</p>
+<p>Prepare cert and key for OpenDJ, for example:</p>
+<div class="highlight"><pre><span></span><code>openssl req -x509 -newkey rsa:2048 -sha256 -days 365 -nodes -keyout opendj.key -out opendj.crt -subj &#39;/CN=demoexample.jans.io&#39; -addext &#39;subjectAltName=DNS:ldap,DNS:opendj&#39;
+</code></pre></div>
+<p>Extract the contents of OpenDJ cert and key files as base64 string:</p>
+<div class="highlight"><pre><span></span><code>OPENDJ_CERT_B64=$(base64 opendj.crt -w0)
+OPENDJ_KEY_B64=$(base64 opendj.key -w0)
+</code></pre></div>
 <p>Add the following yaml snippet to your <code>override.yaml</code> file:
   <div class="highlight"><pre><span></span><code><span class="nt">global</span><span class="p">:</span><span class="w"></span>
 <span class="w">  </span><span class="nt">cnPersistenceType</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ldap</span><span class="w"></span>
@@ -173944,6 +173951,12 @@ helm install nginx ingress-nginx/ingress-nginx
 <span class="w">    </span><span class="nt">provisioner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">kubernetes.io/gce-pd</span><span class="w"></span>
 <span class="w">  </span><span class="nt">opendj</span><span class="p">:</span><span class="w"></span>
 <span class="w">    </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
+<span class="nt">config</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">configmap</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="c1"># -- contents of OpenDJ cert file in base64-string</span><span class="w"></span>
+<span class="w">    </span><span class="nt">cnLdapCrt</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;OPENDJ_CERT_B64&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c1"># -- contents of OpenDJ key file in base64-string</span><span class="w"></span>
+<span class="w">    </span><span class="nt">cnLdapKey</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;OPENDJ_KEY_B64&gt;</span><span class="w"></span>
 </code></pre></div></p>
 <p>So if your desired configuration has no-FQDN and LDAP, the final <code>override.yaml</code> file will look something like that:</p>
 <div class="highlight"><pre><span></span><code><span class="w"> </span><span class="nt">global</span><span class="p">:</span><span class="w"></span>
@@ -173954,15 +173967,21 @@ helm install nginx ingress-nginx/ingress-nginx
 <span class="w">     </span><span class="nt">provisioner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">kubernetes.io/gce-pd</span><span class="w"></span>
 <span class="w">   </span><span class="nt">opendj</span><span class="p">:</span><span class="w"></span>
 <span class="w">     </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
+<span class="w"> </span><span class="nt">config</span><span class="p">:</span><span class="w"></span>
+<span class="w">   </span><span class="nt">configmap</span><span class="p">:</span><span class="w"></span>
+<span class="w">     </span><span class="c1"># -- contents of OpenDJ cert file in base64-string</span><span class="w"></span>
+<span class="w">     </span><span class="nt">cnLdapCrt</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;OPENDJ_CERT_B64&gt;</span><span class="w"></span>
+<span class="w">     </span><span class="c1"># -- contents of OpenDJ key file in base64-string</span><span class="w"></span>
+<span class="w">     </span><span class="nt">cnLdapKey</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;OPENDJ_KEY_B64&gt;</span><span class="w"></span>
 <span class="w"> </span><span class="nt">nginx-ingress</span><span class="p">:</span><span class="w"></span>
 <span class="w">  </span><span class="nt">ingress</span><span class="p">:</span><span class="w"></span>
 <span class="w">      </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/</span><span class="w"></span>
 <span class="w">      </span><span class="nt">hosts</span><span class="p">:</span><span class="w"></span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">demoexample.jans.org</span><span class="w"> </span><span class="c1">#CHANGE-THIS to the FQDN used for Jans</span><span class="w"></span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">demoexample.jans.io</span><span class="w"> </span><span class="c1">#CHANGE-THIS to the FQDN used for Jans</span><span class="w"></span>
 <span class="w">      </span><span class="nt">tls</span><span class="p">:</span><span class="w"></span>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">secretName</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tls-certificate</span><span class="w"></span>
 <span class="w">        </span><span class="nt">hosts</span><span class="p">:</span><span class="w"></span>
-<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">demoexample.jans.org</span><span class="w"> </span><span class="c1">#CHANGE-THIS to the FQDN used for Jans    </span><span class="w"></span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">demoexample.jans.io</span><span class="w"> </span><span class="c1">#CHANGE-THIS to the FQDN used for Jans    </span><span class="w"></span>
 </code></pre></div>
 </li>
 <li>
@@ -174035,16 +174054,16 @@ helm install nginx ingress-nginx/ingress-nginx
 <span class="w">  </span><span class="nt">cnPersistenceType</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sql</span><span class="w"></span>
 <span class="w">  </span><span class="nt">lbIp</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="w"> </span><span class="c1">#Add the LoadBalancer IP from previous command</span><span class="w"></span>
 <span class="w">  </span><span class="nt">isFqdnRegistered</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
-<span class="w">  </span><span class="nt">fqdn</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">demoexample.jans.org</span><span class="w"> </span><span class="c1">#CHANGE-THIS to the FQDN used for Jans</span><span class="w"></span>
+<span class="w">  </span><span class="nt">fqdn</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">demoexample.jans.io</span><span class="w"> </span><span class="c1">#CHANGE-THIS to the FQDN used for Jans</span><span class="w"></span>
 <span class="nt">nginx-ingress</span><span class="p">:</span><span class="w"></span>
 <span class="w">  </span><span class="nt">ingress</span><span class="p">:</span><span class="w"></span>
 <span class="w">      </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/</span><span class="w"></span>
 <span class="w">      </span><span class="nt">hosts</span><span class="p">:</span><span class="w"></span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">demoexample.jans.org</span><span class="w"> </span><span class="c1">#CHANGE-THIS to the FQDN used for Jans</span><span class="w"></span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">demoexample.jans.io</span><span class="w"> </span><span class="c1">#CHANGE-THIS to the FQDN used for Jans</span><span class="w"></span>
 <span class="w">      </span><span class="nt">tls</span><span class="p">:</span><span class="w"></span>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">secretName</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tls-certificate</span><span class="w"></span>
 <span class="w">        </span><span class="nt">hosts</span><span class="p">:</span><span class="w"></span>
-<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">demoexample.jans.org</span><span class="w"> </span><span class="c1">#CHANGE-THIS to the FQDN used for Jans  </span><span class="w"></span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">demoexample.jans.io</span><span class="w"> </span><span class="c1">#CHANGE-THIS to the FQDN used for Jans  </span><span class="w"></span>
 <span class="nt">config</span><span class="p">:</span><span class="w"></span>
 <span class="w">  </span><span class="nt">configmap</span><span class="p">:</span><span class="w"></span>
 <span class="w">    </span><span class="nt">cnSqlDbName</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">jans</span><span class="w"></span>
@@ -174075,7 +174094,7 @@ helm install janssen janssen/janssen -n jans -f override.yaml
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-09-27T17:19:54+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-09-27</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-10-19T11:15:37+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-10-19</span>
       
         <br>
         Created:
