@@ -173815,19 +173815,21 @@ Testing openid-configuration endpoint..
 <div class="highlight"><pre><span></span><code>https://demoexample.jans.io/.well-known/openid-configuration
 </code></pre></div>
 <h2 id="configure-janssen-server">Configure Janssen Server<a class="headerlink" href="#configure-janssen-server" title="Permanent link">#</a></h2>
+<ol>
+<li>
 <p>Access the Docker container shell using:</p>
 <div class="highlight"><pre><span></span><code>docker <span class="nb">exec</span> -ti docker-jans-monolith-jans-1 bash
 </code></pre></div>
-<p>And then use CLI tools to configure Janssen Server as needed.</p>
-<p><div class="highlight"><pre><span></span><code>/opt/jans/jans-cli/config-cli.py
-<span class="c1">#or</span>
-/opt/jans/jans-cli/scim-cli.py
-</code></pre></div>
-Administrative password can be collected from <code>setup.properties.last</code> file. </p>
-<div class="highlight"><pre><span></span><code> - find / -name <span class="s1">&#39;setup.properties.last&#39;</span>
- - cat /var/lib/docker/overlay2/xxxxxx/diff/opt/jans/jans-setup/setup.properties.last <span class="p">|</span> grep -i password
- - <span class="sb">`</span>admin_password<span class="sb">`</span> value is the password
-</code></pre></div>
+</li>
+<li>
+<p>Grab a pair of client_id and client_pw(secret) from <code>setup.properties</code> or <code>/opt/jans/jans-setup/setup.properties.last</code></p>
+</li>
+<li>
+<p>Use the CLI tools located under <code>/opt/jans/jans-cli/</code> to configure Janssen Server as needed. For example you can run the <a href="../../../config-guide/config-tools/jans-tui/">TUI</a>:
+    <div class="highlight"><pre><span></span><code>python3 /opt/jans/jans-cli/config-cli-tui.py
+</code></pre></div></p>
+</li>
+</ol>
 <h2 id="uninstall-remove-the-janssen-server">Uninstall / Remove the Janssen Server<a class="headerlink" href="#uninstall-remove-the-janssen-server" title="Permanent link">#</a></h2>
 <p>This docker based installation uses <code>docker compose</code> under the hood to create containers. Hence uninstalling Janssen server involves invoking <code>docker compose</code> with appropriate yml file. Run command below to stop and remove containers.</p>
 <div class="highlight"><pre><span></span><code>docker compose -f /tmp/jans/docker-jans-monolith/jans-mysql-compose.yml down &amp;&amp; rm -rf jans-*
@@ -173844,7 +173846,7 @@ Administrative password can be collected from <code>setup.properties.last</code>
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-10-13T12:06:40+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-10-13</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-10-19T21:02:36+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-10-19</span>
       
         <br>
         Created:

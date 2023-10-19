@@ -173801,10 +173801,10 @@
 
   <h1>Docker compose</h1>
 
-<blockquote>
-<p><strong>Warning</strong>
-This image is for testing and development purposes only. Use Janssen <a href="https://github.com/JanssenProject/jans/tree/main/charts/janssen">helm charts</a> for production setups.</p>
-</blockquote>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><strong>This image is for testing and development purposes only. Use Janssen <a href="https://github.com/JanssenProject/jans/tree/main/charts/janssen">helm charts</a> for production setups.</strong></p>
+</div>
 <h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">#</a></h2>
 <p>Docker monolith image packaging for Janssen. This image packs janssen services including the auth-server, config-api, fido2, and scim.</p>
 <h2 id="pre-requisites">Pre-requisites<a class="headerlink" href="#pre-requisites" title="Permanent link">#</a></h2>
@@ -173941,12 +173941,21 @@ This image is for testing and development purposes only. Use Janssen <a href="ht
 <div class="highlight"><pre><span></span><code>docker compose -f jans-mysql-compose.yml ps
 </code></pre></div>
 <h2 id="configure-janssen-server">Configure Janssen Server<a class="headerlink" href="#configure-janssen-server" title="Permanent link">#</a></h2>
-<div class="highlight"><pre><span></span><code>docker compose -f jans-mysql-compose.yml <span class="nb">exec</span> jans sh <span class="c1">#This opens a bash terminal in the running container</span>
-
-/opt/jans/jans-cli/config-cli.py <span class="c1">#configure using the config-cli</span>
-
-/opt/jans/jans-cli/scim-cli.py <span class="c1">#configure using the scim-cli</span>
+<ol>
+<li>
+<p>Access the Docker container shell using:</p>
+<div class="highlight"><pre><span></span><code>docker compose -f jans-mysql-compose.yml <span class="nb">exec</span> jans sh
 </code></pre></div>
+</li>
+<li>
+<p>Grab a pair of client_id and client_pw(secret) from <code>setup.properties</code> or <code>/opt/jans/jans-setup/setup.properties.last</code></p>
+</li>
+<li>
+<p>Use the CLI tools located under <code>/opt/jans/jans-cli/</code> to configure Janssen Server as needed. For example you can run the <a href="../../../config-guide/config-tools/jans-tui/">TUI</a>:
+    <div class="highlight"><pre><span></span><code>python3 /opt/jans/jans-cli/config-cli-tui.py
+</code></pre></div></p>
+</li>
+</ol>
 <h2 id="access-endpoints-externally">Access endpoints externally<a class="headerlink" href="#access-endpoints-externally" title="Permanent link">#</a></h2>
 <p>Add to your <code>/etc/hosts</code> file the ip domain record which should be the ip of the instance docker is installed at and the domain used in the env above <code>CN_HOSTNAME</code>.</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># For-example</span>
@@ -173963,7 +173972,7 @@ This image is for testing and development purposes only. Use Janssen <a href="ht
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-09-17T16:57:57+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-09-17</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-10-19T21:02:36+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-10-19</span>
       
         <br>
         Created:
