@@ -173874,8 +173874,8 @@
 <li>
 <p>Now we can grab the FQDN, client-id, client-secret, and connect using the following commands:
     <div class="highlight"><pre><span></span><code>FQDN= #Add your FQDN here
-TUI_CLIENT_ID=$(kubectl get cm cn -n &lt;namespace&gt; --template={{.data.jca_client_id}})
-TUI_CLIENT_SECRET=$(kubectl get secret cn -n &lt;namespace&gt; --template={{.data.jca_client_pw}} | base64 -d)
+TUI_CLIENT_ID=$(kubectl get cm cn -n &lt;namespace&gt; --template={{.data.tui_client_id}})
+TUI_CLIENT_SECRET=$(kubectl get secret cn -n &lt;namespace&gt; --template={{.data.tui_client_pw}} | base64 -d)
 #add -noverify if your FQDN is not registered
 python3 jans-cli-tui-linux-ubuntu-X86-64.pyz --host $FQDN --client-id $TUI_CLIENT_ID --client-secret $TUI_CLIENT_SECRET
 </code></pre></div></p>
@@ -173887,7 +173887,7 @@ python3 jans-cli-tui-linux-ubuntu-X86-64.pyz --host $FQDN --client-id $TUI_CLIEN
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-09-27T17:19:54+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-09-27</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-11-02T14:51:26+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-11-02</span>
       
         <br>
         Created:
