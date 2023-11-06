@@ -12,14 +12,14 @@
         <meta name="author" content="Janssen, Inc.">
       
       
-        <link rel="canonical" href="https://jans.io/docs/v1.0.20.nightly/admin/lock/design/">
+        <link rel="canonical" href="https://jans.io/docs/v1.0.20.nightly/admin/lock/lock_opa_policies/">
       
       <link rel="icon" href="../../../assets/janssen_project_favicon_transparent_50px_50px.ico">
       <meta name="generator" content="mkdocs-1.4.1, mkdocs-material-8.5.7">
     
     
       
-        <title>Design - Janssen Documentation</title>
+        <title>Lock opa policies - Janssen Documentation</title>
       
     
     
@@ -77,11 +77,6 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
-        
-        <a href="#jans-lock-design-overview" class="md-skip">
-          Skip to content
-        </a>
-      
     </div>
     <div data-md-component="announce">
       
@@ -128,7 +123,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Design
+              Lock opa policies
             
           </span>
         </div>
@@ -173749,21 +173744,6 @@
   
   
   
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#jans-lock-design-overview" class="md-nav__link">
-    Jans Lock Design Overview
-  </a>
-  
-</li>
-      
-    </ul>
-  
 </nav>
                   </div>
                 </div>
@@ -173779,59 +173759,26 @@
 
 
 
-  <a href="https://github.com/JanssenProject/jans/edit/main/docs/admin/lock/design.md" title="Edit this page" class="md-content__button md-icon">
+  <a href="https://github.com/JanssenProject/jans/edit/main/docs/admin/lock/lock_opa_policies.md" title="Edit this page" class="md-content__button md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
   </a>
 
 
-  <h1>Design</h1>
+  <h1>Lock opa policies</h1>
 
-<h2 id="jans-lock-design-overview">Jans Lock Design Overview<a class="headerlink" href="#jans-lock-design-overview" title="Permanent link">#</a></h2>
-<p>Jans Lock enables domains to enforce policies based on real time OAuth data.<br />
-The Lock Client pushes token data from Auth Server to
-<a href="https://openpolicyagent.org">OPA</a>, enabling authorization based on real time
-information from the OAuth infrastructure. In order to use Jans Lock, admins
-will have to do a few things:
-  * Enable the Lock Token Stream in Auth Server
-  * Configure a Lock Client
-  * Author Rego policies based on OAuth token data</p>
-<p>The Lock Client is an OPA helper demon that calls the OPA API to update it with
-the latest data, policies, and public keys. Jans Lock consumes updates from an
-Auth Server Token Stream websocket, which contains the reference ids of any new
-tokens or revocations. Lock retrieves the data for a given token id directly
-from the database service.</p>
-<p>This architecture results in the best of three worlds. First, authorization
-is fast, because reference tokens are in OPA's memory--no introspection is
-needed. Second, admins get the power of Rego to express complex policies
-based on any combination of data present in the token or context. Third,<br />
-domains can publish central data for local decision making, for example
-information about how the end user authenticated.</p>
-<p>The Auth Server Lock Token Stream is highly confidential. Domains should
-restrict access to trusted first party clients using a private network.
-Each Lock Client uses OAuth dynamic client registration, and registers its
-public keys to enable asymmetric client authentication and the use of DPoP
-access tokens. The Lock Client must present a valid OAuth access token in
-order to receive updates from the Lock Token Stream.</p>
-<p>Lock Clients download token data directly from the local persistence service.
-This design minimizes the network and compute load on Auth Server. Lock Client
-also retrieve the latest policies from Git and the latest keys from a list of
-OpenID Providers.</p>
-<p>The diagram below illustrates a Jans Lock topology where OPA is used to
-control course grain authorization in an API gateway, fine grain authorization
-in First Party API code, and the issuance of access token scopes.</p>
-<p>![Jans Lock Design Overview Diagram][../../assets/lock-design-diagram-00.png]</p>
+
 
   <hr>
 <div class="md-source-file">
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-11-05T22:42:18+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-11-05</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-11-06T17:51:03+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-11-06</span>
       
         <br>
         Created:
-        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-10-31T22:12:26+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-10-31</span>
+        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2021-04-16T15:32:33+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2021-04-16</span>
       
     
   </small>
