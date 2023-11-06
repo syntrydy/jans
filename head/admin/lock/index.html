@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#this-content-is-in-progress" class="md-skip">
+        <a href="#jans-lock-overview" class="md-skip">
           Skip to content
         </a>
       
@@ -173756,22 +173756,8 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#this-content-is-in-progress" class="md-nav__link">
-    This content is in progress
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#have-questions-in-the-meantime" class="md-nav__link">
-    Have questions in the meantime?
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#want-to-contribute" class="md-nav__link">
-    Want to contribute?
+  <a href="#jans-lock-overview" class="md-nav__link">
+    Jans Lock Overview
   </a>
   
 </li>
@@ -173803,6 +173789,31 @@
         <span class="md-tag">lock</span>
       
     
+      
+      
+        <span class="md-tag">authorization</span>
+      
+    
+      
+      
+        <span class="md-tag">OPA</span>
+      
+    
+      
+      
+        <span class="md-tag">open policy agent</span>
+      
+    
+      
+      
+        <span class="md-tag">PDP</span>
+      
+    
+      
+      
+        <span class="md-tag">PEP</span>
+      
+    
   </nav>
 
 
@@ -173815,20 +173826,47 @@
 
   <h1>Index</h1>
 
-<h2 id="this-content-is-in-progress">This content is in progress<a class="headerlink" href="#this-content-is-in-progress" title="Permanent link">#</a></h2>
-<p>The Janssen Project documentation is currently in development. Topic pages are being created in order of broadest relevance, and this page is coming in the near future.</p>
-<h2 id="have-questions-in-the-meantime">Have questions in the meantime?<a class="headerlink" href="#have-questions-in-the-meantime" title="Permanent link">#</a></h2>
-<p>While this documentation is in progress, you can ask questions through <a href="https://github.com/JanssenProject/jans/discussion">GitHub Discussions</a> or the <a href="https://gitter.im/JanssenProject/Lobby">community chat on Gitter</a>. Any questions you have will help determine what information our documentation should cover.</p>
-<h2 id="want-to-contribute">Want to contribute?<a class="headerlink" href="#want-to-contribute" title="Permanent link">#</a></h2>
-<p>If you have content you'd like to contribute to this page in the meantime, you can get started with our <a href="https://docs.jans.io/head/CONTRIBUTING/">Contribution guide</a>.
-(https://github.com/JanssenProject/jans/discussions)</p>
+<h2 id="jans-lock-overview">Jans Lock Overview<a class="headerlink" href="#jans-lock-overview" title="Permanent link">#</a></h2>
+<p>Jans Lock enables domains to enforce policies based on real time OAuth data.<br />
+The Lock Client pushes token data from Auth Server to
+<a href="https://openpolicyagent.org">OPA</a>, enabling authorization based on real time
+information from the OAuth infrastructure. In order to use Jans Lock, admins
+will have to do a few things:
+  * <a href="lock_token_stream/">Enable the Lock Token Stream in Auth Server</a>
+  * <a href="lock_client/">Configure a Lock Client</a>
+  * <a href="lock_opa_policies/">Author Rego policies based on OAuth token data</a></p>
+<p>The Lock Client is a helper demon that calls the OPA API to update it with
+the latest data, policies, and public keys. The Lock Client consumes updates
+from an Auth Server Token Stream websocket, which contains the reference ids of
+any new or revoked tokens. Lock retrieves the data (i.e. token value) for a
+given token reference id from the database service.</p>
+<p>This architecture results in the best of three worlds. First, authorization
+is fast, because OAuth access and transaction tokens are in OPA's memory--no
+introspection is needed. Second, admins get the power of Rego to express complex
+policies based on any combination of data present in the token or context. Third,<br />
+domains can publish central data for local decision making, for example
+information about how the end user authenticated.</p>
+<p>The Auth Server Lock Token Stream is highly confidential. The Lock Client must
+present a valid OAuth access token in order to receive updates from the Lock
+Token Stream. Domains should Lock Clients to trusted first party services that
+use a private network. Each Lock Client uses OAuth dynamic client registration
+with a software statement to enable asymmetric client authentication
+and the use of DPoP access tokens.</p>
+<p>Lock Clients download token data directly from the local persistence service.
+This design minimizes the network and compute load on Auth Server. Lock Clients
+also retrieve the latest policies from Git and the latest keys from a list of
+OpenID Providers.</p>
+<p>The diagram below illustrates a Jans Lock topology where OPA is used to
+control course grain authorization in an API gateway, fine grain authorization
+in First Party API code, and the issuance of access token scopes.</p>
+<p>![Jans Lock Design Overview Diagram][../../../assets/lock-design-diagram-00.png]</p>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-10-31T22:12:26+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-10-31</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-11-06T17:51:03+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-11-06</span>
       
         <br>
         Created:
