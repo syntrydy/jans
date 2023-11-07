@@ -19,7 +19,7 @@
     
     
       
-        <title>Index - Janssen Documentation</title>
+        <title>Jans Lock Overview - Janssen Documentation</title>
       
     
     
@@ -128,7 +128,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Index
+              Jans Lock Overview
             
           </span>
         </div>
@@ -173748,21 +173748,8 @@
   
   
   
+    
   
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#jans-lock-overview" class="md-nav__link">
-    Jans Lock Overview
-  </a>
-  
-</li>
-      
-    </ul>
   
 </nav>
                   </div>
@@ -173824,17 +173811,17 @@
   </a>
 
 
-  <h1>Index</h1>
-
-<h2 id="jans-lock-overview">Jans Lock Overview<a class="headerlink" href="#jans-lock-overview" title="Permanent link">#</a></h2>
+<h1 id="jans-lock-overview">Jans Lock Overview<a class="headerlink" href="#jans-lock-overview" title="Permanent link">#</a></h1>
 <p>Jans Lock enables domains to enforce policies based on real time OAuth data.<br />
 The Lock Client pushes token data from Auth Server to
 <a href="https://openpolicyagent.org">OPA</a>, enabling authorization based on real time
 information from the OAuth infrastructure. In order to use Jans Lock, admins
-will have to do a few things:
-  * <a href="lock_token_stream/">Enable the Lock Token Stream in Auth Server</a>
-  * <a href="lock_client/">Configure a Lock Client</a>
-  * <a href="lock_opa_policies/">Author Rego policies based on OAuth token data</a></p>
+will have to do a few things:</p>
+<ul>
+<li><a href="lock_token_stream/">Enable the Lock Token Stream in Auth Server</a></li>
+<li><a href="lock_client/">Configure a Lock Client</a></li>
+<li><a href="lock_opa_policies/">Author Rego policies based on OAuth token data</a></li>
+</ul>
 <p>The Lock Client is a helper demon that calls the OPA API to update it with
 the latest data, policies, and public keys. The Lock Client consumes updates
 from an Auth Server Token Stream websocket, which contains the reference ids of
@@ -173859,14 +173846,14 @@ OpenID Providers.</p>
 <p>The diagram below illustrates a Jans Lock topology where OPA is used to
 control course grain authorization in an API gateway, fine grain authorization
 in First Party API code, and the issuance of access token scopes.</p>
-<p>![Jans Lock Design Overview Diagram][../../../assets/lock-design-diagram-00.png]</p>
+<p><img alt="Jans Lock Design Overview Diagram" src="../../assets/lock-design-diagram-00.png" /></p>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-11-06T17:51:03+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-11-06</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-11-07T17:53:33+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-11-07</span>
       
         <br>
         Created:

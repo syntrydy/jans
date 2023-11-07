@@ -174080,7 +174080,8 @@
 <span class="nt">metadata</span><span class="p">:</span><span class="w"></span>
 <span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">auth-key-rotation</span><span class="w"></span>
 <span class="nt">spec</span><span class="p">:</span><span class="w"></span>
-<span class="w">  </span><span class="nt">schedule</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;0</span><span class="nv"> </span><span class="s">*/48</span><span class="nv"> </span><span class="s">*</span><span class="nv"> </span><span class="s">*</span><span class="nv"> </span><span class="s">*&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="c1"># runs the job every 48 hours</span><span class="w"></span>
+<span class="w">  </span><span class="nt">schedule</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;@every</span><span class="nv"> </span><span class="s">48h&quot;</span><span class="w"></span>
 <span class="w">  </span><span class="nt">concurrencyPolicy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Forbid</span><span class="w"></span>
 <span class="w">  </span><span class="nt">jobTemplate</span><span class="p">:</span><span class="w"></span>
 <span class="w">    </span><span class="nt">spec</span><span class="p">:</span><span class="w"></span>
@@ -174113,9 +174114,9 @@
 </li>
 </ol>
 <h2 id="ldap">LDAP<a class="headerlink" href="#ldap" title="Permanent link">#</a></h2>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Subject Alt Name must match opendj service.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Starting from <code>1.0.20</code>, the <code>ghcr.io/janssenproject/jans/certmanager</code> image is no longer handle LDAP certificate and key rotation in favor of re-generating them manually.</p>
 </div>
 <table>
 <thead>
@@ -174130,41 +174131,42 @@
 <tr>
 <td>/etc/certs/opendj.key</td>
 </tr>
-<tr>
-<td>/etc/certs/opendj.pem</td>
-</tr>
-<tr>
-<td>/etc/certs/opendj.pkcs12</td>
-</tr>
 </tbody>
 </table>
 <ol>
 <li>
-<p>Create a file named <code>ldap-key-rotation.yaml</code> with the following contents :</p>
-<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">batch/v1</span><span class="w"></span>
-<span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Job</span><span class="w"></span>
-<span class="nt">metadata</span><span class="p">:</span><span class="w"></span>
-<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ldap-key-rotation</span><span class="w"></span>
-<span class="nt">spec</span><span class="p">:</span><span class="w"></span>
-<span class="w">  </span><span class="nt">template</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="nt">metadata</span><span class="p">:</span><span class="w"></span>
-<span class="w">      </span><span class="nt">annotations</span><span class="p">:</span><span class="w"></span>
-<span class="w">        </span><span class="nt">sidecar.istio.io/inject</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;false&quot;</span><span class="w">              </span>
-<span class="w">    </span><span class="nt">spec</span><span class="p">:</span><span class="w"></span>
-<span class="w">      </span><span class="nt">restartPolicy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Never</span><span class="w"></span>
-<span class="w">      </span><span class="nt">containers</span><span class="p">:</span><span class="w"></span>
-<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ldap-key-rotation</span><span class="w"></span>
-<span class="w">          </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ghcr.io/janssenproject/jans/certmanager:replace-janssen-version-1</span><span class="w"></span>
-<span class="w">          </span><span class="nt">envFrom</span><span class="p">:</span><span class="w"></span>
-<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">configMapRef</span><span class="p">:</span><span class="w"></span>
-<span class="w">              </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">janssen-config-cm</span><span class="w"></span>
-<span class="w">          </span><span class="nt">args</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;patch&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;ldap&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;--opts&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;subj-alt-name:opendj&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;--opts&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;valid-to:365&quot;</span><span class="p p-Indicator">]</span><span class="w"> </span>
+<p>Prepare cert and key for OpenDJ, for example:</p>
+<div class="highlight"><pre><span></span><code>openssl req -x509 -newkey rsa:2048 -sha256 -days 365 -nodes -keyout opendj.key -out opendj.crt -subj &#39;/CN=demoexample.jans.io&#39; -addext &#39;subjectAltName=DNS:ldap,DNS:opendj&#39;
 </code></pre></div>
 </li>
 <li>
-<p>Apply job</p>
-<div class="highlight"><pre><span></span><code>kubectl apply -f ldap-key-rotation.yaml -n &lt;jans-namespace&gt;
+<p>Extract the contents of OpenDJ cert and key files as base64 string:</p>
+<div class="highlight"><pre><span></span><code>OPENDJ_CERT_B64=$(base64 opendj.crt -w0)
+OPENDJ_KEY_B64=$(base64 opendj.key -w0)
 </code></pre></div>
+</li>
+<li>
+<p>Add the following yaml snippet to your <code>override.yaml</code> file, for example:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">global</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">cnPersistenceType</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ldap</span><span class="w"></span>
+<span class="w">  </span><span class="nt">storageClass</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">provisioner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">kubernetes.io/aws-ebs</span><span class="w"></span>
+<span class="w">  </span><span class="nt">opendj</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
+<span class="nt">config</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">configmap</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="c1"># -- contents of OpenDJ cert file in base64-string</span><span class="w"></span>
+<span class="w">    </span><span class="nt">cnLdapCrt</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;OPENDJ_CERT_B64&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c1"># -- contents of OpenDJ key file in base64-string</span><span class="w"></span>
+<span class="w">    </span><span class="nt">cnLdapKey</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;OPENDJ_KEY_B64&gt;</span><span class="w"></span>
+</code></pre></div>
+</li>
+<li>
+<p>Rollout restart OpenDJ statefulset:</p>
+<div class="highlight"><pre><span></span><code>kubectl -n &lt;jans-namespace&gt; rollout restart sts &lt;opendj-statefulset-name&gt;
+</code></pre></div>
+<p>Wait until pods are re-deployed successfully (this will update OpenDJ certificate and key in Kubernetes secrets).
+Afterwards, do rollout restart for other deployments/statefulsets to ensure latest OpenDJ certificate and key are pulled into pods.</p>
 </li>
 </ol>
 
@@ -174173,7 +174175,7 @@
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-05-10T17:22:59+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-05-10</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-11-07T17:48:39+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-11-07</span>
       
         <br>
         Created:
