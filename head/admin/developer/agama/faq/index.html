@@ -5101,12 +5101,26 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#classes-added-on-the-fly" class="md-nav__link">
-    Classes added on the fly
+  <a href="#libraries-and-classes-added-on-the-fly" class="md-nav__link">
+    Libraries and classes added on the fly
   </a>
   
-    <nav class="md-nav" aria-label="Classes added on the fly">
+    <nav class="md-nav" aria-label="Libraries and classes added on the fly">
       <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-groovy-and-java-versions-are-supported" class="md-nav__link">
+    What Groovy and Java versions are supported?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-add-third-party-libraries" class="md-nav__link">
+    How to add third party libraries?
+  </a>
+  
+</li>
         
           <li class="md-nav__item">
   <a href="#a-class-is-still-available-after-removing-the-corresponding-file" class="md-nav__link">
@@ -5118,13 +5132,6 @@
           <li class="md-nav__item">
   <a href="#how-to-append-data-to-a-flows-log-directly" class="md-nav__link">
     How to append data to a flow's log directly?
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#what-groovy-and-java-versions-are-supported" class="md-nav__link">
-    What Groovy and Java versions are supported?
   </a>
   
 </li>
@@ -174081,12 +174088,26 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#classes-added-on-the-fly" class="md-nav__link">
-    Classes added on the fly
+  <a href="#libraries-and-classes-added-on-the-fly" class="md-nav__link">
+    Libraries and classes added on the fly
   </a>
   
-    <nav class="md-nav" aria-label="Classes added on the fly">
+    <nav class="md-nav" aria-label="Libraries and classes added on the fly">
       <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-groovy-and-java-versions-are-supported" class="md-nav__link">
+    What Groovy and Java versions are supported?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-add-third-party-libraries" class="md-nav__link">
+    How to add third party libraries?
+  </a>
+  
+</li>
         
           <li class="md-nav__item">
   <a href="#a-class-is-still-available-after-removing-the-corresponding-file" class="md-nav__link">
@@ -174098,13 +174119,6 @@
           <li class="md-nav__item">
   <a href="#how-to-append-data-to-a-flows-log-directly" class="md-nav__link">
     How to append data to a flow's log directly?
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#what-groovy-and-java-versions-are-supported" class="md-nav__link">
-    What Groovy and Java versions are supported?
   </a>
   
 </li>
@@ -174338,7 +174352,11 @@
 <li>Find a replacement for the problematic class</li>
 <li>As a last resort, set <code>serializerType</code> property of the <a href="../engine-bridge-config/#engine-configuration">engine</a> to <code>null</code>. Note this will switch to standard Java serialization. This setting applies globally for all your flows</li>
 </ul>
-<h2 id="classes-added-on-the-fly">Classes added on the fly<a class="headerlink" href="#classes-added-on-the-fly" title="Permanent link">#</a></h2>
+<h2 id="libraries-and-classes-added-on-the-fly">Libraries and classes added on the fly<a class="headerlink" href="#libraries-and-classes-added-on-the-fly" title="Permanent link">#</a></h2>
+<h3 id="what-groovy-and-java-versions-are-supported">What Groovy and Java versions are supported?<a class="headerlink" href="#what-groovy-and-java-versions-are-supported" title="Permanent link">#</a></h3>
+<p>Groovy 4.0 and Java 11. The runtime is Amazon Corretto 17.</p>
+<h3 id="how-to-add-third-party-libraries">How to add third party libraries?<a class="headerlink" href="#how-to-add-third-party-libraries" title="Permanent link">#</a></h3>
+<p>You can include jar files in the <code>lib</code> directory of a <a href="../../../../agama/gama-format/#anatomy-of-a-project">project</a>. This applies only for VM-based installation of Janssen. Onboarding the jar files require a restart of the authentication server. Additionally, a prior update to file <code>/opt/jans/jetty/jans-auth/webapps/jans-auth.xml</code> may be required.</p>
 <!--
 ### A class does not "see" other classes in its own package
 
@@ -174348,8 +174366,6 @@ This is a limitation of the scripting engine. Here, classes have to be imported 
 <p>This is because the JVM does not support unloading: even if a given source file is removed, its corresponding class will still be accessible - it remains in the classpath. The classpath will be clean again after a service restart.</p>
 <h3 id="how-to-append-data-to-a-flows-log-directly">How to append data to a flow's log directly?<a class="headerlink" href="#how-to-append-data-to-a-flows-log-directly" title="Permanent link">#</a></h3>
 <p>Call method <code>log</code> of class <code>io.jans.agama.engine.script.LogUtils</code>. This method receives a variable number of arguments as DSL's <code>Log</code> does. Thus you can do <code>LogUtils.log("@w Today is Friday %th", 13)</code>, as in the logging <a href="../../../../agama/language-reference/#logging">examples</a>.</p>
-<h3 id="what-groovy-and-java-versions-are-supported">What Groovy and Java versions are supported?<a class="headerlink" href="#what-groovy-and-java-versions-are-supported" title="Permanent link">#</a></h3>
-<p>Groovy 4.0 and Java 11. The runtime is Amazon Corretto 11.</p>
 <h2 id="templates">Templates<a class="headerlink" href="#templates" title="Permanent link">#</a></h2>
 <h3 id="how-to-implement-localization">How to implement localization?<a class="headerlink" href="#how-to-implement-localization" title="Permanent link">#</a></h3>
 <p>This topic is covered <a href="../advanced-usages/#localization">here</a>.</p>
@@ -174400,7 +174416,7 @@ Call java.lang.String#join &quot;&quot; strings
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-08-03T16:21:13+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-08-03</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-11-08T21:20:51+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-11-08</span>
       
         <br>
         Created:
