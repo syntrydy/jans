@@ -173812,48 +173812,47 @@
 
 
 <h1 id="jans-lock-overview">Jans Lock Overview<a class="headerlink" href="#jans-lock-overview" title="Permanent link">#</a></h1>
-<p>Jans Lock enables domains to enforce policies based on real time OAuth data.<br />
-The Lock Client pushes token data from Auth Server to
-<a href="https://openpolicyagent.org">OPA</a>, enabling authorization based on real time
-information from the OAuth infrastructure. In order to use Jans Lock, admins
-will have to do a few things:</p>
+<p>Lock enables domains to enforce policies based on real time OAuth data. Lock
+pushes token data from Auth Server to <a href="https://openpolicyagent.org">OPA</a>, enabling
+authorization based on real time information from the OAuth infrastructure. In
+order to use Lock, admins will have to do a few things:</p>
 <ul>
-<li><a href="lock_token_stream/">Enable the Lock Token Stream in Auth Server</a></li>
-<li><a href="lock_client/">Configure a Lock Client</a></li>
+<li><a href="lock_token_stream/">Enable Lock in Auth Server</a></li>
+<li><a href="lock_client/">Configure a Lock client instance</a></li>
 <li><a href="lock_opa_policies/">Author Rego policies based on OAuth token data</a></li>
 </ul>
-<p>The Lock Client is a helper demon that calls the OPA API to update it with
-the latest data, policies, and public keys. The Lock Client consumes updates
-from an Auth Server Token Stream websocket, which contains the reference ids of
-any new or revoked tokens. Lock retrieves the data (i.e. token value) for a
-given token reference id from the database service.</p>
-<p>This architecture results in the best of three worlds. First, authorization
-is fast, because OAuth access and transaction tokens are in OPA's memory--no
-introspection is needed. Second, admins get the power of Rego to express complex
-policies based on any combination of data present in the token or context. Third,<br />
-domains can publish central data for local decision making, for example
-information about how the end user authenticated.</p>
-<p>The Auth Server Lock Token Stream is highly confidential. The Lock Client must
-present a valid OAuth access token in order to receive updates from the Lock
-Token Stream. Domains should Lock Clients to trusted first party services that
-use a private network. Each Lock Client uses OAuth dynamic client registration
-with a software statement to enable asymmetric client authentication
-and the use of DPoP access tokens.</p>
-<p>Lock Clients download token data directly from the local persistence service.
-This design minimizes the network and compute load on Auth Server. Lock Clients
-also retrieve the latest policies from Git and the latest keys from a list of
-OpenID Providers.</p>
+<p>Lock is a helper demon that calls the OPA API to update it with the latest
+data, policies, and public keys. Lock consumes updates from an Auth Server token
+stream, which contains the reference ids of any new or revoked tokens. Lock
+retrieves the data (i.e. token value) for a given token reference id from the
+database service.</p>
+<p><img alt="Jans Lock Toplogy" src="../../assets/lock-design-diagram-01.png" /></p>
+<p>This architecture results in the best of three worlds. First, authorization is<br />
+fast, because OAuth access and transaction tokens are in OPA's memory--no introspection
+is needed. Second, admins get the power of Rego to express complex policies based
+on any combination of data present in the token or context. Third, domains can
+publish central data for local decision making, for example information about
+how the end user authenticated.</p>
+<p>The Auth Server Lock token stream is highly confidential. Lock must present a
+valid OAuth access token to Auth Server in order subscribe to the token
+stream. Domains should only use Lock for trusted first party services with
+a private network. Each Lock client instance uses OAuth dynamic client
+registration with a software statement to enable asymmetric client
+authentication and the use of DPoP access tokens.</p>
+<p>Lock client instances download token data directly from the local persistence
+service. This design minimizes the network and compute load on Auth Server. Lock
+can also retrieve Rego policy updates and JWKS keys.</p>
 <p>The diagram below illustrates a Jans Lock topology where OPA is used to
 control course grain authorization in an API gateway, fine grain authorization
 in First Party API code, and the issuance of access token scopes.</p>
-<p><img alt="Jans Lock Design Overview Diagram" src="../../assets/lock-design-diagram-00.png" /></p>
+<p><img alt="Jans Lock sample toplogy" src="../../assets/lock-design-diagram-00.png" /></p>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-11-07T17:53:33+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-11-07</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-11-08T22:33:18+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-11-08</span>
       
         <br>
         Created:
