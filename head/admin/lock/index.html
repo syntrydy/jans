@@ -173846,13 +173846,18 @@ can also retrieve Rego policy updates and JWKS keys.</p>
 control course grain authorization in an API gateway, fine grain authorization
 in First Party API code, and the issuance of access token scopes.</p>
 <p><img alt="Jans Lock sample toplogy" src="../../assets/lock-design-diagram-00.png" /></p>
+<p>This authorization model is also useful for East-West service mesh authorization
+because it avoids the "hairpin" inefficiency of routing all traffic through
+and API gateway (which is better for North-South web ingress). TLS is required
+to protect the bearer token. MTLS is even better.</p>
+<p><img alt="Jans Lock sample toplogy" src="../../assets/lock-east-west-service-mesh-diagram.png" /></p>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-11-08T22:33:18+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-11-08</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-11-10T17:37:50+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-11-10</span>
       
         <br>
         Created:
