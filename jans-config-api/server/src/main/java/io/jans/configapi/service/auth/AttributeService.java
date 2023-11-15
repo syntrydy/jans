@@ -3,17 +3,25 @@ package io.jans.configapi.service.auth;
 
 import static io.jans.as.model.util.Util.escapeLog;
 import io.jans.as.common.util.AttributeConstants;
+import io.jans.as.model.configuration.AppConfiguration;
 import io.jans.configapi.util.ApiConstants;
 import io.jans.model.JansAttribute;
 import io.jans.model.SearchRequest;
+import io.jans.orm.PersistenceEntryManager;
 import io.jans.orm.model.PagedResult;
 import io.jans.orm.model.SortOrder;
 import io.jans.orm.search.filter.Filter;
+import io.jans.model.SchemaEntry;
+import io.jans.service.DataSourceTypeService;
+import io.jans.util.ArrayHelper;
+import io.jans.util.StringHelper;
 
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * @author Yuriy Zabrovarnyy
@@ -22,6 +30,15 @@ import java.util.Map;
 public class AttributeService extends io.jans.as.common.service.AttributeService {
 
     private static final long serialVersionUID = -820393743995746612L;
+    
+    @Inject
+    transient AppConfiguration appConfiguration;
+    
+    @Inject 
+    ConfigurationService configurationService;
+    
+    @Inject
+    DataSourceTypeService dataSourceTypeService;
     
     @Override
     protected boolean isUseLocalCache() {
@@ -103,5 +120,70 @@ public class AttributeService extends io.jans.as.common.service.AttributeService
         }
         return jansAttribute;
     }
+    
+    public boolean validateAttributeDefinition(String attributeName) {
+        log.info("1n 1 Validate attributeName:{}, dataSourceTypeService.isLDAP(getDnForAttribute(null):{}, schemaService.containsAttributeTypeInSchema(attributeName):{}", attributeName, dataSourceTypeService.isLDAP(getDnForAttribute(null)), schemaService.containsAttributeTypeInSchema(attributeName));
+        
+        if (dataSourceTypeService.isLDAP(getDnForAttribute(null))) {
+            boolean containsAttribute = schemaService.containsAttributeTypeInSchema(attributeName);
+            log.info("1n 2 Validate containsAttribute:{}", containsAttribute);
+            
+            if (!containsAttribute) {
+                log.info("\n 1n 3");
+                return false;
+            }
+            boolean containsAttributeInGluuObjectClasses = containsAttributeInJansObjectClasses(attributeName);
+            log.info("1n 4 containsAttributeInGluuObjectClasses:{}", containsAttribute);
+            
+            if (!containsAttributeInGluuObjectClasses) {
+                log.info("1n 5 ");
+                return false;
+            }
+            log.info("1n 6");
+            return true;
+        } else {
+            log.info("1n 7");
+            boolean containsAttributeInGluuObjectClasses = containsAttributeInJansObjectClasses(attributeName);
+            log.info("1n 8 containsAttributeInGluuObjectClasses:{}", containsAttributeInGluuObjectClasses);
+            if (!containsAttributeInGluuObjectClasses) {
+                log.info("1n 9 ");
+                return false;
+            }
+            log.info("1n 10");
+            return true;
+        }
+        
+    }
+
+   private boolean containsAttributeInJansObjectClasses(String attributeName) {
+        log.info("Verify attributeName:{}, configurationService.getPersistenceType():{}, appConfiguration.getPersonCustomObjectClassList():{}", attributeName, configurationService.getPersistenceType(),
+                appConfiguration.getPersonCustomObjectClassList());
+        String persistenceType = configurationService.getPersistenceType();
+        log.info("persistenceType:{}",persistenceType); 
+        String[] arr = null;
+        if (appConfiguration.getPersonCustomObjectClassList() != null
+                && !appConfiguration.getPersonCustomObjectClassList().isEmpty()) {
+            arr = appConfiguration.getPersonCustomObjectClassList().stream().toArray(String[]::new);
+        }
+        String[] objectClasses = ArrayHelper.arrayMerge(new String[] { "gluuPerson" }, arr);
+        log.info("objectClasses:{}",objectClasses); 
+        SchemaEntry schemaEntry = schemaService.getSchema();
+        Set<String> attributeNames = schemaService.getObjectClassesAttributes(schemaEntry, objectClasses);
+
+        String atributeNameToSearch = StringHelper.toLowerCase(attributeName);
+        boolean result = attributeNames.contains(atributeNameToSearch);
+        log.info("attributeName:{}, result:{}", attributeName, result);
+        return result;
+    }
+    
+    public boolean isLDAP() {
+        String persistenceType = configurationService.getPersistenceType();
+        log.debug("persistenceType: {}", persistenceType);
+        if (PersistenceEntryManager.PERSITENCE_TYPES.ldap.name().equals(persistenceType)) {
+            return true;
+        }
+        return false;
+    }
+
 
 }
