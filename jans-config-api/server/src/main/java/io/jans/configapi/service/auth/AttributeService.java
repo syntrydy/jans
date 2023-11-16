@@ -160,19 +160,23 @@ public class AttributeService extends io.jans.as.common.service.AttributeService
                 appConfiguration.getPersonCustomObjectClassList());
         String persistenceType = configurationService.getPersistenceType();
         log.info("persistenceType:{}",persistenceType); 
-        String[] arr = null;
+        String[] arr = new String[0];
         if (appConfiguration.getPersonCustomObjectClassList() != null
                 && !appConfiguration.getPersonCustomObjectClassList().isEmpty()) {
             arr = appConfiguration.getPersonCustomObjectClassList().stream().toArray(String[]::new);
         }
-        String[] objectClasses = ArrayHelper.arrayMerge(new String[] { "gluuPerson" }, arr);
+        String[] objectClasses = ArrayHelper.arrayMerge(new String[] { "jansPerson" }, arr);
         log.info("objectClasses:{}",objectClasses); 
         SchemaEntry schemaEntry = schemaService.getSchema();
         Set<String> attributeNames = schemaService.getObjectClassesAttributes(schemaEntry, objectClasses);
-
-        String atributeNameToSearch = StringHelper.toLowerCase(attributeName);
-        boolean result = attributeNames.contains(atributeNameToSearch);
-        log.info("attributeName:{}, result:{}", attributeName, result);
+        log.info("attributeNames:{}",attributeNames); 
+        
+        boolean result = false;
+        if (attributeNames != null || !attributeNames.isEmpty()) {
+            String atributeNameToSearch = StringHelper.toLowerCase(attributeName);
+            result = attributeNames.contains(atributeNameToSearch);
+            log.info("attributeName:{}, result:{}", attributeName, result);
+        }
         return result;
     }
     
