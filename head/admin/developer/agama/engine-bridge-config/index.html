@@ -173902,10 +173902,9 @@
 <h1 id="engine-and-bridge-configurations">Engine and bridge configurations<a class="headerlink" href="#engine-and-bridge-configurations" title="Permanent link">#</a></h1>
 <h2 id="availability">Availability<a class="headerlink" href="#availability" title="Permanent link">#</a></h2>
 <p>The engine and the bridge are two of the components part of the Agama Framework implementation in Janssen. The <a href="../jans-agama-engine/">engine</a> is a piece of software in charge of parsing flows written in Agama DSL and put them into action. The "bridge" is a regular jython script that temporarily hands control to the engine when an Agama flow is started, and receives control back once the flow has finished. This script is in charge of completing the authentication process for the user.</p>
-<p>By default, both components are disabled. To activate them do the following:</p>
+<p>By default, the bridge is disabled. To activate it do the following:</p>
 <ul>
 <li>Open <a href="../../../config-guide/config-tools/jans-tui/">TUI</a></li>
-<li>Navigate to <code>Auth Server</code> &gt; <code>properties</code> &gt; <code>agamaConfiguration</code> &gt; check <code>enabled</code> &gt; <code>save</code></li>
 <li>Navigate to <code>Scripts</code> &gt; Search 'agama' &gt; Select the script and hit enter &gt; check <code>enabled</code> &gt; <code>save</code> </li>
 </ul>
 <h2 id="engine-configuration">Engine configuration<a class="headerlink" href="#engine-configuration" title="Permanent link">#</a></h2>
@@ -173913,7 +173912,7 @@
 <p>The properties of Agama engine configuration are described in the following:</p>
 <ul>
 <li>
-<p><code>enabled</code>: A boolean value that specifies if the engine is enabled. Read more about <a href="#availability">engine availability</a> above </p>
+<p><code>enabled</code>: A boolean value that specifies if the engine is enabled. To disable the engine, open <a href="../../../config-guide/config-tools/jans-tui/">TUI</a> and navigate to <code>Auth Server</code> &gt; <code>properties</code> &gt; <code>agamaConfiguration</code>. Then uncheck <code>enabled</code> and hit <code>save</code></p>
 </li>
 <li>
 <p><code>templatesPath</code>: A path relative to <code>/opt/jans/jetty/jans-auth/server/agama</code> that serves as the root of Agama flow pages. Default value is <code>/ftl</code></p>
@@ -173972,7 +173971,7 @@
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-08-03T16:21:13+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-08-03</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-11-16T20:49:58+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-11-16</span>
       
         <br>
         Created:
