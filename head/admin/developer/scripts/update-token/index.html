@@ -174259,13 +174259,13 @@ To Associate an Update Token script to a client (RP), execute the command below 
     def modifyAccessToken(self, accessToken, context):
 
         # header claims
-        accessToken.getHeader().setClaim(&quot;header_name&quot;, &quot;header_value&quot;)
+        context.getHeader().setClaim(&quot;header_name&quot;, &quot;header_value&quot;)
 
         #custom claims
-        accessToken.getClaims().setClaim(&quot;claim_name&quot;, &quot;claimValue&quot;)
+        context.getClaims().setClaim(&quot;claim_name&quot;, &quot;claimValue&quot;)
 
         #regular claims        
-        accessToken.getClaims().setClaim(&quot;sub&quot;, claimValue)
+        context.getClaims().setClaim(&quot;sub&quot;, claimValue)
 
         return True
 </code></pre></div>
@@ -174365,7 +174365,7 @@ Get it as integer, via
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-07-10T15:06:36+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-07-10</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-11-16T11:47:42+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-11-16</span>
       
         <br>
         Created:
