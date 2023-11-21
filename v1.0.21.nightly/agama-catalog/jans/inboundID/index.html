@@ -174052,7 +174052,7 @@
 <h3 id="add-agama-inbound-jar">Add agama-inbound jar<a class="headerlink" href="#add-agama-inbound-jar" title="Permanent link">#</a></h3>
 <p>Let's add the required libraries to the authentication server:</p>
 <ul>
-<li>Visit <a href="https://maven.jans.io/maven/io/jans/agama-inbound/">this</a> page, navigate to the folder matching your Janssen server version, and download the file suffixed with <code>jar-with-dependencies.jar</code></li>
+<li>Visit <a href="https://maven.jans.io/maven/io/jans/agama-inbound/">this</a> page, navigate to the folder matching your Janssen server version, and download the jar file</li>
 <li>SSH to the server. Transfer the file to directory <code>/opt/jans/jetty/jans-auth/custom/libs</code></li>
 <li>Navigate to <code>/opt/jans/jetty/jans-auth/webapps</code> and edit the file <code>jans-auth.xml</code> by adding <code>&lt;Set name="extraClasspath"&gt;./custom/libs/*&lt;/Set&gt;</code> before the root tag closes</li>
 <li>Restart the server, e.g. <code>systemctl restart jans-auth</code></li>
@@ -174128,7 +174128,7 @@
 </table>
 <p>Edit the file with the properties you consider relevant for every provider. Generally, the first six are the only needed.</p>
 <h3 id="supply-the-main-flow-configurations">Supply the main flow configurations<a class="headerlink" href="#supply-the-main-flow-configurations" title="Permanent link">#</a></h3>
-<p>The main flow (<code>io.jans.inbound.ExternalSiteLogin</code>) has to be parameterized as well. The configuration is held in a JSON object whose keys are the identifiers of the existing identity providers. The associated value for a key is a JSON object itself and follows the structure represented by <a href="https://github.com/JanssenProject/jans/blob/v1.0.21.nightly/jans-auth-server/agama/inboundID/src/main/java/io/jans/inbound/Provider.java">this</a> Java class.</p>
+<p>The main flow (<code>io.jans.inbound.ExternalSiteLogin</code>) has to be parameterized as well. The configuration is held in a JSON object whose keys are the identifiers of the existing identity providers. The associated value for a key is a JSON object itself and follows the structure represented by <a href="https://github.com/JanssenProject/jans/blob/vreplace-janssen-version/jans-auth-server/agama/inboundID/src/main/java/io/jans/inbound/Provider.java">this</a> Java class.</p>
 <p>This is an example of a configuration for a couple of identity providers:</p>
 <div class="highlight"><pre><span></span><code>{
 
@@ -174323,7 +174323,7 @@
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-08-10T14:04:19+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-08-10</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-11-21T18:37:33+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-11-21</span>
       
         <br>
         Created:
