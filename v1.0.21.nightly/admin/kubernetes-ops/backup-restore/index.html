@@ -1100,73 +1100,6 @@
       
         
           
-        
-          
-        
-      
-      
-        <label class="md-nav__link" for="__nav_1_3_3">
-          Docker Installation
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <nav class="md-nav" aria-label="Docker Installation" data-md-level="3">
-        <label class="md-nav__title" for="__nav_1_3_3">
-          <span class="md-nav__icon md-icon"></span>
-          Docker Installation
-        </label>
-        <ul class="md-nav__list" data-md-scrollfix>
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../install/docker-install/quick-start/" class="md-nav__link">
-        Quick Start
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../install/docker-install/compose/" class="md-nav__link">
-        Docker compose
-      </a>
-    </li>
-  
-
-            
-          
-        </ul>
-      </nav>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-      
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_3_4" type="checkbox" id="__nav_1_3_4" >
-      
-      
-      
-        
-          
             
           
         
@@ -1187,14 +1120,14 @@
         <div class="md-nav__link md-nav__link--index ">
           <a href="../../install/helm-install/">Helm Deployments</a>
           
-            <label for="__nav_1_3_4">
+            <label for="__nav_1_3_3">
               <span class="md-nav__icon md-icon"></span>
             </label>
           
         </div>
       
       <nav class="md-nav" aria-label="Helm Deployments" data-md-level="3">
-        <label class="md-nav__title" for="__nav_1_3_4">
+        <label class="md-nav__title" for="__nav_1_3_3">
           <span class="md-nav__icon md-icon"></span>
           Helm Deployments
         </label>
@@ -1266,6 +1199,73 @@
     <li class="md-nav__item">
       <a href="../../install/helm-install/rancher/" class="md-nav__link">
         Using Rancher Marketplace
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_3_4" type="checkbox" id="__nav_1_3_4" >
+      
+      
+      
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_1_3_4">
+          Docker Deployments
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Docker Deployments" data-md-level="3">
+        <label class="md-nav__title" for="__nav_1_3_4">
+          <span class="md-nav__icon md-icon"></span>
+          Docker Deployments
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../install/docker-install/quick-start/" class="md-nav__link">
+        Quick Start
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../install/docker-install/compose/" class="md-nav__link">
+        Docker compose
       </a>
     </li>
   
@@ -173973,7 +173973,7 @@
 </code></pre></div></p>
 </li>
 </ol>
-<p>Keep note of the chart version. For example: <code>1.0.21.nightly</code></p>
+<p>Keep note of the chart version. For example: <code>replace-janssen-version</code></p>
 <h3 id="manual-restore">Manual Restore<a class="headerlink" href="#manual-restore" title="Permanent link">#</a></h3>
 <ol>
 <li>
@@ -173995,7 +173995,7 @@
 <p>Insall jans using the override or user supplied values with the same chart version:</p>
 </li>
 </ol>
-<div class="highlight"><pre><span></span><code>helm install &lt;release-name&gt; janssen/janssen -f values.yaml --version<span class="o">=</span>&lt;1.0.21.nightly&gt; -n &lt;namespace&gt;
+<div class="highlight"><pre><span></span><code>helm install &lt;release-name&gt; janssen/janssen -f values.yaml --version<span class="o">=</span>&lt;replace-janssen-version&gt; -n &lt;namespace&gt;
 </code></pre></div>
 <h2 id="automatic-backup-and-restore">Automatic Backup and Restore<a class="headerlink" href="#automatic-backup-and-restore" title="Permanent link">#</a></h2>
 <p>There are several tools that helps in automatic backups and restore, like <a href="https://www.kasten.io/kubernetes/use-cases/backup-restore">Kasten K10</a>.</p>

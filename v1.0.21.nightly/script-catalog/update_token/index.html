@@ -1096,73 +1096,6 @@
       
         
           
-        
-          
-        
-      
-      
-        <label class="md-nav__link" for="__nav_1_3_3">
-          Docker Installation
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <nav class="md-nav" aria-label="Docker Installation" data-md-level="3">
-        <label class="md-nav__title" for="__nav_1_3_3">
-          <span class="md-nav__icon md-icon"></span>
-          Docker Installation
-        </label>
-        <ul class="md-nav__list" data-md-scrollfix>
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../admin/install/docker-install/quick-start/" class="md-nav__link">
-        Quick Start
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../admin/install/docker-install/compose/" class="md-nav__link">
-        Docker compose
-      </a>
-    </li>
-  
-
-            
-          
-        </ul>
-      </nav>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-      
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_3_4" type="checkbox" id="__nav_1_3_4" >
-      
-      
-      
-        
-          
             
           
         
@@ -1183,14 +1116,14 @@
         <div class="md-nav__link md-nav__link--index ">
           <a href="../../admin/install/helm-install/">Helm Deployments</a>
           
-            <label for="__nav_1_3_4">
+            <label for="__nav_1_3_3">
               <span class="md-nav__icon md-icon"></span>
             </label>
           
         </div>
       
       <nav class="md-nav" aria-label="Helm Deployments" data-md-level="3">
-        <label class="md-nav__title" for="__nav_1_3_4">
+        <label class="md-nav__title" for="__nav_1_3_3">
           <span class="md-nav__icon md-icon"></span>
           Helm Deployments
         </label>
@@ -1262,6 +1195,73 @@
     <li class="md-nav__item">
       <a href="../../admin/install/helm-install/rancher/" class="md-nav__link">
         Using Rancher Marketplace
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_3_4" type="checkbox" id="__nav_1_3_4" >
+      
+      
+      
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_1_3_4">
+          Docker Deployments
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Docker Deployments" data-md-level="3">
+        <label class="md-nav__title" for="__nav_1_3_4">
+          <span class="md-nav__icon md-icon"></span>
+          Docker Deployments
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../admin/install/docker-install/quick-start/" class="md-nav__link">
+        Quick Start
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../admin/install/docker-install/compose/" class="md-nav__link">
+        Docker compose
       </a>
     </li>
   
@@ -173874,7 +173874,7 @@
   <h1>Index</h1>
 
 <h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">#</a></h2>
-<p>By overriding the interface methods in <a href="https://github.com/JanssenProject/jans/blob/v1.0.21.nightly/jans-core/script/src/main/java/io/jans/model/custom/script/type/token/UpdateTokenType.java"><code>UpdateTokenType</code></a> inside a custom script you can</p>
+<p>By overriding the interface methods in <a href="https://github.com/JanssenProject/jans/blob/vreplace-janssen-version/jans-core/script/src/main/java/io/jans/model/custom/script/type/token/UpdateTokenType.java"><code>UpdateTokenType</code></a> inside a custom script you can</p>
 <ol>
 <li>Enable transformation of claims and values in id_token and Access token e.g. add a custom claim to an <code>id_token</code>, change a token expiry, change the <code>sub</code> value, or remove the <code>nonce</code>.
    <br/>Example use-case:  <ul>
@@ -173911,7 +173911,7 @@ Jans AS-&gt;&gt;RP: return token(s) (Access token, ID token or Refresh Token) re
 <li>Configure any parameters that the script may use.</li>
 <li><code>name</code> field should reflect the use case</li>
 <li><code>script_type</code> should be <code>UPDATE_TOKEN</code></li>
-<li><code>script.py</code> can have contents similar to <a href="https://github.com/JanssenProject/jans/blob/v1.0.21.nightly/docs/script-catalog/update_token/sample-script/sample_script.py">Sample Script</a>) and is present in jans-cli's host machine.</li>
+<li><code>script.py</code> can have contents similar to <a href="https://github.com/JanssenProject/jans/blob/vreplace-janssen-version/docs/script-catalog/update_token/sample-script/sample_script.py">Sample Script</a>) and is present in jans-cli's host machine.</li>
 </ol>
 <p><div class="highlight"><pre><span></span><code>{
   &quot;dn&quot;: null,
@@ -174014,7 +174014,7 @@ Pseudocode and example :
 #### a. Granularity of access control:
 An UpdateTokenType script is great for adding scopes or removing scopes to/from the Access token. By doing so you can tailor build the granularity of access control according to business need.
 
-[`context.overwriteAccessTokenScopes`](https://github.com/JanssenProject/jans/blob/v1.0.21.nightly/jans-auth-server/server/src/main/java/io/jans/as/server/service/external/context/ExternalUpdateTokenContext.java) is ready to use method of the `context` variable
+[`context.overwriteAccessTokenScopes`](https://github.com/JanssenProject/jans/blob/vreplace-janssen-version/jans-auth-server/server/src/main/java/io/jans/as/server/service/external/context/ExternalUpdateTokenContext.java) is ready to use method of the `context` variable
 </code></pre></div>
     def modifyAccessToken(self, accessToken, context):
               context.overwriteAccessTokenScopes(accessToken, Sets.newHashSet("openid", "mynewscope"))
@@ -174081,7 +174081,7 @@ Used to modify claims in a Refresh Token
         return True</p>
 <p><div class="highlight"><pre><span></span><code>## IntrospectionType script vs UpdateTokenType script 
 
-|   | [`IntrospectionType`](https://github.com/JanssenProject/jans/blob/v1.0.21.nightly/jans-core/script/src/main/java/io/jans/model/custom/script/type/introspection/IntrospectionType.java)| [`UpdateTokenType`](https://github.com/JanssenProject/jans/blob/v1.0.21.nightly/jans-core/script/src/main/java/io/jans/model/custom/script/type/token/UpdateTokenType.java) |
+|   | [`IntrospectionType`](https://github.com/JanssenProject/jans/blob/vreplace-janssen-version/jans-core/script/src/main/java/io/jans/model/custom/script/type/introspection/IntrospectionType.java)| [`UpdateTokenType`](https://github.com/JanssenProject/jans/blob/vreplace-janssen-version/jans-core/script/src/main/java/io/jans/model/custom/script/type/token/UpdateTokenType.java) |
 |---|---|---|
 | Client configuration parameter  |Introspection script is invoked only when **`accessTokenAsJwt`=`true`**   | Update token script is invoked irrespective of whether `accessTokenAsJwt` is `true` or `false`   |
 | Core Purpose   | Used to return access token meta information like current validity, approved scopes, and information about the context in which the token was issued when a Resource Server which queries the [Introspection endpoint](https://datatracker.ietf.org/doc/html/rfc7662)     | used to enable transformation of claims and values in id_token and Access token, set a specific token lifetime, change granularity of access control (up-scoping, down-scoping), audit logging for each token response, forbid the creation of AT based on a criteria. |
@@ -174091,7 +174091,7 @@ Used to modify claims in a Refresh Token
 
 ## Testing
 
-1. Use this: [Reference for testing](https://github.com/JanssenProject/jans/blob/v1.0.21.nightly/jans-auth-server/client/src/test/java/io/jans/as/client/ws/rs/AuthorizationCodeFlowHttpTest.java)
+1. Use this: [Reference for testing](https://github.com/JanssenProject/jans/blob/vreplace-janssen-version/jans-auth-server/client/src/test/java/io/jans/as/client/ws/rs/AuthorizationCodeFlowHttpTest.java)
 2. Inspect the tokens. Use [jwt.io](https://jwt.io) to inspect the contents of a JWT. 
 
 ## FAQ
