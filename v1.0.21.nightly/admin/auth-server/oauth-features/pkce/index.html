@@ -174074,9 +174074,9 @@ the <code>code_challenge_method</code> field.</p>
 <p>The following command generates the <code>code_challenge</code> using <code>s256</code>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
+<p>To execute command the command below, you need to have <code>openssl</code>, <code>basenc</code></p>
 </div>
-<p>To execute command the command below, you need to have <code>openssl</code>, <code>basenc</code>
-and <code>tr</code> installed.</p>
+<p>and <code>tr</code> installed.</p>
 <div class="highlight"><pre><span></span><code><span class="nb">echo</span> -n <span class="s2">&quot;MW54l5Ma7i8n6QsetI_dnJhfMQ6gIfBNJiWFINu6rtD0zvZUXG3STWoolT5HFatjWu2Vj1L-Au4PtRzkear088FJLzq.6tAg10wikJrIqn75HCJ7V1b_p8io_ugkPkkr&quot;</span> <span class="p">|</span> openssl dgst -binary -sha256 <span class="p">|</span> basenc --base64url <span class="p">|</span> tr -d <span class="s1">&#39;=&#39;</span>
 </code></pre></div>
 <p>Output example:</p>
@@ -174111,8 +174111,8 @@ Content-Type: application/json
 </code></pre></div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-</div>
 <p>Notee that the <code>token_endpoint_auth_method</code> field is <code>none</code>.</p>
+</div>
 <div class="highlight"><span class="filename">Response</span><pre><span></span><code>HTTP/1.1 201 Created
 Date: Fri, 17 Nov 2023 22:51:13 GMT
 Server: Apache/2.4.41 (Ubuntu)
@@ -174185,9 +174185,9 @@ code_challenge_method=&lt;YOUR_CODE_CHALLENGE_METHOD&gt;
 </code></pre></div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
+<p>Remember that this <strong>endpoint</strong> is where you must send the <code>code_challenge</code> and <code>code_challenge_method</code></p>
 </div>
-<p>Remember that this <strong>endpoint</strong> is where you must send the <code>code_challenge</code> and <code>code_challenge_method</code>
-parameters.</p>
+<p>parameters.</p>
 <p>The field we need to obtain is the <code>code</code>.</p>
 <p><img alt="pkce2.png" src="../../../../assets/pkce2.png" /></p>
 <h3 id="4-call-token-endpoint">4. Call <code>token</code> endpoint<a class="headerlink" href="#4-call-token-endpoint" title="Permanent link">#</a></h3>
@@ -174215,7 +174215,7 @@ code=&lt;YOUR_CODE&gt;
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-11-22T23:35:57+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-11-22</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-11-24T15:47:39+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-11-24</span>
       
         <br>
         Created:
