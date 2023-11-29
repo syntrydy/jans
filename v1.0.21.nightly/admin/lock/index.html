@@ -173844,10 +173844,71 @@
 
 
 <h1 id="jans-lock-overview">Jans Lock Overview<a class="headerlink" href="#jans-lock-overview" title="Permanent link">#</a></h1>
-<p>Lock enables domains to enforce policies based on real time OAuth data. Lock
-pushes token data from Auth Server to <a href="https://openpolicyagent.org">OPA</a>, enabling
-authorization based on real time information from the OAuth infrastructure. In
-order to use Lock, admins will have to do a few things:</p>
+<p>Jans Lock enables domains to enforce access policies based on real time OAuth
+data.</p>
+<p>Centralized policy management is a best practice for authorization for distributed
+networks. If security policies are buried in the code of numerous applications,
+they are hard to inventory and harder to update. For decades, application
+security architects have conceptualized distributed authorization in line with
+<a href="https://datatracker.ietf.org/doc/html/rfc2904#section-4.4">RFC 2409</a>
+and <a href="https://docs.oasis-open.org/xacml/3.0/xacml-3.0-core-spec-cos01-en.html">XACML</a>,
+which describe several common components:</p>
+<table>
+<thead>
+<tr>
+<th>Abbr.</th>
+<th align="center">Term</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PDP</td>
+<td align="center">Policy Decision Point</td>
+<td>Service which evaluates access requests against authorization policies before issuing access decisions</td>
+</tr>
+<tr>
+<td>PEP</td>
+<td align="center">Policy Enforcement Point</td>
+<td>Service, website or API which queries the PDP for authorization</td>
+</tr>
+<tr>
+<td>PAP</td>
+<td align="center">Policy Administration Point</td>
+<td>User interface where admins manage authorization policies</td>
+</tr>
+<tr>
+<td>PIP</td>
+<td align="center">Policy Information Point</td>
+<td>The "data" about people, clients and resources</td>
+</tr>
+<tr>
+<td>PRP</td>
+<td align="center">Policy Retrieval Point</td>
+<td>Repository where policies are stored</td>
+</tr>
+</tbody>
+</table>
+<p>In the old days of "WAM" (web access management), each web server would query
+a centralized PDP over the network. This is ok for course grain authorization.
+But for fine grain authorization, it is too slow--each decision requires a round
+trip HTTP request/response. A more performant design is to move the PDP to the
+edge of the network. Policy definition and administration is still a centralized
+activity. Once a policy is defined, it can be executed anywhere on the network.
+Although multiple PDP instances exist, they must provide the same access control
+decisions given the same inputs.</p>
+<p>Another critical optimization was to move the PIP to the edge, so the PDP
+has all the data it needs to make a decision. This aligns with a principle that
+each microservice is well-encapsulated--all logic and data is encapsulated into
+a single deployment unit.</p>
+<p><img alt="Jans Lock Toplogy" src="../../assets/lock-design-diagram-02.png" /></p>
+<p>To empower this cloud native authorization pattern, Janssen leverages a
+component governed under the Linux Foundation: <a href="https://openpolicyagent.org">OPA</a>,
+a project at the <a href="https://cncf.io">CNCF</a>. OPA is a popular PDP, whose popularity
+grew significantly in response to the need for granular policies for Kubernetes
+access control. The Jans Lock solution pushes token data from Auth Server to OPA,
+enabling authorization based on real time information from the OAuth
+infrastructure. In order to use Lock, admins will have to do a few things:</p>
 <ul>
 <li><a href="lock_token_stream/">Enable Lock in Auth Server</a></li>
 <li><a href="lock_client/">Configure a Lock client instance</a></li>
@@ -173889,7 +173950,7 @@ to protect the bearer token. MTLS is even better.</p>
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-11-10T17:37:50+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-11-10</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-11-29T22:56:08+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-11-29</span>
       
         <br>
         Created:
