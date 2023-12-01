@@ -1538,6 +1538,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#custom-jar-file-for-scripts" class="md-nav__link">
+    Custom Jar file for scripts
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#customized-pages-examples" class="md-nav__link">
     Customized pages examples
   </a>
@@ -173998,6 +174005,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#custom-jar-file-for-scripts" class="md-nav__link">
+    Custom Jar file for scripts
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#customized-pages-examples" class="md-nav__link">
     Customized pages examples
   </a>
@@ -174158,6 +174172,31 @@ Resource bundle names to support other languages should be placed under the same
 <ol>
 <li>All templates should be placed under <code>/opt/jans/jetty/jans-auth/custom/pages/WEB-INF/incl/layout/</code> </li>
 <li>Place a modified <code>template.xhtml</code> in the above location which will override the <a href="https://github.com/JanssenProject/jans/blob/main/jans-auth-server/server/src/main/webapp/WEB-INF/incl/layout/template.xhtml">default template file</a> from the war</li>
+</ol>
+<h2 id="custom-jar-file-for-scripts">Custom Jar file for scripts<a class="headerlink" href="#custom-jar-file-for-scripts" title="Permanent link">#</a></h2>
+<ol>
+<li>
+<p>Create a configmap with the custom jar file: 
+    <code>kubectl -n &lt;namespace&gt; create cm my-custom-jar --from-file=mycustom.jar</code></p>
+</li>
+<li>
+<p>Mount the configmap in your values.yaml under <code>auth-server.volumes</code> and <code>auth-server.volumeMounts</code></p>
+<div class="highlight"><pre><span></span><code>auth-server:
+  volumeMounts:
+    - name: my-custom-jar-volume
+      mountPath: /opt/jans/jetty/jans-auth/custom/libs/mycustom.jar
+      subPath: mycustom.jar
+  volumes:
+    - name: my-custom-jar-volume
+      configMap:
+        name: my-custom-jar
+</code></pre></div>
+</li>
+<li>
+<p>Run helm install or helm upgrade if Jans has been already installed.
+    <div class="highlight"><pre><span></span><code>helm upgrade &lt;helm-release-name&gt; janssen/janssen -n &lt;namespace&gt; -f values.yaml --version<span class="o">=</span><span class="m">1</span>.0.x
+</code></pre></div></p>
+</li>
 </ol>
 <h2 id="customized-pages-examples">Customized pages examples<a class="headerlink" href="#customized-pages-examples" title="Permanent link">#</a></h2>
 <h3 id="custom-login-page">Custom Login page<a class="headerlink" href="#custom-login-page" title="Permanent link">#</a></h3>
@@ -174366,7 +174405,7 @@ kubectl -n &lt;namespace&gt; create cm auth-server-custom-css --from-file<span c
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-04-06T09:57:04+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-04-06</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-12-01T15:48:03+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-12-01</span>
       
         <br>
         Created:

@@ -174376,14 +174376,17 @@
 <h3 id="no-finish-instruction-was-reached">No Finish instruction was reached<a class="headerlink" href="#no-finish-instruction-was-reached" title="Permanent link">#</a></h3>
 <p>This occurs when no <code>Finish</code> statement has been found in the execution of a flow and there are no remaining instructions.</p>
 <h3 id="serialization-errors">Serialization errors<a class="headerlink" href="#serialization-errors" title="Permanent link">#</a></h3>
-<p>Agama engine saves the state of a flow every time an <a href="../../../../agama/language-reference/#rrf">RRF</a> or <a href="../../../../agama/language-reference/#rfac">RFAC</a> instruction is reached. For this purpose the <a href="https://github.com/EsotericSoftware/kryo">KRYO</a> library is employed. If kryo is unable to serialize a variable in use by your flow, a serialization error will appear in the screen or in the logs. Normally the problematic (Java) class is logged and this helps reveal the variable that is causing the issue. Note variables that hold "native" Agama values like strings or maps are never troublesome; the problems may originate from values obtained via <a href="../../../../agama/language-reference/#foreign-routines">Call</a>.</p>
-<p>To fix a serialization problem, try some of the following:</p>
+<p>Agama engine saves the state of a flow every time an <a href="../../../../agama/language-reference/#rrf">RRF</a> or <a href="../../../../agama/language-reference/#rfac">RFAC</a> instruction is reached. The <em>State</em> can be understood as the set of all variables defined in a flow and their associated values up to certain point. </p>
+<p>Most of times, variables hold basic Agama <a href="../../../../agama/language-reference/#data-types">values</a> like strings, booleans, numbers, lists or maps, however, more complex values may appear due to Java <code>Call</code>s. The engine does its best  to properly serialize these Java objects, nonetheless, this is not always feasible. In these cases, the flow crashes and errors will appear on screen as well as in the server logs.</p>
+<p>Use the information in the logs to detect the problematic Java class. This would normally allow you to identify the variable that is causing the issue. Now you have several options to proceed:</p>
 <ul>
-<li>Check if the value held by the variable is needed for RRF/RFAC or some upcoming statement. If that's not the case, simply set it to <code>null</code> before RRF/RFAC occurs</li>
-<li>Adjust the given class so it is "serialization" friendlier. With kryo, classes are not required to implement the <code>java.io.Serializable</code> interface </li>
-<li>Find a replacement for the problematic class</li>
-<li>As a last resort, set <code>serializerType</code> property of the <a href="../engine-bridge-config/#engine-configuration">engine</a> to <code>null</code>. Note this will switch to standard Java serialization. This setting applies globally for all your flows</li>
+<li>Check if the value held by the variable is needed for the given RRF/RFAC or some upcoming statement. If that's not the case, simply set it to <code>null</code> before RRF/RFAC occurs</li>
+<li>Extract only the necessary pieces from the variable, that is, grab only the fields from the object which are of use for the rest of the flow. If they are simple values like strings or numbers, serialization will succeed. Ensure to nullify or overwrite the original variable</li>
+<li>Adjust the given class so it is "serialization" friendlier. Sometimes, adding a no-args constructor fixes the problem. In other cases, making the class implement the <code>java.io.Serializable</code> interface will make it work. The error in the log should provide a hint </li>
+<li>Tweak the engine serialization <a href="../engine-bridge-config/#serialization-rules">rules</a> so an alternative type of serialization can be used for this particular object </li>
+<li>Modify your Java code so an alternative class is used instead</li>
 </ul>
+<p>In general, a good practice is to avoid handling complex variables in flows. Letting big object graphs live in the state has a negative impact on performance and also increases the risk of serialization issues.   </p>
 <h2 id="libraries-and-classes-added-on-the-fly">Libraries and classes added on the fly<a class="headerlink" href="#libraries-and-classes-added-on-the-fly" title="Permanent link">#</a></h2>
 <h3 id="what-groovy-and-java-versions-are-supported">What Groovy and Java versions are supported?<a class="headerlink" href="#what-groovy-and-java-versions-are-supported" title="Permanent link">#</a></h3>
 <p>Groovy 4.0 and Java 11. The runtime is Amazon Corretto 17.</p>
@@ -174448,7 +174451,7 @@ Call java.lang.String#join &quot;&quot; strings
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-11-08T21:20:51+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-11-08</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-12-01T15:53:48+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-12-01</span>
       
         <br>
         Created:
