@@ -173955,18 +173955,25 @@
 </li>
 <li>
 <p>Execute Installer</p>
-<p>The installer can be invoked using various options to tailor the installation process. Invoke the commands below to know about all the available options.</p>
-<div class="highlight"><pre><span></span><code>install.py --help
-setup.py --help
-</code></pre></div>
-<p>One particularly useful option for development environments is the one below which installs the Janssen Server with test data loaded.</p>
-<div class="highlight"><pre><span></span><code>python3 install.py --args=&quot;-t&quot;
-</code></pre></div>
-<p>To install without test data loaded, run the command below:</p>
-<div class="highlight"><pre><span></span><code>python3 install.py
-</code></pre></div>
 </li>
 </ol>
+<p>To execute installer, run the command below:</p>
+<div class="highlight"><pre><span></span><code>python3 install.py
+</code></pre></div>
+<p>The installer can be invoked using various options to tailor the 
+   installation process. Invoke the commands below to know about all the 
+   available options.</p>
+<div class="highlight"><pre><span></span><code>python3 install.py --help
+</code></pre></div>
+<p>One particularly useful option for development environments is the one 
+   below which installs the Janssen Server with test data loaded.</p>
+<div class="highlight"><pre><span></span><code>python3 install.py --args=&quot;-t&quot;
+</code></pre></div>
+<p>Installer can be run with all the arguments provided via command-line
+   at the time of invocking the install script. This enables prompt-less
+   installation. For example, see the command below:</p>
+<div class="highlight"><pre><span></span><code>python3 install.py --args<span class="o">=</span><span class="s2">&quot;-n -ip-address 10.229.38.28 -host-name jans-opensuse -city ah -state gj -country in -org-name gluu -email dhaval@gluu.org -jans-max-mem 26349 -admin-password admin -ldap-admin-password admin --listen_all_interfaces --with-casa --install-jans-keycloak-link -t&quot;</span>
+</code></pre></div>
 <h2 id="uninstall">Uninstall<a class="headerlink" href="#uninstall" title="Permanent link">#</a></h2>
 <p>Use the command below to uninstall the Janssen Server</p>
 <div class="highlight"><pre><span></span><code>python3 install.py -uninstall
@@ -173977,7 +173984,7 @@ setup.py --help
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-04-11T07:54:01+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-04-11</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-12-04T11:56:57+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-12-04</span>
       
         <br>
         Created:
