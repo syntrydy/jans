@@ -1544,6 +1544,26 @@
     Custom Jar file for scripts
   </a>
   
+    <nav class="md-nav" aria-label="Custom Jar file for scripts">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#for-jars-less-than-1mb" class="md-nav__link">
+    for JARs less than 1MB
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#for-jars-greater-than-1mb" class="md-nav__link">
+    For JARs greater than 1MB
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -174025,6 +174045,26 @@
     Custom Jar file for scripts
   </a>
   
+    <nav class="md-nav" aria-label="Custom Jar file for scripts">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#for-jars-less-than-1mb" class="md-nav__link">
+    for JARs less than 1MB
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#for-jars-greater-than-1mb" class="md-nav__link">
+    For JARs greater than 1MB
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -174190,6 +174230,7 @@ Resource bundle names to support other languages should be placed under the same
 <li>Place a modified <code>template.xhtml</code> in the above location which will override the <a href="https://github.com/JanssenProject/jans/blob/main/jans-auth-server/server/src/main/webapp/WEB-INF/incl/layout/template.xhtml">default template file</a> from the war</li>
 </ol>
 <h2 id="custom-jar-file-for-scripts">Custom Jar file for scripts<a class="headerlink" href="#custom-jar-file-for-scripts" title="Permanent link">#</a></h2>
+<h3 id="for-jars-less-than-1mb">for JARs less than 1MB<a class="headerlink" href="#for-jars-less-than-1mb" title="Permanent link">#</a></h3>
 <ol>
 <li>
 <p>Create a configmap with the custom jar file: 
@@ -174206,6 +174247,39 @@ Resource bundle names to support other languages should be placed under the same
     - name: my-custom-jar-volume
       configMap:
         name: my-custom-jar
+</code></pre></div>
+</li>
+<li>
+<p>Run helm install or helm upgrade if Jans has been already installed.
+    <div class="highlight"><pre><span></span><code>helm upgrade &lt;helm-release-name&gt; janssen/janssen -n &lt;namespace&gt; -f values.yaml --version<span class="o">=</span><span class="m">1</span>.0.x
+</code></pre></div></p>
+</li>
+</ol>
+<h3 id="for-jars-greater-than-1mb">For JARs greater than 1MB<a class="headerlink" href="#for-jars-greater-than-1mb" title="Permanent link">#</a></h3>
+<ol>
+<li>
+<p>Create a configmap or secret for a shell script that contains instructions to pull the custom jar file:</p>
+<p><div class="highlight"><pre><span></span><code><span class="ch">#!/bin/sh</span>
+<span class="c1"># This script will pull the custom jar file from a remote location</span>
+<span class="c1"># and place it in the correct location for the Jans Auth server to use it</span>
+wget -O /opt/jans/jetty/jans-auth/custom/libs/mycustom.jar https://mydomain.com/mycustom.jar
+</code></pre></div>
+<code>kubectl -n &lt;namespace&gt; create cm my-custom-jar --from-file=mycustomjar.sh</code></p>
+</li>
+<li>
+<p>Mount the configmap or secret in your values.yaml under <code>auth-server.volumes</code> and <code>auth-server.volumeMounts</code></p>
+<div class="highlight"><pre><span></span><code>auth-server:
+  volumeMounts:
+    - name: my-custom-jar-volume
+      mountPath: /tmp/mycustomjar.sh
+      subPath: mycustomjar.sh
+  volumes:
+    - name: my-custom-jar-volume
+      configMap:
+        name: my-custom-jar
+        defaultMode: 0755
+  customScripts:
+    - /tmp/mycustomjar.sh
 </code></pre></div>
 </li>
 <li>
@@ -174421,7 +174495,7 @@ kubectl -n &lt;namespace&gt; create cm auth-server-custom-css --from-file<span c
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-12-01T15:48:03+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-12-01</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-12-08T11:29:31+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-12-08</span>
       
         <br>
         Created:
