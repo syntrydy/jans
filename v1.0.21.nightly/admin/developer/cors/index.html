@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#this-content-is-in-progress" class="md-skip">
+        <a href="#cors-filter" class="md-skip">
           Skip to content
         </a>
       
@@ -5127,6 +5127,8 @@
       <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
       
       
+        
+      
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
           CORS
@@ -5143,6 +5145,8 @@
   
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -5151,22 +5155,22 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#this-content-is-in-progress" class="md-nav__link">
-    This content is in progress
+  <a href="#overview" class="md-nav__link">
+    Overview
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#have-questions-in-the-meantime" class="md-nav__link">
-    Have questions in the meantime?
+  <a href="#configure-cors" class="md-nav__link">
+    Configure CORS
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#want-to-contribute" class="md-nav__link">
-    Want to contribute?
+  <a href="#parameters-supported-by-cors-filters" class="md-nav__link">
+    Parameters supported by CORS Filters
   </a>
   
 </li>
@@ -173853,6 +173857,8 @@
   
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -173861,22 +173867,22 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#this-content-is-in-progress" class="md-nav__link">
-    This content is in progress
+  <a href="#overview" class="md-nav__link">
+    Overview
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#have-questions-in-the-meantime" class="md-nav__link">
-    Have questions in the meantime?
+  <a href="#configure-cors" class="md-nav__link">
+    Configure CORS
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#want-to-contribute" class="md-nav__link">
-    Want to contribute?
+  <a href="#parameters-supported-by-cors-filters" class="md-nav__link">
+    Parameters supported by CORS Filters
   </a>
   
 </li>
@@ -173918,21 +173924,78 @@
   </a>
 
 
-  <h1>CORS</h1>
-
-<h2 id="this-content-is-in-progress">This content is in progress<a class="headerlink" href="#this-content-is-in-progress" title="Permanent link">#</a></h2>
-<p>The Janssen Project documentation is currently in development. Topic pages are being created in order of broadest relevance, and this page is coming in the near future.</p>
-<h2 id="have-questions-in-the-meantime">Have questions in the meantime?<a class="headerlink" href="#have-questions-in-the-meantime" title="Permanent link">#</a></h2>
-<p>While this documentation is in progress, you can ask questions through <a href="https://github.com/JanssenProject/jans/discussions">GitHub Discussions</a> or the <a href="https://gitter.im/JanssenProject/Lobby">community chat on Gitter</a>. Any questions you have will help determine what information our documentation should cover.</p>
-<h2 id="want-to-contribute">Want to contribute?<a class="headerlink" href="#want-to-contribute" title="Permanent link">#</a></h2>
-<p>If you have content you'd like to contribute to this page in the meantime, you can get started with our <a href="https://docs.jans.io/head/CONTRIBUTING/">Contribution guide</a>.</p>
+<h1 id="cors-filter">CORS Filter<a class="headerlink" href="#cors-filter" title="Permanent link">#</a></h1>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">#</a></h2>
+<p>CORS Filter is an implementation of the <a href="https://fetch.spec.whatwg.org/">W3C's Cross-Origin Resource Sharing (CORS) specification</a>.</p>
+<p>The CORS Filter works by adding required <code>Access-Control-*</code> headers to the <code>HttpServletResponse</code> object. 
+The filter also protects against HTTP response splitting. If a request is invalid or not permitted, the request is 
+rejected with HTTP status code 403 (Forbidden).</p>
+<p>The minimal configuration required to use the CORS Filter is shown below, and is already added to the <code>web.xml</code> in <code>jans-auth.war</code>. 
+The filter name is <code>io.jans.as.server.filter.CorsFilter</code>.</p>
+<div class="highlight"><pre><span></span><code>    &lt;filter-mapping&gt;
+        &lt;filter-name&gt;CorsFilter&lt;/filter-name&gt;
+        &lt;url-pattern /&gt;
+    &lt;/filter-mapping&gt;
+</code></pre></div>
+<h2 id="configure-cors">Configure CORS<a class="headerlink" href="#configure-cors" title="Permanent link">#</a></h2>
+<p>CORS can be configured in Jans Server using <code>Jans TUI</code>. Follow these steps:</p>
+<ol>
+<li>Open <code>Jans TUI</code> using <code>/opt/jans/jans-cli/jans_cli_tui.py</code> command.</li>
+<li>Go to <code>Auth Server &gt; Properties</code> and select <code>corsConfigurationFilters</code></li>
+<li>This will display the CORS Configuration Filter parameters, as shown below:</li>
+</ol>
+<p><img alt="Screenshot from 2023-12-08 04-38-33" src="https://github.com/JanssenProject/jans/assets/43112579/3cbcfad9-9410-46b6-88d2-34e5a45556c8" /></p>
+<ol>
+<li>Define and configure the parameters.</li>
+<li>Click <code>save</code> at the bottom of the page.</li>
+</ol>
+<h2 id="parameters-supported-by-cors-filters">Parameters supported by CORS Filters<a class="headerlink" href="#parameters-supported-by-cors-filters" title="Permanent link">#</a></h2>
+<p>CORS Filter supports the following initialization parameters:</p>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>corsAllowedOrigins</td>
+<td>A list of origins that are allowed to access the resource. A <code>*</code> can be specified to enable access to resource from any origin. Otherwise, a whitelist of comma separated origins can be provided. Eg: <code>http://www.w3.org</code>, <code>https://www.apache.org.</code> Defaults: <code>*</code> (Any origin is allowed to access the resource).</td>
+</tr>
+<tr>
+<td>corsAllowedMethods</td>
+<td>A comma separated list of HTTP methods that can be used to access the resource, using cross-origin requests. These are the methods which will also be included as part of Access-Control-Allow-Methods header in pre-flight response. Eg: <code>GET</code>, <code>POST</code>. Defaults: <code>GET</code>, <code>POST</code>, <code>HEAD</code>, <code>OPTIONS</code></td>
+</tr>
+<tr>
+<td>corsExposedHeaders</td>
+<td>A comma separated list of request headers that can be used when making an actual request. These headers will also be returned as part of Access-Control-Allow-Headers header in a pre-flight response. Eg: <code>Origin, Accept</code>. Defaults: <code>Origin, Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers</code></td>
+</tr>
+<tr>
+<td>corsSupportCredentials</td>
+<td>A flag that indicates whether the resource supports user credentials. This flag is exposed as part of <code>Access-Control-Allow-Credentials</code> header in a pre-flight response. It helps browser determine whether or not an actual request can be made using credentials. Defaults: <code>true</code></td>
+</tr>
+<tr>
+<td>corsLoggingEnabled</td>
+<td>Value to enable logging, Setting the value to <code>False</code> will disable logging. Defaults: <code>true</code></td>
+</tr>
+<tr>
+<td>corsPreflightMaxAge</td>
+<td>The duration in seconds the browser is allowed to cache the result of the pre-flight request. This will be included as part of the <code>Access-Control-Max-Age</code> header in the pre-flight response. A negative value will prevent the CORS Filter from adding this response header to the pre-flight response. Defaults: <code>1800</code></td>
+</tr>
+<tr>
+<td>corsRequestDecorate</td>
+<td>A flag to control if CORS specific attributes should be added to the HttpServletRequest object. Defaults: <code>true</code></td>
+</tr>
+</tbody>
+</table>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-10-26T06:08:13+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-10-26</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-12-11T07:38:51+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-12-11</span>
       
         <br>
         Created:
