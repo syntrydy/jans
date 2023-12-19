@@ -174388,8 +174388,9 @@ hasOne = Call map.numbers contains 1
 <p>The usage of a hash sign (or spaces) before a method name helps disambiguate whether the invocation is on a static class method or an object method. This is so because an expression like <code>hey.You</code> may reference the class <code>You</code> on package <code>hey</code>, or the value of key <code>You</code> in a map named <code>hey</code>.</p>
 <h3 id="highlights">Highlights<a class="headerlink" href="#highlights" title="Permanent link">#</a></h3>
 <p>Any method that meets the conditions mentioned (public or interface static) and that is reachable in the JVM <a href="#classpath">classpath</a> can be called; developers are not restricted solely to <code>java.*</code> packages. </p>
-<p>When using <code>Call</code>, the method to execute is picked based on the name (e.g. after the <code>#</code> sign) and the number of arguments supplied. If a class/interface exhibits several methods with the same name and arity (number of parameters), there is <strong>no way to know</strong> which of the available variants will be called. The <code>java.util.Arrays</code> class has several methods of this kind for instance.</p>
-<p>For non-static method invocations, i.e. no hash sign, the class used for method lookup is that of the instance passed (the first parameter in the <code>Call</code> directive). When the instance does not hold a Java but an Agama value, the following is used to pick a class:</p>
+<p>When using <code>Call</code>, the method to execute is picked based on the name (e.g. after the <code>#</code> sign) and the number of arguments supplied. If a class/interface exhibits several methods with the same name and arity (number of parameters), the method that best matches the dataypes of the arguments with respect to its signature is selected. Sometimes this requires to perform arguments <a href="#arguments-conversion">conversions</a> and they may fail. In such case, the second best suited method is tried and so on. </p>
+<p>When all attempts fail or there are no candidate methods to choose from, the <code>Call</code> simply throws a <code>NoSuchMethodException</code>.</p>
+<p>For non-static method invocations, i.e. no hash sign, the class used for method lookup is that of the instance passed (the first parameter in the <code>Call</code> directive). This includes all associated superclasses too, as expected. When the instance does not hold a Java but an Agama value, the following is used to pick a class:</p>
 <table>
 <thead>
 <tr>
@@ -174420,7 +174421,6 @@ hasOne = Call map.numbers contains 1
 </tr>
 </tbody>
 </table>
-<p>Once a concrete method is selected, a best effort is made to convert (if required) the values passed as arguments so that they match the expected parameter types in the method signature. If a conversion fails, this will degenerate in an <code>IllegalArgumentException</code>. More on conversions <a href="#arguments-conversion">here</a>.</p>
 <p><strong>Limitations:</strong></p>
 <ul>
 <li>
@@ -174628,7 +174628,7 @@ words = Call java.util.Collections#unmodifiableSet jStrArr
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-08-03T16:21:13+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-08-03</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-12-19T16:47:20+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-12-19</span>
       
         <br>
         Created:
