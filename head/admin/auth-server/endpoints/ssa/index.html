@@ -174561,7 +174561,7 @@ parameters as described below:</p>
 </tr>
 <tr>
 <td>lifetime</td>
-<td>SSA Lifetime in milliseconds</td>
+<td>SSA Lifetime in seconds</td>
 <td>true</td>
 </tr>
 </tbody>
@@ -174599,7 +174599,7 @@ It should be clarified that these values are persisted in the database and are n
 <li><code>org_id</code> — The "org_id" is used for organization identification.</li>
 <li><code>software_roles</code> — List of string values, fixed value <code>["password", "notify"]</code>.</li>
 <li><code>grant_types</code> — Fixed value <code>["client_credentials"]</code>.</li>
-<li><code>lifetime</code> — SSA lifetime in milliseconds.</li>
+<li><code>lifetime</code> — SSA lifetime in seconds.</li>
 <li><code>exp</code> — Expiration Time.</li>
 <li><code>myCustom1, myCustom2, ...</code>: if you have custom attributes, they will be displayed here.</li>
 </ul>
@@ -174690,7 +174690,7 @@ Connection: Keep-Alive
 <li><code>description</code> — Describe SSA.</li>
 <li><code>one_time_use</code> — Defined whether the SSA will be used only once or can be used multiple times.</li>
 <li><code>rotate_ssa</code> — TODO - Will be used to rotate expiration of the SSA, currently is only saved as part of the SSA.</li>
-<li><code>lifetime</code> — SSA lifetime in milliseconds.</li>
+<li><code>lifetime</code> — SSA lifetime in seconds.</li>
 <li><code>myCustom1, myCustom2, ...</code> — if you have custom attributes, they will be displayed here.</li>
 </ul>
 </li>
@@ -174919,10 +174919,10 @@ Connection: Keep-Alive
 <li><code>creationDate</code> type <code>Date</code> — SSA Creation date.</li>
 <li><code>creatorId</code> type <code>String</code> — Client that created SSA.</li>
 <li><code>creatorType</code> type enum <code>CreatorType</code> — Contains the following CreatorType values (<code>NONE</code>, <code>CLIENT</code>, <code>USER</code>, <code>AUTO</code>).</li>
-<li><code>ttl</code> type <code>Integer</code> — SSA lifetime in milliseconds.</li>
+<li><code>ttl</code> type <code>Integer</code> — SSA lifetime in seconds.</li>
 <li><code>atributes</code> type class <code>SsaAtributes</code><ul>
 <li><code>oneTimeUse</code> type <code>Boolean</code> — Whether the SSA will be single use.</li>
-<li><code>lifetime</code> type <code>Integer</code> — SSA lifetime in milliseconds.</li>
+<li><code>lifetime</code> type <code>Integer</code> — SSA lifetime in seconds.</li>
 <li><code>rotateSsa</code> type <code>Boolean</code> — TODO - Will be used to rotate expiration of the SSA, currently is only saved as part
   of the SSA.</li>
 <li><code>clientDn</code> type <code>String</code> — Client's DN.</li>
@@ -174940,7 +174940,7 @@ Connection: Keep-Alive
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-10-10T04:32:49+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-10-10</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-12-22T16:17:33+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-12-22</span>
       
         <br>
         Created:
