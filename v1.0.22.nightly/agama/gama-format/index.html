@@ -174012,24 +174012,74 @@
 </ul>
 <p>Except for <code>code</code> and <code>web</code> directories, all elements in the file structure above are optional. Note that files in <code>web</code> must follow a directory structure that is consistent with respect to <code>Basepath</code> and <code>RRF</code> directives found in the included flows.</p>
 <h3 id="metadata">Metadata<a class="headerlink" href="#metadata" title="Permanent link">#</a></h3>
-<p><code>project.json</code> file is expected to contain metadata about the contents of the project in JSON format. This is an example:</p>
+<p><code>project.json</code> file is expected to contain metadata about the contents of the project in JSON format. </p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+<th>data type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>projectName</code></td>
+<td>A unique name that will be associated to this project</td>
+<td><em>string</em></td>
+</tr>
+<tr>
+<td><code>version</code></td>
+<td>Project's version. It is recommended to use semantic versioning format</td>
+<td><em>string</em></td>
+</tr>
+<tr>
+<td><code>author</code></td>
+<td>A user handle that identifies the author of the project</td>
+<td><em>string</em></td>
+</tr>
+<tr>
+<td><code>license</code></td>
+<td>A reference to applicable license terms</td>
+<td><em>string</em></td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td></td>
+<td><em>string</em></td>
+</tr>
+<tr>
+<td><code>configs</code></td>
+<td>Object containing exemplifying <a href="../language-reference/#header-basics">configuration properties</a> for flows that may need them. The keys of this field, if any, are qualified flow names already part of the project</td>
+<td><em>json object</em></td>
+</tr>
+<tr>
+<td><code>noDirectLaunch</code></td>
+<td>An array holding zero or more qualified flow names. This list is used to prevent certain flows to be launched directly from a web browser. It's a security measure to avoid end-users triggering flows at will</td>
+<td><em>array</em></td>
+</tr>
+</tbody>
+</table>
+<p>All fields are optional and more can be added if desired.</p>
+<p>Below is an example of a <code>project.json</code> file:</p>
 <div class="highlight"><pre><span></span><code>{
-  &quot;projectName&quot;: &quot;A unique name that will be associated to this project&quot;,
-  &quot;author&quot;: &quot;A user handle that identifies you&quot;,
-  &quot;description&quot;: &quot;Other relevant data can go here&quot;,
-  &quot;type&quot;: &quot;&quot;,
+  &quot;projectName&quot;: &quot;biometric-auth&quot;,
+  &quot;version&quot;: &quot;2.0.3&quot;,
+  &quot;author&quot;: &quot;avgJoe123&quot;,
+  &quot;license&quot;: &quot;apache-2.0&quot;,
+  &quot;description&quot;: &quot;Allows users to authenticate via fingerpint and/or iris recognition&quot;,
   &quot;configs&quot;: {
-    &quot;com.foods.sweet&quot;: {
+    &quot;com.acme.bio.IrisScan&quot;: {
         &quot;prop1&quot;: &quot;secret&quot;,
-        &quot;prop2&quot;: [1, 2, 3]
+        &quot;prop2&quot;: { &quot;subprop&quot;: [1, 2, 3] }
     }
   },
-  &quot;noDirectLaunch&quot;: [ &quot;test&quot; ]
+  &quot;noDirectLaunch&quot;: [ &quot;com.acme.bio.TraitExtractor&quot; ]
 }
 </code></pre></div>
-<p>The <code>configs</code> section is a JSON object containing exemplifying <a href="../language-reference/#header-basics">configuration properties</a> for flows that may need them. Note <code>.gama</code> files <strong>must not</strong> contain <strong>real</strong> configuration properties because these files can be freely distributed; in practice, configurations hold sensitive data that should not be exposed. The keys of object <code>configs</code>, if any, are qualified flow names already part of the project.  </p>
-<p>The <code>noDirectLaunch</code> section is an array holding zero or more qualified flow names. Use this list to prevent certain flows to be launched directly from a web browser. This is a security measure to avoid end-users triggering flows at will.</p>
-<p>Other fields can be added in <code>project.json</code>.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Use the <code>configs</code> section wisely: <code>.gama</code> files <strong>must not</strong> contain <strong>real</strong> configuration properties because these files may be freely distributed; in practice, configurations hold sensitive data that should not be exposed</p>
+</div>
 <h2 id="sample-project">Sample project<a class="headerlink" href="#sample-project" title="Permanent link">#</a></h2>
 <p>As an example assume you want to deliver these two flows:</p>
 <div class="highlight"><pre><span></span><code>Flow test
@@ -174080,7 +174130,7 @@ list = Call com.foods.RecipeUtils#retrieveIngredients choice.meal
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-11-08T21:20:51+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-11-08</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-12-29T19:13:03+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-12-29</span>
       
         <br>
         Created:

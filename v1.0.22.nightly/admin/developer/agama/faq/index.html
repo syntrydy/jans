@@ -5134,15 +5134,15 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#unable-to-find-a-constructor-with-arity-in-class" class="md-nav__link">
-    Unable to find a constructor with arity ... in class ...
+  <a href="#unable-to-find-a-suitable-constructor-with-arity-in-class" class="md-nav__link">
+    Unable to find a suitable constructor with arity ... in class ...
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#unable-to-find-a-method-called-with-arity-in-class" class="md-nav__link">
-    Unable to find a method called ... with arity ... in class ...
+  <a href="#unable-to-find-a-suitable-method-called-with-arity-in-class" class="md-nav__link">
+    Unable to find a suitable method called ... with arity ... in class ...
   </a>
   
 </li>
@@ -174121,15 +174121,15 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#unable-to-find-a-constructor-with-arity-in-class" class="md-nav__link">
-    Unable to find a constructor with arity ... in class ...
+  <a href="#unable-to-find-a-suitable-constructor-with-arity-in-class" class="md-nav__link">
+    Unable to find a suitable constructor with arity ... in class ...
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#unable-to-find-a-method-called-with-arity-in-class" class="md-nav__link">
-    Unable to find a method called ... with arity ... in class ...
+  <a href="#unable-to-find-a-suitable-method-called-with-arity-in-class" class="md-nav__link">
+    Unable to find a suitable method called ... with arity ... in class ...
   </a>
   
 </li>
@@ -174403,15 +174403,15 @@
 
 <h1 id="frequently-asked-questions">Frequently asked questions<a class="headerlink" href="#frequently-asked-questions" title="Permanent link">#</a></h1>
 <h2 id="common-errors">Common errors<a class="headerlink" href="#common-errors" title="Permanent link">#</a></h2>
-<h3 id="unable-to-find-a-constructor-with-arity-in-class">Unable to find a constructor with arity ... in class ...<a class="headerlink" href="#unable-to-find-a-constructor-with-arity-in-class" title="Permanent link">#</a></h3>
-<p>A Java invocation of the form <code>Call package.className#new ...</code> is passing a number of parameters that does not match any of the existing constructors for that class. </p>
-<h3 id="unable-to-find-a-method-called-with-arity-in-class">Unable to find a method called ... with arity ... in class ...<a class="headerlink" href="#unable-to-find-a-method-called-with-arity-in-class" title="Permanent link">#</a></h3>
-<p>A java invocation is attempting to call a method that is not part of the given class or the number of parameters passed for the method is not correct.</p>
+<h3 id="unable-to-find-a-suitable-constructor-with-arity-in-class">Unable to find a suitable constructor with arity ... in class ...<a class="headerlink" href="#unable-to-find-a-suitable-constructor-with-arity-in-class" title="Permanent link">#</a></h3>
+<p>A Java invocation of the form <code>Call package.className#new ...</code> is passing an incorrect number of arguments or their data types do not match the signature of any of the constructors for that class. </p>
+<h3 id="unable-to-find-a-suitable-method-called-with-arity-in-class">Unable to find a suitable method called ... with arity ... in class ...<a class="headerlink" href="#unable-to-find-a-suitable-method-called-with-arity-in-class" title="Permanent link">#</a></h3>
+<p>A java invocation is attempting to call a method that is not part of the given class, the number of arguments passed for the method is not correct, or the arguments could not be converted to make a successful call.</p>
 <h3 id="no-finish-instruction-was-reached">No Finish instruction was reached<a class="headerlink" href="#no-finish-instruction-was-reached" title="Permanent link">#</a></h3>
 <p>This occurs when no <code>Finish</code> statement has been found in the execution of a flow and there are no remaining instructions.</p>
 <h3 id="serialization-errors">Serialization errors<a class="headerlink" href="#serialization-errors" title="Permanent link">#</a></h3>
 <p>Agama engine saves the state of a flow every time an <a href="../../../../agama/language-reference/#rrf">RRF</a> or <a href="../../../../agama/language-reference/#rfac">RFAC</a> instruction is reached. The <em>State</em> can be understood as the set of all variables defined in a flow and their associated values up to certain point. </p>
-<p>Most of times, variables hold basic Agama <a href="../../../../agama/language-reference/#data-types">values</a> like strings, booleans, numbers, lists or maps, however, more complex values may appear due to Java <code>Call</code>s. The engine does its best  to properly serialize these Java objects, nonetheless, this is not always feasible. In these cases, the flow crashes and errors will appear on screen as well as in the server logs.</p>
+<p>Most of times, variables hold basic Agama <a href="../../../../agama/language-reference/#data-types">values</a> like strings, booleans, numbers, lists or maps, however, more complex values may appear due to Java <code>Call</code>s. The engine does its best  to properly serialize these Java objects, nonetheless, this is not always possible. In these cases, the flow crashes and errors will appear on screen as well as in the server logs.</p>
 <p>Use the information in the logs to detect the problematic Java class. This would normally allow you to identify the variable that is causing the issue. Now you have several options to proceed:</p>
 <ul>
 <li>Check if the value held by the variable is needed for the given RRF/RFAC or some upcoming statement. If that's not the case, simply set it to <code>null</code> before RRF/RFAC occurs</li>
@@ -174423,7 +174423,7 @@
 <p>In general, a good practice is to avoid handling complex variables in flows. Letting big object graphs live in the state has a negative impact on performance and also increases the risk of serialization issues.   </p>
 <h2 id="libraries-and-classes-added-on-the-fly">Libraries and classes added on the fly<a class="headerlink" href="#libraries-and-classes-added-on-the-fly" title="Permanent link">#</a></h2>
 <h3 id="what-groovy-and-java-versions-are-supported">What Groovy and Java versions are supported?<a class="headerlink" href="#what-groovy-and-java-versions-are-supported" title="Permanent link">#</a></h3>
-<p>Groovy 4.0 and Java 11. The runtime is Amazon Corretto 17.</p>
+<p>Groovy 4.0 and Java 8 or higher. The runtime is Amazon Corretto 17.</p>
 <h3 id="how-to-add-third-party-libraries">How to add third party libraries?<a class="headerlink" href="#how-to-add-third-party-libraries" title="Permanent link">#</a></h3>
 <p>You can include jar files in the <code>lib</code> directory of a <a href="../../../../agama/gama-format/#anatomy-of-a-project">project</a>. This applies only for VM-based installation of Janssen. Onboarding the jar files require a restart of the authentication server. Additionally, a prior update to file <code>/opt/jans/jetty/jans-auth/webapps/jans-auth.xml</code> may be required.</p>
 <!--
@@ -174466,8 +174466,8 @@ This is a limitation of the scripting engine. Here, classes have to be imported 
 <h3 id="why-are-the-contents-of-a-list-or-map-logged-partially">Why are the contents of a list or map logged partially?<a class="headerlink" href="#why-are-the-contents-of-a-list-or-map-logged-partially" title="Permanent link">#</a></h3>
 <p>This is to avoid traversing big structures fully. You can increase the value of <code>maxItemsLoggedInCollections</code> in the <a href="../engine-bridge-config/#engine-configuration">engine configuration</a>.</p>
 <h3 id="how-to-add-two-numbers-or-compare-numeric-values-in-agama">How to add two numbers or compare numeric values in Agama?<a class="headerlink" href="#how-to-add-two-numbers-or-compare-numeric-values-in-agama" title="Permanent link">#</a></h3>
-<p>Agama only provides operators for equality check in conditional statements. The structure of an authentication flow will rarely have to deal with computations/comparisons of numbers, strings, etc. In case this is needed, developers have to resort to Java.</p>
-<p><em>Hint</em>: some methods like <code>addExact</code>, <code>incrementExact</code>, etc. in <code>java.lang.Math</code> might help.  </p>
+<p>Agama only provides operators for equality/inequality check in conditional statements. Comparisons like "less-than", "greater-than-or-equal", etc. require Java usage, however, the structure of an authentication flow will rarely have to deal with this kind of computations.</p>
+<p><em>Hint</em>: methods like <code>addExact</code>, <code>incrementExact</code>, etc. in <code>java.lang.Math</code> may help you to do some arithmetic.  </p>
 <h3 id="how-to-concatenate-strings-in-agama">How to concatenate strings in Agama?<a class="headerlink" href="#how-to-concatenate-strings-in-agama" title="Permanent link">#</a></h3>
 <p>See the previous answer. A two-lines solution could be:</p>
 <div class="highlight"><pre><span></span><code>strings = [ s1, s2, ... ]
@@ -174485,7 +174485,7 @@ Call java.lang.String#join &quot;&quot; strings
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-12-19T16:47:20+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-12-19</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-12-29T19:13:03+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-12-29</span>
       
         <br>
         Created:
