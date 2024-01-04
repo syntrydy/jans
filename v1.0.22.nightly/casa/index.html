@@ -173552,10 +173552,6 @@
       
         
           
-            
-          
-        
-          
         
           
         
@@ -173573,16 +173569,10 @@
         
       
       
-        
-        
-        <div class="md-nav__link md-nav__link--index ">
-          <a href="administration/">Administration Guide</a>
-          
-            <label for="__nav_5_3">
-              <span class="md-nav__icon md-icon"></span>
-            </label>
-          
-        </div>
+        <label class="md-nav__link" for="__nav_5_3">
+          Administration Guide
+          <span class="md-nav__icon md-icon"></span>
+        </label>
       
       <nav class="md-nav" aria-label="Administration Guide" data-md-level="2">
         <label class="md-nav__title" for="__nav_5_3">
@@ -173592,15 +173582,13 @@
         <ul class="md-nav__list" data-md-scrollfix>
           
             
-          
-            
               
   
   
   
     <li class="md-nav__item">
-      <a href="administration/2fa-basics/" class="md-nav__link">
-        About 2FA
+      <a href="administration/admin-console/" class="md-nav__link">
+        Admin console
       </a>
     </li>
   
@@ -173613,8 +173601,8 @@
   
   
     <li class="md-nav__item">
-      <a href="administration/admin-console/" class="md-nav__link">
-        Admin console
+      <a href="administration/2fa-basics/" class="md-nav__link">
+        About 2FA
       </a>
     </li>
   
@@ -173686,7 +173674,7 @@
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_3_8" type="checkbox" id="__nav_5_3_8" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_3_7" type="checkbox" id="__nav_5_3_7" >
       
       
       
@@ -173699,13 +173687,13 @@
         
       
       
-        <label class="md-nav__link" for="__nav_5_3_8">
+        <label class="md-nav__link" for="__nav_5_3_7">
           Plugins
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" aria-label="Plugins" data-md-level="3">
-        <label class="md-nav__title" for="__nav_5_3_8">
+        <label class="md-nav__title" for="__nav_5_3_7">
           <span class="md-nav__icon md-icon"></span>
           Plugins
         </label>
@@ -173856,13 +173844,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#plugin-oriented" class="md-nav__link">
-    Plugin oriented
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#existing-plugins" class="md-nav__link">
     Existing plugins
   </a>
@@ -173955,44 +173936,39 @@
 <li>Enroll, delete and manage two-factor authentication (2FA) credentials for their account (e.g. FIDO security keys, mobile apps, phone numbers, etc.)</li>
 <li>Turn 2FA on and off</li>
 <li>View and manage which external apps have been authorized to access what personal data</li>
-<li>View trusted devices   </li>
+<li>View trusted devices</li>
 </ul>
-<p>Casa provides a platform for people to perform these account security functions and more. </p>
+<p>Casa provides a platform for people to perform these account security functions and more in an friendly, straightforward manner. </p>
 <h2 id="two-factor-authentication">Two-factor authentication<a class="headerlink" href="#two-factor-authentication" title="Permanent link">#</a></h2>
 <p>The core use case for Casa is self-service 2FA. If people need to call the helpdesk every time they get a new phone or security key, supporting strong authentication becomes prohibitively expensive. </p>
 <p>Out-of-the-box, Casa can be used to enroll and manage the following authenticators:    </p>
 <ul>
-<li>FIDO2 security keys like <a href="https://www.yubico.com/products/yubikey-hardware/">Yubikeys</a>       </li>
-<li>Gluu's FIDO push-notification mobile app, <a href="https://super.gluu.org">Super Gluu</a>    </li>
+<li>FIDO2 security keys like <a href="https://www.yubico.com/products/">Yubikeys</a>       </li>
+<li>Gluu's FIDO push-notification mobile app, <a href="https://docs.gluu.org/head/supergluu/">Super Gluu</a>    </li>
 <li>OTP hardware cards like <a href="https://www.ftsafe.com/Products/Power_Card/Standard">these</a> or dongles like <a href="https://www.ftsafe.com/Products/OTP/Single_Button_OTP">these</a>      </li>
 <li>OTP mobile apps like Google Authenticator, FreeOTP, etc.       </li>
 <li>Mobile phone numbers able to receive OTPs via SMS   </li>
 <li>Passwords (if stored in the corresponding Janssen Server's local database, i.e. not a backend LDAP like AD)      </li>
 </ul>
-<p>Additional authenticators and use cases can be supported via <a href="#plugin-oriented">custom plugins</a>. </p>
+<p>Additional authenticators and use cases can be supported via <a href="#existing-plugins">custom plugins</a>.</p>
 <h2 id="2fa-enrollment-apis">2FA enrollment APIs<a class="headerlink" href="#2fa-enrollment-apis" title="Permanent link">#</a></h2>
 <p>To facilitate 2FA device enrollment during account registration, or elsewhere in an application ecosystem, Casa exposes APIs for enrolling the following types of authenticators:   </p>
 <ul>
-<li>Phone numbers for SMS OTP   </li>
-<li>OTP apps, cards or dongles        </li>
-<li><a href="https://super.gluu.org">Super Gluu</a> Android and iOS devices  </li>
+<li>Phone numbers for SMS OTP</li>
+<li>OTP apps, cards, or dongles  </li>
 <li>FIDO2 security keys</li>
 </ul>
 <h2 id="configuration-via-apis">Configuration via APIs<a class="headerlink" href="#configuration-via-apis" title="Permanent link">#</a></h2>
 <p>Besides a comprehensive graphical admin console, application settings can also be manipulated by means of a configuration API.</p>
-<h2 id="plugin-oriented">Plugin oriented<a class="headerlink" href="#plugin-oriented" title="Permanent link">#</a></h2>
-<p>Casa is a plugin-oriented, Java web application. Existing functionality can be extended and new functionality and APIs can be introduced through plugins. </p>
 <h2 id="existing-plugins">Existing plugins<a class="headerlink" href="#existing-plugins" title="Permanent link">#</a></h2>
-<p>Gluu has written a number of plugins to extend Casa, including plugins for:</p>
+<p>Casa is a plugin-oriented, Java web application. Existing functionality can be extended and new functionality and APIs can be introduced through plugins. Currently, there are plugins available for the following:</p>
 <ul>
 <li><a href="plugins/consent-management/">Consent management</a> </li>
 <li><a href="plugins/custom-branding/">Custom branding</a>  </li>
 <li><a href="plugins/2fa-settings/">2FA settings</a></li>
 </ul>
-<!-- - [BioID authentication](./plugins/bioid.md) -->
-
 <h2 id="janssen-server-integration">Janssen Server integration<a class="headerlink" href="#janssen-server-integration" title="Permanent link">#</a></h2>
-<p>Janssen Server relies on "interception scripts" to implement user authentication. Casa itself has an interception script which defines authentication logic and routes authentications to specific 2FA mechanisms which also have their own scripts. All scripts must be enabled in the Janssen Server.        </p>
+<p>Janssen Server relies on "interception scripts" to implement user authentication. Casa itself has an interception script which defines authentication logic and routes authentications to specific 2FA mechanisms which also have their own scripts.        </p>
 <h2 id="user-roles">User roles<a class="headerlink" href="#user-roles" title="Permanent link">#</a></h2>
 <p>There are two types of users in Jans Casa:</p>
 <ul>
@@ -174008,7 +173984,6 @@
 <p>Use the following links to get started with Casa:  </p>
 <h3 id="admin-guide">Admin Guide<a class="headerlink" href="#admin-guide" title="Permanent link">#</a></h3>
 <ul>
-<li><a href="administration/">Administration</a></li>
 <li><a href="administration/admin-console/">Admin console</a></li>
 <li><a href="administration/credentials-stored/">Credentials storage</a>        </li>
 <li><a href="administration/custom-branding/">Custom branding</a>        </li>
@@ -174024,7 +173999,7 @@
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-10-18T15:16:29+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-10-18</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2024-01-04T08:18:09+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-01-04</span>
       
         <br>
         Created:

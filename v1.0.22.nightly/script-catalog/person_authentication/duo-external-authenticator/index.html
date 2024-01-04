@@ -173548,10 +173548,6 @@
       
         
           
-            
-          
-        
-          
         
           
         
@@ -173569,16 +173565,10 @@
         
       
       
-        
-        
-        <div class="md-nav__link md-nav__link--index ">
-          <a href="../../../casa/administration/">Administration Guide</a>
-          
-            <label for="__nav_5_3">
-              <span class="md-nav__icon md-icon"></span>
-            </label>
-          
-        </div>
+        <label class="md-nav__link" for="__nav_5_3">
+          Administration Guide
+          <span class="md-nav__icon md-icon"></span>
+        </label>
       
       <nav class="md-nav" aria-label="Administration Guide" data-md-level="2">
         <label class="md-nav__title" for="__nav_5_3">
@@ -173588,15 +173578,13 @@
         <ul class="md-nav__list" data-md-scrollfix>
           
             
-          
-            
               
   
   
   
     <li class="md-nav__item">
-      <a href="../../../casa/administration/2fa-basics/" class="md-nav__link">
-        About 2FA
+      <a href="../../../casa/administration/admin-console/" class="md-nav__link">
+        Admin console
       </a>
     </li>
   
@@ -173609,8 +173597,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../casa/administration/admin-console/" class="md-nav__link">
-        Admin console
+      <a href="../../../casa/administration/2fa-basics/" class="md-nav__link">
+        About 2FA
       </a>
     </li>
   
@@ -173682,7 +173670,7 @@
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_3_8" type="checkbox" id="__nav_5_3_8" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_3_7" type="checkbox" id="__nav_5_3_7" >
       
       
       
@@ -173695,13 +173683,13 @@
         
       
       
-        <label class="md-nav__link" for="__nav_5_3_8">
+        <label class="md-nav__link" for="__nav_5_3_7">
           Plugins
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" aria-label="Plugins" data-md-level="3">
-        <label class="md-nav__title" for="__nav_5_3_8">
+        <label class="md-nav__title" for="__nav_5_3_7">
           <span class="md-nav__icon md-icon"></span>
           Plugins
         </label>
@@ -173923,7 +173911,7 @@
   <h1>Index</h1>
 
 <h2 id="integrating-duos-universal-prompt-as-an-authentication-method-in-janssen-server">Integrating DUO's Universal Prompt as an authentication method in Janssen server<a class="headerlink" href="#integrating-duos-universal-prompt-as-an-authentication-method-in-janssen-server" title="Permanent link">#</a></h2>
-<p><a href="https://duosecurity.com">Duo Security</a> is a SaaS authentication provider. This document will explain how to use Janssen's <a href="https://github.com/JanssenProject/jans/blob/v1.0.22.nightly/docs/script-catalog/person_authentication/duo-external-authenticator/DuoExternalAuthenticator.py">Duo interception script</a> to configure the Janssen Server for a two-step authentication process with username and password as the first step, and Duo as the second step. The script invokes the Universal Prompt which is a redesign of Duo’s traditional authentication prompt. </p>
+<p><a href="https://duosecurity.com">Duo Security</a> is a SaaS authentication provider. This document will explain how to use Janssen's <a href="https://github.com/JanssenProject/jans/blob/vreplace-janssen-version/docs/script-catalog/person_authentication/duo-external-authenticator/DuoExternalAuthenticator.py">Duo interception script</a> to configure the Janssen Server for a two-step authentication process with username and password as the first step, and Duo as the second step. The script invokes the Universal Prompt which is a redesign of Duo’s traditional authentication prompt. </p>
 <h2 id="authentication-flow">Authentication flow<a class="headerlink" href="#authentication-flow" title="Permanent link">#</a></h2>
 <pre class="mermaid"><code>sequenceDiagram
 title Integrating DUO's Universal Prompt as an authentication method in Janssen server
@@ -173947,7 +173935,7 @@ end
 Jans AS-&gt;&gt;RP: 10. write Jans session cookie</code></pre>
 <h2 id="administrator-prerequisites">Administrator prerequisites<a class="headerlink" href="#administrator-prerequisites" title="Permanent link">#</a></h2>
 <ul>
-<li><a href="https://github.com/JanssenProject/jans/blob/v1.0.22.nightly/docs/script-catalog/person_authentication/duo-external-authenticator/DuoExternalAuthenticator.py">Duo interception script</a> (included in the default Janssen Server distribution);</li>
+<li><a href="https://github.com/JanssenProject/jans/blob/vreplace-janssen-version/docs/script-catalog/person_authentication/duo-external-authenticator/DuoExternalAuthenticator.py">Duo interception script</a> (included in the default Janssen Server distribution);</li>
 <li>An account with <a href="https://duo.com/">Duo Security</a>.   </li>
 </ul>
 <h2 id="user-prerequisites">User prerequisites<a class="headerlink" href="#user-prerequisites" title="Permanent link">#</a></h2>
@@ -174062,7 +174050,7 @@ Jans AS-&gt;&gt;RP: 10. write Jans session cookie</code></pre>
 <p>To make sure Duo has been enabled successfully, you can check your Janssen Server's OpenID Connect configuration by navigating to the following URL: <code>https://&lt;hostname&gt;/.well-known/openid-configuration</code>. Find <code>"acr_values_supported":</code> and you should see <code>"duo"</code>. </p>
 </div>
 <h2 id="make-duo-the-default-authentication-mechanism">Make Duo the Default Authentication Mechanism<a class="headerlink" href="#make-duo-the-default-authentication-mechanism" title="Permanent link">#</a></h2>
-<p>For CURL commands, use this <a href="https://github.com/JanssenProject/jans/blob/v1.0.22.nightly/docs/admin/config-guide/curl.md#2-enable-an-authentication-script">link</a> as a reference.</p>
+<p>For CURL commands, use this <a href="https://github.com/JanssenProject/jans/blob/vreplace-janssen-version/docs/admin/config-guide/curl.md#2-enable-an-authentication-script">link</a> as a reference.</p>
 <p>Steps:
 1. Create a file say <code>duo-auth-default.json</code> with the following contents
 <div class="highlight"><pre><span></span><code>{

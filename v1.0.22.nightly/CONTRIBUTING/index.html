@@ -173562,10 +173562,6 @@
       
         
           
-            
-          
-        
-          
         
           
         
@@ -173583,16 +173579,10 @@
         
       
       
-        
-        
-        <div class="md-nav__link md-nav__link--index ">
-          <a href="../casa/administration/">Administration Guide</a>
-          
-            <label for="__nav_5_3">
-              <span class="md-nav__icon md-icon"></span>
-            </label>
-          
-        </div>
+        <label class="md-nav__link" for="__nav_5_3">
+          Administration Guide
+          <span class="md-nav__icon md-icon"></span>
+        </label>
       
       <nav class="md-nav" aria-label="Administration Guide" data-md-level="2">
         <label class="md-nav__title" for="__nav_5_3">
@@ -173602,15 +173592,13 @@
         <ul class="md-nav__list" data-md-scrollfix>
           
             
-          
-            
               
   
   
   
     <li class="md-nav__item">
-      <a href="../casa/administration/2fa-basics/" class="md-nav__link">
-        About 2FA
+      <a href="../casa/administration/admin-console/" class="md-nav__link">
+        Admin console
       </a>
     </li>
   
@@ -173623,8 +173611,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../casa/administration/admin-console/" class="md-nav__link">
-        Admin console
+      <a href="../casa/administration/2fa-basics/" class="md-nav__link">
+        About 2FA
       </a>
     </li>
   
@@ -173696,7 +173684,7 @@
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_3_8" type="checkbox" id="__nav_5_3_8" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_3_7" type="checkbox" id="__nav_5_3_7" >
       
       
       
@@ -173709,13 +173697,13 @@
         
       
       
-        <label class="md-nav__link" for="__nav_5_3_8">
+        <label class="md-nav__link" for="__nav_5_3_7">
           Plugins
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" aria-label="Plugins" data-md-level="3">
-        <label class="md-nav__title" for="__nav_5_3_8">
+        <label class="md-nav__title" for="__nav_5_3_7">
           <span class="md-nav__icon md-icon"></span>
           Plugins
         </label>
@@ -174044,11 +174032,11 @@ In this guide, the following command is documented:</p>
 <p>Above command contains references to the release number at two places. <code>v1.0.5</code> in the URL and <code>1.0.5</code> as part of the file
 name. There are many such places throughout the documentation when release numbers need to be mentioned. Whenever we
 make a new release, these numbers need to change as they point to the latest release number. This becomes a manual task.</p>
-<p>To avoid this manual, error-prone approach the Janssen Project uses a release marker, <code>1.0.22.nightly</code> instead
+<p>To avoid this manual, error-prone approach the Janssen Project uses a release marker, <code>replace-janssen-version</code> instead
 of writing actual release numbers in the <code>head</code>(latest) documentation branch. So, when there is a need to mention the release number, instead of
 writing the actual release number, use the release marker. Let's see how to document the above command (at the <code>head</code> version)
 so that it stays up-to-date release after release.</p>
-<div class="highlight"><pre><span></span><code>wget https://github.com/JanssenProject/jans/releases/download/v1.0.22.nightly/jans_1.0.22.nightly.ubuntu20.04_amd64.deb -P /tmp
+<div class="highlight"><pre><span></span><code>wget https://github.com/JanssenProject/jans/releases/download/vreplace-janssen-version/jans_replace-janssen-version.ubuntu20.04_amd64.deb -P /tmp
 </code></pre></div>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>

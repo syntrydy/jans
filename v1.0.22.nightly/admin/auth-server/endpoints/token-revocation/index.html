@@ -173625,10 +173625,6 @@
       
         
           
-            
-          
-        
-          
         
           
         
@@ -173646,16 +173642,10 @@
         
       
       
-        
-        
-        <div class="md-nav__link md-nav__link--index ">
-          <a href="../../../../casa/administration/">Administration Guide</a>
-          
-            <label for="__nav_5_3">
-              <span class="md-nav__icon md-icon"></span>
-            </label>
-          
-        </div>
+        <label class="md-nav__link" for="__nav_5_3">
+          Administration Guide
+          <span class="md-nav__icon md-icon"></span>
+        </label>
       
       <nav class="md-nav" aria-label="Administration Guide" data-md-level="2">
         <label class="md-nav__title" for="__nav_5_3">
@@ -173665,15 +173655,13 @@
         <ul class="md-nav__list" data-md-scrollfix>
           
             
-          
-            
               
   
   
   
     <li class="md-nav__item">
-      <a href="../../../../casa/administration/2fa-basics/" class="md-nav__link">
-        About 2FA
+      <a href="../../../../casa/administration/admin-console/" class="md-nav__link">
+        Admin console
       </a>
     </li>
   
@@ -173686,8 +173674,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../casa/administration/admin-console/" class="md-nav__link">
-        Admin console
+      <a href="../../../../casa/administration/2fa-basics/" class="md-nav__link">
+        About 2FA
       </a>
     </li>
   
@@ -173759,7 +173747,7 @@
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_3_8" type="checkbox" id="__nav_5_3_8" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_3_7" type="checkbox" id="__nav_5_3_7" >
       
       
       
@@ -173772,13 +173760,13 @@
         
       
       
-        <label class="md-nav__link" for="__nav_5_3_8">
+        <label class="md-nav__link" for="__nav_5_3_7">
           Plugins
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" aria-label="Plugins" data-md-level="3">
-        <label class="md-nav__title" for="__nav_5_3_8">
+        <label class="md-nav__title" for="__nav_5_3_7">
           <span class="md-nav__icon md-icon"></span>
           Plugins
         </label>
@@ -173998,7 +173986,7 @@ looks like below:</p>
 <div class="highlight"><pre><span></span><code>https://jans-dynamic-ldap/jans-auth/restv1/revoke
 </code></pre></div>
 <p>More information about request and response of the revocation endpoint can be found in
-the OpenAPI specification of <a href="https://gluu.org/swagger-ui/?url=https://raw.githubusercontent.com/JanssenProject/jans/v1.0.22.nightly/jans-auth-server/docs/swagger.yaml#/Token/revoke">jans-auth-server module</a>.</p>
+the OpenAPI specification of <a href="https://gluu.org/swagger-ui/?url=https://raw.githubusercontent.com/JanssenProject/jans/vreplace-janssen-version/jans-auth-server/docs/swagger.yaml#/Token/revoke">jans-auth-server module</a>.</p>
 <h2 id="disabling-the-endpoint-using-feature-flag">Disabling The Endpoint Using Feature Flag<a class="headerlink" href="#disabling-the-endpoint-using-feature-flag" title="Permanent link">#</a></h2>
 <p><code>Token revocation</code> endpoint can be enabled or disable using <a href="../../../reference/json/feature-flags/janssenauthserver-feature-flags/#revoketoken">REVOKE_TOKEN feature flag</a>.
 Use <a href="../../../config-guide/config-tools/jans-tui/">Janssen Text-based UI(TUI)</a> or <a href="../../../config-guide/config-tools/jans-cli/">Janssen command-line interface</a> to perform this task.</p>
