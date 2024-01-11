@@ -173495,6 +173495,8 @@
         
           
         
+          
+        
       
       
         
@@ -173752,6 +173754,57 @@
     <li class="md-nav__item">
       <a href="../../../casa/administration/faq/" class="md-nav__link">
         FAQ
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_3" type="checkbox" id="__nav_5_3" >
+      
+      
+      
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_5_3">
+          Developer Guide
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Developer Guide" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_3">
+          <span class="md-nav__icon md-icon"></span>
+          Developer Guide
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../casa/developer/add-authn-methods/" class="md-nav__link">
+        Adding authentication methods
       </a>
     </li>
   
@@ -174150,7 +174203,7 @@
 </table>
 <p>Edit the file with the properties you consider relevant for every provider. Generally, the first six are the only needed.</p>
 <h3 id="supply-the-main-flow-configurations">Supply the main flow configurations<a class="headerlink" href="#supply-the-main-flow-configurations" title="Permanent link">#</a></h3>
-<p>The main flow (<code>io.jans.inbound.ExternalSiteLogin</code>) has to be parameterized as well. The configuration is held in a JSON object whose keys are the identifiers of the existing identity providers. The associated value for a key is a JSON object itself and follows the structure represented by <a href="https://github.com/JanssenProject/jans/blob/v1.0.22.nightly/jans-auth-server/agama/inboundID/src/main/java/io/jans/inbound/Provider.java">this</a> Java class.</p>
+<p>The main flow (<code>io.jans.inbound.ExternalSiteLogin</code>) has to be parameterized as well. The configuration is held in a JSON object whose keys are the identifiers of the existing identity providers. The associated value for a key is a JSON object itself and follows the structure represented by <a href="https://github.com/JanssenProject/jans/blob/vreplace-janssen-version/jans-auth-server/agama/inboundID/src/main/java/io/jans/inbound/Provider.java">this</a> Java class.</p>
 <p>This is an example of a configuration for a couple of identity providers:</p>
 <div class="highlight"><pre><span></span><code>{
 
