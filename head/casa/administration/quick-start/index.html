@@ -173499,6 +173499,8 @@
         
           
         
+          
+        
       
       
         
@@ -173872,6 +173874,57 @@
   
   
   
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_3" type="checkbox" id="__nav_5_3" >
+      
+      
+      
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_5_3">
+          Developer Guide
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Developer Guide" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_3">
+          <span class="md-nav__icon md-icon"></span>
+          Developer Guide
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../developer/add-authn-methods/" class="md-nav__link">
+        Adding authentication methods
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
     <li class="md-nav__item">
       <a href="../../user-guide/" class="md-nav__link">
         User Guide
@@ -174032,13 +174085,32 @@
 <h3 id="enable-scripts">Enable scripts<a class="headerlink" href="#enable-scripts" title="Permanent link">#</a></h3>
 <p>First, the custom authentication scripts corresponding to the authentication methods of your preference must be enabled in the server. For this purpose you can use <a href="../../../admin/config-guide/config-tools/jans-tui/">TUI</a> or the <a href="https://docs.gluu.org/head/admin/admin-ui/introduction/">Admin UI</a> if you have Gluu Flex Server installed.</p>
 <p>Scripts can be more easily looked up by display name. The below table shows the display names of the scripts previously listed:</p>
-<p>|-|-|
-|Script|Display name|
-|-|-|
-|OTP (SMS)|twilio_sms|
-|OTP (apps or hardware)|otp|
-|FIDO devices|fido2|
-|Super gluu|super_gluu|</p>
+<table>
+<thead>
+<tr>
+<th>Script</th>
+<th>Display name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OTP (SMS)</td>
+<td>twilio_sms</td>
+</tr>
+<tr>
+<td>OTP (apps or hardware)</td>
+<td>otp</td>
+</tr>
+<tr>
+<td>FIDO devices</td>
+<td>fido2</td>
+</tr>
+<tr>
+<td>Super gluu</td>
+<td>super_gluu</td>
+</tr>
+</tbody>
+</table>
 <p>As an example, connect to your server and run <code>python3 /opt/jans/jans-cli/jans_cli_tui.py</code>), follow the prompts, and navigate to the <em>scripts</em> tab. There, search for the  script matching the type of 2FA credential you want to support, e.g. <code>fido2</code>, <code>otp</code>, etc. Press enter to open the script details page. Select the "Enabled" field and press space (an asterisk will be displayed). Finally, press the "save" button.</p>
 <p><strong>Important notes</strong>:</p>
 <ul>
@@ -174082,7 +174154,7 @@ Janssen Server using <a href="../../../admin/config-guide/config-tools/jans-tui/
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2024-01-05T14:38:35+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-01-05</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2024-01-11T14:35:55+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-01-11</span>
       
         <br>
         Created:
