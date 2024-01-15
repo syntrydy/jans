@@ -38,8 +38,10 @@ import com.unboundid.ldap.sdk.Modification;
 import com.unboundid.ldap.sdk.ModificationType;
 import com.unboundid.ldap.sdk.ResultCode;
 import com.unboundid.ldap.sdk.SearchResultEntry;
+import com.unboundid.ldap.sdk.schema.ObjectClassDefinition;
 import com.unboundid.util.StaticUtils;
 
+import io.jans.model.SchemaEntry;
 import io.jans.orm.PersistenceEntryManager;
 import io.jans.orm.annotation.AttributeName;
 import io.jans.orm.event.DeleteNotifier;
@@ -924,6 +926,38 @@ public class LdapEntryManager extends BaseEntryManager<LdapOperationService> imp
         }
     }
 
+    @Override
+	public boolean hasRegisteredAttribute(String objectClass, String attributeName) {
+        if (isSchemaEntry(objectClass)) {
+        	
+        }
+		return false;
+	}
+
+    private Set<String> getObjectClassesAttributes(SchemaEntry schemaEntry, String[] objectClasses) {
+        if ((schemaEntry == null) || (objectClasses == null)) {
+            return null;
+        }
+
+        Map<String, ObjectClassDefinition> objectClassDefinitions = new HashMap<String, ObjectClassDefinition>();
+        for (String objectClassDefinition : schemaEntry.getObjectClasses()) {
+            ObjectClassDefinition definition;
+            try {
+                definition = new ObjectClassDefinition(objectClassDefinition);
+
+                for (String name : definition.getNames()) {
+                    objectClassDefinitions.put(StringHelper.toLowerCase(name), definition);
+                }
+            } catch (Exception ex) {
+                LOG.error("Failed to parse LDAP object class definition: '{}'", ex, objectClassDefinition);
+            }
+        }
+
+        Set<ObjectClassDefinition> resultObjectClassDefinitions = getSuperiorClasses(objectClassDefinitions, objectClasses, true);
+        Set<String> resultAttributes = getAttributes(resultObjectClassDefinitions, true, true);
+
+        return resultAttributes;
+    }
     private static class CountBatchOperation<T> extends DefaultBatchOperation<T> {
 
         private int countEntries = 0;

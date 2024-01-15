@@ -968,4 +968,9 @@ public class SpannerEntryManager extends BaseEntryManager<SpannerOperationServic
 		return objectClasses[0];
 	}
 
+    @Override
+	public boolean hasRegisteredAttribute(String objectClass, String attributeName) {
+		return true;
+	}
+
 }

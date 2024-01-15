@@ -19,12 +19,11 @@ import java.util.Set;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
-
-import io.jans.model.SchemaEntry;
 import io.jans.orm.PersistenceEntryManager;
 import io.jans.orm.hybrid.impl.HybridEntryManagerFactory;
 import io.jans.orm.ldap.impl.LdapEntryManagerFactory;
 import io.jans.orm.ldap.operation.LdapOperationService;
+import io.jans.orm.model.base.SchemaEntry;
 import io.jans.util.StringHelper;
 import io.jans.util.exception.InvalidSchemaUpdateException;
 import org.slf4j.Logger;

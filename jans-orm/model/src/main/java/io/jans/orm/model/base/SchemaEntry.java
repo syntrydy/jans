@@ -4,13 +4,12 @@
  * Copyright (c) 2020, Janssen Project
  */
 
-package io.jans.model;
+package io.jans.orm.model.base;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import io.jans.orm.model.base.Entry;
 import io.jans.orm.annotation.AttributeName;
 
 /**

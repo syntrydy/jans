@@ -2291,6 +2291,10 @@ public abstract class BaseEntryManager<O extends PersistenceOperationService> im
 		}
 	}
 
+	public boolean hasRegisteredAttribute(String objectClass, String attributeName) {
+		return true;
+	}
+
 	@Override
 	public <T> AttributeType getAttributeType(String primaryKey, Class<T> entryClass, String propertyName) {
         throw new UnsupportedOperationException("Method not implemented.");

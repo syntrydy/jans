@@ -19,8 +19,8 @@ import org.slf4j.Logger;
 import com.unboundid.ldap.sdk.schema.AttributeTypeDefinition;
 
 import io.jans.model.JansAttribute;
-import io.jans.model.SchemaEntry;
 import io.jans.orm.PersistenceEntryManager;
+import io.jans.orm.model.base.SchemaEntry;
 import io.jans.orm.search.filter.Filter;
 import io.jans.util.OxConstants;
 import io.jans.util.StringHelper;

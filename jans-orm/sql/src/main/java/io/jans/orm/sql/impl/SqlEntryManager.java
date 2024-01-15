@@ -1016,4 +1016,9 @@ public class SqlEntryManager extends BaseEntryManager<SqlOperationService> imple
 		return objectClasses[0];
 	}
 
+    @Override
+	public boolean hasRegisteredAttribute(String objectClass, String attributeName) {
+		return true;
+	}
+
 }
