@@ -174270,7 +174270,7 @@ Finish obj
 <ul>
 <li>The engine. It emits information related to flows transpilation, projects deployment, and flow crashes - generally low-level information</li>
 <li><a href="../../../../agama/language-reference/#logging">Log</a> instructions. These are statements originated directly from the Agama code</li>
-<li><a href="#foreign-calls">Call</a> directives. Foreign code can issue logging statements as well as any other code a <code>Call</code> may depend on</li>
+<li><a href="#foreign-calls">Call</a> directives. Foreign code can issue logging statements as well as any other code a <code>Call</code> may depend on. See the <a href="../faq/#how-to-add-log-statements">FAQ</a></li>
 </ul>
 <p>The following table details the location of log data. Paths are relative to directory <code>/opt/jans/jetty/jans-auth/log</code>:</p>
 <table>
@@ -174278,24 +174278,20 @@ Finish obj
 <tr>
 <th>Source</th>
 <th>Destination file</th>
-<th>Notes</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>Engine</td>
 <td><code>jans-auth.log</code></td>
-<td></td>
 </tr>
 <tr>
 <td><code>Log</code> instructions</td>
 <td><code>jans-auth_script.log</code></td>
-<td>This log also contains the output of <code>print</code> statements used in standard Jython custom scripts of Jans Server</td>
 </tr>
 <tr>
 <td>Foreign code</td>
 <td><code>jans-auth.log</code></td>
-<td>Usage of <a href="https://slf4j.org">slf4j</a> recommended. Proper visualization of logging statements may require customization of the server <a href="../../../auth-server/logging/log4j2/">loggers</a> (Log4j2 descriptor)</td>
 </tr>
 </tbody>
 </table>
@@ -174332,7 +174328,7 @@ Finish obj
 </tbody>
 </table>
 <p>For instance, these two instructions are equivalent: <code>Log "@e Universe collapsed"</code> and <code>Log "@error Universe collapsed"</code></p>
-<p>The engine will use <code>info</code> when the level is not specified explicitly, as in <code>Log "ahoy, ahoy"</code>.</p>
+<p>The engine will use <code>info</code> when the level is not specified explicitly, as in <code>Log "Look ma!"</code>.</p>
 <h2 id="rfac-and-callback-url">RFAC and Callback URL<a class="headerlink" href="#rfac-and-callback-url" title="Permanent link">#</a></h2>
 <p>Engine's callback URL is <code>https://&lt;your-server-name&gt;/jans-auth/fl/callback</code>. This resource is only be available for a given browser session while <code>RFAC</code> is in execution. Once the callback is visited or the flow times out (whichever occurs first), subsequent requests will respond with an HTTP 404 error.</p>
 <p>The mechanism used for redirection is a "302 Found" HTTP redirect that entails a subsequent GET request to the external site. In cases where a POST is expected, the 3-param version of <a href="../flows-navigation-ui/#3-param-variant">RRF</a> can be useful.</p>
@@ -174687,7 +174683,7 @@ words = Call java.util.Collections#unmodifiableSet jStrArr
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-12-19T16:47:20+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-12-19</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2024-01-17T14:08:19+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-01-17</span>
       
         <br>
         Created:
