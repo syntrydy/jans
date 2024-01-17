@@ -5196,6 +5196,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#how-to-add-log-statements" class="md-nav__link">
+    How to add log statements?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#how-to-append-data-to-a-flows-log-directly" class="md-nav__link">
     How to append data to a flow's log directly?
   </a>
@@ -5204,6 +5211,13 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-use-contexts-and-dependency-injection-cdi" class="md-nav__link">
+    How to use Contexts and Dependency Injection (CDI)?
+  </a>
   
 </li>
       
@@ -174224,6 +174238,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#how-to-add-log-statements" class="md-nav__link">
+    How to add log statements?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#how-to-append-data-to-a-flows-log-directly" class="md-nav__link">
     How to append data to a flow's log directly?
   </a>
@@ -174232,6 +174253,13 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-use-contexts-and-dependency-injection-cdi" class="md-nav__link">
+    How to use Contexts and Dependency Injection (CDI)?
+  </a>
   
 </li>
       
@@ -174474,8 +174502,34 @@ This is a limitation of the scripting engine. Here, classes have to be imported 
 -->
 <h3 id="a-class-is-still-available-after-removing-the-corresponding-file">A class is still available after removing the corresponding file<a class="headerlink" href="#a-class-is-still-available-after-removing-the-corresponding-file" title="Permanent link">#</a></h3>
 <p>This is because the JVM does not support unloading: even if a given source file is removed, its corresponding class will still be accessible - it remains in the classpath. The classpath will be clean again after a service restart.</p>
+<h3 id="how-to-add-log-statements">How to add log statements?<a class="headerlink" href="#how-to-add-log-statements" title="Permanent link">#</a></h3>
+<p>The Jans server uses <a href="https://slf4j.org">slf4j</a> and <a href="https://logging.apache.org/log4j/2.x/">log4j2</a> logging frameworks. Below is a simple usage example for Java/Groovy code:</p>
+<div class="highlight"><pre><span></span><code>import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+...
+Logger logger = LoggerFactory.getLogger(your.class);
+logger.info(&quot;ahoy, ahoy&quot;);
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The logging descriptor used by the server can be found <a href="https://github.com/JanssenProject/jans/blob/main/jans-auth-server/server/src/main/resources/log4j2.xml">here</a></p>
+</div>
+<p>Depending on the package <code>your</code> class belongs to, the message may not appear in the server log. In this case, you have two choices:</p>
+<ul>
+<li>Supply a <a href="../../../auth-server/logging/custom-logs/">custom log4j</a> descriptor</li>
+<li>Use a class in package <code>io.jans</code> when calling <code>getLogger</code>. A good example would be using <code>io.jans.agama.model.Flow</code></li>
+</ul>
 <h3 id="how-to-append-data-to-a-flows-log-directly">How to append data to a flow's log directly?<a class="headerlink" href="#how-to-append-data-to-a-flows-log-directly" title="Permanent link">#</a></h3>
 <p>Call method <code>log</code> of class <code>io.jans.agama.engine.script.LogUtils</code>. This method receives a variable number of arguments as DSL's <code>Log</code> does. Thus you can do <code>LogUtils.log("@w Today is Friday %th", 13)</code>, as in the logging <a href="../../../../agama/language-reference/#logging">examples</a>.</p>
+<h2 id="how-to-use-contexts-and-dependency-injection-cdi">How to use Contexts and Dependency Injection (CDI)?<a class="headerlink" href="#how-to-use-contexts-and-dependency-injection-cdi" title="Permanent link">#</a></h2>
+<p>Jans server uses Weld (a CDI reference implementation), and as such makes heavy use of managed beans, scopes, dependency injection, events, etc. Unless the code added is part of a jar <a href="#how-to-add-third-party-libraries">library</a>, annotations related to scopes or dependency injection won't take any effect in your code. This is because the Java container does a thorough scanning of classes upon start, but the source code files in <code>lib</code> directory are compiled upon use and modification, as expected in a scripting scenario.</p>
+<p>Java/Groovy files can however reuse any of the (application-scoped) managed beans available in the server's classpath. To obtain a reference to a bean, use a call like:</p>
+<div class="highlight"><pre><span></span><code>import io.jans.service.cdi.util.CdiUtil;
+...
+ref = CdiUtil.bean(managedBean.class);
+</code></pre></div>
+<p>More advanced bean lookup capabilities are provided by method <code>instance</code> of <a href="https://github.com/JanssenProject/jans/blob/main/jans-auth-server/agama/engine/src/main/java/io/jans/agama/engine/service/ManagedBeanService.java">this</a> class where you can supply qualifiers.</p>
 <h2 id="templates">Templates<a class="headerlink" href="#templates" title="Permanent link">#</a></h2>
 <h3 id="how-to-implement-localization">How to implement localization?<a class="headerlink" href="#how-to-implement-localization" title="Permanent link">#</a></h3>
 <p>This topic is covered <a href="../advanced-usages/#localization">here</a>.</p>
@@ -174526,7 +174580,7 @@ Call java.lang.String#join &quot;&quot; strings
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-12-29T19:13:03+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-12-29</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2024-01-17T14:08:19+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-01-17</span>
       
         <br>
         Created:
