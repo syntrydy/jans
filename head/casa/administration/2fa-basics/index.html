@@ -174078,8 +174078,12 @@ credential before any other. OTP credentials are generally more accessible than 
 they normally don't demand special conditions from the device used to access, like having a USB port.</p>
 <p>To do so, just add a new configuration property named <code>2fa_requisite</code> to the custom interception script corresponding 
 to the authentication method, and assign <code>true</code> as its value. It may take more than one minute for Casa to pick up the 
-changes. To add the property, open oxTrust web console and navigate to <code>Configuration</code> &gt; <code>Manage custom scripts</code>, 
-collapse the method you want to set as requisite for 2FA, and click on <code>Add new property</code>.</p>
+changes. To add the property to a custom interception script, open 
+<a href="../../../admin/config-guide/config-tools/jans-tui/">the text-based UI (TUI)</a> 
+and 
+navigate to 
+<code>Scripts</code>. Select and open the script. Use <code>Config properties</code> section to 
+add the new property.</p>
 <p>You can flag more than one method as requisite. In this case users will be encouraged to enroll one credential 
 associated to any of the flagged methods.</p>
 <p>If you are using an authentication method you added your own (via plugin), ensure the corresponding plugin 
@@ -174099,7 +174103,7 @@ before the first usage of the application. This can be done in two ways:</p>
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2024-01-05T14:38:35+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-01-05</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2024-01-17T10:12:36+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-01-17</span>
       
         <br>
         Created:
