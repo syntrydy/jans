@@ -1492,6 +1492,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#network-traffic-between-jans-services" class="md-nav__link">
+    Network traffic between Jans services
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -174025,6 +174032,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#network-traffic-between-jans-services" class="md-nav__link">
+    Network traffic between Jans services
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -174076,13 +174090,33 @@
 
 <h2 id="service-start-order">Service Start Order<a class="headerlink" href="#service-start-order" title="Permanent link">#</a></h2>
 <p><img alt="svg" src="../../../assets/kubernetes-services-start-order.svg" /></p>
+<h2 id="network-traffic-between-jans-services">Network traffic between Jans services<a class="headerlink" href="#network-traffic-between-jans-services" title="Permanent link">#</a></h2>
+<ol>
+<li>
+<p><strong>Database Access:</strong> all Jans services require access to the database.</p>
+</li>
+<li>
+<p><strong>Pod-2-Pod Communication:</strong> Jans services communicate with each other as depicted.</p>
+</li>
+<li>
+<p><strong>External/Internet Communication</strong>:</p>
+<ul>
+<li>
+<p>Auth-server: should be publically accessible.</p>
+</li>
+<li>
+<p>Rest of the pods:  We recommend to only keep the <code>.well-known</code> endpoints public and protect the rest.</p>
+</li>
+</ul>
+</li>
+</ol>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-04-11T07:54:01+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-04-11</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2024-01-22T04:58:07+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-01-22</span>
       
         <br>
         Created:
