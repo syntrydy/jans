@@ -174052,13 +174052,17 @@
 
 <h2 id="jans-lock-rego-policies">Jans Lock Rego Policies<a class="headerlink" href="#jans-lock-rego-policies" title="Permanent link">#</a></h2>
 <p>Lock can update your policies from a GIT or URI based policy store.</p>
+<p>Remote files specified in <code>policiesJsonUris</code> array should be JSON array with list of actual policies URIs. This behavior was added to group properties in packages.</p>
+<p><code>policiesZipUris</code> is another way to get policies. This can be also be link to download github repository as zip archive.</p>
+<p>These 2 methods support files download with <code>Bearer</code> authentication protection. Access tokens can be specified in <code>policiesJsonUrisAccessToken</code> and <code>policiesZipUrisAccessToken</code></p>
+<p>Lock automatically do policies clean up if they were removed from source servers or configuration on next synchronization.</p>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-12-12T06:57:26+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-12-12</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2024-01-22T20:27:09+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-01-22</span>
       
         <br>
         Created:

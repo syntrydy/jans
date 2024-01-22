@@ -172716,9 +172716,47 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Implement Lock PDP Plugin
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         Implement Lock PDP Plugin
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#janc-core-messages-api" class="md-nav__link">
+    Janc core messages API
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#new-pdp-support" class="md-nav__link">
+    New PDP support
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -173987,6 +174025,28 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#janc-core-messages-api" class="md-nav__link">
+    Janc core messages API
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#new-pdp-support" class="md-nav__link">
+    New PDP support
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -174009,14 +174069,87 @@
 
 
 <h1 id="developer-guide-lock-pdp-client">Developer Guide: Lock PDP Client<a class="headerlink" href="#developer-guide-lock-pdp-client" title="Permanent link">#</a></h1>
-<p>If you want to push OAuth tokens to a PDP, you can do so by writing a plugin.</p>
+<h2 id="janc-core-messages-api">Janc core messages API<a class="headerlink" href="#janc-core-messages-api" title="Permanent link">#</a></h2>
+<p>Jans provides <code>jans-core-message</code> library to work with PubSub servers. It has minimum dependencies and can be integrated in other projects. Current implementation supports 2 servers PostgreSQL and Redis.</p>
+<p>To work with PostgreSQL/Redis servers it has <a href="https://github.com/JanssenProject/jans/blob/main/jans-core/message/src/main/java/io/jans/service/message/provider/MessageInterface.java">MessageInterface</a>/<a href="https://github.com/JanssenProject/jans/blob/main/jans-core/message/src/main/java/io/jans/service/message/provider/MessageProvider.java">MessageProvider</a> implementations. It has methods to subscribe and publish messages defined in:</p>
+<div class="highlight"><pre><span></span><code>public abstract class MessageProvider&lt;T&gt; implements MessageInterface {
+
+    /*
+     * Delegate internal connection object
+     */
+    public abstract T getDelegate();
+
+    public abstract MessageProviderType getProviderType();
+
+    public abstract void shutdown();
+
+}
+
+public interface MessageInterface {
+
+    void subscribe(PubSubInterface pubSubAdapter, String... channels);
+
+    void unsubscribe(PubSubInterface pubSubAdapter);
+
+    boolean publish(String channel, String message);
+
+}
+</code></pre></div>
+<p>All methods defined in this interface <code>MessageInterface</code> are asynchronous.
+<code>MessageProvider</code> provides additional methods needed to determine it type and handle correct shutdown.</p>
+<p><a href="https://github.com/JanssenProject/jans/blob/main/jans-core/message/src/main/java/io/jans/service/message/pubsub/PubSubInterface.java">PubSubInterface</a> here defines call back class which API should call on messaging events:</p>
+<p>To add new PubSub support library should add new <code>MessageProvider</code> implementation.</p>
+<div class="highlight"><pre><span></span><code>public interface PubSubInterface {
+
+    void onMessage(String channel, String message);
+
+    void onSubscribe(String channel, int subscribedChannels);
+
+    void onUnsubscribe(String channel, int subscribedChannels);
+
+}
+</code></pre></div>
+<h2 id="new-pdp-support">New PDP support<a class="headerlink" href="#new-pdp-support" title="Permanent link">#</a></h2>
+<p>To add new PDP support jar file should has 2 classes implementation: <code>MessageConsumer</code> and <code>PolicyConsumer</code>. Lock has 2 implementations of these interfaces <a href="https://github.com/JanssenProject/jans/blob/main/jans-lock/service/src/main/java/io/jans/lock/service/consumer/message/opa/OpaMessageConsumer.java">OpaMessageConsumer</a> and <a href="https://github.com/JanssenProject/jans/blob/main/jans-lock/service/src/main/java/io/jans/lock/service/consumer/policy/opa/OpaPolicyConsumer.java">OpaPolicyConsumer</a>. After adding jar with new PDP support Lock should automatically find these implementations at startup.</p>
+<div class="highlight"><pre><span></span><code>public abstract class MessageConsumer implements MessageConsumerInterface {
+
+    public abstract String getMessageConsumerType();
+
+    public abstract void destroy();
+
+}
+
+public interface MessageConsumerInterface extends PubSubInterface {
+
+    public boolean putData(String message, JsonNode messageNode);
+
+}
+</code></pre></div>
+<p>Reference implementation for OPA is <a href="https://github.com/JanssenProject/jans/blob/main/jans-lock/service/src/main/java/io/jans/lock/service/consumer/message/opa/OpaMessageConsumer.java">OpaMessageConsumer</a>. It subscribes to message channels and send data to OPA through Rest API.</p>
+<div class="highlight"><pre><span></span><code>public abstract class PolicyConsumer implements MessagePolicyInterface {
+
+    public abstract String getPolicyConsumerType();
+
+    public abstract void destroy();
+
+}
+
+public interface MessagePolicyInterface {
+
+    public boolean putPolicies(String sourceUri, List&lt;String&gt; policies);
+
+    public boolean removePolicies(String sourceUri);
+
+}
+</code></pre></div>
+<p>Reference implementation for OPA is <a href="https://github.com/JanssenProject/jans/blob/main/jans-lock/service/src/main/java/io/jans/lock/service/consumer/policy/opa/OpaPolicyConsumer.java"><code>OpaPolicyConsumer</code></a>. <code>PolicyDownloadService</code> calls this service to send updates to OPA through Rest API.</p>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-12-12T06:57:26+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-12-12</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2024-01-22T20:27:09+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-01-22</span>
       
         <br>
         Created:
