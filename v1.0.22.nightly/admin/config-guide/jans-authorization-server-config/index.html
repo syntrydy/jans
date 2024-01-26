@@ -3161,6 +3161,8 @@
         
           
         
+          
+        
       
       
         
@@ -3205,6 +3207,20 @@
     <li class="md-nav__item">
       <a href="../../auth-server/tokens/oauth-refresh-tokens/" class="md-nav__link">
         OAuth Refresh Tokens
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../auth-server/tokens/oauth-tx-tokens/" class="md-nav__link">
+        OAuth Transaction Tokens
       </a>
     </li>
   
@@ -174150,7 +174166,8 @@ To get sample schema type /opt/jans/jans-cli/config-cli.py --schema &lt;schma&gt
     &quot;client_credentials&quot;,
     &quot;refresh_token&quot;,
     &quot;authorization_code&quot;,
-    &quot;password&quot;
+    &quot;password&quot;,
+    &quot;tx_token&quot;
   ],
   &quot;subjectTypesSupported&quot;: [
     &quot;public&quot;,
@@ -174357,6 +174374,7 @@ To get sample schema type /opt/jans/jans-cli/config-cli.py --schema &lt;schma&gt
   &quot;opTosUri&quot;: &quot;https://example.jans.io/tos&quot;,
   &quot;authorizationCodeLifetime&quot;: 60,
   &quot;refreshTokenLifetime&quot;: 14400,
+  &quot;txTokenLifetime&quot;: 180,
   &quot;idTokenLifetime&quot;: 3600,
   &quot;idTokenFilterClaimsBasedOnAccessToken&quot;: false,
   &quot;accessTokenLifetime&quot;: 300,
@@ -174669,7 +174687,7 @@ So, the <code>.json</code> file will look like this:</p>
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-08-11T12:07:59+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-08-11</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2024-01-25T16:08:21+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-01-25</span>
       
         <br>
         Created:
