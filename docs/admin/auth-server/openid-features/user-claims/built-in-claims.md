@@ -6,6 +6,7 @@ tags:
   - feature
   - claims
   - built-in-claims
+  - attributes
 ---
 
 # Built-in Claims

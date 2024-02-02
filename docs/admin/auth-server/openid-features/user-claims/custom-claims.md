@@ -6,6 +6,7 @@ tags:
   - feature
   - claims
   - custom-claims
+  - attributes
 ---
 
 # Custom Claims

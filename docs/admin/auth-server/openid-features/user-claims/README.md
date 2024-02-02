@@ -5,6 +5,7 @@ tags:
   - openidc
   - feature
   - claims
+  - attributes
 ---
 
 # User Claims
