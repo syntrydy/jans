@@ -20,11 +20,30 @@ Custom claims provide the flexibility to include application-specific or user-sp
 #### Step 1: Create a custom attribute
 
 Create a new custom attribute using 
-[Test User Interface](../../../config-guide/config-tools/jans-tui) or 
+[Text User Interface](../../../config-guide/config-tools/jans-tui) or 
 [CURL commands](../../../config-guide/config-tools/jans-cli/README.md), 
 superb tools provided in Janssen. The attribute name should be the claim name.
 
+Within TUI, navigate to `Auth Server` -> `Attributes` -> `Add Attribute`.
+
 ![](../../../../assets/image-tui-add-attribute.png)
+
+| Field Name           | Description                                                             | Default | Is Required |
+|----------------------|-------------------------------------------------------------------------|---------|-------------|
+| Name                 | Name of the claim or the attribute                                      | None    | Yes         |
+| SAML1 URI            |                                                                         |         |             |
+| SAML2 URI            |                                                                         |         |             |
+| Display Name         |                                                                         |         |             |
+| Data type            | Data type of the attribute                                              | String  | Yes         |
+| Edit Type            |                                                                         |         |             |
+| View Type            |                                                                         |         |             |
+| Multivalued          |                                                                         |         |             |
+| Claim Name           |                                                                         |         |             |
+| Include in SCIM Extn |                                                                         |         |             |
+| Description          | Description of the attribute                                            |         |             |
+| Status               | Supported status values are `Active`, `Inactive`, `Expired`, `Register` |         |             |
+| URN                  |                                                                         |         |             |
+
 
 #### Step 2: Make entry of the claim in OpenDJ Schema 
 
