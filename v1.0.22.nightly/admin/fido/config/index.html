@@ -174332,6 +174332,11 @@
 <td>false</td>
 <td>Boolean value indicating whether MDS validation should be omitted during attestation</td>
 </tr>
+<tr>
+<td>assertionOptionsGenerateEndpointEnabled</td>
+<td>false</td>
+<td>Boolean value indicating whether the assertion custom endpoint (used especially in passkey) is enabled.</td>
+</tr>
 </tbody>
 </table>
 <h3 id="configuring-the-fido2-server">Configuring the FIDO2 server:<a class="headerlink" href="#configuring-the-fido2-server" title="Permanent link">#</a></h3>
@@ -174370,6 +174375,7 @@
     &quot;metadataUrlsProvider&quot;: &quot;&quot;,
     &quot;skipDownloadMdsEnabled&quot;: false,
     &quot;skipValidateMdsInAttestationEnabled&quot;: false,
+    &quot;assertionOptionsGenerateEndpointEnabled&quot;:true,
     &quot;requestedCredentialTypes&quot;: [
       &quot;RS256&quot;,
       &quot;ES256&quot;
@@ -174414,7 +174420,7 @@ A[ou=jans] --&gt; V(ou=configuration)
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-09-12T14:05:09+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-09-12</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2024-02-05T11:05:00+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-02-05</span>
       
         <br>
         Created:
