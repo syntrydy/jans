@@ -174094,10 +174094,8 @@ retrieving the session will vary depending on whether the session is stored in m
 </ul>
 <p>The following Auth Server configuration properties are related to sessions:</p>
 <ul>
-<li><strong>sessionIdLifetime</strong> - lifetime of the OP session in seconds. It sets both the <code>session_id</code> cookie expiration property as well as the OP session object expiration (if <code>serverSessionIdLifetime</code> is not set or equals 0 which is default behavior) in the persistence. Upi cam set the value to 0 or -1, which means that expiration is not set. In this case, the sesion is valid until the browser
-session ends. Default value is <code>86400</code>.</li>
-<li><strong>serverSessionIdLifetime</strong> - dedicated property to control lifetime of the server side OP session object in seconds. Overrides <code>sessionIdLifetime</code>. By default value is <code>0</code>, so object lifetime equals <code>sessionIdLifetime</code> (which sets both cookie and object expiration). It can be useful if goal is to keep
-different values for client cookie and server object. Default value is <code>86400</code>.</li>
+<li><strong>sessionIdCookieLifetime</strong> - The lifetime of <code>session_id</code> cookie in seconds. If 0 or -1 then expiration is not set. session_id cookie expires when browser session ends. Default value is <code>86400</code>.</li>
+<li><strong>sessionIdLifetime</strong> - lifetime of the OP session in seconds (server side object). If not set, falls back to <code>session_id</code> cookie expiration set by <code>sessionIdCookieLifetime</code> configuration property.</li>
 <li><strong>sessionIdUnusedLifetime</strong> - unused OP session lifetime in seconds. If an OP session is not used for a given amount of time, the OP session is removed.
 Default value is <code>86400</code>.</li>
 <li><strong>sessionIdUnauthenticatedUnusedLifetime</strong> - lifetime in seconds of <code>unauthenticated</code> OP session. This determines how long the user can be on the login page while unauthenticated. Default value is <code>120</code>.</li>
@@ -174150,7 +174148,7 @@ undesirable default browser behavior.</p>
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-04-17T09:53:49+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-04-17</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2024-02-06T09:54:46+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-02-06</span>
       
         <br>
         Created:
