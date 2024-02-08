@@ -5232,8 +5232,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../recommended-practices/" class="md-nav__link">
-        Recommended practices
+      <a href="../agama-best-practices/" class="md-nav__link">
+        Agama Best Practices
       </a>
     </li>
   
@@ -174570,7 +174570,7 @@ hasOne = Call map.numbers contains 1
 <p>As seen in the examples Agama engine can deal with Java exceptions, however, this feature should be used sparingly. When exception handling adds undesired complexity to your code, create wrapper methods in Java and do the processing there instead of delegating that to the DSL.</p>
 <h3 id="arguments-conversion">Arguments conversion<a class="headerlink" href="#arguments-conversion" title="Permanent link">#</a></h3>
 <p><a href="../../../../agama/language-reference/#data-types">Agama types</a> do not match Java types. This means passing a "native" Agama value as parameter in a method <code>Call</code> requires some form of compatibility with the target (Java) type in the method signature.</p>
-<p>An argument (Agama value) is compatible with a method parameter if it can be "converted" successfully. As we'll see, conversion feels pretty natural in practice. If this process fails a <code>java.lang.IllegalArgumentException</code> is thrown and the flow will crash unless the exception is caught. Note however the recommended practice is to let flows <a href="../recommended-practices/#about-crashes">crash</a>.</p>
+<p>An argument (Agama value) is compatible with a method parameter if it can be "converted" successfully. As we'll see, conversion feels pretty natural in practice. If this process fails a <code>java.lang.IllegalArgumentException</code> is thrown and the flow will crash unless the exception is caught. Note however the recommended practice is to let flows <a href="./agama-best-practices#about-crashes">crash</a>.</p>
 <p>The following lists some of the most common successful conversions:</p>
 <table>
 <thead>
@@ -174757,14 +174757,14 @@ words = Call java.util.Collections#unmodifiableSet jStrArr
 <li>Usage of <code>==</code> operator actually calls the <code>equals</code> method. Most of times this is fine but can be a problem when you are overriding <code>equals</code> in your class and make use of <code>==</code>. This will introduce a recursive call in your implementation and may degenerate in a stack overflow. If possible, use the <code>===</code> operator or the <code>is</code> method in these cases</li>
 </ul>
 <h3 id="oop-prose-warning">OOP prose warning<a class="headerlink" href="#oop-prose-warning" title="Permanent link">#</a></h3>
-<p>See the recommended <a href="../recommended-practices/#oop-prose-warning">practices</a> to learn more about this topic.</p>
+<p>See the recommended <a href="./agama-best-practices#oop-prose-warning">practices</a> to learn more about this topic.</p>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2024-01-17T14:08:19+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-01-17</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2024-02-08T19:03:01+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-02-08</span>
       
         <br>
         Created:
