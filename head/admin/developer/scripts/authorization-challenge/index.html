@@ -174418,6 +174418,16 @@ If all is good script has to return <code>true</code> and it's strongly recommen
 <span class="w">            </span><span class="n">deviceSessionObject</span><span class="p">.</span><span class="na">getAttributes</span><span class="p">().</span><span class="na">getAttributes</span><span class="p">().</span><span class="na">put</span><span class="p">(</span><span class="n">PASSWORD_PARAMETER</span><span class="p">,</span><span class="w"> </span><span class="n">password</span><span class="p">);</span><span class="w"></span>
 <span class="w">        </span><span class="p">}</span><span class="w"></span>
 
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">clientId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">context</span><span class="p">.</span><span class="na">getHttpRequest</span><span class="p">().</span><span class="na">getParameter</span><span class="p">(</span><span class="s">&quot;client_id&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">StringUtils</span><span class="p">.</span><span class="na">isNotBlank</span><span class="p">(</span><span class="n">clientId</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">deviceSessionObject</span><span class="p">.</span><span class="na">getAttributes</span><span class="p">().</span><span class="na">getAttributes</span><span class="p">().</span><span class="na">put</span><span class="p">(</span><span class="s">&quot;client_id&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">clientId</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">acrValues</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">context</span><span class="p">.</span><span class="na">getHttpRequest</span><span class="p">().</span><span class="na">getParameter</span><span class="p">(</span><span class="s">&quot;acr_values&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">StringUtils</span><span class="p">.</span><span class="na">isNotBlank</span><span class="p">(</span><span class="n">acrValues</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">deviceSessionObject</span><span class="p">.</span><span class="na">getAttributes</span><span class="p">().</span><span class="na">getAttributes</span><span class="p">().</span><span class="na">put</span><span class="p">(</span><span class="s">&quot;acr_values&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">acrValues</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">newSave</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">            </span><span class="n">deviceSessionService</span><span class="p">.</span><span class="na">persist</span><span class="p">(</span><span class="n">deviceSessionObject</span><span class="p">);</span><span class="w"></span>
 <span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
@@ -174607,6 +174617,16 @@ public class AuthorizationChallenge implements AuthorizationChallengeType {
             deviceSessionObject.getAttributes().getAttributes().put(OTP_PARAMETER, otp);
         }
 
+        String clientId = context.getHttpRequest().getParameter(&quot;client_id&quot;);
+        if (StringUtils.isNotBlank(clientId)) {
+            deviceSessionObject.getAttributes().getAttributes().put(&quot;client_id&quot;, clientId);
+        }
+
+        String acrValues = context.getHttpRequest().getParameter(&quot;acr_values&quot;);
+        if (StringUtils.isNotBlank(acrValues)) {
+            deviceSessionObject.getAttributes().getAttributes().put(&quot;acr_values&quot;, acrValues);
+        }
+
         if (newSave) {
             deviceSessionService.persist(deviceSessionObject);
         } else {
@@ -174659,7 +174679,7 @@ public class AuthorizationChallenge implements AuthorizationChallengeType {
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-10-12T14:22:14+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-10-12</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2024-02-13T11:24:52+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-02-13</span>
       
         <br>
         Created:
