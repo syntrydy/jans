@@ -173924,23 +173924,84 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#operation-modes" class="md-nav__link">
-    Operation Modes
+  <a href="#installation" class="md-nav__link">
+    Installation
   </a>
   
-    <nav class="md-nav" aria-label="Operation Modes">
+    <nav class="md-nav" aria-label="Installation">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#scim-mode" class="md-nav__link">
-    SCIM Mode
+  <a href="#on-the-janssen-server" class="md-nav__link">
+    On The Janssen Server
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#auth-mode" class="md-nav__link">
-    AUTH Mode
+  <a href="#stand-alone-installation" class="md-nav__link">
+    Stand-alone Installation
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cli-tool-configuration" class="md-nav__link">
+    CLI Tool Configuration
+  </a>
+  
+    <nav class="md-nav" aria-label="CLI Tool Configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cli-authorization" class="md-nav__link">
+    CLI Authorization
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getting-help" class="md-nav__link">
+    Getting Help
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cli-command-structure" class="md-nav__link">
+    CLI Command Structure
+  </a>
+  
+    <nav class="md-nav" aria-label="CLI Command Structure">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#operation-modes" class="md-nav__link">
+    Operation Modes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tasks" class="md-nav__link">
+    Tasks
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operation-ids" class="md-nav__link">
+    Operation-ids
   </a>
   
 </li>
@@ -173958,44 +174019,36 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#about-schemas" class="md-nav__link">
+    About Schemas
+  </a>
+  
+    <nav class="md-nav" aria-label="About Schemas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#patch-request-schema" class="md-nav__link">
     Patch Request (schema)
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#multiple-patch-request-schema" class="md-nav__link">
     Multiple Patch Request (schema)
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#quick-patch-operations" class="md-nav__link">
     Quick Patch Operations
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#cli-authorization" class="md-nav__link">
-    CLI Authorization
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#stand-alone-installation" class="md-nav__link">
-    Stand-alone Installation
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#cli-tool-configuration" class="md-nav__link">
-    CLI Tool Configuration
-  </a>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -174052,18 +174105,60 @@
 
 
 <h1 id="janssen-cli">Janssen CLI<a class="headerlink" href="#janssen-cli" title="Permanent link">#</a></h1>
-<p><code>jans-cli</code> module is a command line interface for configuring the Janssen software, providing both interactive and simple single line options for configuration. This module interacts with Janssen server via RESTful configuration APIs that server exposes. Using these REST APIs, <code>jans-cli</code> allows configuration of authorization server and its major modules for FIDO2, SCIM, OpenID Connect etc. 
-</br>
-</br></p>
-<p align="center">
- <img src="../../../../assets/image-using-jans-cli-comp-04222022.png">
-</p>
-
-<p>Using this mode is more difficult than the TUI. If needed, help options are available by typing:  </p>
-<div class="highlight"><pre><span></span><code>/opt/jans/jans-cli/config-cli.py --help
+<p><code>jans-cli</code> module is a command line interface for configuring the Janssen 
+Server. This module interacts with Janssen Server via 
+<a href="./config-api/README.md">RESTful configuration APIs</a>
+that server exposes. <code>jans-cli</code> can be used to retrieve and update configuration
+of Janssen Server.</p>
+<h2 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">#</a></h2>
+<h3 id="on-the-janssen-server">On The Janssen Server<a class="headerlink" href="#on-the-janssen-server" title="Permanent link">#</a></h3>
+<p>On a Janssen Server instance, the <code>jans-cli</code> will be already installed.</p>
+<p>It can be invoked executing following command on Janssen Server.</p>
+<div class="highlight"><pre><span></span><code>/opt/jans/jans-cli/config-cli.py
 </code></pre></div>
-<p>It will print all information about how to configure Janssen Server using CLI mode:</p>
-<p><div class="highlight"><pre><span></span><code>usage: config-cli.py [-h] [--host HOST] [--client-id CLIENT_ID]
+<h3 id="stand-alone-installation">Stand-alone Installation<a class="headerlink" href="#stand-alone-installation" title="Permanent link">#</a></h3>
+<p><code>jans-cli</code> can be installed on any other machine and then use it to configure
+remote server where Janssen Server is installed.</p>
+<ul>
+<li>Follow <a href="../jans-tui/#1-build-pyz-self-executable-file">these instructions</a> and create a self-executable file</li>
+<li>Run the file as shown in the example below to enter CLI mode. Here, supplying the argument <code>--no-tui</code> is necessary,
+  otherwise it will switch to TUI mode.
+   <div class="highlight"><pre><span></span><code>$ ./jans-cli-tui.pyz --no-tui --host test.jans.io --client-id 2000.562981df-1623-4136-b1d0-aaa277edc48c --client-secret KU6ydImJZK6S --operation-id get-acrs
+Please wait while retrieving data ...
+Access token was not found.
+Please visit verification url https://test.jans.io/device-code?user_code=LKHC-PBTR and authorize this device within 1800 secods
+Please press «Enter» when ready
+{
+  &quot;defaultAcr&quot;: &quot;simple_password_auth&quot;
+}
+</code></pre></div></li>
+</ul>
+<h2 id="cli-tool-configuration">CLI Tool Configuration<a class="headerlink" href="#cli-tool-configuration" title="Permanent link">#</a></h2>
+<p>Janssen CLI tool stores its configuration under <code>&lt;install-path&gt;/.config</code>
+directory. Various settings for CLI tool can be found under this directory,
+for example <a href="../../../../contribute/developer-faq/#how-to-enable-debug-logs-for-jans-cli-and-tui-configuration-tools">logging levels</a>.</p>
+<p>This directory also contains SALT used by Janssen CLI tool.</p>
+<h3 id="cli-authorization">CLI Authorization<a class="headerlink" href="#cli-authorization" title="Permanent link">#</a></h3>
+<p>To run operations on Janssen Server, CLI client will need to be authenticated and authorized by the server. Since CLI has limited input capabilities, it uses <a href="https://datatracker.ietf.org/doc/html/rfc8628">Device Authorization Grant</a> flow to get required permissions in form of an access token. After successfully receiving the token, CLI can run operations on the Janssen server while the token is valid. The steps below will summarize this process.</p>
+<ol>
+<li>Execution of CLI command will return the following message if a valid token is not found.
+   <div class="highlight"><pre><span></span><code>Access token was not found.
+Please visit verification url &lt;Janssen-server-device-code-url&gt; and enter user code CGFZ-RTZR in 1800 seconds
+Please press &lt;&lt;Enter&gt;&gt; when ready
+</code></pre></div></li>
+<li>Take <code>&lt;Janssen-server-device-code-url&gt;</code> from the message above and use any browser to access it from a different device</li>
+<li>User will be presented with a page where the user has to authenticate using id and password</li>
+<li>After successful user authentication, the next screen allows the user to enter the user code. Use the user code presented on command-line instruction in step 1 above.</li>
+<li>After successful code validation, the user is presented with OAuth permissions screen. This screen would list all the permissions requested by Jans CLI. The user can choose to <code>Allow</code> or <code>Not Allow</code> granting of these permissions.</li>
+<li>After allowing the grant of requested permissions, the user should come back to the command-line interface and hit &lt;<Enter>&gt; as instructed. This will enable CLI to run operations on the corresponding Janssen server.</li>
+</ol>
+<h2 id="getting-help">Getting Help<a class="headerlink" href="#getting-help" title="Permanent link">#</a></h2>
+<p>CLI <code>--help</code> switch prints all options available from CLI to configure Janssen
+Server. Run command below</p>
+<p><div class="highlight"><pre><span></span><code>/opt/jans/jans-cli/config-cli.py --help
+</code></pre></div>
+To see all options as below:
+<div class="highlight"><pre><span></span><code>usage: config-cli.py [-h] [--host HOST] [--client-id CLIENT_ID]
                      [--client_secret CLIENT_SECRET] [--plugins PLUGINS] [-debug]
                      [--debug-log-file DEBUG_LOG_FILE]
                      [--operation-id OPERATION_ID] [--url-suffix URL_SUFFIX]
@@ -174118,124 +174213,103 @@ optional arguments:
   --data DATA           Path to json data file
   --output-access-token Prints jwt access token and exits
 root@testjans:~# 
-</code></pre></div>
-We start with getting information about tasks, tasks are options of argument <code>--info</code>:</p>
-<div class="highlight"><pre><span></span><code>Attribute, CacheConfiguration, CacheConfigurationInMemory, CacheConfigurationMemcached, CacheConfigurationNativePersistence, CacheConfigurationRedis, ConfigurationFido2, ConfigurationJWKJSONWebKeyJWK, ConfigurationLogging, ConfigurationProperties, ConfigurationSMTP, CustomScripts, DatabaseCouchbaseConfiguration, DatabaseLDAPConfiguration, DefaultAuthenticationMethod, OAuthOpenIDConnectClients, OAuthOpenIDConnectSectorIdentifiers, OAuthScopes, OAuthUMAResources
-</code></pre></div>
-<p>To get information for a specific task we run command as below: 
-<div class="highlight"><pre><span></span><code>/opt/jans/jans-cli/config-cli.py --info [task]
-</code></pre></div>
-for example: 
-<div class="highlight"><pre><span></span><code>/opt/jans/jans-cli/config-cli.py --info DefaultAuthenticationMethod
 </code></pre></div></p>
-<p>It returns with some <code>operation id</code>:
-<div class="highlight"><pre><span></span><code>Operation ID: get-acrs
-  Description: Gets default authentication method.
-Operation ID: put-acrs
-  Description: Updates default authentication method.
-  Schema: /components/schemas/AuthenticationMethod
-
-To get sample shema type /opt/jans/jans-cli/config-cli.py --schema &lt;schma&gt;, for example /opt/jans/jans-cli/config-cli.py --schema /components/schemas/AuthenticationMethod
+<h2 id="cli-command-structure">CLI Command Structure<a class="headerlink" href="#cli-command-structure" title="Permanent link">#</a></h2>
+<p>CLI operations are structurally grouped by <code>Operation Modes</code> and within 
+these modes, they are logically grouped together by tasks. Diagram below 
+depicts this structure.</p>
+<p><img alt="" src="../../../../assets/jans-cli-structure.png" /></p>
+<h3 id="operation-modes">Operation Modes<a class="headerlink" href="#operation-modes" title="Permanent link">#</a></h3>
+<p>CLI offer three operation modes, JCA, SCIM and AUTH. JCA is the default mode.
+To use SCIM and AUTH modes, the CLI command specifies <code>-scim</code> or <code>-auth</code> 
+switches. Use <code>-h</code> switch to get help on each mode.</p>
+<div class="highlight"><pre><span></span><code>/opt/jans/jans-cli/config-cli.py -scim -h
 </code></pre></div>
-To perform any operation, you have to run command line with the operation id. for example:</p>
-<p><div class="highlight"><pre><span></span><code>/opt/jans/jans-cli/config-cli.py --operation-id get-acrs
+<p>The modes usually have different task(and hence operations).</p>
+<h3 id="tasks">Tasks<a class="headerlink" href="#tasks" title="Permanent link">#</a></h3>
+<p><code>Tasks</code> are logical grouping of operation-ids so that users can easily list
+all the operational-ids relevant to a particular aspect of Janssen Server
+configuration using <code>--info</code> switch. For instance,
+all the operation-ids related to attribute management are grouped under
+<code>attribute</code> task. As mentioned, tasks are logical groupings, they don't perform
+any operation on the server. Tasks can only be used with <code>--info</code> switch.</p>
+<p>Execute following command to see what all tasks are offered by jans-cli:</p>
+<div class="highlight"><pre><span></span><code>/opt/jans/jans-cli/config-cli.py --help
 </code></pre></div>
-It returns:</p>
+<p>Options listed for <code>--info</code> switch are tasks groups available. For example:</p>
+<div class="highlight"><pre><span></span><code>usage: config-cli.py <span class="o">[</span>-h<span class="o">]</span> <span class="o">[</span>--host HOST<span class="o">]</span> <span class="o">[</span>--client-id CLIENT_ID<span class="o">]</span> <span class="o">[</span>--client-secret CLIENT_SECRET<span class="o">]</span> <span class="o">[</span>--access-token ACCESS_TOKEN<span class="o">]</span> <span class="o">[</span>--plugins PLUGINS<span class="o">]</span>
+                     <span class="o">[</span>-debug<span class="o">]</span> <span class="o">[</span>--debug-log-file DEBUG_LOG_FILE<span class="o">]</span> <span class="o">[</span>--operation-id OPERATION_ID<span class="o">]</span> <span class="o">[</span>--url-suffix URL_SUFFIX<span class="o">]</span>
+                     <span class="o">[</span>--info <span class="o">{</span>AdminUiLicense,AdminUiPermission,AdminUiRole,AdminUiRolePermissionsMapping,AdminUiWebhooks,Agama,AgamaConfiguration,Attribute,AuthServerHealthCheck,AuthSessionManagement,CacheConfiguration,CacheConfigurationInMemory,CacheConfigurationMemcached,CacheConfigurationNativePersistence,CacheConfigurationRedis,ClientAuthorization,ConfigurationConfigApi,ConfigurationJwkJsonWebKeyJwk,ConfigurationLogging,ConfigurationProperties,ConfigurationSmtp,ConfigurationUserManagement,CustomScripts,DatabaseLdapConfiguration,DefaultAuthenticationMethod,Fido2Configuration,Fido2Registration,HealthCheck,JansLinkConfiguration,MessageConfiguration,MessageConfigurationPostgres,MessageConfigurationRedis,OauthOpenidConnectClients,OauthScopes,OauthUmaResources,OrganizationConfiguration,Plugins,SamlConfiguration,SamlIdentityBroker,SamlTrustRelationship,ScimConfigManagement,StatisticsUser<span class="o">}]</span>
+                     <span class="o">[</span>--op-mode <span class="o">{</span>get,post,put,patch,delete<span class="o">}]</span> <span class="o">[</span>--endpoint-args ENDPOINT_ARGS<span class="o">]</span> <span class="o">[</span>--schema SCHEMA<span class="o">]</span> <span class="o">[</span>-CC CONFIG_API_MTLS_CLIENT_CERT<span class="o">]</span>
+                     <span class="o">[</span>-CK CONFIG_API_MTLS_CLIENT_KEY<span class="o">]</span> <span class="o">[</span>--key-password KEY_PASSWORD<span class="o">]</span> <span class="o">[</span>-noverify<span class="o">]</span> <span class="o">[</span>-use-test-client<span class="o">]</span> <span class="o">[</span>--patch-add PATCH_ADD<span class="o">]</span>
+                     <span class="o">[</span>--patch-replace PATCH_REPLACE<span class="o">]</span> <span class="o">[</span>--patch-remove PATCH_REMOVE<span class="o">]</span> <span class="o">[</span>-no-color<span class="o">]</span> <span class="o">[</span>--log-dir LOG_DIR<span class="o">]</span> <span class="o">[</span>--tmp-dir TMP_DIR<span class="o">]</span>
+                     <span class="o">[</span>-revoke-session<span class="o">]</span> <span class="o">[</span>-scim<span class="o">]</span> <span class="o">[</span>-auth<span class="o">]</span> <span class="o">[</span>--data DATA<span class="o">]</span> <span class="o">[</span>--output-access-token<span class="o">]</span>
+</code></pre></div>
+<p>To see operation-id available under a task, execute the command below with
+the task name as an argument:</p>
+<div class="highlight"><pre><span></span><code>/opt/jans/jans-cli/config-cli.py --info Attribute
+</code></pre></div>
+<p>Above will list all the operations under <code>Attribute</code> group.</p>
+<div class="highlight"><pre><span></span><code>Operation ID: get-attributes
+  Description: Gets a list of Jans attributes.
+  Parameters:
+  limit: Search size - max size of the results to <span class="k">return</span> <span class="o">[</span>integer<span class="o">]</span>
+  pattern: Search pattern <span class="o">[</span>string<span class="o">]</span>
+  status: Status of the attribute <span class="o">[</span>string<span class="o">]</span>
+  startIndex: The <span class="m">1</span>-based index of the first query result <span class="o">[</span>integer<span class="o">]</span>
+  sortBy: Attribute whose value will be used to order the returned response <span class="o">[</span>string<span class="o">]</span>
+  sortOrder: Order <span class="k">in</span> which the sortBy param is applied. Allowed values are <span class="s2">&quot;ascending&quot;</span> and <span class="s2">&quot;descending&quot;</span> <span class="o">[</span>string<span class="o">]</span>
+  fieldValuePair: Field and value pair <span class="k">for</span> seraching <span class="o">[</span>string<span class="o">]</span>
+Operation ID: put-attributes
+  Description: Updates an existing attribute
+  Schema: JansAttribute
+Operation ID: post-attributes
+  Description: Adds a new attribute
+  Schema: JansAttribute
+Operation ID: get-attributes-by-inum
+  Description: Gets an attribute based on inum
+  Parameters:
+  inum: Attribute Id <span class="o">[</span>string<span class="o">]</span>
+Operation ID: delete-attributes-by-inum
+  Description: Deletes an attribute based on inum
+  Parameters:
+  inum: Attribute Id <span class="o">[</span>string<span class="o">]</span>
+Operation ID: patch-attributes-by-inum
+  Description: Partially modify a JansAttribute
+  Parameters:
+  inum: Attribute Id <span class="o">[</span>string<span class="o">]</span>
+  Schema: Array of PatchRequest
+</code></pre></div>
+<h3 id="operation-ids">Operation-ids<a class="headerlink" href="#operation-ids" title="Permanent link">#</a></h3>
+<p>jans-cli's unit of work, or a command, is known as <code>operation-id</code>. Each
+operation id is a configuration retrieval/update action on the Janssen Server.
+For example: <code>get-attributes</code> is an operation that <code>Gets a list of Janssen
+Server attributes</code>.</p>
+<p>To perform any operation, you have to run command line with the operation id. 
+For example:</p>
+<div class="highlight"><pre><span></span><code>/opt/jans/jans-cli/config-cli.py --operation-id get-acrs
+</code></pre></div>
+<p>It returns:</p>
 <div class="highlight"><pre><span></span><code>Getting access token for scope https://jans.io/oauth/config/acrs.readonly
 {
   &quot;defaultAcr&quot;: &quot;simple_password_auth&quot;
 }
 </code></pre></div>
-<p>This is how we can execute single line command to get information about the Janssen Server. </p>
-<h2 id="operation-modes">Operation Modes<a class="headerlink" href="#operation-modes" title="Permanent link">#</a></h2>
-<p>Default operation mode is <strong>jca</strong>, i.e., all queries are done to Jans Config Api Server. CLI has also SCIM and OAUTH modes:</p>
-<h3 id="scim-mode">SCIM Mode<a class="headerlink" href="#scim-mode" title="Permanent link">#</a></h3>
-<p>To switch SCIM mode user <code>-scim</code> switch. For example to get help for SCIM mode:</p>
-<p><code>/opt/jans/jans-cli/config-cli.py -scim -h</code></p>
-<p>Only <code>--info</code> arguments will be different from <strong>jca</strong> mode:</p>
-<div class="highlight"><pre><span></span><code>--info {Discovery,Fido2Devices,FidoDevices,GlobalSearch,Group,User}
-</code></pre></div>
-<p>You can get information about operation <code>Discovery</code>:</p>
-<div class="highlight"><pre><span></span><code>/opt/jans/jans-cli/config-cli.py -scim --info Fido2Devices
-Operation ID: get-fido2-devices
-  Description: Query Fido 2 resources
-  Parameters:
-  attributes: A comma-separated list of attribute names to return in the response [string]
-  excludedAttributes: When specified, the response will contain a default set of attributes minus those listed here (as a comma-separated list) [string]
-  userId: Used to restrict the search to fido 2 resources owned by a specific user [string]
-  filter: An expression specifying the search criteria. See section 3.4.2.2 of RFC 7644 [string]
-  startIndex: The 1-based index of the first query result [integer]
-  count: Specifies the desired maximum number of query results per page [integer]
-  sortBy: The attribute whose value will be used to order the returned responses [string]
-  sortOrder: Order in which the sortBy param is applied. Allowed values are &quot;ascending&quot; and &quot;descending&quot; [string]
-Operation ID: get-fido2-device-by-id
-  Description: Retrieves a Fido 2 device by Id
-  Parameters:
-  attributes: A comma-separated list of attribute names to return in the response [string]
-  excludedAttributes: When specified, the response will contain a default set of attributes minus those listed here (as a comma-separated list) [string]
-  userId: Identifier (inum) of the device owner. This param is not required when underlying database is LDAP [string]
-  id: No description is provided for this parameter [string]
-Operation ID: update-fido2-device-by-id
-  Description: Updates a Fido 2 resource. Update works in a replacement fashion&amp;amp;#58; every attribute value found in the payload sent will replace the one in the existing resource representation. Attributes not passed in the payload will be left intact.
-
-  Parameters:
-  attributes: A comma-separated list of attribute names to return in the response [string]
-  excludedAttributes: When specified, the response will contain a default set of attributes minus those listed here (as a comma-separated list) [string]
-  id: No description is provided for this parameter [string]
-  Schema: Fido2DeviceResource
-  Schema: Fido2DeviceResource
-Operation ID: delete-fido2-device-by-id
-  Description: Deletes a Fido 2 resource
-  Parameters:
-  id: Identifier of the resource to delete [string]
-Operation ID: search-fido2-device
-  Description: Query Fido 2 resources
-  Parameters:
-  userId: Used to restrict the search to fido 2 resources owned by a specific user [string]
-  Schema: SearchRequest
-  Schema: SearchRequest
-
-To get sample schema type /opt/jans/jans-cli/config-cli.py -scim --schema &lt;schma&gt;, for example /opt/jans/jans-cli/config-cli.py -scim --schema SearchRequest
-</code></pre></div>
-<p>Here is how you can get sample schema for <strong>SearchRequest</strong>:</p>
-<div class="highlight"><pre><span></span><code>/opt/jans/jans-cli/config-cli.py -scim --schema SearchRequest
-{
-  &quot;schemas&quot;: [
-    &quot;string&quot;
-  ],
-  &quot;attributes&quot;: [
-    &quot;string&quot;
-  ],
-  &quot;excludedAttributes&quot;: [
-    &quot;string&quot;
-  ],
-  &quot;filter&quot;: &quot;userName eq \&quot;jhon\&quot; and meta.lastModified gt \&quot;2011-05-13T04:42:34Z\&quot;&quot;,
-  &quot;sortBy&quot;: &quot;string&quot;,
-  &quot;sortOrder&quot;: &quot;string&quot;,
-  &quot;startIndex&quot;: 143,
-  &quot;count&quot;: 58
-}
-</code></pre></div>
-<h3 id="auth-mode">AUTH Mode<a class="headerlink" href="#auth-mode" title="Permanent link">#</a></h3>
-<p>To switch AUTH mode user <code>-auth</code> switch. For example to get help for AUTH mode:</p>
-<p><code>/opt/jans/jans-cli/config-cli.py -auth -h</code></p>
-<p><code>--info</code> arguments will be:</p>
-<div class="highlight"><pre><span></span><code>--info {Authorization,ClientInfo,ClientRegistration,FidoU2F,JwkJsonWebKeySetJwks,Registration,ServerConfiguration,SessionManagement,Ssa,Token,TokenIntrospection,Uma2Resource,UmaScope,UmaUserManagedAccess,UserInfo}
-</code></pre></div>
-<p>To get information about operation <code>ClientRegistration</code>:</p>
-<div class="highlight"><pre><span></span><code>/opt/jans/jans-cli/config-cli.py -auth --info ClientInfo
-Operation ID: get_clientinfo
-  Description: The ClientInfo Endpoint is an OAuth 2.0 Protected Resource that returns Claims about the registered client.
-  Parameters:
-  access_token: No description is provided for this parameter [string]
-  Authorization: No description is provided for this parameter [string]
-Operation ID: post_clientinfo
-  Description: The ClientInfo Endpoint is an OAuth 2.0 Protected Resource that returns Claims about the registered client.
-  Parameters:
-  Authorization: No description is provided for this parameter [string]
-  Parameters:
-    access_token*: Client-specific access token.
-</code></pre></div>
+<p>Certain operations need data to be able to execute while for others just the 
+operation id is enough. For instance in above example <code>get-acrs</code> operation did
+not require any data to be passed and worked only with operation id. While 
+operations like <code>delete-attributes-by-inum</code>, <code>post-attributes</code> need additional
+data to be able to execute. For example, for <code>delete-attributes-by-inum</code> to 
+execute, it needs to know the <code>inum</code> of the attribute to be deleted.</p>
+<p>For operations which need data the data elements are
+passed to the operation in form of <code>parameters</code> and/or <code>schema</code>.
+Operation description provided by <code>--info</code> switch details out what parameters
+and schemas are applicable to each operation.</p>
+<p><code>Parameters</code> allow simple string based values to be passed to the operation, 
+while <code>schema</code> allows JSON structured data to be passed to the operation. 
+For examples of how operations can be used with parameters and schema, refer to
+<a href="../../attribute-configuration/">Attribute</a>. Read more about schema in <a href="#about-schemas">this
+detail section</a>.</p>
 <h2 id="basic-command-line-switches">Basic command-line switches<a class="headerlink" href="#basic-command-line-switches" title="Permanent link">#</a></h2>
 <ol>
 <li><code>-h</code> or <code>--help</code> to get all the formations of command line argument (ex; <code>/opt/jans/jans-cli/config-cli.py -h</code>)</li>
@@ -174244,7 +174318,8 @@ Operation ID: post_clientinfo
 <li><code>--endpoint-args</code> advanced usage for operation-id</li>
 <li><code>--data</code> usage to share data in operations</li>
 </ol>
-<h2 id="patch-request-schema">Patch Request (schema)<a class="headerlink" href="#patch-request-schema" title="Permanent link">#</a></h2>
+<h2 id="about-schemas">About Schemas<a class="headerlink" href="#about-schemas" title="Permanent link">#</a></h2>
+<h3 id="patch-request-schema">Patch Request (schema)<a class="headerlink" href="#patch-request-schema" title="Permanent link">#</a></h3>
 <p>This schema file can be found in <code>/components/schemas/PatchRequest</code> for those which one support this operation.</p>
 <p>When you examine this sample schema, you will see three properties in an object: op, path, and value.</p>
 <ul>
@@ -174252,7 +174327,7 @@ Operation ID: post_clientinfo
 <li><strong>path</strong>: Path of the property to be changed. use path separator <code>/</code> for config or <code>.</code> for SCIM to change a property inside an object.</li>
 <li><strong>value</strong>: New value to be assigned for each property defined in <code>path</code></li>
 </ul>
-<h2 id="multiple-patch-request-schema">Multiple Patch Request (schema)<a class="headerlink" href="#multiple-patch-request-schema" title="Permanent link">#</a></h2>
+<h3 id="multiple-patch-request-schema">Multiple Patch Request (schema)<a class="headerlink" href="#multiple-patch-request-schema" title="Permanent link">#</a></h3>
 <p>When we need to perform multiple patch operations on any configuration endpoint, Instead of doing one by one, we can create a json file including all individual operation into an array. To clarify, please see below json file:</p>
 <div class="highlight"><pre><span></span><code>[
     {
@@ -174284,7 +174359,7 @@ Operation ID: post_clientinfo
 <p>After creating the json file, just run the patch operation command.</p>
 <div class="highlight"><pre><span></span><code>/opt/jans/jans-cli/config-cli.py --operation-id [patch operation id name] --data [json file absolute url]
 </code></pre></div>
-<h2 id="quick-patch-operations">Quick Patch Operations<a class="headerlink" href="#quick-patch-operations" title="Permanent link">#</a></h2>
+<h3 id="quick-patch-operations">Quick Patch Operations<a class="headerlink" href="#quick-patch-operations" title="Permanent link">#</a></h3>
 <p>There is another patch request feature. It is a single line patch-request command line. It supports three types of operations:</p>
 <ul>
 <li><code>patch-replace</code>: to replace value with new one.</li>
@@ -174304,47 +174379,13 @@ Operation ID: post_clientinfo
 <p>Multi valued arguments can be privede as <code>key:value1,key:vlaue2</code>, for example 
 <div class="highlight"><pre><span></span><code>/opt/jans/jans-cli/config-cli.py --operation-id=get-config-scripts  --endpoint-args=&quot;fieldValuePair:scriptType=dynamic_scope,fieldValuePair:level=100&quot;
 </code></pre></div></p>
-<h2 id="cli-authorization">CLI Authorization<a class="headerlink" href="#cli-authorization" title="Permanent link">#</a></h2>
-<p>To run operations on Janssen Server, CLI client will need to be authenticated and authorized by the server. Since CLI has limited input capabilities, it uses <a href="https://datatracker.ietf.org/doc/html/rfc8628">Device Authorization Grant</a> flow to get required permissions in form of an access token. After successfully receiving the token, CLI can run operations on the Janssen server while the token is valid. The steps below will summarize this process.</p>
-<ol>
-<li>Execution of CLI command will return the following message if a valid token is not found.
-   <div class="highlight"><pre><span></span><code>Access token was not found.
-Please visit verification url &lt;Janssen-server-device-code-url&gt; and enter user code CGFZ-RTZR in 1800 seconds
-Please press &lt;&lt;Enter&gt;&gt; when ready
-</code></pre></div></li>
-<li>Take <code>&lt;Janssen-server-device-code-url&gt;</code> from the message above and use any browser to access it from a different device</li>
-<li>User will be presented with a page where the user has to authenticate using id and password</li>
-<li>After successful user authentication, the next screen allows the user to enter the user code. Use the user code presented on command-line instruction in step 1 above.</li>
-<li>After successful code validation, the user is presented with OAuth permissions screen. This screen would list all the permissions requested by Jans CLI. The user can choose to <code>Allow</code> or <code>Not Allow</code> granting of these permissions.</li>
-<li>After allowing the grant of requested permissions, the user should come back to the command-line interface and hit &lt;<Enter>&gt; as instructed. This will enable CLI to run operations on the corresponding Janssen server.</li>
-</ol>
-<h2 id="stand-alone-installation">Stand-alone Installation<a class="headerlink" href="#stand-alone-installation" title="Permanent link">#</a></h2>
-<ul>
-<li>Follow <a href="../jans-tui/#1-build-pyz-self-executable-file">these instructions</a> and create a self-executable file</li>
-<li>Run the file as shown in the example below to enter CLI mode. Here, supplying the argument <code>--no-tui</code> is necessary, 
-otherwise it will switch to TUI mode.
-<div class="highlight"><pre><span></span><code>$ ./jans-cli-tui.pyz --no-tui --host test.jans.io --client-id 2000.562981df-1623-4136-b1d0-aaa277edc48c --client-secret KU6ydImJZK6S --operation-id get-acrs
-Please wait while retrieving data ...
-Access token was not found.
-Please visit verification url https://test.jans.io/device-code?user_code=LKHC-PBTR and authorize this device within 1800 secods
-Please press «Enter» when ready
-{
-  &quot;defaultAcr&quot;: &quot;simple_password_auth&quot;
-}
-</code></pre></div></li>
-</ul>
-<h2 id="cli-tool-configuration">CLI Tool Configuration<a class="headerlink" href="#cli-tool-configuration" title="Permanent link">#</a></h2>
-<p>Janssen CLI tool stores its configuration under <code>&lt;install-path&gt;/.config</code> 
-directory. Various settings for CLI tool can be found under this directory, 
-for example <a href="../../../../contribute/developer-faq/#how-to-enable-debug-logs-for-jans-cli-and-tui-configuration-tools">logging levels</a>.</p>
-<p>This directory also contains SALT used by Janssen CLI tool. </p>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-11-22T12:22:08+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-11-22</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2024-02-14T20:03:08+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-02-14</span>
       
         <br>
         Created:
