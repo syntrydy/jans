@@ -3,11 +3,13 @@ tags:
   - administration
   - configuration
   - attributes
+  - claims
 ---
 
 # Attribute Configuration
 
-This document covers how attributes in Janssen Server can be configured using
+This document covers how attributes(also referred to as claims) in 
+Janssen Server can be configured using
 different configuration tools like [CLI](./config-tools/jans-cli/README.md), 
 [TUI](./config-tools/jans-tui/README.md), 
 [Configuration REST API](./config-tools/config-api/README.md).
@@ -15,6 +17,8 @@ different configuration tools like [CLI](./config-tools/jans-cli/README.md),
 ## Attribute Configuration Using TUI
 
 ## Attribute Configuration Using Command Line
+
+> Prerequisite: Know how to use the Janssen CLI in [command-line mode](config-tools/jans-cli/README.md)
 
 First thing, let's get the information for `Attribute`:
 ```shell
@@ -56,22 +60,10 @@ Operation ID: patch-attributes-by-inum
 To get sample schema type /opt/jans/jans-cli/config-cli.py --schema <schma>, for example /opt/jans/jans-cli/config-cli.py --schema PatchRequest
 ```
 
-We have discussed here about each of this operations ID with few examples to understand how these really works.
+Sections below discusses each of this operations ID with few examples 
+to understand how they really works.
 
-Table of Contents
-=================
-
-* [Attribute](#attribute)
-  * [Get Attributes](#get-attributes)
-  * [Creating an Attribute](#creating-an-attribute)
-  * [Updating an Attribute](#updating-an-attribute)
-  * [Get Attribute by inum](#get-attribute-by-inum)
-  * [Delete Attributes](#delete-attributes)
-  * [Patch Attributes](#patch-attributes)
-
-## Get Attributes
-
-> Prerequisite: Know how to use the Janssen CLI in [command-line mode](config-tools/jans-cli/README.md)
+### Get Attributes
 
 As we know, Attributes are individual pieces of user data, like `uid` or `email`, that are required by applications in order to identify a user and grant access to protect resources. The user attributes that are available in your Janssen Server can be found by using this operation-ID. If we look at the description below:
 
@@ -88,12 +80,13 @@ Operation ID: get-attributes
   fieldValuePair: Field and value pair for seraching [string]
 ```
 
-To get all the attributes without any arguments, run the following command:
+To get all the attributes/claims available in Janssen Server, 
+run the following command:
 ```commandline
 /opt/jans/jans-cli/config-cli.py --operation-id get-attributes
 ```
 
-To get attributes with passing the arguments, let's retrieve randomly limit:5:
+To get attributes/claims with passing the arguments, let's retrieve randomly limit:5:
 
 ```commandline
 /opt/jans/jans-cli/config-cli.py --operation-id get-attributes --endpoint-args limit:1
@@ -146,7 +139,7 @@ Calling with params limit=1
 
 ```
 
-To get attributes with `pattern & status`:
+To get attributes/claims with `pattern & status`:
 
 ```commandline
 /opt/jans/jans-cli/config-cli.py --operation-id get-attributes --endpoint-args limit:3,pattern:profile,status:ACTIVE
@@ -232,9 +225,12 @@ Please wait while retrieving data ...
 }
 ```
 
-## Creating an Attribute
+### Creating an Attribute
 
-To create SSO for certain applications, you may need to add custom attributes to your Janssen Server. Custom attributes can be added by using this operation-ID. It has a schema file where it's defined: the properties it needs to be filled to create a new custom attribute.
+To create SSO for certain applications, you may need to add custom attributes
+to your Janssen Server. Custom attributes can be added by using this 
+operation-ID. It has a schema file where it's defined: the properties it 
+needs to be filled to create a new custom attribute.
 
 ```text
 Operation ID: post-attributes
@@ -353,9 +349,12 @@ It will create a new attribute into the Attribute list with updated `inum & dn`:
 }
 ```
 
-## Updating an Attribute
+### Updating an Attribute
 
-This operation-id can be used to update an existing attribute information. The Janssen Server administrator can make changes to attributes, such as changing their status to `active/inactive` by using this operation-ID. Let's look at the schema:
+This operation-id can be used to update an existing attribute information. 
+The Janssen Server administrator can make changes to attributes, such as 
+changing their status to `active/inactive` by using this operation-ID. 
+Let's look at the schema:
 
 ```
 /opt/jans/jans-cli/config-cli.py --schema JansAttribute > /tmp/attrib.json
@@ -363,7 +362,8 @@ This operation-id can be used to update an existing attribute information. The J
 
 You must see the similar schema while performed in `post-attributes` operation.
 
-To update an existing attribute, we have to ensure following properties in the schema file.
+To update an existing attribute, we have to ensure following properties in the 
+schema file.
 
 In our case, I have modified the schema file as below:
 
@@ -388,6 +388,7 @@ Now if we run the below command line:
 /opt/jans/jans-cli/config-cli.py --operation-id put-attributes --data /tmp/attrb.json
 ```
 
+We get response similar to
 ```
 Getting access token for scope https://jans.io/oauth/config/attributes.write
 Server Response:
@@ -430,18 +431,21 @@ Server Response:
 }
 ```
 
-It just replace the previous value with new one. 
+It just replaces the previous value with the new one. 
 
-## Get Attribute by `inum`
+### Get Attribute by `inum`
 
-As we know, There are a lot of attributes available in the Janssen Server including custom attributes as well. You may want to know details information for a single attribute uniquely identified by `inum`.
+As we know, There are a lot of attributes available in the Janssen Server 
+including custom attributes as well. You may want to know details information 
+for a single attribute uniquely identified by `inum`.
 Getting an attribute information by using its `inum` is pretty simple.
 
 ```
 /opt/jans/jans-cli/config-cli.py --operation-id get-attributes-by-inum --url-suffix inum:attribute-iunm-value
 ```
 
-It will show all details information of the selected Attribute as below example.
+It will show all details information of the selected Attribute as below 
+example.
 
 ```
 /opt/jans/jans-cli/config-cli.py --operation-id get-attributes-by-inum --url-suffix inum:b691f2ab-a7db-4725-b85b-9961575b441f
@@ -486,17 +490,20 @@ Getting access token for scope https://jans.io/oauth/config/attributes.readonly
 }
 ```
 
-## Delete Attributes
+### Delete Attributes
 
-For any reason, If it needs to delete any attribute, you can do that simply using its `inum` value. See below example, just change the `inum` value with one that you want to delete.
+For any reason, If it needs to delete any attribute, you can do that simply 
+using its `inum` value. See below example, just change the `inum` value 
+with one that you want to delete.
 
 ```
 /opt/jans/jans-cli/config-cli.py --operation-id delete-attributes-by-inum --url-suffix inum:b691f2ab-a7db-4725-b85b-9961575b441f
 ```
 
-## Patch Attributes
+### Patch Attributes
 
-This operation can also used for updating an existing attribute by using its `inum` value.
+This operation can also used for updating an existing attribute by 
+using its `inum` value.
 
 ```
 Operation ID: patch-attributes-by-inum
@@ -505,7 +512,8 @@ Operation ID: patch-attributes-by-inum
   Schema: Array of PatchRequest
 ```
 
-If we look at the description, we see that there is a schema file. Let's get the schema file with below command:
+If we look at the description, we see that there is a schema file. Let's 
+get the schema file with below command:
 
 ```
 /opt/jans/jans-cli/config-cli.py --schema PatchRequest > /tmp/patch.json
@@ -525,9 +533,13 @@ Let's modify this schema file to change the status of an attribute as below:
 
 ![](../../assets/image-cl-attribute-patch-03042021.png)
 
-In the above image, added two tasks. To know more about how we can modify this schema file to perform a specific task, follow this link: [patch-request-schema](config-tools/jans-cli/README.md#patch-request-schema)
+In the above image, added two tasks. To know more about how we can modify 
+this schema file to perform a specific task, follow this 
+link: [patch-request-schema](config-tools/jans-cli/README.md#patch-request-schema)
 
-Let's update an attribute by its `inum` value. In our case, `inum`: 6EEB. Before patching the selected attribute, you can check its properties using [get-attributes-by-inum](#get-attribute-by-inum) operation.
+Let's update an attribute by its `inum` value. In our case, `inum`: 6EEB. 
+Before patching the selected attribute, you can check its properties 
+using [get-attributes-by-inum](#get-attribute-by-inum) operation.
 
 Before patching the attribute, its properties are:
 
@@ -569,7 +581,8 @@ Before patching the attribute, its properties are:
   "jansHideOnDiscovery": null
 }
 ```
-According to the schema file, There should be two changes, `status` and `jansHideOnDiscovery`. Let's perform the operation:
+According to the schema file, There should be two changes, `status` 
+and `jansHideOnDiscovery`. Let's perform the operation:
 
 ```
 /opt/jans/jans-cli/config-cli.py --operation-id patch-attributes-by-inum --url-suffix inum:6EEB --data /tmp/patch.json
