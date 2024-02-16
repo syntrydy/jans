@@ -5,7 +5,18 @@ tags:
   - attributes
 ---
 
-# Attribute
+# Attribute Configuration
+
+This document covers how attributes in Janssen Server can be configured using
+different configuration tools like [CLI](./config-tools/jans-cli/README.md), 
+[TUI](./config-tools/jans-tui/README.md), 
+[Configuration REST API](./config-tools/config-api/README.md).
+
+## Attribute Configuration Using Command Line
+
+## Attribute Configuration Using TUI
+
+## Attribute Configuration Using Config API
 
 First thing, let's get the information for `Attribute`:
 ```shell
