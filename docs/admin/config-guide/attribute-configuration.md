@@ -65,7 +65,7 @@ to understand how they really works.
 
 ### Get Attributes
 
-As we know, Attributes are individual pieces of user data, like `uid` or `email`, that are required by applications in order to identify a user and grant access to protect resources. The user attributes that are available in your Janssen Server can be found by using this operation-ID. If we look at the description below:
+As we know, attributes/claims are individual pieces of user data, like `uid` or `email`, that are required by applications in order to identify a user and grant access to protect resources. The user attributes/claims that are available in your Janssen Server can be found by using this operation-ID. If we look at the description below:
 
 ```text
 Operation ID: get-attributes
@@ -228,8 +228,8 @@ Please wait while retrieving data ...
 ### Creating an Attribute
 
 To create SSO for certain applications, you may need to add custom attributes
-to your Janssen Server. Custom attributes can be added by using this 
-operation-ID. It has a schema file where it's defined: the properties it 
+(or custom claim)to your Janssen Server. Custom attributes/claims can be added by using
+this operation-ID. It has a schema file where it's defined: the properties it 
 needs to be filled to create a new custom attribute.
 
 ```text
@@ -352,7 +352,7 @@ It will create a new attribute into the Attribute list with updated `inum & dn`:
 ### Updating an Attribute
 
 This operation-id can be used to update an existing attribute information. 
-The Janssen Server administrator can make changes to attributes, such as 
+The Janssen Server administrator can make changes to attributes/claims, such as 
 changing their status to `active/inactive` by using this operation-ID. 
 Let's look at the schema:
 
@@ -435,8 +435,8 @@ It just replaces the previous value with the new one.
 
 ### Get Attribute by `inum`
 
-As we know, There are a lot of attributes available in the Janssen Server 
-including custom attributes as well. You may want to know details information 
+As we know, There are many attributes/claims available in the Janssen Server 
+including custom attributes/claims as well. You may want to know details information 
 for a single attribute uniquely identified by `inum`.
 Getting an attribute information by using its `inum` is pretty simple.
 
@@ -492,7 +492,7 @@ Getting access token for scope https://jans.io/oauth/config/attributes.readonly
 
 ### Delete Attributes
 
-For any reason, If it needs to delete any attribute, you can do that simply 
+For any reason, If it needs to delete any attribute/claim, you can do that simply 
 using its `inum` value. See below example, just change the `inum` value 
 with one that you want to delete.
 
