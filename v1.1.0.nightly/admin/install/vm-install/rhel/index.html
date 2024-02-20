@@ -174126,26 +174126,26 @@ sudo yum -y module enable mod_auth_openidc
 <li>Download the release package from the Github Janssen Project
   <a href="https://github.com/JanssenProject/jans/releases">Releases</a></li>
 </ul>
-<div class="highlight"><pre><span></span><code>wget https://github.com/JanssenProject/jans/releases/download/v1.1.0.nightly/jans-1.1.0.nightly-el8.x86_64.rpm -P ~/
+<div class="highlight"><pre><span></span><code>wget https://github.com/JanssenProject/jans/releases/download/vreplace-janssen-version/jans-replace-janssen-version-el8.x86_64.rpm -P ~/
 </code></pre></div>
 <ul>
 <li>
 <p>Verify integrity of the downloaded package using published <code>sha256sum</code>.</p>
 <p>Download <code>sha256sum</code> file for the package</p>
-<div class="highlight"><pre><span></span><code>wget https://github.com/JanssenProject/jans/releases/download/v1.1.0.nightly/jans-1.1.0.nightly-el8.x86_64.rpm.sha256sum -P ~/
+<div class="highlight"><pre><span></span><code>wget https://github.com/JanssenProject/jans/releases/download/vreplace-janssen-version/jans-replace-janssen-version-el8.x86_64.rpm.sha256sum -P ~/
 </code></pre></div>
 <p>Check the hash if it is matching.</p>
-<div class="highlight"><pre><span></span><code>sha256sum -c jans-1.1.0.nightly-el8.x86_64.rpm.sha256sum
+<div class="highlight"><pre><span></span><code>sha256sum -c jans-replace-janssen-version-el8.x86_64.rpm.sha256sum
 </code></pre></div>
 <p>Output similar to below should confirm the integrity of the downloaded package.</p>
-<div class="highlight"><pre><span></span><code>jans-1.1.0.nightly-el8.x86_64.rpm: OK
+<div class="highlight"><pre><span></span><code>jans-replace-janssen-version-el8.x86_64.rpm: OK
 </code></pre></div>
 </li>
 <li>
 <p>Install the package</p>
 </li>
 </ul>
-<div class="highlight"><pre><span></span><code>sudo yum install ~/jans-1.1.0.nightly-el8.x86_64.rpm
+<div class="highlight"><pre><span></span><code>sudo yum install ~/jans-replace-janssen-version-el8.x86_64.rpm
 </code></pre></div>
 <h2 id="run-the-setup-script">Run the setup script<a class="headerlink" href="#run-the-setup-script" title="Permanent link">#</a></h2>
 <ul>
@@ -174358,12 +174358,16 @@ the removal of all the unused dependencies.</p>
     <script id="__config" type="application/json">{"base": "../../../..", "features": ["toc.autohide - search.suggest - search.highlight", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.indexes"], "search": "../../../../assets/javascripts/workers/search.16e2a7d4.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "version": {"default": "stable", "provider": "mike"}}</script>
     
     
-      <script src="../../../../assets/javascripts/bundle.8492ddcf.min.js"></script>
-      
-        <script src="../../../../js/timeago.min.js"></script>
-      
-        <script src="../../../../js/timeago_mkdocs_material.js"></script>
-      
-    
+
+<!--Release automation scripts should replace the placeholder with actual URL-->
+<!--for Scarf pixel. This will be done when docs are released into PROD. Not-->
+<!--when releasing for HEAD or nightly builds. This is to ensure that Scarf -->
+<!--is only tracking the user behaviour on the PROD release docs. HEAD and -->
+<!--nightly docs may be used extensively by development team and contributors-->
+<!--for testing purposes-->
+<img referrerpolicy="no-referrer-when-downgrade"
+     src="placeholder-scarf-pixel-url"
+     width="0" height="0"/>
+
   </body>
 </html>
