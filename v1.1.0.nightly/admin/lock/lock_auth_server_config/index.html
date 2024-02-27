@@ -174012,26 +174012,25 @@ Default configuration after CE install when messaging API is not enabled:</p>
 <p>It has 2 section for PostgreSQL (<code>postgresConfiguration</code>) and Redis (<code>redisConfiguration</code>) connection details.</p>
 <p><code>messageProviderType</code> can have 3 values: DISABLED, REDIS, POSTGRES</p>
 <p>Full list of properties defined in jans-config-api-swagger.yaml.</p>
-<p>Second configuration is needed for Jans Auth. In current version Jans Auth calls message API after id_token persistence/removal from/to DB from <code>GarntService</code>. Jans Messages API library provides generic API to hide actual PubSub messages publishing/receiving implementation.</p>
+<p>Second configuration is needed for Jans Auth. In current version Jans Auth calls message API after access_token persistence/removal from/to DB from <code>GarntService</code>. Jans Messages API library provides generic API to hide actual PubSub messages publishing/receiving implementation.</p>
 <p>This is default configuration after server install:</p>
 <p><div class="highlight"><pre><span></span><code>    &quot;lockMessageConfig&quot;: {
-        &quot;enableIdTokenMessages&quot; : false,
-        &quot;idTokenMessagesChannel&quot;: &quot;id_token&quot;
+        &quot;enableTokenMessages&quot; : false,
+        &quot;tokenMessagesChannel&quot;: &quot;jans_token&quot;
     }
 </code></pre></div>
-First property control sending messages to PubSub server. Second one <code>idTokenMessagesChannel</code> specify channel name to send id_token messages.</p>
+First property control sending messages to PubSub server. Second one <code>tokenMessagesChannel</code> specify channel name to send token messages.</p>
 <p>The format of messages which Jans Auth issue is JSON. And it has minimum data for quick processing. Here is message pattern:</p>
-<div class="highlight"><pre><span></span><code>{&quot;tknTyp&quot; : &quot;id_token&quot;, &quot;tknCde&quot; : &quot;id_token identifier&quot;, &quot;tknOp&quot; : &quot;add/del&quot;}
+<div class="highlight"><pre><span></span><code>{&quot;tknTyp&quot; : &quot;access_token&quot;, &quot;tknId&quot; : &quot;token_identifier&quot;, &quot;tknOp&quot; : &quot;add/del&quot;}
 </code></pre></div>
-<p>Also In order to enable messages it's mandatory to enable id_token persistence because Lock server loads tokens from DB by their identifiers.</p>
-<p>Note: For demo purposes in Jans CE with PostgreSQL and Lock server selected to install messages enabled by default. In order to start using it we only need to enable id_token persistence in Jans Auth.</p>
+<p>Note: For demo purposes in Jans CE with PostgreSQL and Lock server selected to install messages enabled by default.</p>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2024-01-22T20:27:09+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-01-22</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2024-02-27T13:17:38+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-02-27</span>
       
         <br>
         Created:
