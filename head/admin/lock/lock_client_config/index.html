@@ -173993,7 +173993,7 @@ All functionality is the same in both deployment modes.</p>
 <p>Since Lock is separated server it has own configuration in <code>ou=jans-lock,ou=configuration,o=jans</code></p>
 <p>The main part of it is generic for all Jans projects. These parts have Lock specific properties:</p>
 <div class="highlight"><pre><span></span><code>   &quot;tokenChannels&quot;:[
-         &quot;id_token&quot;
+         &quot;jans_token&quot;
       ],
    &quot;opaConfiguration&quot;: {
         &quot;baseUrl&quot; : &quot;http://localhost:8181/v1/&quot;,
@@ -174011,7 +174011,7 @@ All functionality is the same in both deployment modes.</p>
    &quot;messageConsumerType&quot;: &quot;OPA&quot;,
    &quot;policyConsumerType&quot;: &quot;OPA&quot;
 </code></pre></div>
-<p>"tokenChannels" – list of token channel names. It’s array to allows add more token types in future without changing property type. Now it has only one value “id_token”.</p>
+<p>"tokenChannels" – list of token channel names. It’s array to allows add more token types in future without changing property type. Now it has only one value “jans_token”.</p>
 <p>"opaConfiguration" section has 2 properties to define OPA API base URL and specify OPA Bearer access token if OPA server started with it.</p>
 <p>Next properties "policiesJsonUris" and "policiesZipUris" specify sources which Lock should check periodically to get new PDP policies. There are more details is in <a href="../lock_opa/">OPA</a> section. This service runs periodically with 30 seconds interval.</p>
 <p><code>messageConsumerType</code> and <code>policyConsumerType</code> specify PDP for data and PDP for policies. In most cases both should specify same provider. Different types can be used together with extension script to put for example data in few different PDP.</p>
@@ -174038,7 +174038,7 @@ Another flow property <code>cancelPdpOperation</code> allows to override default
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2024-01-22T20:27:09+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-01-22</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2024-02-27T13:17:38+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-02-27</span>
       
         <br>
         Created:
