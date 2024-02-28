@@ -174020,16 +174020,19 @@ complicated and costly to operate, as you have to break up the data and
 configure multiple replicated topologies. As a rule of thumb, if concurrency of
 more then 120 OpenID code flow authentications per second are needed, you should
 consider another database. But for concurrency less then this, OpenDJ is an
-excellent choice.</p>
+excellent choice. Owing to these limitations, <strong>LDAP is not 
+supported in production deployments using Kubernetes, 1.0.23 and forward</strong>.</p>
 </li>
 <li>
 <p><strong>MySQL</strong> You know it... you love it. That's the biggest advantage.
 Performance is great out of the box. But if you have high concurrency,
-you'll have to figure out a plan for replication, and horizontal scaling.</p>
+you'll have to figure out a plan for replication, and horizontal scaling. 
+<strong>MySQL is our default persistence for Production deployments using Kubernetes</strong>.</p>
 </li>
 <li>
 <p><strong>Postgres</strong> Same as MySQL above, but there are some great commercial
-distributions of Postgres like <a href="https://www.enterprisedb.com/">EnterpriseDB</a>.</p>
+distributions of Postgres like <a href="https://www.enterprisedb.com/">EnterpriseDB</a>. <strong>Postgres is our default 
+persistence for VM based non-production deployments</strong>.</p>
 </li>
 <li>
 <p><strong>Couchbase</strong> A JSON NoSQL database that supports automatic distribution
@@ -174058,7 +174061,7 @@ API, although recently Google added support for MySQL and Postgres drivers.</p>
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2024-01-02T08:37:52+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-01-02</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2024-02-28T22:14:42+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-02-28</span>
       
         <br>
         Created:
