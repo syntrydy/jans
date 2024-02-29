@@ -1602,6 +1602,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#vault" class="md-nav__link">
+    Vault
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -174157,6 +174164,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#vault" class="md-nav__link">
+    Vault
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -174215,7 +174229,7 @@
   <h1>External Secrets and Configmaps</h1>
 
 <h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">#</a></h2>
-<p>This guide shows how to store and retrieve jans <code>configmaps</code> and <code>secrets</code> externally in <code>AWS Secrets Manager</code> and <code>GCP Secret Manager</code>.  </p>
+<p>This guide shows how to store and retrieve jans <code>configmaps</code> and <code>secrets</code> externally in <code>AWS Secrets Manager</code>, <code>GCP Secret Manager</code> and <code>Vault</code>.  </p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Configmaps and Secrets are stored as a collection of key-value pairs. A secret in AWS/GCP Secret Manager has a max size of 65536 bytes. So the collection of key-value pairs is splitted between secrets, and thus note that during secrets <a href="#retrieve-secrets-">retrieval</a> it's possible that a single key-value pair is to be splitted between 2 AWS/GCP secrets.</p>
@@ -174318,6 +174332,65 @@
 <div class="highlight"><pre><span></span><code>kubectl get configmap -n &lt;namespace&gt; cn -o json 
 </code></pre></div></p>
 <p>From the console, Go to <code>Secret Manager</code>&gt; Click on <code>Create Secret</code> &gt; Add a <code>name</code> &gt; Upload a <code>json</code> file or add the json to the <code>Secret value</code> field &gt; Create</p>
+<h3 id="vault">Vault<a class="headerlink" href="#vault" title="Permanent link">#</a></h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The deployment of Vault is hosted on-premises, not within the HashiCorp Cloud Platform service</p>
+</div>
+<ol>
+<li>
+<p>Enable the KV secrets engine version 1 in Vault. For example:
+    <code>vault secrets enable -path=secret -version=1 kv</code></p>
+<p>Note that the <code>path</code> i.e. <code>secret</code> will be mapped to <code>cnVaultKvPath</code> later.</p>
+</li>
+<li>
+<p>Create a <code>policy</code>, which will be attached later to the <code>appRole</code>.</p>
+<p>Create first a file named <code>policy.hcl</code> with the required capabilities.
+<div class="highlight"><pre><span></span><code>path &quot;secret/&lt;name&gt;/*&quot; {
+ capabilities = [&quot;create&quot;, &quot;list&quot;, &quot;read&quot;, &quot;delete&quot;, &quot;update&quot;]
+}  
+</code></pre></div></p>
+<p>Note that <code>&lt;name&gt;</code> will be mapped to <code>cnVaultPrefix</code> later.</p>
+<p>Create the policy:
+<code>vault policy write &lt;name&gt; /path/to/policy.hcl</code></p>
+</li>
+<li>
+<p>Enable and configure <a href="https://developer.hashicorp.com/vault/docs/auth/approle#configuration">appRole</a>. You have also to reference the previously created policy. For example:
+    <div class="highlight"><pre><span></span><code>vault auth enable -path=approle approle
+vault write auth/approle/role/&lt;role-name&gt; token_policies=&quot;&lt;policy-name&gt;&quot;
+</code></pre></div></p>
+<p>The default appRole path is <code>approle</code> which will be mapped to <code>cnVaultAppRolePath</code> later.</p>
+</li>
+<li>
+<p>Add the following configuration to your <code>override.yaml</code>:</p>
+<p><div class="highlight"><pre><span></span><code><span class="nt">global</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">configSecretAdapter</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">vault</span><span class="w"></span>
+<span class="nt">config</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">configmap</span><span class="p">:</span><span class="w">  </span>
+<span class="w">    </span><span class="c1"># -- Vault AppRole RoleID.</span><span class="w"></span>
+<span class="w">    </span><span class="nt">cnVaultRoleId</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="c1"># -- Vault AppRole SecretID.</span><span class="w"></span>
+<span class="w">    </span><span class="nt">cnVaultSecretId</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="c1"># -- Base URL of Vault.</span><span class="w"></span>
+<span class="w">    </span><span class="nt">cnVaultAddr</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">http://localhost:8200</span><span class="w"></span>
+<span class="w">    </span><span class="c1"># -- Verify connection to Vault.</span><span class="w"></span>
+<span class="w">    </span><span class="nt">cnVaultVerify</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w"></span>
+<span class="w">    </span><span class="c1"># -- Path to file contains Vault AppRole role ID.</span><span class="w"></span>
+<span class="w">    </span><span class="nt">cnVaultRoleIdFile</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/etc/certs/vault_role_id</span><span class="w"></span>
+<span class="w">    </span><span class="c1"># -- Path to file contains Vault AppRole secret ID.</span><span class="w"></span>
+<span class="w">    </span><span class="nt">cnVaultSecretIdFile</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/etc/certs/vault_secret_id</span><span class="w"></span>
+<span class="w">    </span><span class="c1"># -- Vault namespace used to access the secrets.</span><span class="w"></span>
+<span class="w">    </span><span class="nt">cnVaultNamespace</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="c1"># -- Path to Vault KV secrets engine.</span><span class="w"></span>
+<span class="w">    </span><span class="nt">cnVaultKvPath</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">secret</span><span class="w"></span>
+<span class="w">    </span><span class="c1"># -- Base prefix name used to access secrets.</span><span class="w"></span>
+<span class="w">    </span><span class="nt">cnVaultPrefix</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">jans</span><span class="w"></span>
+<span class="w">    </span><span class="c1"># -- Path to Vault AppRole.</span><span class="w"></span>
+<span class="w">    </span><span class="nt">cnVaultAppRolePath</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">approle</span><span class="w"></span>
+</code></pre></div>
+5.  Run <code>helm install</code> or <code>helm upgrade</code></p>
+</li>
+</ol>
 <h2 id="retrieve-secrets">Retrieve Secrets<a class="headerlink" href="#retrieve-secrets" title="Permanent link">#</a></h2>
 <h3 id="aws_1">AWS<a class="headerlink" href="#aws_1" title="Permanent link">#</a></h3>
 <p><strong>String Secret</strong>: To retrieve the secret value from the Console, click on the secret name and then click on <code>Retrieve Secret Value</code></p>
@@ -174336,7 +174409,7 @@
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-08-03T16:21:13+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-08-03</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2024-02-29T15:10:39+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-02-29</span>
       
         <br>
         Created:
