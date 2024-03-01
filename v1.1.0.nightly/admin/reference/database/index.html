@@ -173931,6 +173931,59 @@
     Configuration
   </a>
   
+    <nav class="md-nav" aria-label="Configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#overriding-db-configuration-properties" class="md-nav__link">
+    Overriding DB Configuration Properties
+  </a>
+  
+    <nav class="md-nav" aria-label="Overriding DB Configuration Properties">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cloud-native-installations" class="md-nav__link">
+    Cloud-native Installations
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vm-installations" class="md-nav__link">
+    VM Installations
+  </a>
+  
+    <nav class="md-nav" aria-label="VM Installations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#globally-for-all-modules" class="md-nav__link">
+    Globally For All Modules
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#module-specific" class="md-nav__link">
+    Module Specific
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -174017,20 +174070,102 @@
 <li><a href="pgsql-config/">Hybrid</a>. This is virtual DB layer which allows to combine few DB types based on record type.</li>
 </ul>
 <h2 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">#</a></h2>
-<p>Type of DB layer is specified in <em>/etc/jans/conf/</em>:</p>
+<p>On a Janssen Server instance 
+the type of persistence(DB) used is specified 
+in <code>/etc/jans/conf/jans.properties</code> using the entry as show below:</p>
 <div class="highlight"><pre><span></span><code>persistence.type=ldap
 </code></pre></div>
-<p>The list of allowed property values is next: <strong>ldap, couchbase, sql, spanner, hybrid</strong>. It's defined in this <a href="https://github.com/JanssenProject/jans/blob/main/jans-orm/core/src/main/java/io/jans/orm/PersistenceEntryManager.java#L48">list</a>.</p>
-<p>The corresponding list of configuration files for these persistence types are:</p>
+<p>Values for property <code>persistence.type</code> is set during the installation and based
+on choice of persistence(DB) type, it can be one of these supported values:</p>
 <ul>
-<li><strong>jans-ldap.properties</strong></li>
-<li><strong>jans-couchbase.properties</strong></li>
-<li><strong>jans-spanner.properties</strong></li>
-<li><strong>jans-sql.properties</strong></li>
-<li><strong>jans-hybrid.properties</strong></li>
+<li><code>ldap</code></li>
+<li><code>couchbase</code></li>
+<li><code>sql</code> </li>
+<li><code>spanner</code> </li>
+<li><code>hybrid</code>. </li>
 </ul>
-<p>These files contains DB specific properties and format of them is specified in the relevant sections of this documentation.</p>
-<p>The applications reloads configuration from these files after start up or on files date time modification after initialization.</p>
+<div class="admonition abstract">
+<p class="admonition-title">Code Connect</p>
+<p>In Janssen Server code base, the list of supported persistence types can be
+ found <a href="https://github.com/JanssenProject/jans/blob/main/jans-orm/core/src/main/java/io/jans/orm/PersistenceEntryManager.java#L48">here</a>.</p>
+</div>
+<p>Based on persistent type in use, the corresponding properties file with relevant
+configuration properties will be available on Janssen Server instance under
+the directory <code>/etc/jans/conf/</code>. List of configuration files for these 
+persistence types are:</p>
+<ul>
+<li><code>jans-ldap.properties</code></li>
+<li><code>jans-couchbase.properties</code></li>
+<li><code>jans-spanner.properties</code></li>
+<li><code>jans-sql.properties</code></li>
+<li><code>jans-hybrid.properties</code></li>
+</ul>
+<p>The application reloads configuration from these files after start up or on 
+files date time modification after initialization.</p>
+<h3 id="overriding-db-configuration-properties">Overriding DB Configuration Properties<a class="headerlink" href="#overriding-db-configuration-properties" title="Permanent link">#</a></h3>
+<p>Configuration properties and the values specified under <code>.properties</code> files
+discussed in <a href="#configuration">above</a> section, can be overridden by dynamically
+passing them as a JVM parameter or as an environment variable.</p>
+<h4 id="cloud-native-installations">Cloud-native Installations<a class="headerlink" href="#cloud-native-installations" title="Permanent link">#</a></h4>
+<p>For Janssen Server installations using Helm, Docker, or local Kubernetes,
+dynamically passing DB configuration properties can be done by
+specifying environment variables.</p>
+<p>For example:</p>
+<ul>
+<li>Override connection URI for one specific component. For instance,
+  <code>jans-auth</code> component
+  <div class="highlight"><pre><span></span><code><span class="nv">CN_AUTH_JAVA_OPTIONS</span><span class="o">=</span>-Dconnection.uri<span class="o">=</span>new-mysql-uri
+</code></pre></div></li>
+<li>Override connection URI globally for all Janssen Server modules
+  <div class="highlight"><pre><span></span><code><span class="nv">CN_JAVA_OPTIONS</span><span class="o">=</span>-Dconnection.uri<span class="o">=</span>new-mysql-uri
+</code></pre></div>
+  or by exporting system-level environment variable as below
+  <div class="highlight"><pre><span></span><code><span class="nv">CONNECTION_URI</span><span class="o">=</span>new-mysql-uri
+</code></pre></div>
+For a Helm installation you can globally override hte URI in the <code>values.yaml</code></li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="nt">global</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">usrEnvs</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">normal</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">CN_JAVA_OPTIONS</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">-Dconnection.uri=jdbc:postgresql://postgresql.sql.svc.cluster.local:5432/jansdb</span><span class="w"></span>
+</code></pre></div>
+<p>Or for a specific component like the auth server:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">auth-server</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">usrEnvs</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">normal</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">CN_JAVA_OPTIONS</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">-Dconnection.uri=jdbc:postgresql://postgresql.sql.svc.cluster.local:5432/jansdb</span><span class="w"></span>
+</code></pre></div>
+<h4 id="vm-installations">VM Installations<a class="headerlink" href="#vm-installations" title="Permanent link">#</a></h4>
+<p>For the Janssen Server installed on a VM, a new parameter or parameters with override
+values can be added either at the global level for all modules or specific to
+certain modules only. The steps
+below show how to override the DB connection URI:</p>
+<h5 id="globally-for-all-modules">Globally For All Modules<a class="headerlink" href="#globally-for-all-modules" title="Permanent link">#</a></h5>
+<p>Define environment variable at the VM level, such as shown in the example below:</p>
+<div class="highlight"><pre><span></span><code><span class="nb">export</span> <span class="nv">CONNECTION_URI</span><span class="o">=</span>jdbc:postgresql://localhost:5432/jansdb
+</code></pre></div>
+<p>This will affect all Janssen Server modules, where properties like
+<code>connection.uri</code> or <code>connection-uri</code> will be overridden with the new value.</p>
+<h5 id="module-specific">Module Specific<a class="headerlink" href="#module-specific" title="Permanent link">#</a></h5>
+<p>Properties can also be added/overridden at the module level as well. To do this,
+pass new values either as JVM parameters or as environment variables at
+the module level.</p>
+<p>Janssen Server module level configuration is stored under <code>/etc/default/</code>
+directory which contains config files for Janssen modules. For example
+<code>/etc/default/jans-auth</code> file contains configuration for <code>jans-auth</code> module.</p>
+<ul>
+<li>Update the <code>JAVA_OPTIONS</code> parameter to add the value of the new connection
+  URI against the <code>connection.uri</code> parameter.
+  For example:
+  <div class="highlight"><pre><span></span><code>-Dconnection.uri<span class="o">=</span>jdbc:postgresql://localhost:5432/jansdb<span class="sb">`</span>
+</code></pre></div></li>
+<li>Using the environment variable, export a new variable, as shown in the example
+  below:
+  <div class="highlight"><pre><span></span><code><span class="nb">export</span> <span class="nv">CONNECTION_URI</span><span class="o">=</span>jdbc:postgresql://localhost:5432/jansdb
+</code></pre></div>
+  The exported variable above, <code>CONNECTION_URI</code>, will override the value
+  provided by <code>connection.uri</code> or <code>connection-uri</code> parameters.</li>
+</ul>
 <h2 id="architecture">Architecture<a class="headerlink" href="#architecture" title="Permanent link">#</a></h2>
 <p>Jans ORM has modular architecture. The are few layers in this implementation</p>
 <ol>
@@ -174194,7 +174329,7 @@ schema <a href="https://github.com/JanssenProject/jans/blob/main/jans-linux-setu
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2024-01-02T08:37:52+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-01-02</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2024-03-01T12:23:34+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-03-01</span>
       
         <br>
         Created:

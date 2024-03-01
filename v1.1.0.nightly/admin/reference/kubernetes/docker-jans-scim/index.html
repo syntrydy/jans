@@ -174107,15 +174107,17 @@
 <li><code>CN_CONFIG_KUBERNETES_CONFIGMAP</code>: Kubernetes configmaps name (default to <code>jans</code>).</li>
 <li><code>CN_CONFIG_KUBERNETES_USE_KUBE_CONFIG</code>: Load credentials from <code>$HOME/.kube/config</code>, only useful for non-container environment (default to <code>false</code>).</li>
 <li><code>CN_SECRET_ADAPTER</code>: The secrets' adapter, can be <code>vault</code> (default), <code>kubernetes</code>, or <code>google</code>.</li>
-<li><code>CN_SECRET_VAULT_SCHEME</code>: supported Vault scheme (<code>http</code> or <code>https</code>).</li>
-<li><code>CN_SECRET_VAULT_HOST</code>: hostname or IP of Vault (default to <code>localhost</code>).</li>
-<li><code>CN_SECRET_VAULT_PORT</code>: port of Vault (default to <code>8200</code>).</li>
 <li><code>CN_SECRET_VAULT_VERIFY</code>: whether to verify cert or not (default to <code>false</code>).</li>
 <li><code>CN_SECRET_VAULT_ROLE_ID_FILE</code>: path to file contains Vault AppRole role ID (default to <code>/etc/certs/vault_role_id</code>).</li>
 <li><code>CN_SECRET_VAULT_SECRET_ID_FILE</code>: path to file contains Vault AppRole secret ID (default to <code>/etc/certs/vault_secret_id</code>).</li>
 <li><code>CN_SECRET_VAULT_CERT_FILE</code>: path to Vault cert file (default to <code>/etc/certs/vault_client.crt</code>).</li>
 <li><code>CN_SECRET_VAULT_KEY_FILE</code>: path to Vault key file (default to <code>/etc/certs/vault_client.key</code>).</li>
 <li><code>CN_SECRET_VAULT_CACERT_FILE</code>: path to Vault CA cert file (default to <code>/etc/certs/vault_ca.crt</code>). This file will be used if it exists and <code>CN_SECRET_VAULT_VERIFY</code> set to <code>true</code>.</li>
+<li><code>CN_SECRET_VAULT_ADDR</code>: URL of Vault (default to <code>http://localhost:8200</code>).</li>
+<li><code>CN_SECRET_VAULT_NAMESPACE</code>: Namespace used to access secrets (default to empty string).</li>
+<li><code>CN_SECRET_VAULT_KV_PATH</code>: Path to KV secrets engine (default to <code>secret</code>).</li>
+<li><code>CN_SECRET_VAULT_PREFIX</code>: Base prefix name used to build secret path (default to <code>jans</code>).</li>
+<li><code>CN_SECRET_VAULT_APPROLE_PATH</code>: Path to AppRole (default to <code>approle</code>).</li>
 <li><code>CN_SECRET_KUBERNETES_NAMESPACE</code>: Kubernetes namespace (default to <code>default</code>).</li>
 <li><code>CN_SECRET_KUBERNETES_SECRET</code>: Kubernetes secrets name (default to <code>jans</code>).</li>
 <li><code>CN_SECRET_KUBERNETES_USE_KUBE_CONFIG</code>: Load credentials from <code>$HOME/.kube/config</code>, only useful for non-container environment (default to <code>false</code>).</li>
@@ -174235,7 +174237,7 @@ To customize the config, mount custom config file to <code>/opt/prometheus/prome
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-10-11T10:26:43+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-10-11</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2024-03-01T16:35:58+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-03-01</span>
       
         <br>
         Created:
