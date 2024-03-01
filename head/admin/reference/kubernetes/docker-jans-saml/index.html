@@ -12,14 +12,14 @@
         <meta name="author" content="Janssen, Inc.">
       
       
-        <link rel="canonical" href="https://jans.io/docs/head/admin/reference/kubernetes/docker-jans-persistence-loader/">
+        <link rel="canonical" href="https://jans.io/docs/head/admin/reference/kubernetes/docker-jans-saml/">
       
       <link rel="icon" href="../../../../assets/janssen_project_favicon_transparent_50px_50px.ico">
       <meta name="generator" content="mkdocs-1.4.1, mkdocs-material-8.5.7">
     
     
       
-        <title>Persistence - Janssen Documentation</title>
+        <title>Overview - Janssen Documentation</title>
       
     
     
@@ -128,7 +128,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Persistence
+              Overview
             
           </span>
         </div>
@@ -225,15 +225,13 @@
         
   
   
-    
-  
 
 
   
   
   
     <li class="md-tabs__item">
-      <a href="../../../" class="md-tabs__link md-tabs__link--active">
+      <a href="../../../" class="md-tabs__link">
         Administration
       </a>
     </li>
@@ -359,14 +357,12 @@
 
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" >
       
       
       
@@ -5666,14 +5662,12 @@
               
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_12" type="checkbox" id="__nav_1_12" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_12" type="checkbox" id="__nav_1_12" >
       
       
       
@@ -171869,14 +171863,12 @@
               
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_12_4" type="checkbox" id="__nav_1_12_4" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_12_4" type="checkbox" id="__nav_1_12_4" >
       
       
       
@@ -171945,14 +171937,12 @@
               
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_12_4_4" type="checkbox" id="__nav_1_12_4_4" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_12_4_4" type="checkbox" id="__nav_1_12_4_4" >
       
       
       
@@ -172093,75 +172083,11 @@
               
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-      
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          Persistence
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../docker-jans-persistence-loader/" class="md-nav__link">
         Persistence
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#overview" class="md-nav__link">
-    Overview
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#versions" class="md-nav__link">
-    Versions
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#environment-variables" class="md-nav__link">
-    Environment Variables
-  </a>
-  
-    <nav class="md-nav" aria-label="Environment Variables">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#hybrid-mapping" class="md-nav__link">
-    Hybrid mapping
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -173978,19 +173904,14 @@
   
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
       Table of contents
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#overview" class="md-nav__link">
-    Overview
-  </a>
-  
-</li>
       
         <li class="md-nav__item">
   <a href="#versions" class="md-nav__link">
@@ -174008,9 +173929,36 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#configure-app-loggers" class="md-nav__link">
+    Configure app loggers
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#hybrid-mapping" class="md-nav__link">
     Hybrid mapping
   </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#keycloak-administration" class="md-nav__link">
+    Keycloak Administration
+  </a>
+  
+    <nav class="md-nav" aria-label="Keycloak Administration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#admin-credentials" class="md-nav__link">
+    Admin Credentials
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -174060,18 +174008,16 @@
 
 
 
-  <a href="https://github.com/JanssenProject/jans/edit/main/docs/admin/reference/kubernetes/docker-jans-persistence-loader.md" title="Edit this page" class="md-content__button md-icon">
+  <a href="https://github.com/JanssenProject/jans/edit/main/docs/admin/reference/kubernetes/docker-jans-saml.md" title="Edit this page" class="md-content__button md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
   </a>
 
 
-  <h1>Persistence</h1>
-
-<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">#</a></h2>
-<p>Persistence is a special container to load initial data for LDAP or Couchbase.</p>
+<h1 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">#</a></h1>
+<p>Docker image packaging for SAML</p>
 <h2 id="versions">Versions<a class="headerlink" href="#versions" title="Permanent link">#</a></h2>
-<p>See <a href="https://github.com/orgs/JanssenProject/packages/container/package/jans%2Fpersistence-loader">Packages</a> for available versions.</p>
+<p>See <a href="https://github.com/orgs/JanssenProject/packages/container/package/jans%2Fsaml">Packages</a> for available versions.</p>
 <h2 id="environment-variables">Environment Variables<a class="headerlink" href="#environment-variables" title="Permanent link">#</a></h2>
 <p>The following environment variables are supported by the container:</p>
 <ul>
@@ -174105,35 +174051,30 @@
 <li><code>CN_SECRET_KUBERNETES_USE_KUBE_CONFIG</code>: Load credentials from <code>$HOME/.kube/config</code>, only useful for non-container environment (default to <code>false</code>).</li>
 <li><code>CN_WAIT_MAX_TIME</code>: How long the startup "health checks" should run (default to <code>300</code> seconds).</li>
 <li><code>CN_WAIT_SLEEP_DURATION</code>: Delay between startup "health checks" (default to <code>10</code> seconds).</li>
-<li><code>CN_OXTRUST_CONFIG_GENERATION</code>: Whether to generate oxShibboleth configuration or not (default to <code>true</code>).</li>
-<li><code>CN_CACHE_TYPE</code>: Supported values are <code>IN_MEMORY</code>, <code>REDIS</code>, <code>MEMCACHED</code>, and <code>NATIVE_PERSISTENCE</code> (default to <code>NATIVE_PERSISTENCE</code>).</li>
-<li><code>CN_EXT_SIGNING_JWKS_URI</code>: URI of external signing JWKS (default is "").</li>
-<li><code>CN_REDIS_URL</code>: URL of Redis server, format is host:port (optional; default to <code>localhost:6379</code>).</li>
-<li><code>CN_REDIS_TYPE</code>: Redis service type, either <code>STANDALONE</code> or <code>CLUSTER</code> (optional; default to <code>STANDALONE</code>).</li>
-<li><code>CN_MEMCACHED_URL</code>: URL of Memcache server, format is host:port (optional; default to <code>localhost:11211</code>).</li>
+<li><code>CN_MAX_RAM_PERCENTAGE</code>: Value passed to Java option <code>-XX:MaxRAMPercentage</code>.</li>
 <li><code>CN_PERSISTENCE_TYPE</code>: Persistence backend being used (one of <code>ldap</code>, <code>couchbase</code>, or <code>hybrid</code>; default to <code>ldap</code>).</li>
 <li><code>CN_HYBRID_MAPPING</code>: Specify data mapping for each persistence (default to <code>"{}"</code>). Note this environment only takes effect when <code>CN_PERSISTENCE_TYPE</code> is set to <code>hybrid</code>. See <a href="#hybrid-mapping">hybrid mapping</a> section for details.</li>
-<li><code>CN_PERSISTENCE_SKIP_INITIALIZED</code>: skip initialization if backend already initialized (default to <code>false</code>).</li>
-<li><code>CN_PERSISTENCE_UPDATE_AUTH_DYNAMIC_CONFIG</code>: Whether to allow automatic updates of <code>jans-auth</code> configuration (default to <code>true</code>).</li>
 <li><code>CN_LDAP_URL</code>: Address and port of LDAP server (default to <code>localhost:1636</code>).</li>
 <li><code>CN_LDAP_USE_SSL</code>: Whether to use SSL connection to LDAP server (default to <code>true</code>).</li>
 <li><code>CN_COUCHBASE_URL</code>: Address of Couchbase server (default to <code>localhost</code>).</li>
 <li><code>CN_COUCHBASE_USER</code>: Username of Couchbase server (default to <code>admin</code>).</li>
-<li><code>CN_COUCHBASE_SUPERUSER</code>: Superuser of Couchbase server (default to empty-string).</li>
 <li><code>CN_COUCHBASE_CERT_FILE</code>: Couchbase root certificate location (default to <code>/etc/certs/couchbase.crt</code>).</li>
 <li><code>CN_COUCHBASE_PASSWORD_FILE</code>: Path to file contains Couchbase password (default to <code>/etc/jans/conf/couchbase_password</code>).</li>
-<li><code>CN_COUCHBASE_SUPERUSER_PASSWORD_FILE</code>: Path to file contains Couchbase superuser password (default to <code>/etc/jans/conf/couchbase_superuser_password</code>).</li>
-<li><code>CN_DOCUMENT_STORE_TYPE</code>: Document store type (one of <code>LOCAL</code> or <code>DB</code>; default to <code>DB</code>).</li>
-<li><code>CN_JACKRABBIT_URL</code>: URL to remote repository (default to <code>http://localhost:8080</code>).</li>
-<li><code>CN_JACKRABBIT_ADMIN_ID_FILE</code>: Absolute path to file contains ID for admin user (default to <code>/etc/jans/conf/jackrabbit_admin_id</code>).</li>
-<li><code>CN_JACKRABBIT_ADMIN_PASSWORD_FILE</code>: Absolute path to file contains password for admin user (default to <code>/etc/gluu/conf/jackrabbit_admin_password</code>).</li>
+<li><code>CN_COUCHBASE_CONN_TIMEOUT</code>: Connect timeout used when a bucket is opened (default to <code>10000</code> milliseconds).</li>
+<li><code>CN_COUCHBASE_CONN_MAX_WAIT</code>: Maximum time to wait before retrying connection (default to <code>20000</code> milliseconds).</li>
+<li><code>CN_COUCHBASE_SCAN_CONSISTENCY</code>: Default scan consistency; one of <code>not_bounded</code>, <code>request_plus</code>, or <code>statement_plus</code> (default to <code>not_bounded</code>).</li>
+<li><code>CN_COUCHBASE_BUCKET_PREFIX</code>: Prefix for Couchbase buckets (default to <code>jans</code>).</li>
+<li><code>CN_COUCHBASE_TRUSTSTORE_ENABLE</code>: Enable truststore for encrypted Couchbase connection (default to <code>true</code>).</li>
+<li><code>CN_COUCHBASE_KEEPALIVE_INTERVAL</code>: Keep-alive interval for Couchbase connection (default to <code>30000</code> milliseconds).</li>
+<li><code>CN_COUCHBASE_KEEPALIVE_TIMEOUT</code>: Keep-alive timeout for Couchbase connection (default to <code>2500</code> milliseconds).</li>
+<li><code>CN_SAML_JAVA_OPTIONS</code>: Java options passed to entrypoint, i.e. <code>-Xmx1024m</code> (default to empty-string).</li>
+<li><code>CN_SAML_KC_ADMIN_CREDENTIALS_FILE</code>: File contains credentials for Keycloak admin user.</li>
+<li><code>CN_SAML_KC_DB_PASSWORD_FILE</code>: File contains password for database access.</li>
 <li><code>GOOGLE_APPLICATION_CREDENTIALS</code>: Optional JSON file (contains Google credentials) that can be injected into container for authentication. Refer to https://cloud.google.com/docs/authentication/provide-credentials-adc#how-to for supported credentials.</li>
 <li><code>GOOGLE_PROJECT_ID</code>: ID of Google project.</li>
 <li><code>CN_GOOGLE_SECRET_VERSION_ID</code>: Janssen secret version ID in Google Secret Manager. Defaults to <code>latest</code>, which is recommended.</li>
 <li><code>CN_GOOGLE_SECRET_NAME_PREFIX</code>: Prefix for Janssen secret in Google Secret Manager. Defaults to <code>jans</code>. If left <code>jans-secret</code> secret will be created.</li>
 <li><code>CN_GOOGLE_SECRET_MANAGER_PASSPHRASE</code>: Passphrase for Janssen secret in Google Secret Manager. This is recommended to be changed and defaults to <code>secret</code>.</li>
-<li><code>CN_GOOGLE_SPANNER_INSTANCE_ID</code>: Google Spanner instance ID.</li>
-<li><code>CN_GOOGLE_SPANNER_DATABASE_ID</code>: Google Spanner database ID.</li>
 <li><code>CN_SQL_DB_HOST</code>: Hostname of the SQL database (default to <code>localhost</code>).</li>
 <li><code>CN_SQL_DB_PORT</code>: Port of the SQL database (default to <code>3306</code> for MySQL).</li>
 <li><code>CN_SQL_DB_NAME</code>: SQL database name (default to <code>jans</code>).</li>
@@ -174148,10 +174089,10 @@
 <li><code>AWS_SHARED_CREDENTIALS_FILE</code>: The location of the shared credentials file used by the client (see https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html).</li>
 <li><code>AWS_CONFIG_FILE</code>: The location of the config file used by the client (see https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html).</li>
 <li><code>AWS_PROFILE</code>: The default profile to use, if any.</li>
-<li><code>CN_MESSAGE_TYPE</code>: Message provider type (one of <code>DISABLED</code>, <code>POSTGRES</code>, and <code>REDIS</code>; default to <code>DISABLED</code>).</li>
 </ul>
+<h3 id="configure-app-loggers">Configure app loggers<a class="headerlink" href="#configure-app-loggers" title="Permanent link">#</a></h3>
 <h3 id="hybrid-mapping">Hybrid mapping<a class="headerlink" href="#hybrid-mapping" title="Permanent link">#</a></h3>
-<p>As per v1.0.1, hybrid persistence supports all available persistence types. To configure hybrid persistence and its data mapping, follow steps below:</p>
+<p>As per v1.0.1, hybrid persistence supports all available persistence types. To configure hybrid persistence and its data mapping, follow the steps below:</p>
 <ol>
 <li>
 <p>Set <code>CN_PERSISTENCE_TYPE</code> environment variable to <code>hybrid</code></p>
@@ -174179,6 +174120,13 @@
 </code></pre></div>
 </li>
 </ol>
+<h3 id="keycloak-administration">Keycloak Administration<a class="headerlink" href="#keycloak-administration" title="Permanent link">#</a></h3>
+<h4 id="admin-credentials">Admin Credentials<a class="headerlink" href="#admin-credentials" title="Permanent link">#</a></h4>
+<p>By default, Keycloak's admin username and password are self-generated during the first installation and saved as <code>kc_admin_username</code> (in the <code>cn</code> configmap) and <code>kc_admin_password</code> (in the <code>cn</code> secret) respectively. Note that the secret is <code>base64</code> encoded.</p>
+<p>The credentials will be rendered as <code>/etc/jans/conf/kc_admin_creds</code> file (can be changed via <code>CN_SAML_KC_ADMIN_CREDENTIALS_FILE</code> environment variable) with the following format:</p>
+<div class="highlight"><pre><span></span><code>BASE64(username:password)
+</code></pre></div>
+<p>The credentials will be exported as <code>KEYCLOAK_ADMIN</code> and <code>KEYCLOAK_ADMIN_PASSWORD</code> environment variables for the initial admin username and password.</p>
 
   <hr>
 <div class="md-source-file">
@@ -174209,42 +174157,6 @@
       </main>
       
         <footer class="md-footer">
-  
-    
-    <nav class="md-footer__inner md-grid" aria-label="Footer" >
-      
-        
-        <a href="../docker-jans-monolith/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Monolith" rel="prev">
-          <div class="md-footer__button md-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
-          </div>
-          <div class="md-footer__title">
-            <div class="md-ellipsis">
-              <span class="md-footer__direction">
-                Previous
-              </span>
-              Monolith
-            </div>
-          </div>
-        </a>
-      
-      
-        
-        <a href="../docker-jans-scim/" class="md-footer__link md-footer__link--next" aria-label="Next: SCIM" rel="next">
-          <div class="md-footer__title">
-            <div class="md-ellipsis">
-              <span class="md-footer__direction">
-                Next
-              </span>
-              SCIM
-            </div>
-          </div>
-          <div class="md-footer__button md-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
-          </div>
-        </a>
-      
-    </nav>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
