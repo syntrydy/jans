@@ -174294,9 +174294,23 @@ SUB    = The low-level unit activation state, values depend on unit type.
 <h2 id="how-do-i-check-the-version-of-janssen-server">How do I check the version of Janssen server?<a class="headerlink" href="#how-do-i-check-the-version-of-janssen-server" title="Permanent link">#</a></h2>
 <div class="highlight"><pre><span></span><code>/opt/jans/bin/show_version.py
 </code></pre></div>
+<p>Alternatively, <a href="../../config-guide/config-tools/jans-tui/">TUI</a> can be used to get this information:</p>
+<ol>
+<li>Open TUI</li>
+<li>Navigate to <code>Jans TUI</code> menu item on top menu bar</li>
+<li>Navigate to <code>Application Versions</code></li>
+<li>Hit <code>enter</code></li>
+</ol>
+<p>This will show version of each Janssen Server modules:</p>
+<p><img alt="" src="../../../assets/tui-version-screen.png" /></p>
 <hr />
 <h2 id="after-installation-whats-next">After installation, what's next?<a class="headerlink" href="#after-installation-whats-next" title="Permanent link">#</a></h2>
-<p>After successful installation of the Janssen Server, move on to the <a href="../../config-guide/config-tools/jans-cli/">configuration steps</a> in the Command Line Interface documentation to align Janssen with your organizational requirements.</p>
+<p>After successful installation of the Janssen Server, start configuring Janssen
+Server to fulfil your organizational requirements and authentication flows you
+intend to implement. Use the 
+<a href="../../config-guide/config-tools/jans-tui/">Text-based UI</a> or<br />
+<a href="../../config-guide/config-tools/jans-cli/">command-line interface</a> to 
+configure the Janssen Server.</p>
 <h2 id="does-the-janssen-server-uninstall-process-remove-the-data-store-as-well">Does the Janssen Server uninstall process remove the data store as well?<a class="headerlink" href="#does-the-janssen-server-uninstall-process-remove-the-data-store-as-well" title="Permanent link">#</a></h2>
 <p>Only if the persistence type is local LDAP, it will be removed during the
 Janssen server uninstallation process. </p>
@@ -174314,7 +174328,7 @@ the previous data store. </p>
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2024-01-31T14:25:14+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-01-31</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2024-03-05T06:49:53+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-03-05</span>
       
         <br>
         Created:
