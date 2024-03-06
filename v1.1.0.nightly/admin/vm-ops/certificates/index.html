@@ -174077,12 +174077,20 @@
 <p>On a fresh VM installation, Janssen generates self signed certificates. You will want to change these to real certificates. For this documentation we will use <a href="https://certbot.eff.org">certbot</a> using <a href="https://letsencrypt.org/">Let's Encrypt</a> certificates. Certbot recommends using <code>snap</code> to install certbot and obtain certificates. The following instructions are for Ubuntu 20; however, any platform supporting <code>snap</code> should work.</p>
 <ul>
 <li>Backup the <code>/etc/certs</code> folder on your server</li>
-<li>Install snap: <code>sudo snap install core; sudo snap refresh core</code> </li>
-<li>Remove any certbot OS packages. This varies across distributions. For Ubuntu: <code>sudo apt remove certbot</code></li>
-<li>Install certbot: <code>sudo snap install --classic certbot</code> </li>
-<li>Issue certificate: <code>certbot --apache -d fqdn_of_Gluu_server</code></li>
+<li>Install snap
+   <div class="highlight"><pre><span></span><code>sudo snap install core<span class="p">;</span> sudo snap refresh core
+</code></pre></div></li>
+<li>Remove any certbot OS packages. This varies across distributions. 
+   For Ubuntu: 
+   <div class="highlight"><pre><span></span><code>sudo apt remove certbot
+</code></pre></div></li>
+<li>Install certbot: 
+   <div class="highlight"><pre><span></span><code>sudo snap install --classic certbot
+</code></pre></div></li>
+<li>Issue certificate: 
+   <div class="highlight"><pre><span></span><code>certbot --apache -d fqdn_of_Gluu_server
+</code></pre></div></li>
 <li>Full certificate chain and key are available in: <code>/etc/letsencrypt/live/</code> location.</li>
-<li>Move the cert and key to <code>/etc/certs</code> and name them <code>httpd.crt</code> and <code>httpd.key</code> respectively.</li>
 <li>Reboot your server</li>
 </ul>
 <h1 id="installing-intermediate-certificates">Installing intermediate certificates<a class="headerlink" href="#installing-intermediate-certificates" title="Permanent link">#</a></h1>
@@ -174098,7 +174106,7 @@
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-08-22T11:20:30+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-08-22</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2024-03-06T06:38:09+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-03-06</span>
       
         <br>
         Created:
