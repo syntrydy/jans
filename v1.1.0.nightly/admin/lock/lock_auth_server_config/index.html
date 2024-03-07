@@ -174059,13 +174059,61 @@ First property control sending messages to PubSub server. Second one <code>token
 <div class="highlight"><pre><span></span><code>{&quot;tknTyp&quot; : &quot;access_token&quot;, &quot;tknId&quot; : &quot;token_identifier&quot;, &quot;tknOp&quot; : &quot;add/del&quot;}
 </code></pre></div>
 <p>Note: For demo purposes in Jans CE with PostgreSQL and Lock server selected to install messages enabled by default.</p>
+<p>List of Lock flows:</p>
+<p><img alt="Combined diagram" src="../../../assets/lock-flows.png" />
+<a href="https://sequencediagram.org/index.html#initialData=C4S2BsFMAIBkHsDGBrax7MgO2gM3PAO4DOAUKQIaLoBO0ACpDcfFqQA4U2iIidbBoAJXocuPPhQHQAggFdgAC2gBlJgDcmY7iF79B9OQCMVx7RP0MAIqM469UwVYBC5XK2C4KAWxDgAntDerPDkAOY08HLs0ACMAHTC9HgEhKSMzKwAtAB8IgBcsgqKAHLQAGRFSgBapCIAPLnySqoaTIXxnaTNymo0mjS5hibGhcPgIMTKU-DcQZDExBRhkIUA3gBEwMhYACr+7BvQhRtUiAvEAPromFgbADTQWzsAkgAmRyc32JeI8G+QB5PbZYADyh2OTwobw+AF80PBoMR2JBeLgQJA3tBEIopFhIOBSNg3uFItFoAAmRIIFAI27EaDRN4UYCQdLGUxGXI05CFADCrGIcm8MBFi2WMFwkW82NxWHx4GgUixdmIMDApB5jRyLkKCGhdOw0CMgRBfIBmqQyG1PLGNEgdhgzOAFGg2GANEC7jo9Bs0EIYGmfxRj0Q9pZIFYVhZkEekAAHuwQDQI1GY485GqaO9QxN3e9LSgbVb+RRwIqE6yaFgy0iw3xBOglTCgrMYCyPSAjAoFgjoM7Xe7PYXrUMbKXy9ZkjJ6C8+2qsFiB9AQAJERqtdyS6ocZi5FBDThEFApIyYqwV4IE0mU6BWETF6SojEAMzUq3Yk84cnX5OY42QN6MDIqiIDov+zpsj0rT9EwQwcqMDDGBMUyHm6iZ-liMxzGKSwrNAmwgvsEInGcFzXBg2BAs8WDvJ8wKUVgvz-ICjw0eC9EbAC4AbPCTYgWiGJYjieIEuyIxcjktrQAKWBCiK8zivhUrwDKInygSSqLtAqrqsAI7FigE4VvGVY1oqxD1uwghGIBbZocekCntEBljvQxlTrIs59vawSaP2LKuipMoasST7kgALO+tLsPAEy8L2TIxq5UnbgAYpAwA4m6AyBC+AAMSKoqwbwMrF8UYgywVIiign-ihgjwLg0AAKpCC8DLKtAExYMgDJNtUfAMgAFGEgYUEYOmRAAVqighcDiICaAAlCl0l8mWJlmbWlk0A2fZJayOlxbolUAUB2KbauYRTiObmFDIMIAPS+fA-nlQlZBhaQETPtAACsiT0AAosk+BEOkoP3a02kAI5yEw-jpDYQyg4UQgLLFcntrgVbQPDiM5WWcipmwxJAA">Link</a></p>
+<p>Code:</p>
+<div class="highlight"><pre><span></span><code>title Lock token flows
+
+actor Person
+participant RP
+participant Auth Server
+participant PubSub
+participant PDP
+participant DB
+
+fontfamily mono
+
+group 1. RP flow
+Person-&gt;RP: AuthN &amp; AuthZ
+RP&lt;-&gt;Auth Server: ...
+Auth Server-&gt;PubSub: Publish short message: {&quot;tknTyp&quot; : &quot;access_token&quot;, &quot;tknId&quot; : &quot;token_code&quot;, &quot;tknOp&quot; : &quot;add&quot;} to specified channel
+end
+
+group 2. Lock tokens update
+PubSub-&gt;Lock: Consume message from channel and parse it
+Lock&lt;-&gt;DB: Load token by tknCde
+Lock&lt;-&gt;Lock: Prepare data entry for PDP with scope, creationDate, expirationDate, userId, clientId
+Lock&lt;-&gt;Lock: Call external script to add more attributes to data entry
+Lock&lt;-&gt;PDP: Call PDP API to send data into it
+Lock&lt;-&gt;Lock: Schedule token clean up on it expiration
+end
+
+group 3. Lock clean up expired before specified date
+Auth Server-&gt;PubSub: Publish token expired short message {&quot;tknTyp&quot; : &quot;access_token&quot;, &quot;tknId&quot; : &quot;token_code&quot;, &quot;tknOp&quot; : &quot;del&quot;} to specified channel
+PubSub-&gt;Lock: Consume message from channel and parse it
+Lock&lt;-&gt;Lock: Call external script before token clean up
+Lock&lt;-&gt;PDP: Call PDP API to remove data from it
+end
+
+group 4. Lock policies update
+Lock&lt;-&gt;Lock: Fetch every 30 seconds policies from specified list of URIs and links to Zips (githab project archive)
+Lock&lt;-&gt;Lock: Call external script to update policies before calling PDP
+Lock-&gt;PDP: Add/remove polcies
+end
+
+group 5. PEP flow
+PEP-&gt;PDP: Send query
+PDP-&gt;PEP: Response after query evaluation
+end
+</code></pre></div>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2024-03-04T15:48:01+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-03-04</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2024-03-07T21:04:34+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-03-07</span>
       
         <br>
         Created:
