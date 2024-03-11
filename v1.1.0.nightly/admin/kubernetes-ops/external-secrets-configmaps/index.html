@@ -1597,6 +1597,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#managing-versions" class="md-nav__link">
+    Managing Versions
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -174175,6 +174182,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#managing-versions" class="md-nav__link">
+    Managing Versions
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -174348,6 +174362,14 @@
 <div class="highlight"><pre><span></span><code>kubectl get configmap -n &lt;namespace&gt; cn -o json 
 </code></pre></div></p>
 <p>From the console, Go to <code>Secret Manager</code>&gt; Click on <code>Create Secret</code> &gt; Add a <code>name</code> &gt; Upload a <code>json</code> file or add the json to the <code>Secret value</code> field &gt; Create</p>
+<h4 id="managing-versions">Managing Versions<a class="headerlink" href="#managing-versions" title="Permanent link">#</a></h4>
+<p>While there's no limitation on how many versions a secret can have, the recommendation is to keep the number as low as possible, e.g. 5 active versions.
+If there are too many secret versions, it's best to disable older versions manually, for example:</p>
+<div class="highlight"><pre><span></span><code>gcloud secrets versions list flex-secret --filter<span class="o">=</span><span class="s2">&quot;state = enabled&quot;</span> --filter<span class="o">=</span><span class="s2">&quot;createTime &lt; &#39;2024-03-02&#39;&quot;</span> <span class="p">|</span> grep <span class="s2">&quot;NAME:&quot;</span> <span class="p">|</span> tr -d <span class="s2">&quot;NAME: &quot;</span> &gt; versions_to_disable.txt
+<span class="k">while</span> <span class="nb">read</span> -r line<span class="p">;</span> <span class="k">do</span>
+  gcloud secrets versions disable <span class="s2">&quot;</span><span class="nv">$line</span><span class="s2">&quot;</span> --secret<span class="o">=</span>flex-secret
+<span class="k">done</span> &lt; <span class="s2">&quot;versions_to_disable.txt&quot;</span>
+</code></pre></div>
 <h3 id="vault">Vault<a class="headerlink" href="#vault" title="Permanent link">#</a></h3>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -174425,7 +174447,7 @@ vault write auth/approle/role/&lt;role-name&gt; token_policies=&quot;&lt;policy-
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2024-02-29T15:10:39+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-02-29</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2024-03-11T12:17:05+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-03-11</span>
       
         <br>
         Created:

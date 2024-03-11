@@ -174374,7 +174374,7 @@ cd docs/agama-catalog/jans/inboundID/project
 </tr>
 <tr>
 <td><code>useDCR</code></td>
-<td>If the provider supports <em>dynamic client registration</em> set this to true. It will be a time saver</td>
+<td>If the provider supports <em>dynamic client registration</em> set this to <code>true</code>. It will be a time saver</td>
 </tr>
 <tr>
 <td><code>useCachedClient</code></td>
@@ -174382,7 +174382,7 @@ cd docs/agama-catalog/jans/inboundID/project
 </tr>
 </tbody>
 </table>
-<p>When providing <code>openIdParams</code>, the <code>host</code> will be used to grab the endpoints mentioned in the <code>oauthParams</code> section automatically, namely, authorization, token, and userInfo endpoints.  When <code>useDCR</code> is set to <code>true</code>, a client will be registered so no need to supply <code>clientId</code> and <code>clientSecret</code>. Under these circumstances, most of times only <code>scopes</code> will be needed under the <code>oauthParams</code> section.</p>
+<p>When providing <code>openIdParams</code>, the <code>host</code> will be used to grab the endpoints mentioned in the <code>oauthParams</code> section automatically, namely, authorization, token, and userInfo endpoints.  When <code>useDCR</code> is set to <code>true</code>, a client will be registered so there is no need to supply <code>clientId</code> and <code>clientSecret</code>. Under these circumstances, most of times only <code>scopes</code> will be needed under the <code>oauthParams</code> section.</p>
 <h4 id="attribute-mappings">Attribute mappings<a class="headerlink" href="#attribute-mappings" title="Permanent link">#</a></h4>
 <p>This is the process through which the raw user profile data received by an identity provider is transformed into an object suitable for being stored in the Janssen's user database. Here, developers have the opportunity to "map" or "transform" the incoming data to one compatible with the data types, formats, and names required by the database.</p>
 <p>As an example suppose a provider returned the following:</p>
@@ -174497,7 +174497,7 @@ From there onwards, you only need to re-upload the file as many times as needed.
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2024-03-05T08:05:33+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-03-05</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2024-03-11T14:11:21+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-03-11</span>
       
         <br>
         Created:
