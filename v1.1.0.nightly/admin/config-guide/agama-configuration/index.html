@@ -174276,6 +174276,110 @@ Please wait while retrieving data ...
 <p>Also, You can deploy agama project in Janssen through commandline.</p>
 <div class="highlight"><pre><span></span><code>/opt/jans/jans-cli/config-cli.py --operation-id post-agama-prj --endpoint-args name:agama-project-name
 </code></pre></div>
+<p><strong>Example:</strong></p>
+<p>Let's upload <a href="../../../assets/agama/journey.zip">a test project</a></p>
+<div class="highlight"><pre><span></span><code>/opt/jans/jans-cli/config-cli.py --operation-id=post-agama-prj --url-suffix=&quot;name:Agama Lab Journey&quot; --data /tmp/journey.zip
+Server Response:
+{
+  &quot;message&quot;: &quot;A deployment task for project Agama Lab Journey has been queued. Use the GET endpoint to poll status&quot;
+}
+</code></pre></div>
+<p>To get uploaded projects:</p>
+<div class="highlight"><pre><span></span><code>Please wait while retrieving data ...
+{
+  &quot;start&quot;: 0,
+  &quot;totalEntriesCount&quot;: 1,
+  &quot;entriesCount&quot;: 1,
+  &quot;entries&quot;: [
+    {
+      &quot;dn&quot;: &quot;jansId=a17e9a67-d44f-3b83-9e4d-4bebab375913,ou=deployments,ou=agama,o=jans&quot;,
+      &quot;id&quot;: &quot;a17e9a67-d44f-3b83-9e4d-4bebab375913&quot;,
+      &quot;createdAt&quot;: &quot;2024-03-12T18:15:29&quot;,
+      &quot;taskActive&quot;: false,
+      &quot;finishedAt&quot;: &quot;2024-03-12T18:15:33&quot;,
+      &quot;details&quot;: {
+        &quot;error&quot;: &quot;There were problems processing one or more flows&quot;,
+        &quot;autoconfigure&quot;: false,
+        &quot;flowsError&quot;: {
+          &quot;io.jans.agamalab.credsEnrollment.fido2&quot;: &quot;Qualified name mismatch: io.jans.agamalab.credsEnrollment.fido2 vs. io.jans.agamaLab.credsEnrollment.fido2&quot;,
+          &quot;io.jans.agamaLab.registration&quot;: null,
+          &quot;io.jans.agamaLab.credsEnrollment.otp&quot;: null,
+          &quot;io.jans.agamaLab.authenticator.otp&quot;: null,
+          &quot;io.jans.agamaLab.authenticator.super_gluu&quot;: null,
+          &quot;io.jans.agamaLab.credsEnrollment.super_gluu&quot;: null,
+          &quot;io.jans.inbound.oauth2.AuthzCode&quot;: null,
+          &quot;io.jans.agamaLab.emailVerification&quot;: null,
+          &quot;io.jans.agamaLab.authenticator&quot;: null,
+          &quot;io.jans.agamaLab.authenticator.fido2&quot;: null,
+          &quot;io.jans.inbound.oauth2.AuthzCodeWithUserInfo&quot;: null,
+          &quot;io.jans.agamaLab.main&quot;: null,
+          &quot;io.jans.agamaLab.githubAuthn&quot;: null,
+          &quot;io.jans.agamaLab.credsEnrollment&quot;: null
+        },
+        &quot;projectMetadata&quot;: {
+          &quot;projectName&quot;: &quot;Agama Lab Journey&quot;,
+          &quot;author&quot;: &quot;jgomer2001&quot;,
+          &quot;type&quot;: &quot;Community&quot;,
+          &quot;configs&quot;: {
+            &quot;io.jans.agamaLab.credsEnrollment.super_gluu&quot;: {
+              &quot;timeout&quot;: 80
+            },
+            &quot;io.jans.agamaLab.authenticator.super_gluu&quot;: {
+              &quot;timeout&quot;: 80
+            },
+            &quot;io.jans.agamaLab.credsEnrollment.otp&quot;: {
+              &quot;timeout&quot;: 80,
+              &quot;maxAttempts&quot;: 4
+            },
+            &quot;io.jans.agamaLab.githubAuthn&quot;: {
+              &quot;authzEndpoint&quot;: &quot;https://github.com/login/oauth/authorize&quot;,
+              &quot;tokenEndpoint&quot;: &quot;https://github.com/login/oauth/access_token&quot;,
+              &quot;userInfoEndpoint&quot;: &quot;https://api.github.com/user&quot;,
+              &quot;clientId&quot;: &quot;YOUR CLIENT ID HERE&quot;,
+              &quot;clientSecret&quot;: &quot;YOUR CLIENT SECRET&quot;,
+              &quot;scopes&quot;: [
+                &quot;user&quot;
+              ]
+            },
+            &quot;io.jans.agamaLab.main&quot;: {
+              &quot;minCredsRequired&quot;: 2,
+              &quot;supportedMethods&quot;: [
+                &quot;otp&quot;,
+                &quot;fido2&quot;
+              ]
+            },
+            &quot;io.jans.agamaLab.registration&quot;: {
+              &quot;recaptcha&quot;: {
+                &quot;enabled&quot;: false,
+                &quot;site_key&quot;: &quot;SITE KEY (if enabled was set to true), see deployment instructions&quot;
+              },
+              &quot;zohoCRM&quot;: {
+                &quot;clientId&quot;: &quot;see deployment instructions&quot;,
+                &quot;clientSecret&quot;: &quot;&quot;,
+                &quot;refreshToken&quot;: &quot;&quot;,
+                &quot;accountsUrl&quot;: &quot;https://accounts.zoho.com (domain-specific Zoho Accounts URL - the domain hosting the token endpoint)&quot;
+              }
+            }
+          }
+        }
+      },
+      &quot;baseDn&quot;: &quot;jansId=a17e9a67-d44f-3b83-9e4d-4bebab375913,ou=deployments,ou=agama,o=jans&quot;
+    }
+  ]
+}
+</code></pre></div>
+<p>Let's update configuration for this project with <a href="../../../assets/agama/journey-configs.json">sample project configuration</a>:</p>
+<div class="highlight"><pre><span></span><code>/opt/jans/jans-cli/config-cli.py --operation-id=put-agama-prj --url-suffix &quot;name:Agama Lab Journey&quot; --data /tmp/journey-configs.json 
+Server Response:
+{
+  &quot;io.jans.agamaLab.registration&quot;: true,
+  &quot;io.jans.agamaLab.main&quot;: true,
+  &quot;io.jans.agamaLab.credsEnrollment.otp&quot;: true,
+  &quot;io.jans.agamaLab.authenticator.super_gluu&quot;: true,
+  &quot;io.jans.agamaLab.credsEnrollment.super_gluu&quot;: true,
+  &quot;io.jans.agamaLab.githubAuthn&quot;: true
+}
+</code></pre></div>
 <h2 id="retrieve-agama-project-configuration">Retrieve Agama Project Configuration<a class="headerlink" href="#retrieve-agama-project-configuration" title="Permanent link">#</a></h2>
 <p>To retrieve agama project configuration:</p>
 <div class="highlight"><pre><span></span><code>/opt/jans/jans-cli/config-cli.py --operation-id get-agama-prj-configs --endpoint-args name:agama-project-name
@@ -174319,7 +174423,7 @@ Server Response:
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-08-17T05:07:14+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-08-17</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2024-03-13T18:31:16+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-03-13</span>
       
         <br>
         Created:
