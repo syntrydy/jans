@@ -1494,4 +1494,47 @@ public class Client extends DeletableEntity implements Serializable {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    @Override
+    public String toString() {
+        return "Client [clientId=" + clientId + ", clientSecret=" + clientSecret + ", frontChannelLogoutUri="
+                + frontChannelLogoutUri + ", frontChannelLogoutSessionRequired=" + frontChannelLogoutSessionRequired
+                + ", registrationAccessToken=" + registrationAccessToken + ", clientIdIssuedAt=" + clientIdIssuedAt
+                + ", clientSecretExpiresAt=" + clientSecretExpiresAt + ", redirectUris=" + Arrays.toString(redirectUris)
+                + ", claimRedirectUris=" + Arrays.toString(claimRedirectUris) + ", responseTypes="
+                + Arrays.toString(responseTypes) + ", grantTypes=" + Arrays.toString(grantTypes) + ", applicationType="
+                + applicationType + ", contacts=" + Arrays.toString(contacts) + ", idTokenTokenBindingCnf="
+                + idTokenTokenBindingCnf + ", clientName=" + clientName + ", logoUri=" + logoUri + ", clientUri="
+                + clientUri + ", policyUri=" + policyUri + ", tosUri=" + tosUri + ", clientNameLocalized="
+                + clientNameLocalized + ", logoUriLocalized=" + logoUriLocalized + ", clientUriLocalized="
+                + clientUriLocalized + ", policyUriLocalized=" + policyUriLocalized + ", tosUriLocalized="
+                + tosUriLocalized + ", jwksUri=" + jwksUri + ", jwks=" + jwks + ", sectorIdentifierUri="
+                + sectorIdentifierUri + ", subjectType=" + subjectType + ", idTokenSignedResponseAlg="
+                + idTokenSignedResponseAlg + ", idTokenEncryptedResponseAlg=" + idTokenEncryptedResponseAlg
+                + ", idTokenEncryptedResponseEnc=" + idTokenEncryptedResponseEnc + ", userInfoSignedResponseAlg="
+                + userInfoSignedResponseAlg + ", userInfoEncryptedResponseAlg=" + userInfoEncryptedResponseAlg
+                + ", userInfoEncryptedResponseEnc=" + userInfoEncryptedResponseEnc + ", requestObjectSigningAlg="
+                + requestObjectSigningAlg + ", requestObjectEncryptionAlg=" + requestObjectEncryptionAlg
+                + ", requestObjectEncryptionEnc=" + requestObjectEncryptionEnc + ", tokenEndpointAuthMethod="
+                + tokenEndpointAuthMethod + ", tokenEndpointAuthSigningAlg=" + tokenEndpointAuthSigningAlg
+                + ", defaultMaxAge=" + defaultMaxAge + ", defaultAcrValues=" + Arrays.toString(defaultAcrValues)
+                + ", initiateLoginUri=" + initiateLoginUri + ", postLogoutRedirectUris="
+                + Arrays.toString(postLogoutRedirectUris) + ", requestUris=" + Arrays.toString(requestUris)
+                + ", scopes=" + Arrays.toString(scopes) + ", claims=" + Arrays.toString(claims) + ", trustedClient="
+                + trustedClient + ", lastAccessTime=" + lastAccessTime + ", lastLogonTime=" + lastLogonTime
+                + ", persistClientAuthorizations=" + persistClientAuthorizations + ", includeClaimsInIdToken="
+                + includeClaimsInIdToken + ", refreshTokenLifetime=" + refreshTokenLifetime + ", accessTokenLifetime="
+                + accessTokenLifetime + ", customAttributes=" + customAttributes + ", customObjectClasses="
+                + Arrays.toString(customObjectClasses) + ", rptAsJwt=" + rptAsJwt + ", accessTokenAsJwt="
+                + accessTokenAsJwt + ", accessTokenSigningAlg=" + accessTokenSigningAlg + ", disabled=" + disabled
+                + ", authorizedOrigins=" + Arrays.toString(authorizedOrigins) + ", softwareId=" + softwareId
+                + ", softwareVersion=" + softwareVersion + ", softwareStatement=" + softwareStatement + ", attributes="
+                + attributes + ", backchannelTokenDeliveryMode=" + backchannelTokenDeliveryMode
+                + ", backchannelClientNotificationEndpoint=" + backchannelClientNotificationEndpoint
+                + ", backchannelAuthenticationRequestSigningAlg=" + backchannelAuthenticationRequestSigningAlg
+                + ", backchannelUserCodeParameter=" + backchannelUserCodeParameter + ", description=" + description
+                + ", organization=" + organization + ", groups=" + Arrays.toString(groups) + ", ttl=" + ttl + "]";
+    }
+    
+    
 }
