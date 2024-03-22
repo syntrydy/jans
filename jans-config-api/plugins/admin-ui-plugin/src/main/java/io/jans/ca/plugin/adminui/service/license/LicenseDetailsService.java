@@ -119,6 +119,8 @@ public class LicenseDetailsService extends BaseService {
             LicenseConfiguration licenseConfiguration = auiConfiguration.getLicenseConfiguration();
             if(licenseConfiguration == null) {
                 validateLicenseConfiguration();
+                auiConfiguration = auiConfigurationService.getAUIConfiguration();
+                licenseConfiguration = auiConfiguration.getLicenseConfiguration();
             }
             if (licenseConfiguration == null || Strings.isNullOrEmpty(licenseConfiguration.getHardwareId())) {
                 log.error(ErrorResponse.LICENSE_CONFIG_ABSENT.getDescription());
