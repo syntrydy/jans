@@ -118,9 +118,7 @@ public class LicenseDetailsService extends BaseService {
             AUIConfiguration auiConfiguration = auiConfigurationService.getAUIConfiguration();
             LicenseConfiguration licenseConfiguration = auiConfiguration.getLicenseConfiguration();
             if(licenseConfiguration == null) {
-                AdminConf appConf = entryManager.find(AdminConf.class, AppConstants.ADMIN_UI_CONFIG_DN);
-                LicenseConfig licenseConfig = appConf.getMainSettings().getLicenseConfig();
-                log.info("checkLicense :: Obtained licenseConfig from db : {} ", licenseConfig.toString());
+                validateLicenseConfiguration();
             }
             if (licenseConfiguration == null || Strings.isNullOrEmpty(licenseConfiguration.getHardwareId())) {
                 log.error(ErrorResponse.LICENSE_CONFIG_ABSENT.getDescription());
