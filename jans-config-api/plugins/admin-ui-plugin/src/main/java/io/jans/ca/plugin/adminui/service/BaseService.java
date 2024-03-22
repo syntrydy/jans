@@ -54,7 +54,7 @@ public class BaseService {
      * @return The method is returning a `io.jans.as.client.TokenResponse` object.
      */
     public io.jans.as.client.TokenResponse getToken(TokenRequest tokenRequest, String tokenEndpoint, String userInfoJwt, List<String> permissionTags) {
-
+        log.info("getToken :: Inside getToken method");
         try {
             MultivaluedMap<String, String> body = new MultivaluedHashMap<>();
             if (!Strings.isNullOrEmpty(tokenRequest.getCode())) {
@@ -74,19 +74,22 @@ public class BaseService {
             }
 
             if (!Strings.isNullOrEmpty(tokenRequest.getCodeVerifier())) {
+                log.info("getToken :: code_verifier: {}", tokenRequest.getCodeVerifier());
                 body.putSingle("code_verifier", tokenRequest.getCodeVerifier());
             }
 
             body.putSingle("grant_type", tokenRequest.getGrantType().getValue());
             body.putSingle("redirect_uri", tokenRequest.getRedirectUri());
             body.putSingle("client_id", tokenRequest.getAuthUsername());
-
+            log.info("getToken :: tokenEndpoint: {}",tokenEndpoint);
             Invocation.Builder request = ClientFactory.instance().getClientBuilder(tokenEndpoint);
+            log.info("getToken :: Before calling tokenRequest");
             Response response = request
                     .header("Authorization", "Basic " + tokenRequest.getEncodedCredentials())
                     .post(Entity.form(body));
-
-            log.info("Get Access Token status code: {}", response.getStatus());
+            log.info("getToken :: After calling tokenRequest");
+            log.info("getToken :: tokenRequest.getEncodedCredentials(): {}",tokenRequest.getEncodedCredentials());
+            log.info("getToken :: Get Access Token status code: {}", response.getStatus());
             if (response.getStatus() == 200) {
                 String entity = response.readEntity(String.class);
 
@@ -96,10 +99,14 @@ public class BaseService {
 
                 return tokenResponse;
             }
-            log.error("Error in getting access token: {}", response.getEntity());
+            String entity = response.readEntity(String.class);
+            log.error("getToken :: entity : {}", entity);
+            log.error("getToken :: Error in getting access token: {}", response.getEntity());
+
 
         } catch (Exception e) {
             log.error("Problems processing token call");
+            e.printStackTrace();
             throw e;
 
         }

@@ -26,6 +26,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 
 import java.util.Map;
+import java.util.Random;
 
 @Singleton
 public class AUIConfigurationService extends BaseService {
@@ -123,12 +124,13 @@ public class AUIConfigurationService extends BaseService {
     }
 
     private LicenseConfiguration addPropertiesToLicenseConfiguration(AdminConf appConf) {
+        logger.info("addPropertiesToLicenseConfiguration :: Inside addPropertiesToLicenseConfiguration.");
         LicenseConfiguration licenseConfiguration = new LicenseConfiguration();
         try {
             LicenseConfig licenseConfig = appConf.getMainSettings().getLicenseConfig();
-
+            logger.info("addPropertiesToLicenseConfiguration :: Inside addPropertiesToLicenseConfiguration. : {}", licenseConfig.toString());
             if (licenseConfig != null) {
-
+                logger.info("addPropertiesToLicenseConfiguration :: licenseConfig is null. ");
                 validateLicenseClientOnAuthServer(licenseConfig);
                 licenseConfiguration.setHardwareId(licenseConfig.getLicenseHardwareKey());
                 licenseConfiguration.setLicenseKey(licenseConfig.getLicenseKey());
@@ -137,6 +139,7 @@ public class AUIConfigurationService extends BaseService {
                 licenseConfiguration.setScanApiClientId(licenseConfig.getOidcClient().getClientId());
                 licenseConfiguration.setScanApiClientSecret(licenseConfig.getOidcClient().getClientSecret());
             }
+            logger.info("addPropertiesToLicenseConfiguration :: licenseConfig is obtained successfully. ");
             return licenseConfiguration;
         } catch (Exception e) {
             logger.error(ErrorResponse.ERROR_IN_LICENSE_CONFIGURATION_VALIDATION.getDescription());
@@ -146,19 +149,30 @@ public class AUIConfigurationService extends BaseService {
 
     private void validateLicenseClientOnAuthServer(LicenseConfig licenseConfig) throws ApplicationException {
         try {
-            logger.info("Inside method to request license credentials from SCAN api.");
+            Random rand = new Random();
+            int rand_int1 = rand.nextInt(10000);
+            logger.info("validateLicenseClientOnAuthServer :: Inside method to request license credentials from SCAN api. {}", rand_int1);
+            logger.info("validateLicenseClientOnAuthServer :: Before token request {}", rand_int1);
             io.jans.as.client.TokenResponse tokenResponse = generateToken(licenseConfig.getOidcClient().getOpHost(), licenseConfig.getOidcClient().getClientId(), licenseConfig.getOidcClient().getClientSecret());
+            logger.info("validateLicenseClientOnAuthServer :: After token request {}", rand_int1);
             if (tokenResponse == null) {
                 //try to re-generate clients using old SSA
+                logger.info("validateLicenseClientOnAuthServer :: tokenResponse is null {}", rand_int1);
+                logger.info("validateLicenseClientOnAuthServer ::Before executeDCR {}", rand_int1);
                 DCRResponse dcrResponse = executeDCR(licenseConfig.getSsa());
+                logger.info("validateLicenseClientOnAuthServer ::After executeDCR {}", rand_int1);
                 if (dcrResponse == null) {
+                    logger.info("validateLicenseClientOnAuthServer :: DCR response is null {}", rand_int1);
                     throw new ApplicationException(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode(), ErrorResponse.ERROR_IN_DCR.getDescription());
                 }
+                logger.info("validateLicenseClientOnAuthServer :: Before generateToken {}", rand_int1);
                 tokenResponse = generateToken(licenseConfig.getOidcClient().getOpHost(), licenseConfig.getOidcClient().getClientId(), licenseConfig.getOidcClient().getClientSecret());
-
+                logger.info("validateLicenseClientOnAuthServer :: After generateToken {}", rand_int1);
                 if (tokenResponse == null) {
+                    logger.info("validateLicenseClientOnAuthServer :: tokenResponse is null {}", rand_int1);
                     throw new ApplicationException(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode(), ErrorResponse.TOKEN_GENERATION_ERROR.getDescription());
                 }
+                logger.info("validateLicenseClientOnAuthServer :: tokenResponse is is successful {}", rand_int1);
                 AdminConf appConf = entryManager.find(AdminConf.class, AppConstants.ADMIN_UI_CONFIG_DN);
                 LicenseConfig lc = appConf.getMainSettings().getLicenseConfig();
                 lc.setScanLicenseApiHostname(dcrResponse.getScanHostname());
@@ -175,19 +189,28 @@ public class AUIConfigurationService extends BaseService {
 
     private io.jans.as.client.TokenResponse generateToken(String opHost, String clientId, String clientSecret) {
         try {
+            logger.info("AUIConfigurationService-generateToken :: Inside generateToken method");
+
+            logger.info("AUIConfigurationService-generateToken :: opHost : {}", opHost);
+            logger.info("AUIConfigurationService-generateToken :: clientId : {}", clientId);
+            logger.info("AUIConfigurationService-generateToken :: clientSecret : {}", clientSecret);
             TokenRequest tokenRequest = new TokenRequest(GrantType.CLIENT_CREDENTIALS);
             tokenRequest.setAuthUsername(clientId);
             tokenRequest.setAuthPassword(clientSecret);
             tokenRequest.setGrantType(GrantType.CLIENT_CREDENTIALS);
             tokenRequest.setScope(LicenseResource.SCOPE_LICENSE_READ);
-
+            logger.info("AUIConfigurationService-generateToken :: scope : {}", LicenseResource.SCOPE_LICENSE_READ);
             logger.info("Trying to get access token from auth server: {}", opHost);
             String scanLicenseApiHostname = (new StringBuffer()).append(StringUtils.removeEnd(opHost, "/"))
                     .append("/jans-auth/restv1/token").toString();
+            logger.info("AUIConfigurationService-generateToken :: scanLicenseApiHostname : {}", scanLicenseApiHostname);
             io.jans.as.client.TokenResponse tokenResponse = null;
+            logger.info("AUIConfigurationService-generateToken :: Before calling  getToken");
             tokenResponse = getToken(tokenRequest, scanLicenseApiHostname);
+            logger.info("AUIConfigurationService-generateToken :: After calling  getToken");
             return tokenResponse;
         } catch (Exception e) {
+            logger.error("AUIConfigurationService-generateToken :: Error in generating token");
             logger.error(ErrorResponse.TOKEN_GENERATION_ERROR.getDescription());
             return null;
         }

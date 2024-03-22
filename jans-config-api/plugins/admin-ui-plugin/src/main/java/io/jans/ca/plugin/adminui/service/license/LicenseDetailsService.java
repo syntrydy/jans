@@ -33,6 +33,7 @@ import org.slf4j.Logger;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Random;
 
 @Singleton
 public class LicenseDetailsService extends BaseService {
@@ -68,29 +69,46 @@ public class LicenseDetailsService extends BaseService {
      * @return A LicenseApiResponse object is being returned.
      */
     public GenericResponse validateLicenseConfiguration() {
-
+        Random rand = new Random();
+        int rand_int1 = rand.nextInt(10000);
+        log.info("validateLicenseConfiguration :: Inside validateLicenseConfiguration method {}", rand_int1);
         AdminConf appConf = entryManager.find(AdminConf.class, AppConstants.ADMIN_UI_CONFIG_DN);
         LicenseConfig licenseConfig = appConf.getMainSettings().getLicenseConfig();
-
+        if(licenseConfig != null) {
+            log.info("validateLicenseConfiguration :: Obtained licenseConfig from db {} {} :", licenseConfig.toString(), rand_int1);
+        } else {
+            log.info("validateLicenseConfiguration :: licenseConfig from db is null {} :", rand_int1);
+        }
+        log.info("validateLicenseConfiguration :: Before getting tokenResponse {} :", rand_int1);
         io.jans.as.client.TokenResponse tokenResponse = generateToken(licenseConfig.getOidcClient().getOpHost(), licenseConfig.getOidcClient().getClientId(), licenseConfig.getOidcClient().getClientSecret());
-
+        log.info("validateLicenseConfiguration :: After getting tokenResponse {} : ", rand_int1);
         if (tokenResponse == null || Strings.isNullOrEmpty(tokenResponse.getAccessToken())) {
             //try to re-generate clients using old SSA
+            log.info("validateLicenseConfiguration :: Access Token : {} {}", tokenResponse.getAccessToken(), rand_int1);
+            log.info("validateLicenseConfiguration :: Before Requesting for DCR {} : ", rand_int1);
             DCRResponse dcrResponse = executeDCR(licenseConfig.getSsa());
+            log.info("validateLicenseConfiguration :: After Requesting for DCR : {}", rand_int1);
             if (dcrResponse == null) {
+                log.error("validateLicenseConfiguration :: dcrResponse is null : {}", rand_int1);
                 return CommonUtils.createGenericResponse(false, 500, ErrorResponse.ERROR_IN_DCR.getDescription());
             }
+            log.info("validateLicenseConfiguration :: Before  Requesting for saveCreateClientInPersistence : {}", rand_int1);
             try {
                 saveCreateClientInPersistence(licenseConfig.getSsa(), dcrResponse);
+                log.info("validateLicenseConfiguration :: After  Requesting for saveCreateClientInPersistence : {}", rand_int1);
             } catch (Exception e) {
+                log.error("validateLicenseConfiguration :: Error in saveCreateClientInPersistence  : {}", rand_int1);
                 return CommonUtils.createGenericResponse(false, 500, ErrorResponse.ERROR_IN_SAVING_LICENSE_CLIENT.getDescription());
             }
+            log.info("validateLicenseConfiguration :: Before Trying to generate Token again : {}", rand_int1);
             tokenResponse = generateToken(licenseConfig.getOidcClient().getOpHost(), licenseConfig.getOidcClient().getClientId(), licenseConfig.getOidcClient().getClientSecret());
-
+            log.info("validateLicenseConfiguration :: After Trying to generate Token again : {}", rand_int1);
             if (tokenResponse == null) {
+                log.info("validateLicenseConfiguration :: token is null again : {}", rand_int1);
                 return CommonUtils.createGenericResponse(false, 500, ErrorResponse.TOKEN_GENERATION_ERROR.getDescription());
             }
         }
+        log.info("validateLicenseConfiguration :: No error in license configuration : {}", rand_int1);
         return CommonUtils.createGenericResponse(true, 200, "No error in license configuration.");
     }
 
@@ -99,6 +117,11 @@ public class LicenseDetailsService extends BaseService {
         try {
             AUIConfiguration auiConfiguration = auiConfigurationService.getAUIConfiguration();
             LicenseConfiguration licenseConfiguration = auiConfiguration.getLicenseConfiguration();
+            if(licenseConfiguration == null) {
+                AdminConf appConf = entryManager.find(AdminConf.class, AppConstants.ADMIN_UI_CONFIG_DN);
+                LicenseConfig licenseConfig = appConf.getMainSettings().getLicenseConfig();
+                log.info("checkLicense :: Obtained licenseConfig from db : {} ", licenseConfig.toString());
+            }
             if (licenseConfiguration == null || Strings.isNullOrEmpty(licenseConfiguration.getHardwareId())) {
                 log.error(ErrorResponse.LICENSE_CONFIG_ABSENT.getDescription());
                 return CommonUtils.createGenericResponse(false, 500, ErrorResponse.LICENSE_CONFIG_ABSENT.getDescription());
@@ -491,6 +514,7 @@ public class LicenseDetailsService extends BaseService {
      * request. It has the following properties:
      */
     private void saveCreateClientInPersistence(String ssa, DCRResponse dcrResponse) throws Exception {
+        log.info("saveCreateClientInPersistence :: Inside saveCreateClientInPersistence ");
         AdminConf appConf = entryManager.find(AdminConf.class, AppConstants.ADMIN_UI_CONFIG_DN);
         LicenseConfig licenseConfig = appConf.getMainSettings().getLicenseConfig();
         licenseConfig.setSsa(ssa);
@@ -531,19 +555,30 @@ public class LicenseDetailsService extends BaseService {
      */
     private io.jans.as.client.TokenResponse generateToken(String opHost, String clientId, String clientSecret) {
         try {
+            log.info("generateToken :: Inside generateToken method");
+
+            log.info("generateToken :: opHost : {}", opHost);
+            log.info("generateToken :: clientId : {}", clientId);
+            log.info("generateToken :: clientSecret : {}", clientSecret);
             TokenRequest tokenRequest = new TokenRequest(GrantType.CLIENT_CREDENTIALS);
             tokenRequest.setAuthUsername(clientId);
             tokenRequest.setAuthPassword(clientSecret);
             tokenRequest.setGrantType(GrantType.CLIENT_CREDENTIALS);
             tokenRequest.setScope(LicenseResource.SCOPE_LICENSE_READ);
+            log.info("generateToken :: scope : {}", LicenseResource.SCOPE_LICENSE_READ);
 
-            log.info("Trying to get access token from auth server.");
+            log.info("generateToken :: Trying to get access token from auth server.");
             String scanLicenseApiHostname = (new StringBuffer()).append(StringUtils.removeEnd(opHost, "/"))
                     .append("/jans-auth/restv1/token").toString();
+            log.info("generateToken :: scanLicenseApiHostname : {}", scanLicenseApiHostname);
             io.jans.as.client.TokenResponse tokenResponse = null;
+            log.info("generateToken :: Before calling  getToken");
             tokenResponse = getToken(tokenRequest, scanLicenseApiHostname);
+            log.info("generateToken :: After calling  getToken");
             return tokenResponse;
         } catch (Exception e) {
+            log.error("generateToken :: Error in generating token");
+            e.printStackTrace();
             log.error(ErrorResponse.TOKEN_GENERATION_ERROR.getDescription());
             return null;
         }
