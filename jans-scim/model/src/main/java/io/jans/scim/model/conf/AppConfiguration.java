@@ -49,6 +49,7 @@ public class AppConfiguration implements Configuration, Serializable {
     private Boolean metricReporterEnabled;
     @DocProperty(description = "Boolean value specifying whether to enable JDK Loggers")
     private Boolean disableJdkLogger = true;
+    @DocProperty(description = "Boolean value specifying whether to enable the logger refresh timer")
     private boolean disableLoggerTimer;
     @DocProperty(description = "Boolean value specifying whether to enable local in-memory cache")
     private Boolean useLocalCache = false;
