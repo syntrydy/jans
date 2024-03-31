@@ -90,21 +90,24 @@ public class AttestationController {
     @Path("/result")
     public Response verify(String content) {
         try {
+            log.info("1=============================================: {}", content);
             if (appConfiguration.getFido2Configuration() == null) {
                 throw errorResponseFactory.forbiddenException();
             }
-
+            log.info("2=============================================: {}", content);
             JsonNode params;
             try {
                 params = dataMapperService.readTree(content);
             } catch (IOException ex) {
                 throw errorResponseFactory.invalidRequest(ex.getMessage(), ex);
             }
-
+            log.info("3=============================================: {}", content);
             commonVerifiers.verifyNotUseGluuParameters(params);
+            log.info("4=============================================: {}", content);
             JsonNode result = attestationService.verify(params);
-
+            log.info("5=============================================: {}", result);
             ResponseBuilder builder = Response.ok().entity(result.toString());
+            log.info("6=============================================: {}", result);
             return builder.build();
 
         } catch (WebApplicationException e) {

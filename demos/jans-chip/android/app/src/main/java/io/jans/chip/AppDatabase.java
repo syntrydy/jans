@@ -8,8 +8,10 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
 import io.jans.chip.dao.AppIntegrityDao;
+import io.jans.chip.dao.FidoConfigurationDao;
 import io.jans.chip.dao.OPConfigurationDao;
 import io.jans.chip.dao.OidcClientDao;
+import io.jans.chip.modal.Fido.config.FidoConfiguration;
 import io.jans.chip.modal.OIDCClient;
 import io.jans.chip.modal.OPConfiguration;
 import io.jans.chip.modal.appIntegrity.AppIntegrityEntity;
@@ -19,6 +21,7 @@ import io.jans.chip.utils.AppConfig;
         entities = {
                 OIDCClient.class,
                 OPConfiguration.class,
+                FidoConfiguration.class,
                 AppIntegrityEntity.class
         },
         version = AppConfig.ROOM_DATABASE_VERSION
@@ -46,5 +49,6 @@ public abstract class AppDatabase extends RoomDatabase {
 
     public abstract OidcClientDao oidcClientDao();
     public abstract OPConfigurationDao opConfigurationDao();
+    public abstract FidoConfigurationDao fidoConfigurationDao();
     public abstract AppIntegrityDao appIntegrityDao();
 }

@@ -23,9 +23,10 @@
         android:text="@string/register"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.474"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/logo1"
-        app:layout_constraintVertical_bias="0.509" />
+        app:layout_constraintVertical_bias="0.504" />
 
     <EditText
         android:id="@+id/issuer"
@@ -34,12 +35,13 @@
         android:ems="10"
         android:hint="@string/configuration_endpoint"
         android:inputType="text"
+        android:text="https://admin-ui-test.gluu.org/.well-known/openid-configuration"
         app:layout_constraintBottom_toTopOf="@+id/registerButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.472"
+        app:layout_constraintHorizontal_bias="0.487"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/logo1"
-        app:layout_constraintVertical_bias="0.423" />
+        app:layout_constraintVertical_bias="0.357" />
 
     <TextView
         android:id="@+id/scopes"
@@ -52,10 +54,10 @@
         android:inputType="none"
         app:layout_constraintBottom_toTopOf="@+id/registerButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.463"
+        app:layout_constraintHorizontal_bias="0.482"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/issuer"
-        app:layout_constraintVertical_bias="0.376" />
+        app:layout_constraintVertical_bias="0.69" />
 
     <TextView
         android:id="@+id/heading1"

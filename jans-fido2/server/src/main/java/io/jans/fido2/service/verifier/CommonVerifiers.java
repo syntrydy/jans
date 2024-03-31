@@ -405,12 +405,13 @@ public class CommonVerifiers {
 
     public String verifyCredentialId(CredAndCounterData attestationData, JsonNode params) {
         String paramsKeyId = verifyBase64UrlString(params, "id");
-        
+        log.info("4.12.1 paramsKeyId=============================================: {}", paramsKeyId);
         if (StringHelper.isEmpty(paramsKeyId)) {
             throw errorResponseFactory.invalidRequest("Credential id attestationObject and response id mismatch");
         }
 
         String attestationDataCredId = attestationData.getCredId();
+        log.info("4.12.2s attestationData=============================================: {}", attestationDataCredId);
         if (!StringHelper.compare(attestationDataCredId, paramsKeyId)) {
             throw errorResponseFactory.invalidRequest("Credential id attestationObject and response id mismatch");
         }

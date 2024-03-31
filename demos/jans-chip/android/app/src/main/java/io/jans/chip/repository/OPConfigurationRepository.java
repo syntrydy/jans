@@ -34,7 +34,7 @@ public class OPConfigurationRepository {
 
     public SingleLiveEvent<OPConfiguration> fetchOPConfiguration(String configurationUrl) {
 
-        String issuer = configurationUrl.replace("/.well-known/openid-configuration", "");
+        String issuer = configurationUrl.replace(AppConfig.OP_CONFIG_URL, "");
         Log.d(TAG, "Inside fetchOPConfiguration :: configurationUrl ::" + configurationUrl);
         try {
             Call<OPConfiguration> call = RetrofitClient.getInstance(issuer).getAPIInterface().getOPConfiguration(configurationUrl);

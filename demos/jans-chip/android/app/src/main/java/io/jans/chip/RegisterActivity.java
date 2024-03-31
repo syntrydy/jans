@@ -76,7 +76,7 @@ public class RegisterActivity extends AppCompatActivity {
                                             @Override
                                             public void onChanged(OIDCClient oidcClient) {
                                                 if (opConfiguration.isSuccessful()) {
-                                                    Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                                                    Intent intent = new Intent(RegisterActivity.this, FidoEnrolmentActivity.class);
                                                     startActivity(intent);
                                                 } else {
                                                     showErrorDialog(opConfiguration.getOperationError().getMessage());

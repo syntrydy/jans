@@ -3,7 +3,19 @@
     <string name="error_title">Error</string>
     <string name="click_to_add_scopes">Click to add scopes...</string>
     <string name="configuration_endpoint">Configuration Endpoint</string>
+    <string name="fido_configuration_endpoint">Fido Config Endpoint</string>
+    <string name="username">Username</string>
     <string name="register_oidc_client">Register OIDC Client</string>
+    <string name="fido_enrolment">FIDO Enrolment</string>
     <string name="app_integrity_status">App Integrity Status</string>
     <string name="register">Register</string>
+    <string name="title_activity_fido_enrolment">FidoEnrolmentActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>

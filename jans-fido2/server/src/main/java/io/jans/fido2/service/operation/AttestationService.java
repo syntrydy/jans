@@ -217,68 +217,71 @@ public class AttestationService {
 
 	public ObjectNode verify(JsonNode params) {
 		log.debug("Attestation verify {}", params);
-
+		log.info("4.1=============================================: {}", params);
         // Apply external custom scripts
         ExternalFido2Context externalFido2InterceptionContext = new ExternalFido2Context(params, httpRequest, httpResponse);
+		log.info("4.2=============================================: {}", params);
         boolean externalInterceptContext = externalFido2InterceptionService.verifyAttestationStart(params, externalFido2InterceptionContext);
-
+		log.info("4.3=============================================: {}", params);
         boolean superGluu = commonVerifiers.hasSuperGluu(params);
         boolean oneStep = commonVerifiers.isSuperGluuOneStepMode(params);
         boolean cancelRequest = commonVerifiers.isSuperGluuCancelRequest(params);
-
+		log.info("4.4=============================================: {}", params);
 		// Verify if there are mandatory request parameters
 		commonVerifiers.verifyBasicPayload(params);
 		commonVerifiers.verifyAssertionType(params, "type");
-
+		log.info("4.3=============================================: {}", params);
 		// Get response
 		JsonNode responseNode = params.get("response");
-
+		log.info("4.4=============================================: {}", params);
 		// Verify client data
 		JsonNode clientDataJSONNode = commonVerifiers.verifyClientJSON(responseNode);
+		log.info("4.5=============================================: {}", params);
 		if (!superGluu) {
 			commonVerifiers.verifyClientJSONTypeIsCreate(clientDataJSONNode);
 		}
-
+		log.info("4.6=============================================: {}", params);
 		// Get challenge
 		String challenge = commonVerifiers.getChallenge(clientDataJSONNode);
-
+		log.info("4.7=============================================: {}", challenge);
 		// Find registration entry
 		Fido2RegistrationEntry registrationEntry = registrationPersistenceService.findByChallenge(challenge, oneStep)
 				.parallelStream().findAny().orElseThrow(() ->
 					errorResponseFactory.badRequestException(AttestationErrorResponseType.INVALID_CHALLENGE, String.format("Can't find associated attestation request by challenge '%s'", challenge)));
+		log.info("4.8=============================================: {}", challenge);
 		Fido2RegistrationData registrationData = registrationEntry.getRegistrationData();
-
+		log.info("4.9=============================================: {}", challenge);
 		// Verify domain
 		domainVerifier.verifyDomain(registrationData.getDomain(), clientDataJSONNode);
-
+		log.info("4.10=============================================: {}", challenge);
 		// Verify authenticator attestation response
 		CredAndCounterData attestationData = attestationVerifier.verifyAuthenticatorAttestationResponse(responseNode,
 				registrationData);
-
+		log.info("4.11=============================================: {}", challenge);
 		registrationData.setUncompressedECPoint(attestationData.getUncompressedEcPoint());
 		registrationData.setSignatureAlgorithm(attestationData.getSignatureAlgorithm());
 		registrationData.setCounter(attestationData.getCounters());
-
+		log.info("4.12=============================================: {}", challenge);
 		String keyId = commonVerifiers.verifyCredentialId(attestationData, params);
-
+		log.info("4.13=============================================: {}", challenge);
 		registrationData.setPublicKeyId(keyId);
 		registrationData.setType("public-key");
 		registrationData.setAttestationType(attestationData.getAttestationType());
-
+		log.info("4.14=============================================: {}", challenge);
         // Support cancel request
         if (cancelRequest) {
         	registrationData.setStatus(Fido2RegistrationStatus.canceled);
         } else {
         	registrationData.setStatus(Fido2RegistrationStatus.registered);
         }
-
+		log.info("4.14=============================================: {}", challenge);
 		// Store original response
 		registrationData.setAttenstationResponse(params.toString());
-
+		log.info("4.15=============================================: {}", challenge);
 		// Set actual counter value. Note: Fido2 not update initial value in
 		// Fido2RegistrationData to minimize DB updates
 		registrationData.setCounter(registrationEntry.getCounter());
-
+		log.info("4.16=============================================: {}", challenge);
 		JsonNode responseDeviceData = responseNode.get("deviceData");
 		if (responseDeviceData != null && responseDeviceData.isTextual()) {
             try {
@@ -290,16 +293,16 @@ public class AttestationService {
                 throw errorResponseFactory.invalidRequest(String.format("Device data is invalid: %s", responseDeviceData), ex);
             }
         }
-
+		log.info("4.17=============================================: {}", challenge);
         registrationEntry.setPublicKeyId(registrationData.getPublicKeyId());
 
         int publicKeyIdHash = registrationPersistenceService.getPublicKeyIdHash(registrationData.getPublicKeyId());
         registrationEntry.setPublicKeyIdHash(publicKeyIdHash);
-
+		log.info("4.18=============================================: {}", challenge);
         // Get sessionId before cleaning it from registration entry
         String sessionStateId = registrationEntry.getSessionStateId();
         registrationEntry.setSessionStateId(null);
-
+		log.info("4.19=============================================: {}", challenge);
         // Set expiration for one_step entry
         if (oneStep) {
             int unfinishedRequestExpiration = appConfiguration.getFido2Configuration().getUnfinishedRequestExpiration();
@@ -307,9 +310,9 @@ public class AttestationService {
         } else {
         	registrationEntry.clearExpiration();
         }
-
+		log.info("4.20=============================================: {}", challenge);
 		registrationPersistenceService.update(registrationEntry);
-
+		log.info("4.21=============================================: {}", challenge);
 		// If sessionStateId is not empty update session
         if (StringHelper.isNotEmpty(sessionStateId)) {
             log.debug("There is session id. Setting session id attributes");

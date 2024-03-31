@@ -1,5 +1,14 @@
 package io.jans.chip.services;
 
+import java.util.Map;
+
+import io.jans.chip.modal.Fido.assertion.option.AssertionOptionRequest;
+import io.jans.chip.modal.Fido.assertion.option.AssertionOptionResponse;
+import io.jans.chip.modal.Fido.assertion.result.AssertionResultRequest;
+import io.jans.chip.modal.Fido.attestation.option.AttestationOptionRequest;
+import io.jans.chip.modal.Fido.attestation.option.AttestationOptionResponse;
+import io.jans.chip.modal.Fido.attestation.result.AttestationResultRequest;
+import io.jans.chip.modal.Fido.config.FidoConfigurationResponse;
 import io.jans.chip.modal.appIntegrity.AppIntegrityResponse;
 import io.jans.chip.modal.DCRequest;
 import io.jans.chip.modal.DCResponse;
@@ -18,7 +27,8 @@ import retrofit2.http.Url;
 public interface APIInterface {
     @GET
     Call<OPConfiguration> getOPConfiguration(@Url String url);
-
+    @GET
+    Call<FidoConfigurationResponse> getFidoConfiguration(@Url String url);
     @POST
     Call<DCResponse> doDCR(@Body DCRequest dcrRequest, @Url String url);
 
@@ -52,4 +62,13 @@ public interface APIInterface {
     // This API for verifying integrity token
     @GET
     Call<AppIntegrityResponse> verifyIntegrityTokenOnAppServer(@Url String url);
+
+    @POST
+    Call<AttestationOptionResponse> attestationOption(@Body AttestationOptionRequest request, @Url String url);
+    @POST
+    Call<Map> attestationResult(@Body AttestationResultRequest request, @Url String url);
+    @POST
+    Call<AssertionOptionResponse> assertionOption(@Body AssertionOptionRequest request, @Url String url);
+    @POST
+    Call<Map> assertionResult(@Body AssertionResultRequest request, @Url String url);
 }
